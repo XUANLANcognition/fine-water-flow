@@ -32,7 +32,7 @@ class ProfileCarder extends Component {
   getUserProfile = async (v) => {
     try {
       const response = await axios.get(
-        '/api/users/' + window.localStorage.getItem('user_id')
+        'https://guoliang.online/api/users/' + window.localStorage.getItem('user_id')
       )
       this.data = response.data.username
       this.setState(function (state) {
@@ -62,7 +62,7 @@ class ProfileCarder extends Component {
         <p><a href='/'>My Text</a></p>
         <p><a href='/'>My Translate</a></p>
         <Divider> Action </Divider>
-        <Button type='primary' icon='file-add' block>New Text</Button>
+        <Button type='primary' icon='file-add' block onClick={e => this.props.callback(e)}>New Text</Button>
         <Divider />
         <Button type='danger' ghost onClick={this.showConfirm} block>Logout</Button>
       </Card>

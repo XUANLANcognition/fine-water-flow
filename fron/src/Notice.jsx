@@ -3,6 +3,7 @@ import { Layout } from 'antd'
 
 import Nav from './Nav'
 import Myfooter from './Myfooter'
+import Editor from './Editor'
 
 class Notice extends Component {
   componentDidMount () {
@@ -22,6 +23,7 @@ class Notice extends Component {
       <Layout style={{ minHeight: '100vh' }}>
         <Nav />
         <div style={{ flex: '1 0 ' }} />
+        <Editor />
         <Myfooter />
       </Layout>
     )

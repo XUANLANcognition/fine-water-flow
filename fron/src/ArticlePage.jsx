@@ -27,7 +27,7 @@ class ArticlePage extends Component {
   getArticle = async (v) => {
     try {
       const response = await axios.get(
-        '/api/article/' + this.props.match.params.id
+        'https://guoliang.online/api/article/' + this.props.match.params.id
       )
       this.setState(function (state) {
         return {
@@ -44,7 +44,7 @@ class ArticlePage extends Component {
   getTranslation = async (v) => {
     try {
       const response = await axios.get(
-        '/api/translate/?format=json&article=' + this.state.id
+        'https://guoliang.online/api/translate/?format=json&article=' + this.state.id
       )
       console.log(response)
       this.setState(function (state) {
