@@ -16,7 +16,7 @@ class ArticleList extends Component {
   getArticleList = async (v) => {
     try {
       const response = await axios.get(
-        'https://guoliang.online/api//article/?format=json'
+        'https://guoliang.online:8080/api/article/?format=json'
       )
       this.data = response.data.results
       this.setState(function (state) {

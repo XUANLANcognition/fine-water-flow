@@ -10,7 +10,7 @@ class Login extends Component {
   Login = async (v) => {
     try {
       const response = await axios.post(
-        'https://guoliang.online/api-token-auth/',
+        'https://guoliang.online:8080/api-token-auth/',
         {
           username: v.username,
           password: v.password

@@ -29,7 +29,7 @@ class ArticlePage extends Component {
   getArticle = async (v) => {
     try {
       const response = await axios.get(
-        'https://guoliang.online/api/article/' + this.props.match.params.id
+        'https://guoliang.online:8080/api/article/' + this.props.match.params.id
       )
       this.setState(function (state) {
         return {
@@ -47,7 +47,7 @@ class ArticlePage extends Component {
   getTranslation = async (v) => {
     try {
       const response = await axios.get(
-        'https://guoliang.online/api/translate/?format=json&article=' + this.state.id
+        'https://guoliang.online:8080/api/translate/?format=json&article=' + this.state.id
       )
       console.log(response)
       this.setState(function (state) {
@@ -95,11 +95,16 @@ class ArticlePage extends Component {
           <Col span={12}>
             <Timeline style={{ padding: '60px' }}>
               {this.state.translationList.map((node, index) =>
-                <Row>
-                  <Timeline.Item color='green'>
-                    <Button type='primary' onClick={(title, content) => this.showModal(node.title, node.content)}>{index + '  :  ' + node.title}</Button>
-                  </Timeline.Item>
-                </Row>
+                <Timeline.Item color='green'>
+                  <Row>
+                    <Col span={10}>
+                      <Button type='primary' onClick={(title, content) => this.showModal(node.title, node.content)}>{index + '  :  ' + node.title}</Button>
+                    </Col>
+                    <Col span={6}>
+                      <p>by</p>
+                    </Col>
+                  </Row>
+                </Timeline.Item>
               )}
             </Timeline>
           </Col>

@@ -28,7 +28,7 @@ class Editor extends React.Component {
         console.log(submitData)
         try {
           const response = await axios.post(
-            'https://guoliang.online/api/article/',
+            'https://guoliang.online:8080/api/article/',
             {
               title: submitData.title,
               content: submitData.content,

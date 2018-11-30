@@ -63,7 +63,7 @@ class ArticleViewSet(viewsets.ModelViewSet):
 class TranslateSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Translation
-        fields = ('url', 'id', 'title', 'content', 'article', 'user')
+        fields = ('url', 'id', 'title', 'content', 'article', 'user', 'pub_date')
 
 
 class TranslationPagination(PageNumberPagination):

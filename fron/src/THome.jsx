@@ -56,11 +56,11 @@ class THome extends Component {
           <Editor />
         </Modal>
 
-        <Row style={{ flex: '1 0' }}>
-          <Col span={16} style={{ padding: '30px 60px 60px 200px' }} >
+        <Row style={{ flex: '1 0', padding: '60px' }}>
+          <Col span={16} style={{ paddingRight: '100px' }} >
             <ArticleList />
           </Col>
-          <Col span={8} style={{ padding: '30px 00px 60px 60px' }} >
+          <Col span={8} >
             <ProfileCard callback={this.showModal} />
             <Divider style={{ width: '300px' }} />
             <Advertisement />
