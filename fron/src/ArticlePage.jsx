@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Card, Row, Col, Layout, Modal, Timeline, Button, Divider } from 'antd'
 import axios from 'axios'
+import BraftEditor from 'braft-editor'
 
 import Nav from './Nav'
 import Myfooter from './Myfooter'
@@ -12,6 +13,7 @@ class ArticlePage extends Component {
       title: '',
       content: '',
       id: '',
+      url: '',
       translationList: [],
       visible: false,
       modalTitle: '',
@@ -33,7 +35,8 @@ class ArticlePage extends Component {
         return {
           title: response.data.title,
           content: response.data.content,
-          id: response.data.id
+          id: response.data.id,
+          url: response.data.url
         }
       })
     } catch (error) {
@@ -86,7 +89,7 @@ class ArticlePage extends Component {
         <Row style={{ padding: '30px', flex: '1 0' }}>
           <Col span={12}>
             <Card title={this.state.title} bordered={false} >
-              <p>{this.state.content}</p>
+              <div dangerouslySetInnerHTML={{ __html: this.state.content }} />
             </Card>
           </Col>
           <Col span={12}>

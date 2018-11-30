@@ -2,6 +2,7 @@ import 'braft-editor/dist/index.css'
 import React from 'react'
 import BraftEditor from 'braft-editor'
 import { Form, Input, Button } from 'antd'
+import axios from 'axios'
 
 const FormItem = Form.Item
 
@@ -15,16 +16,29 @@ class Editor extends React.Component {
     }, 1000)
   }
 
-  handleSubmit = (event) => {
+  handleSubmit = async (event) => {
     event.preventDefault()
 
-    this.props.form.validateFields((error, values) => {
+    this.props.form.validateFields(async (error, values) => {
       if (!error) {
         const submitData = {
           title: values.title,
-          content: values.content.toRAW() // or values.content.toHTML()
+          content: values.content.toHTML() // or values.content.toHTML()
         }
         console.log(submitData)
+        try {
+          const response = await axios.post(
+            'https://guoliang.online/api/article/',
+            {
+              title: submitData.title,
+              content: submitData.content,
+              pub_date: '2018-11-30T04:03:04.442Z',
+              user: window.localStorage.getItem('url')
+            }
+          )
+        } catch (error) {
+          console.log(error)
+        }
       }
     })
   }

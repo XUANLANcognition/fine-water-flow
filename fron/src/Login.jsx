@@ -17,9 +17,8 @@ class Login extends Component {
         }
       )
       window.localStorage.setItem('token', response.data.token)
-      window.localStorage.setItem('user_id', response.data.user_id)
-      window.localStorage.setItem('user_url', response.data.url)
       message.success('Welcome ' + response.data.user_name)
+      window.localStorage.setItem('user_id', response.data.user_id)
       this.props.history.replace('/')
     } catch (error) {
       message.error('error')
