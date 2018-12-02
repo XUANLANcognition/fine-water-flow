@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { Form, Icon, Input, Button, Checkbox, message } from 'antd'
-import './Login.css'
 import axios from 'axios'
 import { withRouter } from 'react-router'
 

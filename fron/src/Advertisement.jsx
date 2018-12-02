@@ -6,7 +6,6 @@ class Advertisement extends Component {
     return (
       <Card
         title='广告位'
-        style={{ width: 300 }}
       >
         <p>诚招</p>
       </Card>

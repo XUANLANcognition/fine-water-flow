@@ -8,6 +8,8 @@ import Notice from './Notice'
 import THome from './THome'
 import ArticlePage from './ArticlePage'
 
+import textEditorPage from './Page/textEditorPage'
+
 const MainPage = props => {
   const token = window.localStorage.getItem('token')
   const { history } = props
@@ -26,6 +28,7 @@ class App extends Component {
           <Switch>
             <Route exact path='/' component={MainPage} />
             <Route path='/notice' component={Notice} />
+            <Route path='/textEditorPage' component={textEditorPage} />
             <Route path='/article/:id' component={ArticlePage} />
             <Route component={NoMatch} />
           </Switch>

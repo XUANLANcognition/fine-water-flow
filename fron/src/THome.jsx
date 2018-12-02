@@ -1,17 +1,16 @@
 import React, { Component } from 'react'
-import { Layout, Row, Col, Divider, Modal } from 'antd'
+import { Layout, Row, Col, Divider, Form } from 'antd'
+import { withRouter } from 'react-router'
 
 import Nav from './Nav'
 import Advertisement from './Advertisement'
 import ArticleList from './ArticleList'
 import Myfooter from './Myfooter'
 import ProfileCard from './ProfileCard'
-import Editor from './Editor'
 
 class THome extends Component {
   state = {
-    collapsed: false,
-    visible: false
+    collapsed: false
   };
 
   onCollapse = (collapsed) => {
@@ -19,50 +18,21 @@ class THome extends Component {
     this.setState({ collapsed })
   }
 
-    showModal = (title, content) => {
-      this.setState({
-        visible: true,
-        modalTitle: title,
-        modalContent: content
-      })
-    }
-
-  handleOk = (e) => {
-    console.log(e)
-    this.setState({
-      visible: false
-    })
-  }
-
-  handleCancel = (e) => {
-    console.log(e)
-    this.setState({
-      visible: false
-    })
+  goToEditorPage = () => {
+    this.props.history.replace('/textEditorPage')
   }
 
   render () {
     return (
       <Layout style={{ minHeight: '100vh', backgroundColor: '#f6f6f6' }}>
-
         <Nav />
-        <Modal
-          style={{ top: 20 }}
-          visible={this.state.visible}
-          onOk={this.handleOk}
-          onCancel={this.handleCancel}
-          width={1000}
-        >
-          <Editor />
-        </Modal>
-
         <Row style={{ flex: '1 0', padding: '60px' }}>
-          <Col span={16} style={{ paddingRight: '100px' }} >
+          <Col xl={{ span: 16 }} lg={{ span: 14 }} style={{ paddingRight: '100px' }} >
             <ArticleList />
           </Col>
-          <Col span={8} >
-            <ProfileCard callback={this.showModal} />
-            <Divider style={{ width: '300px' }} />
+          <Col xl={{ span: 8 }} lg={{ span: 10 }} >
+            <ProfileCard callback={this.goToEditorPage} />
+            <Divider />
             <Advertisement />
           </Col>
         </Row>
@@ -72,4 +42,6 @@ class THome extends Component {
   }
 }
 
-export default THome
+const THomer = withRouter(Form.create()(THome))
+
+export default THomer

@@ -50,9 +50,7 @@ class ProfileCarder extends Component {
 
   render () {
     return (
-      <Card
-        style={{ width: 300 }}
-      >
+      <Card >
         <Meta
           avatar={<Avatar style={{ backgroundColor: '#123456' }}>{this.data}</Avatar>}
           title={this.state.data}
@@ -63,7 +61,7 @@ class ProfileCarder extends Component {
         <p><a href='/'>My Text</a></p>
         <p><a href='/'>My Translate</a></p>
         <Divider> Action </Divider>
-        <Button type='primary' icon='file-add' block onClick={e => this.props.callback(e)}>New Text</Button>
+        <Button type='primary' block onClick={e => this.props.callback(e)}>New Text</Button>
         <Divider />
         <Button type='danger' ghost onClick={this.showConfirm} block>Logout</Button>
       </Card>

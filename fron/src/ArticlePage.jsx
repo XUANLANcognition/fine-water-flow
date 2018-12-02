@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { Card, Row, Col, Layout, Modal, Timeline, Button, Divider } from 'antd'
 import axios from 'axios'
-import BraftEditor from 'braft-editor'
 
 import Nav from './Nav'
 import Myfooter from './Myfooter'
