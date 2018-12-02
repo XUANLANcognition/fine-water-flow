@@ -56,7 +56,7 @@ class ArticlePagination(PageNumberPagination):
         fields = ('url', 'title', 'content')
 
 class ArticleViewSet(viewsets.ModelViewSet):
-    queryset = Article.objects.all()
+    queryset = Article.objects.all().order_by('-pub_date')
     serializer_class = ArticleSerializer
     pagination_class = ArticlePagination
 
