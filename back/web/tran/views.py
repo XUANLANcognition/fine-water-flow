@@ -21,7 +21,7 @@ from django_filters import rest_framework as filters
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = User
-        fields = ('url', 'username', 'password', 'email', 'is_staff')
+        fields = ('url', 'username', 'password', 'email')
     def create(self, validated_data):
         user = super(UserSerializer, self).create(validated_data)
         user.set_password(validated_data['password'])
