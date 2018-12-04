@@ -44,7 +44,7 @@ class textEditorPage extends Component {
             {
               title: submitData.title,
               content: submitData.content,
-              pub_date: '2018-11-30T04:03:04.442Z',
+              pub_date: new Date().toISOString(),
               user: window.localStorage.getItem('url')
             }
           )
@@ -101,7 +101,7 @@ class textEditorPage extends Component {
                 )}
               </FormItem>
               <FormItem >
-                <Button size='large' type='primary' htmlType='submit' style={{ position: 'fixed', bottom: '80px', right: '60px' }}>
+                <Button size='large' type='primary' htmlType='submit' style={{ position: 'fixed', top: '80px', right: '60px' }}>
                 提交
                 </Button>
               </FormItem>

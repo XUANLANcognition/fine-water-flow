@@ -9,6 +9,7 @@ import THome from './THome'
 import ArticlePage from './ArticlePage'
 
 import textEditorPage from './Page/textEditorPage'
+import translationEditorPage from './Page/translationEditorPage'
 
 const MainPage = props => {
   const token = window.localStorage.getItem('token')
@@ -29,6 +30,7 @@ class App extends Component {
             <Route exact path='/' component={MainPage} />
             <Route path='/notice' component={Notice} />
             <Route path='/textEditorPage' component={textEditorPage} />
+            <Route path='/:id/translationEditorPage' component={translationEditorPage} />
             <Route path='/article/:id' component={ArticlePage} />
             <Route component={NoMatch} />
           </Switch>

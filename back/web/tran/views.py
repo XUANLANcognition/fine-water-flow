@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import JsonResponse
 from rest_framework import routers, serializers, viewsets
 from rest_framework.pagination import PageNumberPagination
@@ -44,6 +44,11 @@ class UserViewSet(viewsets.ModelViewSet):
 class ArticleSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Article
+        fields = ('url', 'id', 'title', 'description', 'pub_date', 'user')
+
+class ArticleSerializerRetrieve(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Article
         fields = ('url', 'id', 'title', 'content', 'pub_date', 'user')
 
 class ArticlePagination(PageNumberPagination):
@@ -59,6 +64,13 @@ class ArticleViewSet(viewsets.ModelViewSet):
     queryset = Article.objects.all().order_by('-pub_date')
     serializer_class = ArticleSerializer
     pagination_class = ArticlePagination
+
+    def retrieve(self, request, pk=None):
+        queryset = Article.objects.all()
+        article = get_object_or_404(queryset, pk=pk)
+        serializer = ArticleSerializerRetrieve(article, context={'request': request})
+        field = ('title')
+        return Response(serializer.data)
 
 class TranslateSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:

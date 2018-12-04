@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Card, Row, Col, Layout, Modal, Timeline, Button, Divider } from 'antd'
+import { Card, Row, Col, Layout, Modal, Timeline, Button, Affix, Form } from 'antd'
 import axios from 'axios'
 
 import Nav from './Nav'
@@ -59,6 +59,10 @@ class ArticlePage extends Component {
     }
   }
 
+  gotoTranslationEditorPage = () => {
+    this.props.history.replace('/' + this.props.match.params.id + '/translationEditorPage')
+  }
+
   showModal = (title, content) => {
     this.setState({
       visible: true,
@@ -92,6 +96,13 @@ class ArticlePage extends Component {
             </Card>
           </Col>
           <Col span={12}>
+            <Affix offsetTop={0}>
+              <Card title='Action' bordered={false} style={{ background: '#ECECEC', margin: '0px 60px 30px 60px', borderRadius: '1rem' }}>
+                <Button type='primary' size={'small'} style={{ marginRight: '10px' }} onClick={this.gotoTranslationEditorPage}>Translate</Button>
+                <Button type='primary' size={'small'} style={{ marginRight: '10px' }}>Issues</Button>
+                <Button type='primary' size={'small'} style={{ marginRight: '10px' }}>Primary</Button>
+              </Card>
+            </Affix>
             <Timeline style={{ padding: '60px' }}>
               {this.state.translationList.map((node, index) =>
                 <Timeline.Item color='green'>
@@ -116,7 +127,7 @@ class ArticlePage extends Component {
           onCancel={this.handleCancel}
           width={1000}
         >
-          <p>{this.state.modalContent}</p>
+          <div dangerouslySetInnerHTML={{ __html: this.state.modalContent }} />
         </Modal>
         <Myfooter />
       </Layout>
@@ -124,4 +135,4 @@ class ArticlePage extends Component {
   }
 }
 
-export default ArticlePage
+export default Form.create()(ArticlePage)
