@@ -94,7 +94,7 @@ class ArticleList extends Component {
               <List.Item.Meta
                 title={<a href={'/article/' + item.id}>{item.title}</a>}
               />
-              {}
+              {item.description}
             </Skeleton>
           </List.Item>
         )}

@@ -41,12 +41,12 @@ class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
-class ArticleSerializer(serializers.HyperlinkedModelSerializer):
+class ArticleSerializerList(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Article
         fields = ('url', 'id', 'title', 'description', 'pub_date', 'user')
 
-class ArticleSerializerRetrieve(serializers.HyperlinkedModelSerializer):
+class ArticleSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Article
         fields = ('url', 'id', 'title', 'content', 'pub_date', 'user')
@@ -65,12 +65,10 @@ class ArticleViewSet(viewsets.ModelViewSet):
     serializer_class = ArticleSerializer
     pagination_class = ArticlePagination
 
-    def retrieve(self, request, pk=None):
-        queryset = Article.objects.all()
-        article = get_object_or_404(queryset, pk=pk)
-        serializer = ArticleSerializerRetrieve(article, context={'request': request})
-        field = ('title')
-        return Response(serializer.data)
+    def get_serializer_class(self):
+        if self.action == 'list':
+            return ArticleSerializerList
+        return ArticleSerializer
 
 class TranslateSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
