@@ -65,7 +65,7 @@ class Login extends Component {
             style={{ width: '100%' }}>
             登陆
           </Button>
-          没有账号？<a href=''>注册</a>
+          没有账号？<a href='/join'>注册</a>
         </FormItem>
       </Form>
     )

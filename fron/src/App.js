@@ -10,6 +10,7 @@ import ArticlePage from './ArticlePage'
 
 import textEditorPage from './Page/textEditorPage'
 import translationEditorPage from './Page/translationEditorPage'
+import Join from './Page/Join'
 
 const MainPage = props => {
   const token = window.localStorage.getItem('token')
@@ -29,6 +30,7 @@ class App extends Component {
           <Switch>
             <Route exact path='/' component={MainPage} />
             <Route path='/notice' component={Notice} />
+            <Route path='/join' component={Join} />
             <Route path='/textEditorPage' component={textEditorPage} />
             <Route path='/:id/translationEditorPage' component={translationEditorPage} />
             <Route path='/article/:id' component={ArticlePage} />
