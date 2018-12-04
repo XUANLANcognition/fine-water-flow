@@ -37,7 +37,7 @@ schema_view = get_schema_view(
       description="非机翻的好看的后端接口文档",
    ),
    public=True,
-   permission_classes=(permissions.AllowAny,),
+   permission_classes=(permissions.IsAdminUser,),
 )
 
 
