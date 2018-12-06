@@ -71,7 +71,7 @@ class textEditorPage extends Component {
           </Tooltip>
           <div className='demo-container'>
             <Form onSubmit={this.handleSubmit}>
-              <FormItem label='文章标题'>
+              <FormItem label='描述'>
                 {getFieldDecorator('title', {
                   rules: [{
                     required: true,
@@ -81,7 +81,7 @@ class textEditorPage extends Component {
                   <Input size='large' placeholder='请输入标题' />
                 )}
               </FormItem>
-              <FormItem label='文章正文'>
+              <FormItem label='正文'>
                 {getFieldDecorator('content', {
                   validateTrigger: 'onBlur',
                   rules: [{

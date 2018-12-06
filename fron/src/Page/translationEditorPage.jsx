@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Layout, Tooltip, notification, Form, Input, Button, Row, Col, Card, Affix } from 'antd'
+import { Layout, Tooltip, notification, Form, Input, Button, Row, Col, Card, Affix, Spin } from 'antd'
 import axios from 'axios'
 
 import BraftEditor from 'braft-editor'
@@ -26,7 +26,8 @@ class translationEditorPage extends Component {
       id: '',
       title: '',
       content: '',
-      url: ''
+      url: '',
+      loading: true
     }
   }
 
@@ -50,7 +51,8 @@ class translationEditorPage extends Component {
           title: response.data.title,
           content: response.data.content,
           id: response.data.id,
-          url: response.data.url
+          url: response.data.url,
+          loading: false
         }
       })
     } catch (error) {
@@ -98,6 +100,9 @@ class translationEditorPage extends Component {
         <Content style={{ backgroundColor: '#fff', padding: '20px 80px 20px 80px' }}>
           <Row gutter={30}>
             <Col span={12}>
+              <div style={{ textAlign: 'center' }}>
+                <Spin spinning={this.state.loading} size='large' tip='loading...' />
+              </div>
               <Card title={this.state.title} bordered={false} >
                 <div dangerouslySetInnerHTML={{ __html: this.state.content }} style={{ height: '800px', overflowY: 'scroll' }} />
               </Card>
