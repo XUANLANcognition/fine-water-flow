@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Card, Row, Col, Layout, Modal, Timeline, Button, Affix, Form } from 'antd'
+import { Card, Row, Col, Layout, Modal, Timeline, Button, Affix, Form, Spin } from 'antd'
 import axios from 'axios'
 
 import Nav from './Nav'
@@ -16,7 +16,8 @@ class ArticlePage extends Component {
       translationList: [],
       visible: false,
       modalTitle: '',
-      modalContent: ''
+      modalContent: '',
+      loading: true
     }
   }
 
@@ -35,7 +36,8 @@ class ArticlePage extends Component {
           title: response.data.title,
           content: response.data.content,
           id: response.data.id,
-          url: response.data.url
+          url: response.data.url,
+          loading: false
         }
       })
     } catch (error) {
@@ -91,6 +93,9 @@ class ArticlePage extends Component {
         <Nav />
         <Row style={{ padding: '30px', flex: '1 0' }}>
           <Col span={12}>
+            <div style={{ textAlign: 'center' }}>
+              <Spin spinning={this.state.loading} size='large' tip='loading...' />
+            </div>
             <Card title={this.state.title} bordered={false} >
               <div dangerouslySetInnerHTML={{ __html: this.state.content }} />
             </Card>
@@ -105,15 +110,9 @@ class ArticlePage extends Component {
             </Affix>
             <Timeline style={{ padding: '60px' }}>
               {this.state.translationList.map((node, index) =>
-                <Timeline.Item color='green'>
-                  <Row>
-                    <Col span={10}>
-                      <Button type='primary' onClick={(title, content) => this.showModal(node.title, node.content)}>{index + '  :  ' + node.title}</Button>
-                    </Col>
-                    <Col span={6}>
-                      <p>by</p>
-                    </Col>
-                  </Row>
+                <Timeline.Item type='flex' justify='space-around' color='green'>
+                  <a href={'/' + this.state.id + '/translation/' + node.id}>{'click to ' + index + '  :  ' + node.title}</a>
+                  <Button type='primary' style={{ marginLeft: '10px' }} onClick={(title, content) => this.showModal(node.title, node.content)}>{index + '  :  ' + node.title}</Button>
                 </Timeline.Item>
               )}
             </Timeline>

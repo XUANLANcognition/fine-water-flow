@@ -1,9 +1,8 @@
+import { Col, Divider, Layout, Row, Button } from 'antd'
 import React, { Component } from 'react'
-import { Layout, Row, Col, Divider } from 'antd'
-
 import Login from './Login'
-import Nav from './Nav'
 import Myfooter from './Myfooter'
+import Nav from './Nav'
 
 class Home extends Component {
   state = {
@@ -18,18 +17,27 @@ class Home extends Component {
   render () {
     return (
       <Layout style={{ minHeight: '100vh', backgroundColor: '#fff' }}>
+        <div style={{ height: '100vh' }}>
+          <Nav />
+          <Row type='flex' justify='space-around' align='middle' style={{ flex: '1 0', height: '100vh' }}>
+            <Col span={16} style={{ padding: '60px' }}>
+              <h1>非机翻</h1>
+              <Divider />
+              <p>你的， 便值得分享</p>
+            </Col>
+            <Col span={8} style={{ padding: '60px' }}>
+              <Login />
+            </Col>
+          </Row>
+        </div>
 
-        <Nav />
-
-        <Row style={{ flex: '1 0' }}>
-          <Col span={16} style={{ padding: '60px' }}>
-            <h1>非机翻</h1>
-            <Divider />
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nonne merninisti licere mihi ista probare, quae sunt a te dicta? Refert tamen, quo modo.</p>
-          </Col>
-          <Col span={8} style={{ padding: '60px' }}>
-            <Login />
-          </Col>
+        <Row type='flex' justify='center' align='middle' style={{ height: '100vh', backgroundColor: '#2b3137', flexDirection: 'column' }}>
+          <p style={{ fontSize: '45px', color: '#fff' }}>A better way to translate together</p>
+          <p style={{ fontSize: '25px', color: '#fff' }}>A better way to translate together</p>
+        </Row>
+        <Row type='flex' justify='center' align='middle' style={{ height: '100vh', backgroundColor: '#fff', flexDirection: 'column' }}>
+          <p style={{ fontSize: '45px', color: 'black' }}>Join us</p>
+          <Button size='large' type='primary' ghost>Learn about us -></Button>
         </Row>
         <Myfooter />
       </Layout>

@@ -22,6 +22,10 @@ class Nav extends Component {
         mode='horizontal'
         style={{ padding: '10px 40px 0px 40px', backgroundColor: '#343a40', color: '#fff' }}
       >
+        <Menu.Item>
+          <img src='/icon.png' style={{ width: '40px', height: '40px' }} />
+          <Link to='/' />
+        </Menu.Item>
         <Menu.Item key='home'>
           <Icon type='home' />HOME
           <Link to='/' />
