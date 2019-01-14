@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Layout, Row, Col, Divider, Form } from 'antd'
+import { Layout, Row, Col, Divider, Form, Affix } from 'antd'
 import { withRouter } from 'react-router'
 
 import Nav from './Nav'
@@ -31,7 +31,9 @@ class THome extends Component {
             <ArticleList />
           </Col>
           <Col xl={{ span: 8 }} lg={{ span: 10 }} >
-            <ProfileCard callback={this.goToEditorPage} />
+            <Affix offsetTop={0}>
+              <ProfileCard callback={this.goToEditorPage} />
+            </Affix>
             <Divider />
             <Advertisement />
           </Col>

@@ -20,6 +20,9 @@ const openNotificationWithIcon = (type) => {
 }
 
 class textEditorPage extends Component {
+  state = {
+    uploading: false
+  }
   componentDidMount () {
     // 异步设置编辑器内容
     setTimeout(() => {
@@ -30,6 +33,11 @@ class textEditorPage extends Component {
   }
 
   handleSubmit = async (event) => {
+    this.setState(function (state) {
+      return {
+        uploading: true
+      }
+    })
     event.preventDefault()
 
     this.props.form.validateFields(async (error, values) => {
@@ -48,6 +56,11 @@ class textEditorPage extends Component {
               user: window.localStorage.getItem('url')
             }
           )
+          this.setState(function (state) {
+            return {
+              uploading: false
+            }
+          })
           if (response.status === 201) {
             openNotificationWithIcon('success')
           } else {
@@ -101,7 +114,7 @@ class textEditorPage extends Component {
                 )}
               </FormItem>
               <FormItem >
-                <Button size='large' type='primary' htmlType='submit' style={{ position: 'fixed', top: '80px', right: '60px' }}>
+                <Button loading={this.state.uploading} size='large' type='primary' htmlType='submit' style={{ position: 'fixed', top: '80px', right: '60px' }}>
                 提交
                 </Button>
               </FormItem>

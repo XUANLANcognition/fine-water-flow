@@ -9,7 +9,7 @@ const IconText = ({ type, text }) => (
   </span>
 )
 
-const count = 3
+const count = 8
 
 class ArticleList extends Component {
   state = {

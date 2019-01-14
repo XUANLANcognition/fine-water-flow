@@ -35,7 +35,7 @@ class Home extends Component {
           <p style={{ fontSize: '45px', color: '#fff' }}>A better way to translate together</p>
           <p style={{ fontSize: '25px', color: '#fff' }}>A better way to translate together</p>
         </Row>
-        <Row type='flex' justify='center' align='middle' style={{ height: '100vh', backgroundColor: '#fff', flexDirection: 'column' }}>
+        <Row type='flex' justify='center' align='middle' style={{ height: '100vh', flexDirection: 'column' }}>
           <p style={{ fontSize: '45px', color: 'black' }}>Join us</p>
           <Button size='large' type='primary' ghost>Learn about us -></Button>
         </Row>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Layout, Form, Row, Col, Card, Spin } from 'antd'
+import { Layout, Form, Row, Col, Card, Spin, Button } from 'antd'
 import axios from 'axios'
 
 import 'braft-editor/dist/index.css'
@@ -64,7 +64,7 @@ class ArticleTranslation extends Component {
     return (
       <Layout style={{ minHeight: '100vh' }}>
         <Nav />
-        <Content style={{ backgroundColor: '#fff', padding: '20px 80px 20px 80px' }}>
+        <Content style={{ backgroundColor: '#fff', padding: '20px 60px 20px 60px' }}>
           <Row gutter={30}>
             <Col span={12}>
               <div style={{ textAlign: 'center' }}>
@@ -78,6 +78,7 @@ class ArticleTranslation extends Component {
               <div style={{ textAlign: 'center' }}>
                 <Spin spinning={this.state.loadingTranslation} size='large' tip='loading...' />
               </div>
+              <Button type='primary'>primary</Button>
               <Card title={this.state.translationTitle} bordered={false} >
                 <div dangerouslySetInnerHTML={{ __html: this.state.translationContent }} style={{ height: '100vh', overflowY: 'scroll' }} />
               </Card>

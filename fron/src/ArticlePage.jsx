@@ -9,7 +9,7 @@ class ArticlePage extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      title: '',
+      title: 'loading...',
       content: '',
       id: '',
       url: '',
@@ -65,14 +65,6 @@ class ArticlePage extends Component {
     this.props.history.replace('/' + this.props.match.params.id + '/translationEditorPage')
   }
 
-  showModal = (title, content) => {
-    this.setState({
-      visible: true,
-      modalTitle: title,
-      modalContent: content
-    })
-  }
-
   handleOk = (e) => {
     console.log(e)
     this.setState({
@@ -91,43 +83,19 @@ class ArticlePage extends Component {
     return (
       <Layout style={{ minHeight: '100vh', backgroundColor: '#fff' }}>
         <Nav />
-        <Row style={{ padding: '30px', flex: '1 0' }}>
-          <Col span={12}>
-            <div style={{ textAlign: 'center' }}>
-              <Spin spinning={this.state.loading} size='large' tip='loading...' />
-            </div>
-            <Card title={this.state.title} bordered={false} >
-              <div dangerouslySetInnerHTML={{ __html: this.state.content }} />
-            </Card>
-          </Col>
-          <Col span={12}>
-            <Affix offsetTop={0}>
-              <Card title='Action' bordered={false} style={{ background: '#ECECEC', margin: '0px 60px 30px 60px', borderRadius: '1rem' }}>
-                <Button type='primary' size={'small'} style={{ marginRight: '10px' }} onClick={this.gotoTranslationEditorPage}>Translate</Button>
-                <Button type='primary' size={'small'} style={{ marginRight: '10px' }}>Issues</Button>
-                <Button type='primary' size={'small'} style={{ marginRight: '10px' }}>Primary</Button>
-              </Card>
-            </Affix>
-            <Timeline style={{ padding: '60px' }}>
-              {this.state.translationList.map((node, index) =>
-                <Timeline.Item type='flex' justify='space-around' color='green'>
-                  <a href={'/' + this.state.id + '/translation/' + node.id}>{'click to ' + index + '  :  ' + node.title}</a>
-                  <Button type='primary' style={{ marginLeft: '10px' }} onClick={(title, content) => this.showModal(node.title, node.content)}>{index + '  :  ' + node.title}</Button>
-                </Timeline.Item>
-              )}
-            </Timeline>
-          </Col>
-        </Row>
-        <Modal
-          style={{ top: 20 }}
-          title={this.state.modalTitle}
-          visible={this.state.visible}
-          onOk={this.handleOk}
-          onCancel={this.handleCancel}
-          width={1000}
-        >
-          <div dangerouslySetInnerHTML={{ __html: this.state.modalContent }} />
-        </Modal>
+        <Affix offsetTop={0}>
+          <Card bordered={false} style={{ fontSize: '25px', fontWeight: 'bold', color: 'black', paddingLeft: '100px' }}>
+            {this.state.title}
+          </Card>
+        </Affix>
+        <div type='flex' style={{ flex: '1 0', background: '#ECECEC', padding: '0px 100px 0px 100px' }}>
+          <Card bordered={false} style={{ fontSize: '18px', marginTop: '15px' }}>
+            <div dangerouslySetInnerHTML={{ __html: this.state.content }} />
+          </Card>
+          <div style={{ textAlign: 'center' }}>
+            <Spin spinning={this.state.loading} size='large' tip='loading...' />
+          </div>
+        </div>
         <Myfooter />
       </Layout>
     )
