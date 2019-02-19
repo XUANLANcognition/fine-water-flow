@@ -29,7 +29,7 @@ class ArticlePage extends Component {
   getArticle = async (v) => {
     try {
       const response = await axios.get(
-        'https://guoliang.online:8080/api/article/' + this.props.match.params.id
+        'https://guoliang.online:8080/api/article/' + this.props.match.params.id + '/'
       )
       this.setState(function (state) {
         return {
@@ -59,10 +59,6 @@ class ArticlePage extends Component {
     } catch (error) {
       console.log(error)
     }
-  }
-
-  gotoTranslationEditorPage = () => {
-    this.props.history.replace('/' + this.props.match.params.id + '/translationEditorPage')
   }
 
   handleOk = (e) => {
