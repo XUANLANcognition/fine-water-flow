@@ -7,7 +7,7 @@ class Advertisement extends Component {
       <Card
         title='广告位'
       >
-        <p>诚招</p>
+        <p>假若你有什么“不”需要宣传的.</p>
       </Card>
     )
   }
