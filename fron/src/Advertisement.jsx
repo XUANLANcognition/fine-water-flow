@@ -7,7 +7,7 @@ class Advertisement extends Component {
       <Card
         title='广告位'
       >
-        <p>假若你有什么“不”需要宣传的.</p>
+        <p>你未看此花时，此花与汝同归于寂；你来看此花时，则此花颜色一时明白起来</p>
       </Card>
     )
   }

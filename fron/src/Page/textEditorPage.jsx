@@ -23,6 +23,7 @@ class textEditorPage extends Component {
   state = {
     uploading: false
   }
+
   componentDidMount () {
     // 异步设置编辑器内容
     setTimeout(() => {
@@ -75,16 +76,14 @@ class textEditorPage extends Component {
 
   render () {
     const { getFieldDecorator } = this.props.form
+
     return (
       <Layout style={{ minHeight: '100vh' }}>
         <Nav />
         <Content style={{ backgroundColor: '#fff', padding: '20px 80px 20px 80px' }}>
-          <Tooltip title='prompt text'>
-            <span>Editor your Text</span>
-          </Tooltip>
-          <div className='demo-container'>
+          <div className='editor-wrapper' style={{ padding: '10px 100px 10px 100px' }}>
             <Form onSubmit={this.handleSubmit}>
-              <FormItem label='描述'>
+              <FormItem label='标题'>
                 {getFieldDecorator('title', {
                   rules: [{
                     required: true,
@@ -110,6 +109,7 @@ class textEditorPage extends Component {
                   <BraftEditor
                     className='my-editor'
                     placeholder='请输入正文内容'
+                    media={{ image: true }}
                   />
                 )}
               </FormItem>
