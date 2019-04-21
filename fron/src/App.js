@@ -7,6 +7,7 @@ import Home from './Home'
 import Notice from './Notice'
 import THome from './THome'
 import ArticlePage from './ArticlePage'
+import Profile from './Profile'
 
 import textEditorPage from './Page/textEditorPage'
 import Join from './Page/Join'
@@ -32,6 +33,7 @@ class App extends Component {
             <Route path='/join' component={Join} />
             <Route path='/textEditorPage' component={textEditorPage} />
             <Route path='/article/:id' component={ArticlePage} />
+            <Route path='/profile/:id' component={Profile} />
             <Route component={NoMatch} />
           </Switch>
         </Router>

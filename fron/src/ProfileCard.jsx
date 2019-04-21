@@ -57,7 +57,7 @@ class ProfileCarder extends Component {
           description='My description'
         />
         <Divider> Infomation </Divider>
-        <p><a href='/'>Profile</a></p>
+        <p><a href={'/profile/' + this.state.data} >Profile</a></p>
         <p><a href='/'>My Text</a></p>
         <p><a href='/'>My Translate</a></p>
         <Divider> Action </Divider>
