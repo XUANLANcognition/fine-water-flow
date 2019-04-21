@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Card, Avatar, Divider, Button, message, Modal } from 'antd'
 import axios from 'axios'
 import { withRouter } from 'react-router'
+import { Link } from 'react-router-dom'
 
 const { Meta } = Card
 const confirm = Modal.confirm
@@ -57,7 +58,7 @@ class ProfileCarder extends Component {
           description='My description'
         />
         <Divider> Infomation </Divider>
-        <p><a href={'/profile/' + this.state.data} >Profile</a></p>
+        <p><Link to={'/profile/' + this.state.data} >Profile</Link></p>
         <p><a href='/'>My Text</a></p>
         <p><a href='/'>My Translate</a></p>
         <Divider> Action </Divider>
