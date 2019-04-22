@@ -11,6 +11,7 @@ import Profile from './Profile'
 
 import textEditorPage from './Page/textEditorPage'
 import Join from './Page/Join'
+import Settings from './Page/Settings'
 
 const MainPage = props => {
   const token = window.localStorage.getItem('token')
@@ -34,6 +35,7 @@ class App extends Component {
             <Route path='/textEditorPage' component={textEditorPage} />
             <Route path='/article/:id' component={ArticlePage} />
             <Route path='/profile/:id' component={Profile} />
+            <Route path='/settings/profile' component={Settings} />
             <Route component={NoMatch} />
           </Switch>
         </Router>
