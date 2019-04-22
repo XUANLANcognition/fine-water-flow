@@ -51,6 +51,11 @@ class ArticleSerializer(serializers.HyperlinkedModelSerializer):
         model = Article
         fields = ('url', 'id', 'title', 'content', 'pub_date', 'user')
 
+class ArticleFilter(filters.FilterSet):
+    class Meta:
+        model = Article
+        fields = '__all__'
+
 class ArticlePagination(PageNumberPagination):
     page_size = 8
     page_size_query_param = 'page_size'
@@ -68,6 +73,9 @@ class ArticleViewSet(viewsets.ModelViewSet):
         if self.action == 'list':
             return ArticleSerializerList
         return ArticleSerializer
+
+    filter_backends = (filters.DjangoFilterBackend,)
+    filterset_class = ArticleFilter
 
 class TranslateSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
