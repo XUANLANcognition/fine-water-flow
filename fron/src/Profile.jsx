@@ -14,7 +14,7 @@ class Profile extends Component {
         <Row style={{ flex: '1 0', padding: '60px' }}>
           <Col xl={{ span: 6 }} lg={{ span: 8 }} xs={{ span: 24 }} >
             <Avatar size={180} shape='square' >{this.props.match.params.id}</Avatar>
-            <h1>{this.props.match.params.id}</h1>
+            <h1 style={{ paddingTop: '10px' }}>{this.props.match.params.id}</h1>
           </Col>
           <Col xl={{ span: 18 }} lg={{ span: 16 }} xs={{ span: 24 }} >
             <Tabs defaultActiveKey='1'>
