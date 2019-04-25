@@ -46,15 +46,13 @@ class UserList(generics.ListCreateAPIView):
 class IsOwner(permissions.BasePermission):
 
     def has_object_permission(self, request, view, obj):
-        if request.method in permissions.SAFE_METHODS:
-            return True
         return request.user == obj
 
 class UserDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = User.objects.all()
     serializer_class =  UserSerializer
-    permission_classes = (permissions.IsAuthenticated, IsOwner,)
-
+    permission_classes = (IsOwner,)
+ 
 class ArticleSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
