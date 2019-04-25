@@ -26,9 +26,7 @@ from drf_yasg import openapi
 from rest_framework.decorators import permission_classes
 
 router = routers.DefaultRouter()
-router.register(r'users', UserViewSet)
 router.register(r'article', ArticleViewSet)
-router.register(r'translate', TranslationViewSet)
 
 schema_view = get_schema_view(
    openapi.Info(
@@ -49,4 +47,6 @@ urlpatterns = [
     url(r'^swagger(?P<format>\.json|\.yaml)$', schema_view.without_ui(cache_timeout=0), name='schema-json'),
     url(r'^swagger/$', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     url(r'^redoc/$', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
+    path('api/users/', UserList.as_view(), name='user-list'),
+    path('api/users/<int:pk>', UserDetail.as_view(), name='user-detail'),
 ]
