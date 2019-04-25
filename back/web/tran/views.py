@@ -53,7 +53,7 @@ class UserDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class =  UserSerializer
     permission_classes = (IsOwner,)
  
-class ArticleSerializer(serializers.HyperlinkedModelSerializer):
+class ArticleSerializer(serializers.ModelSerializer):
     user = serializers.ReadOnlyField(source='user.username')
     class Meta:
         model = Article
@@ -73,7 +73,7 @@ class ArticlePagination(PageNumberPagination):
 
     class Meta:
         model = Article
-        fields = ('url', 'title', 'content')
+        fields = '__all__'
 
 class ArticleFilter(filters.FilterSet):
     class Meta:
