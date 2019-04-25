@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
-import { Layout, Collapse } from 'antd'
+import { Layout } from 'antd'
 
 import Nav from '../Nav'
 import Myfooter from '../Myfooter'
+import AvatarUpload from '../AvatarUpload'
 
 class Settings extends Component {
   componentDidMount () {
@@ -23,6 +24,7 @@ class Settings extends Component {
         <Nav />
         <div style={{ flex: '1 0 ', padding: '60px', backgroundColor: '#fff' }} >
           <h1>我肝不动了...</h1>
+          <AvatarUpload />
         </div>
         <Myfooter />
       </Layout>
