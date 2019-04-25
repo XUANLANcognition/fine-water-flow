@@ -54,15 +54,17 @@ class UserDetail(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = (IsOwner,)
  
 class ArticleSerializer(serializers.HyperlinkedModelSerializer):
-
+    user = serializers.ReadOnlyField(source='user.username')
     class Meta:
         model = Article
         fields = '__all__'
 
-class ArticleFilter(filters.FilterSet):
-    class Meta:
-        model = Article
-        fields = '__all__'
+class PublishArticle(permissions.BasePermission):
+
+    def has_permission(self,  request, view):
+        if request.method == 'POST':
+            return permissions.IsAuthenticated
+        return True
 
 class ArticlePagination(PageNumberPagination):
     page_size = 8
@@ -73,16 +75,30 @@ class ArticlePagination(PageNumberPagination):
         model = Article
         fields = ('url', 'title', 'content')
 
-class ArticleViewSet(viewsets.ModelViewSet):
+class ArticleFilter(filters.FilterSet):
+    class Meta:
+        model = Article
+        fields = '__all__'
+
+class ArticleList(generics.ListCreateAPIView):
     queryset = Article.objects.all().order_by('-pub_date')
     serializer_class = ArticleSerializer
-    # pagination
+    permission_classes = (PublishArticle,)
     pagination_class = ArticlePagination
-    # authentication
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
-    # filter
     filter_backends = (filters.DjangoFilterBackend,)
     filterset_class = ArticleFilter
+
+class ReadArticle(permissions.BasePermission):
+    
+    def has_object_permission(self, request, view, obj):
+        if request.method in permissions.SAFE_METHODS:
+            return True
+        return obj.user == request.user
+
+class ArticleDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Article.objects.all()
+    serializer_class = ArticleSerializer
+    permission_classes = (ReadArticle,)
 
 class CustomAuthToken(ObtainAuthToken):
     
