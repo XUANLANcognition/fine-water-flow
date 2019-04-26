@@ -27,10 +27,10 @@ class THome extends Component {
       <Layout style={{ minHeight: '100vh', backgroundColor: '#f6f6f6' }}>
         <Nav />
         <Row style={{ flex: '1 0', padding: '60px' }}>
-          <Col xl={{ span: 16 }} lg={{ span: 14 }} style={{ paddingRight: '100px' }} >
+          <Col xl={{ span: 16 }} lg={{ span: 14 }} xs={{ span: 24 }} style={{ paddingRight: '100px' }} >
             <ArticleList />
           </Col>
-          <Col xl={{ span: 8 }} lg={{ span: 10 }} >
+          <Col xl={{ span: 8 }} lg={{ span: 10 }} xs={{ span: 24 }}>
             <Affix offsetTop={0}>
               <ProfileCard callback={this.goToEditorPage} />
             </Affix>

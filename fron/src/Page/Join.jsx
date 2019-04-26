@@ -102,7 +102,7 @@ class Join extends Component {
           <h1 style={{ fontSize: '40px' }}>Join NMT</h1>
           <p style={{ color: '#586069', fontSize: '20px', paddingBottom: '20px' }}>Non Machine Translation</p>
           <Row>
-            <Col span={8}>
+            <Col xl={{ span: 8 }} lg={{ span: 14 }} xs={{ span: 24 }}>
               <Card
                 title='Why Join?'
               >
@@ -111,7 +111,7 @@ class Join extends Component {
                 <p><Icon type='check' style={{ color: 'green' }} /> Frictionless Translate</p>
               </Card>
             </Col>
-            <Col span={16}>
+            <Col xl={{ span: 16 }} lg={{ span: 10 }} xs={{ span: 24 }}>
               <Form onSubmit={this.handleSubmit}>
                 <FormItem
                   {...formItemLayout}

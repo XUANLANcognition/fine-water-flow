@@ -20,12 +20,12 @@ class Home extends Component {
         <div style={{ height: '100vh' }}>
           <Nav />
           <Row type='flex' justify='space-around' align='middle' style={{ flex: '1 0', height: '100vh' }}>
-            <Col span={16} style={{ padding: '60px' }}>
+            <Col xl={{ span: 16 }} lg={{ span: 14 }} xs={{ span: 24 }} style={{ padding: '60px' }}>
               <h1>非机翻</h1>
               <Divider />
               <p>你的， 便值得分享</p>
             </Col>
-            <Col span={8} style={{ padding: '60px' }}>
+            <Col xl={{ span: 8 }} lg={{ span: 10 }} xs={{ span: 24 }} style={{ padding: '60px' }}>
               <Login />
             </Col>
           </Row>
