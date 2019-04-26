@@ -54,7 +54,7 @@ class UserDetail(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = (IsOwner,)
  
 class ArticleSerializer(serializers.ModelSerializer):
-    user = serializers.ReadOnlyField(source='user.username')
+
     class Meta:
         model = Article
         fields = '__all__'
