@@ -49,7 +49,7 @@ class textEditorPage extends Component {
         }
         try {
           const response = await axios.post(
-            'https://guoliang.online:8080/api/article/',
+            'https://guoliang.online:8080/api/articles/',
             {
               title: submitData.title,
               content: submitData.content,

@@ -1,23 +1,33 @@
 import React, { Component } from 'react'
-import { Upload, Icon, message } from 'antd'
+import { Upload, Icon, message, Avatar } from 'antd'
 import axios from 'axios'
 
 function beforeUpload (file) {
-  const isJPG = file.type === 'image/jpeg'
-  if (!isJPG) {
-    message.error('You can only upload JPG file!')
-  }
   const isLt2M = file.size / 1024 / 1024 < 2
   if (!isLt2M) {
     message.error('Image must smaller than 2MB!')
   }
-  return isJPG && isLt2M
+  return isLt2M
 }
 
 class AvatarUpload extends Component {
   state = {
     loading: false
   };
+
+  CoverAvatarUrl = async (avatarURL) => {
+    let config = {
+      headers: { 'Authorization': 'Token ' + window.localStorage.getItem('token') }
+    }
+    const response = await axios.patch(
+      'https://guoliang.online:8080/api/users/' + window.localStorage.getItem('user_id'),
+      {
+        'last_name': avatarURL
+      },
+      config
+    )
+    console.log('ds', response)
+  }
 
   handleChange = (info) => {
     if (info.file.status === 'uploading') {
@@ -27,6 +37,7 @@ class AvatarUpload extends Component {
     if (info.file.status === 'done') {
       this.setState({ imageUrl: info.file.response.data.url, loading: false })
     }
+    this.CoverAvatarUrl(info.file.response.data.url)
   }
 
   customRequest = async (info) => {
@@ -49,12 +60,6 @@ class AvatarUpload extends Component {
   }
 
   render () {
-    const uploadButton = (
-      <div>
-        <Icon type={this.state.loading ? 'loading' : 'plus'} />
-        <div className='ant-upload-text'>Upload</div>
-      </div>
-    )
     const imageUrl = this.state.imageUrl
     return (
       <Upload
@@ -67,7 +72,7 @@ class AvatarUpload extends Component {
         customRequest={this.customRequest}
         action='https://sm.ms/api/upload'
       >
-        {imageUrl ? <img src={imageUrl} alt='avatar' /> : uploadButton}
+        {<Avatar size={180} shape='square' src={imageUrl} icon='user' style={{ color: '#ffffff', backgroundColor: '#f6f6f6' }} />}
       </Upload>
     )
   }

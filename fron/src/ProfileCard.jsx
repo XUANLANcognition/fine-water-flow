@@ -32,8 +32,12 @@ class ProfileCarder extends Component {
 
   getUserProfile = async (v) => {
     try {
+      let config = {
+        headers: { 'Authorization': 'Token ' + window.localStorage.getItem('token') }
+      }
       const response = await axios.get(
-        'https://guoliang.online:8080/api/users/' + window.localStorage.getItem('user_id')
+        'https://guoliang.online:8080/api/users/' + window.localStorage.getItem('user_id'),
+        config
       )
       window.localStorage.setItem('url', response.data.url)
       this.data = response.data.username

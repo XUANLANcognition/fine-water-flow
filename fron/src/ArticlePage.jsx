@@ -23,13 +23,12 @@ class ArticlePage extends Component {
 
   componentDidMount = async (v) => {
     await this.getArticle()
-    this.getTranslation()
   }
 
   getArticle = async (v) => {
     try {
       const response = await axios.get(
-        'https://guoliang.online:8080/api/article/' + this.props.match.params.id + '/'
+        'https://guoliang.online:8080/api/articles/' + this.props.match.params.id
       )
       this.setState(function (state) {
         return {
@@ -38,22 +37,6 @@ class ArticlePage extends Component {
           id: response.data.id,
           url: response.data.url,
           loading: false
-        }
-      })
-    } catch (error) {
-      console.log(error)
-    }
-  }
-
-  getTranslation = async (v) => {
-    try {
-      const response = await axios.get(
-        'https://guoliang.online:8080/api/translate/?format=json&article=' + this.state.id
-      )
-      console.log(response)
-      this.setState(function (state) {
-        return {
-          translationList: response.data.results
         }
       })
     } catch (error) {

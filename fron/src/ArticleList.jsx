@@ -30,9 +30,10 @@ class ArticleList extends Component {
   getArticleData = async (v) => {
     try {
       const response = await axios.get(
-        'https://guoliang.online:8080/api/article/?format=json' + '&page=' + this.state.page + '&page_size=' + count
+        'https://guoliang.online:8080/api/articles/?format=json' + '&page=' + this.state.page + '&page_size=' + count
       )
       this.data = response.data.results
+      console.log('vsdkasv', this.data)
       this.setState(function (state) {
         return { data: response.data.results, cache: response.data.results }
       })
@@ -51,7 +52,7 @@ class ArticleList extends Component {
     try {
       this.state.page = this.state.page + 1
       const response = await axios.get(
-        'https://guoliang.online:8080/api/article/?format=json' + '&page=' + this.state.page + '&page_size=' + count
+        'https://guoliang.online:8080/api/articles/?format=json' + '&page=' + this.state.page + '&page_size=' + count
       )
       if (response.status !== 404) {
         const cache = this.state.cache.concat(response.data.results)

@@ -21,11 +21,14 @@ class Profile extends Component {
 
   getProfileData = async (v) => {
     try {
+      let config = {
+        headers: { 'Authorization': 'Token ' + window.localStorage.getItem('token') }
+      }
       const response = await axios.get(
-        'https://guoliang.online:8080/api/users/' + window.localStorage.getItem('user_id') + '/?format=json'
+        'https://guoliang.online:8080/api/users/' + window.localStorage.getItem('user_id') + '?format=json',
+        config
       )
       this.data = response.data.results
-      console.log('qfrg', response.data)
       this.setState(function (state) {
         return { urlAvatar: response.data.last_name }
       })
