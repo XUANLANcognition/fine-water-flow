@@ -57,7 +57,7 @@ class ArticleSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Article
-        fields = ('url', 'id', 'title', 'description', 'pub_date', 'user')
+        fields = ('url', 'id', 'title', 'description', 'pub_date', 'user', 'content')
 
 class PublishArticle(permissions.BasePermission):
 
