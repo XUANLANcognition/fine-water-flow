@@ -53,11 +53,11 @@ class UserDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class =  UserSerializer
     permission_classes = (IsOwner,)
  
-class ArticleSerializer(serializers.ModelSerializer):
+class ArticleSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Article
-        fields = '__all__'
+        fields = ('url', 'id', 'title', 'description', 'pub_date', 'user')
 
 class PublishArticle(permissions.BasePermission):
 
