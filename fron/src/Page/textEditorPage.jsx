@@ -48,14 +48,16 @@ class textEditorPage extends Component {
           content: values.content.toHTML() // or values.content.toHTML()
         }
         try {
+          let config = {
+            headers: { 'Authorization': 'Token ' + window.localStorage.getItem('token') }
+          }
           const response = await axios.post(
             'https://guoliang.online:8080/api/articles/',
             {
               title: submitData.title,
-              content: submitData.content,
-              pub_date: new Date().toISOString(),
-              user: window.localStorage.getItem('url')
-            }
+              content: submitData.content
+            },
+            config
           )
           this.setState(function (state) {
             return {
