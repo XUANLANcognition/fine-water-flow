@@ -59,12 +59,10 @@ class ProfileCarder extends Component {
         <Meta
           avatar={<Avatar size='large' src={this.state.avatarUrl} icon='user' style={{ color: '#ffffff', backgroundColor: '#f6f6f6' }} />}
           title={this.state.username}
-          description='My description'
+          description='I am just a baby.'
         />
         <Divider> Infomation </Divider>
-        <p><Link to={'/profile/' + this.state.username} >Profile</Link></p>
-        <p><a href='/'>My Text</a></p>
-        <p><a href='/'>My Translate</a></p>
+        <p><Link to={'/profile/' + this.state.username} >My Profile</Link></p>
         <Divider> Action </Divider>
         <Button type='primary' block onClick={e => this.props.callback(e)}>New Text</Button>
         <Divider />
