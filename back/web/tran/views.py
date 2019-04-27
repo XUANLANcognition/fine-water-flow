@@ -31,6 +31,12 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
         user.save()
         return user
 
+class UserAnotherSerializer(serializers.HyperlinkedModelSerializer):
+
+    class Meta:
+        model = User
+        fields = ('username', 'first_name', 'last_name', 'url')
+
 class CreateUser(permissions.BasePermission):
 
     def has_permission(self, request, view):
@@ -52,6 +58,11 @@ class UserDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = User.objects.all()
     serializer_class =  UserSerializer
     permission_classes = (IsOwner,)
+
+class UserAnotherDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = User.objects.all()
+    serializer_class =  UserAnotherSerializer
+    permission_classes = ()
  
 class ArticleSerializer(serializers.HyperlinkedModelSerializer):
 
