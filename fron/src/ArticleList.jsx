@@ -88,15 +88,13 @@ class ArticleList extends Component {
           loadMore={loadMore}
           loading={initLoading}
           renderItem={item => (
-            <List.Item
-              actions={[<IconText type='star-o' text='0' />, <IconText type='like-o' text='999+' />, <IconText type='message' text='0' />]}
-            >
+            <List.Item>
               <Skeleton avatar title={false} loading={item.loading} active>
                 <List.Item.Meta
                   title={<a href={'/article/' + item.id}>{item.title}</a>}
                   avatar={<Avatar icon='user' src={item.user && item.user.last_name} />}
+                  description={dayjs(item.pub_date).fromNow()}
                 />
-                {dayjs(item.pub_date).fromNow()}
               </Skeleton>
             </List.Item>
           )}

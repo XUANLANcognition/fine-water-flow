@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-import { List, Icon, Button, Skeleton, message } from 'antd'
+import { List, Icon, Button, Skeleton, message, Avatar } from 'antd'
 import axios from 'axios'
+import dayjs from 'dayjs'
 
 const IconText = ({ type, text }) => (
   <span>
@@ -87,14 +88,13 @@ class ProfileArticleList extends Component {
         loadMore={loadMore}
         loading={initLoading}
         renderItem={item => (
-          <List.Item
-            actions={[<IconText type='star-o' text='156' />, <IconText type='like-o' text='156' />, <IconText type='message' text='2' />]}
-          >
+          <List.Item>
             <Skeleton title={false} loading={item.loading} active>
               <List.Item.Meta
                 title={<a href={'/article/' + item.id}>{item.title}</a>}
+                avatar={<Avatar icon='user' src={item.user && item.user.last_name} />}
+                description={dayjs(item.pub_date).fromNow()}
               />
-              {item.description}
             </Skeleton>
           </List.Item>
         )}
