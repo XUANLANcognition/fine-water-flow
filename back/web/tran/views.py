@@ -65,7 +65,7 @@ class UserAnotherDetail(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = ()
  
 class ArticleSerializer(serializers.HyperlinkedModelSerializer):
-
+    user = UserAnotherSerializer()
     class Meta:
         model = Article
         fields = ('url', 'id', 'title', 'description', 'pub_date', 'user', 'content')
