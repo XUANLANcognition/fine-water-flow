@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { List, Icon, Button, Skeleton, message, Avatar } from 'antd'
 import axios from 'axios'
+import dayjs from 'dayjs'
 
 const IconText = ({ type, text }) => (
   <span>
@@ -95,7 +96,7 @@ class ArticleList extends Component {
                   title={<a href={'/article/' + item.id}>{item.title}</a>}
                   avatar={<Avatar icon='user' src={item.user && item.user.last_name} />}
                 />
-                {item.pub_date}
+                {dayjs(item.pub_date).fromNow()}
               </Skeleton>
             </List.Item>
           )}
