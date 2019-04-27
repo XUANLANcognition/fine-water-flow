@@ -9,7 +9,8 @@ const confirm = Modal.confirm
 
 class ProfileCarder extends Component {
   state = {
-    username: ''
+    username: '',
+    avatarUrl: ''
   }
 
   onClickLogout = () => {
@@ -40,29 +41,28 @@ class ProfileCarder extends Component {
         config
       )
       window.localStorage.setItem('url', response.data.url)
-      this.data = response.data.username
       this.setState(function (state) {
-        return { data: response.data.username }
+        return { username: response.data.username, avatarUrl: response.data.last_name }
       })
     } catch (error) {
       console.log(error)
     }
   }
 
-  componentDidMount () {
-    this.getUserProfile()
+  componentDidMount = async (v) => {
+    await this.getUserProfile()
   }
 
   render () {
     return (
       <Card >
         <Meta
-          avatar={<Avatar style={{ backgroundColor: '#123456' }}>{this.data}</Avatar>}
-          title={this.state.data}
+          avatar={<Avatar size='large' src={this.state.avatarUrl} icon='user' style={{ color: '#ffffff', backgroundColor: '#f6f6f6' }} />}
+          title={this.state.username}
           description='My description'
         />
         <Divider> Infomation </Divider>
-        <p><Link to={'/profile/' + this.state.data} >Profile</Link></p>
+        <p><Link to={'/profile/' + this.state.username} >Profile</Link></p>
         <p><a href='/'>My Text</a></p>
         <p><a href='/'>My Translate</a></p>
         <Divider> Action </Divider>
