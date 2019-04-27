@@ -64,11 +64,15 @@ class UserAnotherDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class =  UserAnotherSerializer
     permission_classes = ()
  
+
 class ArticleSerializer(serializers.HyperlinkedModelSerializer):
-    user = UserAnotherSerializer()
+    
+    user = UserAnotherSerializer(read_only = True)
+    
     class Meta:
         model = Article
         fields = ('url', 'id', 'title', 'description', 'pub_date', 'user', 'content')
+
 
 class PublishArticle(permissions.BasePermission):
 
@@ -98,6 +102,9 @@ class ArticleList(generics.ListCreateAPIView):
     pagination_class = ArticlePagination
     filter_backends = (filters.DjangoFilterBackend,)
     filterset_class = ArticleFilter
+    
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
 
 class ReadArticle(permissions.BasePermission):
     

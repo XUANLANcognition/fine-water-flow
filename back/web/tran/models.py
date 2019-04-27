@@ -6,7 +6,7 @@ class Article(models.Model):
     title = models.CharField(max_length=256)
     description = models.CharField(max_length=512, default='description')
     content =  models.TextField()
-    pub_date = models.DateTimeField('date published')
+    pub_date = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
 class Translation(models.Model):
