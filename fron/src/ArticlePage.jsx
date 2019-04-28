@@ -62,19 +62,27 @@ class ArticlePage extends Component {
     return (
       <Layout style={{ minHeight: '100vh', backgroundColor: '#fff' }}>
         <Nav />
-        <Affix offsetTop={0}>
-          <Card bordered={false} style={{ fontSize: '25px', fontWeight: 'bold', color: 'black', paddingLeft: '100px' }}>
-            {this.state.title}
-          </Card>
-        </Affix>
-        <div type='flex' style={{ flex: '1 0', background: '#ECECEC', padding: '0px 100px 0px 100px' }}>
-          <Card bordered={false} style={{ fontSize: '18px', marginTop: '15px' }}>
-            <div dangerouslySetInnerHTML={{ __html: this.state.content }} />
-          </Card>
-          <div style={{ textAlign: 'center' }}>
-            <Spin spinning={this.state.loading} size='large' tip='loading...' />
-          </div>
-        </div>
+        <Row >
+          <Col xl={{ span: 18, offset: 3 }} lg={{ span: 7, offset: 1 }} xs={{ span: 24 }}>
+            <Affix offsetTop={0}>
+              <Card bordered={false} style={{ fontSize: '25px', fontWeight: 'bold', color: 'black' }}>
+                {this.state.title}
+              </Card>
+            </Affix>
+          </Col>
+        </Row>
+        <Row style={{ flex: '1 0' }} >
+          <Col xl={{ span: 18, offset: 3 }} lg={{ span: 7, offset: 1 }} xs={{ span: 24 }}>
+            <div type='flex' style={{ flex: '1 0', background: '#fff' }}>
+              <Card bordered={false} style={{ fontSize: '18px', marginTop: '0' }}>
+                <div dangerouslySetInnerHTML={{ __html: this.state.content }} />
+              </Card>
+              <div style={{ textAlign: 'center' }}>
+                <Spin spinning={this.state.loading} size='large' tip='loading...' />
+              </div>
+            </div>
+          </Col>
+        </Row>
         <Myfooter />
       </Layout>
     )
