@@ -27,7 +27,7 @@ class THome extends Component {
       <Layout style={{ minHeight: '100vh', backgroundColor: '#f6f6f6' }}>
         <Nav />
         <Row style={{ flex: '1 0', padding: '60px' }}>
-          <Col xl={{ span: 14, offset: 1 }} lg={{ span: 14 }} xs={{ span: 24 }}>
+          <Col xl={{ span: 14, offset: 1 }} lg={{ span: 14 }} xs={{ span: 24 }} style={{ paddingBottom: '20px' }}>
             <ArticleList />
           </Col>
           <Col xl={{ span: 8, offset: 1 }} lg={{ span: 10 }} xs={{ span: 24 }}>
