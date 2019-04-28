@@ -75,7 +75,7 @@ class ArticlePage extends Component {
           <Col xl={{ span: 18, offset: 3 }} lg={{ span: 7, offset: 1 }} xs={{ span: 24 }}>
             <div type='flex' style={{ flex: '1 0', background: '#fff' }}>
               <Card bordered={false} style={{ fontSize: '18px', marginTop: '0' }}>
-                <div dangerouslySetInnerHTML={{ __html: this.state.content }} />
+                <div style={{ overflow: 'auto' }} dangerouslySetInnerHTML={{ __html: this.state.content }} />
               </Card>
               <div style={{ textAlign: 'center' }}>
                 <Spin spinning={this.state.loading} size='large' tip='loading...' />
