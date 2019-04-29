@@ -35,7 +35,7 @@ class UserAnotherSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = User
-        fields = ('username', 'first_name', 'last_name', 'url')
+        fields = ('username', 'first_name', 'last_name', 'url', 'id')
 
 class CreateUser(permissions.BasePermission):
 
