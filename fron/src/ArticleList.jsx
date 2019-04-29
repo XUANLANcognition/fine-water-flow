@@ -91,7 +91,7 @@ class ArticleList extends Component {
             <List.Item>
               <Skeleton avatar title={false} loading={item.loading} active>
                 <List.Item.Meta
-                  title={<a href={(item.user && item.user.id == window.localStorage.getItem('user_id') ? '/profile/' : '/visit/') + (item.user && item.user.id)}>{item.user && item.user.username}</a>}
+                  title={<a href={((item.user && item.user.id) + '' === window.localStorage.getItem('user_id') ? '/profile/' : '/visit/') + (item.user && item.user.id)}>{item.user && item.user.username}</a>}
                   avatar={<Avatar icon='user' src={item.user && item.user.last_name} />}
                   description={dayjs(item.pub_date).fromNow()}
                 />

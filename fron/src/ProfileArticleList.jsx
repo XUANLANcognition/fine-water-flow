@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
-import { List, Button, Skeleton, message, Avatar } from 'antd'
+import { List, Button, Skeleton, message, Avatar, Modal } from 'antd'
 import axios from 'axios'
 import dayjs from 'dayjs'
 
 const count = 3
+const confirm = Modal.confirm
 
 class ProfileArticleList extends Component {
   state = {
@@ -62,6 +63,34 @@ class ProfileArticleList extends Component {
     }
   }
 
+  deleteArticle = async (v) => {
+    try {
+      confirm({
+        title: 'Delete!',
+        content: '你确认要删除这篇文章吗？',
+        onOk: async () => {
+          let config = {
+            headers: { 'Authorization': 'Token ' + window.localStorage.getItem('token') }
+          }
+          const response = await axios.delete(
+            'https://guoliang.online:8080/api/articles/' + v,
+            config
+          )
+          if (response.status === 204) {
+            message.success('删除成功.')
+            this.setState(function (state) {
+              return { data: state.data.filter(article => article.id !== v) }
+            })
+          } else {
+            message.error('删除失败.')
+          }
+        }
+      })
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   render () {
     const { initLoading, loading, data } = this.state
     const loadMore = !initLoading && !loading ? (
@@ -75,14 +104,14 @@ class ProfileArticleList extends Component {
 
     return (
       <List
-        itemLayout='vertical'
+        itemLayout='horizontal'
         dataSource={data}
         size='large'
         loadMore={loadMore}
         loading={initLoading}
         renderItem={item => (
-          <List.Item>
-            <Skeleton title={false} loading={item.loading} active>
+          <List.Item actions={[<a>Modify</a>, <a onClick={() => this.deleteArticle(item.id)} style={{ color: 'red' }}>Delete</a>]}>
+            <Skeleton title={false} loading={item.loading} actives>
               <List.Item.Meta
                 title={<a href={'/article/' + item.id}>{item.title}</a>}
                 avatar={<Avatar icon='user' src={item.user && item.user.last_name} />}
