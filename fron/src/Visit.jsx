@@ -5,11 +5,11 @@ import axios from 'axios'
 
 import Nav from './Nav'
 import Myfooter from './Myfooter'
-import ProfileArticleList from './ProfileArticleList'
+import VisitProfileArticleList from './VisitProfileArticleList'
 
 const TabPane = Tabs.TabPane
 
-class Profile extends Component {
+class Visit extends Component {
   state = {
     data: [],
     urlAvatar: '',
@@ -22,12 +22,8 @@ class Profile extends Component {
 
   getProfileData = async (v) => {
     try {
-      let config = {
-        headers: { 'Authorization': 'Token ' + window.localStorage.getItem('token') }
-      }
       const response = await axios.get(
-        'https://guoliang.online:8080/api/users/' + window.localStorage.getItem('user_id') + '?format=json',
-        config
+        'https://guoliang.online:8080/api/user/' + this.props.match.params.id + '?format=json'
       )
       this.data = response.data.results
       this.setState(function (state) {
@@ -51,11 +47,8 @@ class Profile extends Component {
           </Col>
           <Col xl={{ span: 17, offset: 1 }} lg={{ span: 15, offset: 1 }} xs={{ span: 24 }} >
             <Tabs defaultActiveKey='1'>
-              <TabPane tab={<span><Icon type='read' />我的文章</span>} key='1'>
-                <ProfileArticleList />
-              </TabPane>
-              <TabPane tab={<span><Icon type='rest' />我的草稿</span>} key='2'>
-      等会写...
+              <TabPane tab={<span><Icon type='read' />Ta 的文章</span>} key='1'>
+                <VisitProfileArticleList visitUserId={this.props.match.params.id} />
               </TabPane>
             </Tabs>
           </Col>
@@ -66,4 +59,4 @@ class Profile extends Component {
   }
 }
 
-export default Profile
+export default Visit
