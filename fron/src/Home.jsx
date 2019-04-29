@@ -20,20 +20,22 @@ class Home extends Component {
         <div style={{ height: '100vh' }}>
           <Nav />
           <Row type='flex' justify='space-around' align='middle' style={{ flex: '1 0', height: '100vh' }}>
-            <Col xl={{ span: 16 }} lg={{ span: 14 }} xs={{ span: 24 }} style={{ padding: '60px' }}>
-              <h1>非机翻</h1>
+            <Col xl={{ span: 12, offset: 2 }} xs={{ span: 22, offset: 1 }}>
+              <h1>非机</h1>
               <Divider />
               <p>你的， 便值得分享</p>
             </Col>
-            <Col xl={{ span: 8 }} lg={{ span: 10 }} xs={{ span: 24 }} style={{ padding: '60px' }}>
+            <Col xl={{ span: 7, offset: 1 }} xs={{ span: 22, offset: 1 }}>
               <Login />
             </Col>
           </Row>
         </div>
 
         <Row type='flex' justify='center' align='middle' style={{ height: '100vh', backgroundColor: '#2b3137', flexDirection: 'column' }}>
-          <p style={{ fontSize: '45px', color: '#fff' }}>A better way to translate together</p>
-          <p style={{ fontSize: '25px', color: '#fff' }}>A better way to translate together</p>
+          <Col xl={{ span: 20, offset: 2 }} xs={{ span: 22, offset: 1 }}>
+            <p style={{ fontSize: '45px', color: '#fff' }}>SHARE</p>
+            <p style={{ fontSize: '25px', color: '#fff' }}>A better way to share together</p>
+          </Col>
         </Row>
         <Row type='flex' justify='center' align='middle' style={{ height: '100vh', flexDirection: 'column' }}>
           <p style={{ fontSize: '45px', color: 'black' }}>Join us</p>
