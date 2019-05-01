@@ -101,8 +101,8 @@ class Join extends Component {
         <div style={{ flex: '1 0 ', backgroundColor: '#fff' }} >
           <Row style={{ paddingTop: '20px' }}>
             <Col xl={{ span: 20, offset: 2 }} xs={{ span: 22, offset: 1 }} >
-              <h1 style={{ fontSize: '40px' }}>Join NMT</h1>
-              <p style={{ color: '#586069', fontSize: '20px', paddingBottom: '20px' }}>Non Machine Translation</p>
+              <h1 style={{ fontSize: '40px' }}>Join 非机</h1>
+              <p style={{ color: '#586069', fontSize: '20px', paddingBottom: '20px' }}>非 机</p>
             </Col>
           </Row>
           <Row>
@@ -111,9 +111,9 @@ class Join extends Component {
               <Card
                 title='Why Join?'
               >
-                <p><Icon type='check' style={{ color: 'green' }} /> Great communication</p>
-                <p><Icon type='check' style={{ color: 'green' }} /> Open source community</p>
-                <p><Icon type='check' style={{ color: 'green' }} /> Frictionless Translate</p>
+                <p><Icon type='check' style={{ color: 'green' }} /> 无聊？</p>
+                <p><Icon type='check' style={{ color: 'green' }} /> 独乐乐不如众乐乐？</p>
+                <p><Icon type='check' style={{ color: 'green' }} /> 我编不下去了. </p>
               </Card>
             </Col>
             <Col xl={{ span: 14, offset: 1 }} xs={{ span: 22, offset: 1 }}>
