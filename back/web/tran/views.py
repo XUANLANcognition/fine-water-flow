@@ -3,7 +3,7 @@ from django.http import JsonResponse
 from rest_framework import routers, serializers, viewsets
 from rest_framework.pagination import PageNumberPagination
 from django.contrib.auth.models import User
-from .models import Article, Translation, Profile
+from .models import Article, Translation
 from rest_framework.authtoken.models import Token
 
 from rest_framework.authtoken.views import ObtainAuthToken
