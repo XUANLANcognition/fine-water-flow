@@ -3,7 +3,7 @@ from django.http import JsonResponse
 from rest_framework import routers, serializers, viewsets
 from rest_framework.pagination import PageNumberPagination
 from django.contrib.auth.models import User
-from .models import Article, Translation
+from .models import Article, Translation, Profile
 from rest_framework.authtoken.models import Token
 
 from rest_framework.authtoken.views import ObtainAuthToken
@@ -24,6 +24,7 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = User
         fields = ('username', 'password', 'email', 'first_name', 'last_name', 'url')
+        extra_kwargs = {'password': {'write_only': True}}
 
     def create(self, validated_data):
         user = super(UserSerializer, self).create(validated_data)
@@ -36,6 +37,7 @@ class UserAnotherSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = User
         fields = ('username', 'first_name', 'last_name', 'url', 'id')
+        read_only_fields = ('username', 'first_name', 'last_name', 'url', 'id')
 
 class CreateUser(permissions.BasePermission):
 
