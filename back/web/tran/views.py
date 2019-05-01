@@ -47,11 +47,11 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
         return super(UserSerializer, self).update(instance, validated_data)
 
 class UserAnotherSerializer(serializers.HyperlinkedModelSerializer):
-    
+    profile = UserProfileSerializer()
     class Meta:
         model = User
-        fields = ('username', 'first_name', 'last_name', 'url', 'id')
-        read_only_fields = ('username', 'first_name', 'last_name', 'url', 'id')
+        fields = ('username', 'first_name', 'last_name', 'url', 'id', 'profile')
+        read_only_fields = ('username', 'first_name', 'last_name', 'url', 'id', 'profile')
 
 class CreateUser(permissions.BasePermission):
 
