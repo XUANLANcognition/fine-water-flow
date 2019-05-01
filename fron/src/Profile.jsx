@@ -8,7 +8,7 @@ import Myfooter from './Myfooter'
 import ProfileArticleList from './ProfileArticleList'
 
 const TabPane = Tabs.TabPane
-const { Title, Paragraph, Text } = Typography
+const { Title, Paragraph } = Typography
 
 class Profile extends Component {
   state = {

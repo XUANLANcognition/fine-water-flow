@@ -13,6 +13,7 @@ import Visit from './Visit'
 import textEditorPage from './Page/textEditorPage'
 import Join from './Page/Join'
 import Settings from './Page/Settings'
+import Agreement from './Page/Agreement'
 
 const MainPage = props => {
   const token = window.localStorage.getItem('token')
@@ -38,6 +39,7 @@ class App extends Component {
             <Route path='/profile/:id' component={Profile} />
             <Route path='/visit/:id' component={Visit} />
             <Route path='/settings/profile' component={Settings} />
+            <Route path='/agreement' component={Agreement} />
             <Route component={NoMatch} />
           </Switch>
         </Router>

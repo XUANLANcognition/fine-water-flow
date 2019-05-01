@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Form, Icon, Input, Button, Checkbox, message } from 'antd'
 import axios from 'axios'
 import { withRouter } from 'react-router'
+import { Link } from 'react-router-dom'
 
 const FormItem = Form.Item
 
@@ -65,7 +66,7 @@ class Login extends Component {
             style={{ width: '100%' }}>
             登陆
           </Button>
-          没有账号？<a href='/join'>注册</a>
+          没有账号？<Link to='/join'>注册</Link>
         </FormItem>
       </Form>
     )

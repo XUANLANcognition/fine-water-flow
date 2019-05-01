@@ -8,7 +8,8 @@ class AuthorShowCard extends Component {
   state = {
     data: [],
     urlAvatar: '',
-    username: ''
+    username: '',
+    bio: ''
   }
 
   componentDidUpdate (prevProps) {
@@ -22,7 +23,7 @@ class AuthorShowCard extends Component {
       )
       this.data = response.data.results
       this.setState(function (state) {
-        return { urlAvatar: response.data.last_name, username: response.data.username }
+        return { urlAvatar: response.data.last_name, username: response.data.username, bio: response.data.profile.bio }
       })
     } catch (error) {
       console.log(error)
@@ -35,7 +36,7 @@ class AuthorShowCard extends Component {
         <Meta
           avatar={<Avatar src={this.state.urlAvatar} />}
           title={this.state.username}
-          description='I am just s baby.'
+          description={this.state.bio}
         />
       </Card>
     )

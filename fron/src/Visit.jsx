@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
-import { Layout, Avatar, Row, Col, Tabs, Icon, Button } from 'antd'
-import { Link } from 'react-router-dom'
+import { Layout, Avatar, Row, Col, Tabs, Icon, Typography } from 'antd'
 import axios from 'axios'
 
 import Nav from './Nav'
@@ -8,12 +7,14 @@ import Myfooter from './Myfooter'
 import VisitProfileArticleList from './VisitProfileArticleList'
 
 const TabPane = Tabs.TabPane
+const { Title, Paragraph } = Typography
 
 class Visit extends Component {
   state = {
     data: [],
     urlAvatar: '',
-    username: ''
+    username: '',
+    bio: ''
   }
 
   componentDidMount = async (v) => {
@@ -27,7 +28,7 @@ class Visit extends Component {
       )
       this.data = response.data.results
       this.setState(function (state) {
-        return { urlAvatar: response.data.last_name, username: response.data.username }
+        return { urlAvatar: response.data.last_name, username: response.data.username, bio: response.data.profile.bio }
       })
     } catch (error) {
       console.log(error)
@@ -41,10 +42,8 @@ class Visit extends Component {
         <Row style={{ flex: '1 0', padding: '60px' }} >
           <Col xl={{ span: 5, offset: 1 }} lg={{ span: 7, offset: 1 }} xs={{ span: 24 }} >
             <Avatar size={180} shape='square' src={this.state.urlAvatar} icon='user' style={{ color: '#ffffff', backgroundColor: '#f6f6f6' }} />
-            <h1 style={{ paddingTop: '10px' }}>{this.state.username}</h1>
-            <Button block style={{ backgroundColor: '#f6f6f6' }}>
-              <Link to='/settings/profile'>Edit</Link>
-            </Button>
+            <Title level={2}>{this.state.username}</Title>
+            <Paragraph>{this.state.bio}</Paragraph>
           </Col>
           <Col xl={{ span: 17, offset: 1 }} lg={{ span: 15, offset: 1 }} xs={{ span: 24 }} >
             <Tabs defaultActiveKey='1'>

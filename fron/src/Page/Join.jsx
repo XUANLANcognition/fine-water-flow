@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Layout, Form, Input, Tooltip, Icon, Row, Col, Button, Checkbox, Card, message } from 'antd'
 import axios from 'axios'
+import { Link } from 'react-router-dom'
 
 import Nav from '../Nav'
 import Myfooter from '../Myfooter'
@@ -181,7 +182,7 @@ class Join extends Component {
                   {getFieldDecorator('agreement', {
                     valuePropName: 'checked'
                   })(
-                    <Checkbox>I have read the <a href=''>agreement</a></Checkbox>
+                    <Checkbox>I have read the <Link to='agreement'>agreement</Link></Checkbox>
                   )}
                 </FormItem>
                 <FormItem {...tailFormItemLayout}>

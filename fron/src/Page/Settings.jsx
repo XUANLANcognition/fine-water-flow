@@ -81,9 +81,9 @@ class Settings extends Component {
               </Row>
               <Row>
                 <Col xl={{ span: 16, offset: 0 }} xs={{ span: 22, offset: 1 }} >
-                  <h3>Bio : {this.state.username}</h3>
+                  <h3>Username : {this.state.username}</h3>
                   <h3>Bio : {this.state.bio}</h3>
-                  <h3>Bio : {this.state.email}</h3>
+                  <h3>E-mail : {this.state.email}</h3>
                 </Col>
                 <Col xl={{ span: 4, offset: 1 }} xs={{ span: 22, offset: 1 }} >
                   <AvatarUpload avatarUrl={this.state.urlAvatar} />
