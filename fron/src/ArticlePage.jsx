@@ -1,9 +1,12 @@
 import React, { Component } from 'react'
-import { Card, Row, Col, Layout, Form, Spin } from 'antd'
+import { Card, Row, Col, Layout, Form, Spin, Affix, Tag } from 'antd'
 import axios from 'axios'
+import dayjs from 'dayjs'
 
 import Nav from './Nav'
 import Myfooter from './Myfooter'
+import AuthorShowCard from './AuthorShowCard'
+import Advertisement from './Advertisement'
 
 class ArticlePage extends Component {
   constructor (props) {
@@ -17,7 +20,9 @@ class ArticlePage extends Component {
       visible: false,
       modalTitle: '',
       modalContent: '',
-      loading: true
+      loading: true,
+      authorId: '',
+      pubDate: ''
     }
   }
 
@@ -36,7 +41,9 @@ class ArticlePage extends Component {
           content: response.data.content,
           id: response.data.id,
           url: response.data.url,
-          loading: false
+          loading: false,
+          authorId: response.data.user.id,
+          pubDate: response.data.pub_date
         }
       })
     } catch (error) {
@@ -70,15 +77,22 @@ class ArticlePage extends Component {
           </Col>
         </Row>
         <Row style={{ flex: '1 0' }} >
-          <Col xl={{ span: 18, offset: 3 }} lg={{ span: 7, offset: 1 }} xs={{ span: 24 }}>
+          <Col xl={{ span: 12, offset: 3 }} xs={{ span: 24 }}>
             <div type='flex' style={{ flex: '1 0', background: '#fff' }}>
               <Card bordered={false} style={{ fontSize: '18px', marginTop: '0' }}>
                 <div style={{ overflow: 'auto' }} dangerouslySetInnerHTML={{ __html: this.state.content }} />
+                <Tag color='#108ee9'>编辑于 {dayjs(this.state.pubDate).fromNow()}</Tag>
               </Card>
               <div style={{ textAlign: 'center' }}>
                 <Spin spinning={this.state.loading} size='large' tip='loading...' />
               </div>
             </div>
+          </Col>
+          <Col xl={{ span: 5, offset: 1 }} xs={{ span: 20, offset: 2 }} style={{ paddingBottom: '20px' }}>
+            <Affix offsetTop={0}>
+              <AuthorShowCard authorId={this.state.authorId} />
+            </Affix>
+            <Advertisement />
           </Col>
         </Row>
         <Myfooter />

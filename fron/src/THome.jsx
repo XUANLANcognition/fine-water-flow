@@ -24,7 +24,7 @@ class THome extends Component {
 
   render () {
     return (
-      <Layout style={{ minHeight: '100vh', backgroundColor: '#f6f6f6' }}>
+      <Layout style={{ minHeight: '100vh', backgroundColor: '#fff' }}>
         <Nav />
         <Row style={{ flex: '1 0', padding: '60px' }}>
           <Col xl={{ span: 14, offset: 1 }} lg={{ span: 14 }} xs={{ span: 24 }} style={{ paddingBottom: '20px' }}>
@@ -34,7 +34,6 @@ class THome extends Component {
             <Affix offsetTop={0}>
               <ProfileCard callback={this.goToEditorPage} />
             </Affix>
-            <Divider />
             <Advertisement />
           </Col>
         </Row>

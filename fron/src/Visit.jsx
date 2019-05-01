@@ -33,6 +33,7 @@ class Visit extends Component {
       console.log(error)
     }
   }
+
   render () {
     return (
       <Layout style={{ minHeight: '100vh', backgroundColor: '#ffffff' }}>

@@ -1,14 +1,7 @@
 import React, { Component } from 'react'
-import { List, Icon, Button, Skeleton, message, Avatar } from 'antd'
+import { List, Button, Skeleton, message, Avatar } from 'antd'
 import axios from 'axios'
 import dayjs from 'dayjs'
-
-const IconText = ({ type, text }) => (
-  <span>
-    <Icon type={type} style={{ marginRight: 8 }} />
-    {text}
-  </span>
-)
 
 const count = 8
 
