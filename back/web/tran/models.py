@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.dispatch import receiver
+from django.db.models.signals import post_save, pre_delete
 
 # Create your models here.
 class Article(models.Model):
@@ -8,6 +10,21 @@ class Article(models.Model):
     content =  models.TextField()
     pub_date = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    bio = models.CharField(max_length=100, blank=True)
+
+    @receiver(post_save, sender = User)
+    def create_profile_for_user(sender, instance = None, created = False, **kwargs):
+        if created:
+            Profile.objects.get_or_create(user = instance)
+
+    @receiver(pre_delete, sender = User)
+    def delete_profile_for_user(sender, instance = None, **kwargs):
+        if instance:
+            user_profile = Profile.objects.get(user = instance)
+            user_profile.delete()
 
 class Translation(models.Model):
     title = models.CharField(max_length=50)

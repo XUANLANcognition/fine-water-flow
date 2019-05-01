@@ -3,7 +3,7 @@ from django.http import JsonResponse
 from rest_framework import routers, serializers, viewsets
 from rest_framework.pagination import PageNumberPagination
 from django.contrib.auth.models import User
-from .models import Article, Translation
+from .models import Article, Translation, Profile
 from rest_framework.authtoken.models import Token
 
 from rest_framework.authtoken.views import ObtainAuthToken
@@ -19,11 +19,17 @@ from django_filters import rest_framework as filters
 
 # Create your views here.
 
-class UserSerializer(serializers.HyperlinkedModelSerializer):
+class UserProfileSerializer(serializers.ModelSerializer):
 
     class Meta:
+        model = Profile
+        fields = ('bio', )
+
+class UserSerializer(serializers.HyperlinkedModelSerializer):
+    profile = UserProfileSerializer(required=False)
+    class Meta:
         model = User
-        fields = ('username', 'password', 'email', 'first_name', 'last_name', 'url')
+        fields = ('username', 'password', 'email', 'first_name', 'last_name', 'url','profile')
         extra_kwargs = {'password': {'write_only': True}}
 
     def create(self, validated_data):
@@ -32,8 +38,16 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
         user.save()
         return user
 
-class UserAnotherSerializer(serializers.HyperlinkedModelSerializer):
+    def update(self, instance, validated_data):
+        if 'profile' in validated_data:
+            profile_data = validated_data.pop('profile')
+            profile = instance.profile
+            profile.bio = profile_data.get('bio', profile.bio)
+            profile.save()
+        return super(UserSerializer, self).update(instance, validated_data)
 
+class UserAnotherSerializer(serializers.HyperlinkedModelSerializer):
+    
     class Meta:
         model = User
         fields = ('username', 'first_name', 'last_name', 'url', 'id')
