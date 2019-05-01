@@ -15,6 +15,12 @@ class AvatarUpload extends Component {
     loading: false
   };
 
+  componentDidUpdate (prevProps) {
+    if (prevProps.avatarUrl !== this.props.avatarUrl) {
+      this.setState({ imageUrl: this.props.avatarUrl })
+    }
+  }
+
   CoverAvatarUrl = async (avatarURL) => {
     let config = {
       headers: { 'Authorization': 'Token ' + window.localStorage.getItem('token') }
@@ -60,7 +66,6 @@ class AvatarUpload extends Component {
   }
 
   render () {
-    const imageUrl = this.state.imageUrl
     return (
       <Upload
         name='avatar'
@@ -72,7 +77,7 @@ class AvatarUpload extends Component {
         customRequest={this.customRequest}
         action='https://sm.ms/api/upload'
       >
-        {<Avatar size={180} shape='square' src={imageUrl} icon='user' style={{ color: '#ffffff', backgroundColor: '#f6f6f6' }} />}
+        {<Avatar size={180} shape='square' src={this.state.imageUrl} icon='user' style={{ color: '#ffffff', backgroundColor: '#f6f6f6' }} />}
       </Upload>
     )
   }

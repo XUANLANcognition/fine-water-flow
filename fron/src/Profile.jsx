@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Layout, Avatar, Row, Col, Tabs, Icon, Button } from 'antd'
+import { Layout, Avatar, Row, Col, Tabs, Icon, Button, Typography } from 'antd'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 
@@ -8,12 +8,14 @@ import Myfooter from './Myfooter'
 import ProfileArticleList from './ProfileArticleList'
 
 const TabPane = Tabs.TabPane
+const { Title, Paragraph, Text } = Typography
 
 class Profile extends Component {
   state = {
     data: [],
     urlAvatar: '',
-    username: ''
+    username: '',
+    bio: ''
   }
 
   componentDidMount = async (v) => {
@@ -31,7 +33,7 @@ class Profile extends Component {
       )
       this.data = response.data.results
       this.setState(function (state) {
-        return { urlAvatar: response.data.last_name, username: response.data.username }
+        return { urlAvatar: response.data.last_name, username: response.data.username, bio: response.data.profile.bio }
       })
     } catch (error) {
       console.log(error)
@@ -44,7 +46,8 @@ class Profile extends Component {
         <Row style={{ flex: '1 0', padding: '60px' }} >
           <Col xl={{ span: 5, offset: 1 }} lg={{ span: 7, offset: 1 }} xs={{ span: 24 }} >
             <Avatar size={180} shape='square' src={this.state.urlAvatar} icon='user' style={{ color: '#ffffff', backgroundColor: '#f6f6f6' }} />
-            <h1 style={{ paddingTop: '10px' }}>{this.state.username}</h1>
+            <Title level={2}>{this.state.username}</Title>
+            <Paragraph>{this.state.bio}</Paragraph>
             <Button block style={{ backgroundColor: '#f6f6f6' }}>
               <Link to='/settings/profile'>Edit</Link>
             </Button>

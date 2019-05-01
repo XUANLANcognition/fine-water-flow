@@ -10,7 +10,8 @@ const confirm = Modal.confirm
 class ProfileCarder extends Component {
   state = {
     username: '',
-    avatarUrl: ''
+    avatarUrl: '',
+    bio: ''
   }
 
   onClickLogout = () => {
@@ -42,7 +43,7 @@ class ProfileCarder extends Component {
       )
       window.localStorage.setItem('url', response.data.url)
       this.setState(function (state) {
-        return { username: response.data.username, avatarUrl: response.data.last_name }
+        return { username: response.data.username, avatarUrl: response.data.last_name, bio: response.data.profile.bio }
       })
     } catch (error) {
       console.log(error)
@@ -59,7 +60,7 @@ class ProfileCarder extends Component {
         <Meta
           avatar={<Avatar size='large' src={this.state.avatarUrl} icon='user' style={{ color: '#ffffff', backgroundColor: '#f6f6f6' }} />}
           title={this.state.username}
-          description='I am just a baby.'
+          description={this.state.bio}
         />
         <Divider> Infomation </Divider>
         <p><Link to={'/profile/' + this.state.username} >My Profile</Link></p>

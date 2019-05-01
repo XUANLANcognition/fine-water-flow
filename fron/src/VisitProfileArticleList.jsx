@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { List, Button, Skeleton, message, Avatar } from 'antd'
 import axios from 'axios'
 import dayjs from 'dayjs'
+import { Link } from 'react-router-dom'
 
 const count = 3
 
@@ -84,8 +85,7 @@ class ProfileArticleList extends Component {
           <List.Item>
             <Skeleton title={false} loading={item.loading} active>
               <List.Item.Meta
-                title={<a href={'/article/' + item.id}>{item.title}</a>}
-                avatar={<Avatar icon='user' src={item.user && item.user.last_name} />}
+                title={<Link to={'/article/' + item.id}>{item.title}</Link>}
                 description={dayjs(item.pub_date).fromNow()}
               />
             </Skeleton>
