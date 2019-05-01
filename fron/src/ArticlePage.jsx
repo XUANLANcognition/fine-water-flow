@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Card, Row, Col, Layout, Modal, Timeline, Button, Affix, Form, Spin } from 'antd'
+import { Card, Row, Col, Layout, Form, Spin } from 'antd'
 import axios from 'axios'
 
 import Nav from './Nav'
@@ -64,11 +64,9 @@ class ArticlePage extends Component {
         <Nav />
         <Row >
           <Col xl={{ span: 18, offset: 3 }} lg={{ span: 7, offset: 1 }} xs={{ span: 24 }}>
-            <Affix offsetTop={0}>
-              <Card bordered={false} style={{ fontSize: '25px', fontWeight: 'bold', color: 'black' }}>
-                {this.state.title}
-              </Card>
-            </Affix>
+            <Card bordered={false} style={{ fontSize: '25px', fontWeight: 'bold', color: 'black' }}>
+              {this.state.title}
+            </Card>
           </Col>
         </Row>
         <Row style={{ flex: '1 0' }} >
