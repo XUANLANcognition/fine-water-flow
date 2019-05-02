@@ -7,6 +7,7 @@ import Nav from './Nav'
 import Myfooter from './Myfooter'
 import AuthorShowCard from './AuthorShowCard'
 import Advertisement from './Advertisement'
+import AddComment from './AddComment'
 
 class ArticlePage extends Component {
   constructor (props) {
@@ -70,29 +71,30 @@ class ArticlePage extends Component {
       <Layout style={{ minHeight: '100vh', backgroundColor: '#fff' }}>
         <Nav />
         <Row >
-          <Col xl={{ span: 18, offset: 3 }} lg={{ span: 7, offset: 1 }} xs={{ span: 24 }}>
-            <Card bordered={false} style={{ fontSize: '25px', fontWeight: 'bold', color: 'black' }}>
+          <Col xl={{ span: 18, offset: 3 }} xs={{ span: 24 }}>
+            <div style={{ fontSize: '25px', fontWeight: 'bold', color: 'black', padding: '24px 0 24px 0' }}>
               {this.state.title}
-            </Card>
+            </div>
           </Col>
         </Row>
         <Row style={{ flex: '1 0' }} >
-          <Col xl={{ span: 12, offset: 3 }} xs={{ span: 24 }}>
+          <Col xl={{ span: 12, offset: 3 }} xs={{ span: 22, offset: 1 }}>
             <div type='flex' style={{ flex: '1 0', background: '#fff' }}>
-              <Card bordered={false} style={{ fontSize: '18px', marginTop: '0' }}>
+              <div style={{ fontSize: '16px' }}>
                 <div style={{ overflow: 'auto' }} dangerouslySetInnerHTML={{ __html: this.state.content }} />
-                <Tag color='#108ee9'>编辑于 {dayjs(this.state.pubDate).fromNow()}</Tag>
-              </Card>
+                <Tag style={{ marginTop: '10px' }} color='#108ee9'>编辑于 {dayjs(this.state.pubDate).fromNow()}</Tag>
+              </div>
               <div style={{ textAlign: 'center' }}>
                 <Spin spinning={this.state.loading} size='large' tip='loading...' />
               </div>
+              <AddComment authorId={this.state.authorId} articleId={this.state.id} articleUrl={this.state.url} />
             </div>
           </Col>
-          <Col xl={{ span: 5, offset: 1 }} xs={{ span: 20, offset: 2 }} style={{ paddingBottom: '20px' }}>
+          <Col xl={{ span: 5, offset: 1 }} xs={{ span: 22, offset: 1 }} style={{ paddingBottom: '20px' }}>
+            <Advertisement />
             <Affix offsetTop={0}>
               <AuthorShowCard authorId={this.state.authorId} />
             </Affix>
-            <Advertisement />
           </Col>
         </Row>
         <Myfooter />
