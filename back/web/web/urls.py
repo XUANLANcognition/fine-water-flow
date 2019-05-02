@@ -18,14 +18,16 @@ from django.urls import path, include
 from django.conf.urls import include, url
 from rest_framework import routers, serializers, viewsets, permissions
 from django.contrib.auth.models import User
-from tran.views import *
 from rest_framework.authtoken import views
-
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 from rest_framework.decorators import permission_classes
 
+from tran.views import *
+
+
 router = routers.DefaultRouter()
+
 
 schema_view = get_schema_view(
    openapi.Info(
@@ -34,7 +36,7 @@ schema_view = get_schema_view(
       description="非机翻的好看的后端接口文档",
    ),
    public=True,
-   permission_classes = ()
+   permission_classes = (permissions.IsAuthenticated)
 )
 
 
@@ -51,4 +53,6 @@ urlpatterns = [
     path('api/user/<int:pk>', UserAnotherDetail.as_view(), name='user-detail'),
     path('api/articles/', ArticleList.as_view(), name='article-list'),
     path('api/articles/<int:pk>', ArticleDetail.as_view(), name='article-detail'),
+    path('api/comments/', CommentList.as_view(), name='comment-list'),
+    path('api/comments/<int:pk>', CommentDetail.as_view(), name='comment-detail'),
 ]

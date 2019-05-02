@@ -26,10 +26,9 @@ class Profile(models.Model):
             user_profile = Profile.objects.get(user = instance)
             user_profile.delete()
 
-class Translation(models.Model):
-    title = models.CharField(max_length=50)
-    content =  models.TextField()
+class Comment(models.Model):
+    content = models.CharField(max_length=1024)
     article = models.ForeignKey(Article, on_delete=models.CASCADE)
-    pub_date = models.DateTimeField('date published')
-    version = models.IntegerField(default=0)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    pub_date = models.DateTimeField(auto_now_add=True)
+
