@@ -99,7 +99,7 @@ class ProfileArticleList extends Component {
         textAlign: 'center', marginTop: 12, height: 32, lineHeight: '32px'
       }}
       >
-        <Button onClick={this.onLoadMore}>loading more</Button>
+        {(this.state.data.length > 0) && <Button onClick={this.onLoadMore}>loading more</Button>}
       </div>
     ) : null
 

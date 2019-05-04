@@ -14,7 +14,7 @@ const FormItem = Form.Item
 const openNotificationWithIcon = (type) => {
   notification[type]({
     message: 'successful',
-    description: '发布成功，等待小伙伴们的讨论吧',
+    description: '发布成功',
     duration: 2
   })
 }

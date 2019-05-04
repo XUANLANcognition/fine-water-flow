@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Card, Row, Col, Layout, Form, Spin, Affix, Tag } from 'antd'
+import { Row, Col, Layout, Form, Spin, Affix, Tag } from 'antd'
 import axios from 'axios'
 import dayjs from 'dayjs'
 
@@ -71,7 +71,7 @@ class ArticlePage extends Component {
       <Layout style={{ minHeight: '100vh', backgroundColor: '#fff' }}>
         <Nav />
         <Row >
-          <Col xl={{ span: 18, offset: 3 }} xs={{ span: 24 }}>
+          <Col xl={{ span: 18, offset: 3 }} xs={{ span: 22, offset: 1 }}>
             <div style={{ fontSize: '25px', fontWeight: 'bold', color: 'black', padding: '24px 0 24px 0' }}>
               {this.state.title}
             </div>

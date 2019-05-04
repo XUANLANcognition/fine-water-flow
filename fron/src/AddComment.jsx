@@ -59,10 +59,12 @@ class AddComment extends Component {
 
     componentDidMount = async (v) => {
       this.getUserData()
-      await this.getCommentData()
-      this.setState(function (state) {
-        return { initLoading: false }
-      })
+      if (this.props.articleId) {
+        await this.getCommentData()
+        this.setState(function (state) {
+          return { initLoading: false }
+        })
+      }
     }
 
     componentDidUpdate = async (prevProps) => {
@@ -92,16 +94,18 @@ class AddComment extends Component {
     }
 
     getCommentData = async (v) => {
-      try {
-        const response = await axios.get(
-          'https://guoliang.online:8080/api/comments/?format=json&page=' + this.state.page + '&page_size=' + count + '&article=' + this.props.articleId
-        )
-        this.comments = response.data.results
-        this.setState(function (state) {
-          return { comments: response.data.results, cache: response.data.results }
-        })
-      } catch (error) {
-        console.log(error)
+      if (this.props.articleId) {
+        try {
+          const response = await axios.get(
+            'https://guoliang.online:8080/api/comments/?format=json&page=' + this.state.page + '&page_size=' + count + '&article=' + this.props.articleId
+          )
+          this.comments = response.data.results
+          this.setState(function (state) {
+            return { comments: response.data.results, cache: response.data.results }
+          })
+        } catch (error) {
+          console.log(error)
+        }
       }
     }
 

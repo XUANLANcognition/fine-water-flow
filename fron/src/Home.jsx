@@ -19,13 +19,13 @@ class Home extends Component {
       <Layout style={{ minHeight: '100vh', backgroundColor: '#fff' }}>
         <div style={{ height: '100vh' }}>
           <Nav />
-          <Row type='flex' justify='space-around' align='middle' style={{ flex: '1 0', height: '100vh' }}>
-            <Col xl={{ span: 12, offset: 2 }} xs={{ span: 22, offset: 1 }}>
+          <Row type='flex' align='middle' style={{ flex: '1 0', height: '80vh' }}>
+            <Col xl={{ span: 13, offset: 2 }} xs={{ span: 22, offset: 1 }}>
               <h1>非机</h1>
               <Divider />
               <p>你的， 便值得分享</p>
             </Col>
-            <Col xl={{ span: 7, offset: 1 }} xs={{ span: 22, offset: 1 }}>
+            <Col xl={{ span: 6, offset: 1 }} xs={{ span: 22, offset: 1 }}>
               <Login />
             </Col>
           </Row>
