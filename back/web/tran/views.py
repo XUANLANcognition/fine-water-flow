@@ -54,16 +54,26 @@ class Publish(permissions.BasePermission):
 # User API
 
 
-class UserProfileSerializer(serializers.ModelSerializer):
+class FollowerSerializer(serializers.ModelSerializer):
+    username = serializers.CharField(source='user.username')
+    last_name = serializers.CharField(source='user.last_name')
+    id = serializers.CharField(source='user.id')
 
     class Meta:
         model = Profile
-        fields = ('bio', )
+        fields = ('username', 'last_name', 'id', 'bio')
+
+
+class UserProfileSerializer(serializers.ModelSerializer):
+    follow = FollowerSerializer(many=True, read_only=True)
+    class Meta:
+        model = Profile
+        fields = ('bio', 'follow',)
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer): 
     profile = UserProfileSerializer(required=False)
-    
+
     class Meta:
         model = User
         fields = ('username', 'password', 'email', 'first_name', 'last_name', 'url','profile')
@@ -98,7 +108,7 @@ class UserDetail(generics.RetrieveUpdateDestroyAPIView):
 
 class UserAnotherSerializer(serializers.HyperlinkedModelSerializer):
     profile = UserProfileSerializer()
-    
+
     class Meta:
         model = User
         fields = ('username', 'first_name', 'last_name', 'url', 'id', 'profile')
