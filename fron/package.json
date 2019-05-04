@@ -6,7 +6,7 @@
     "antd": "^3.16.6",
     "axios": "^0.18.0",
     "babel-plugin-import": "^1.9.1",
-    "braft-editor": "^2.1.32",
+    "braft-editor": "^2.2.10",
     "braft-extensions": "0.0.13",
     "dayjs": "^1.8.13",
     "react": "^16.5.2",
