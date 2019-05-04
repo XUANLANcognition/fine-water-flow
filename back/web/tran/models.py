@@ -14,6 +14,7 @@ class Article(models.Model):
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     bio = models.CharField(max_length=100, blank=True, default='I am just a baby.')
+    follow = models.ManyToManyField('Profile', related_name='followed_by', blank=True)
 
     @receiver(post_save, sender = User)
     def create_profile_for_user(sender, instance = None, created = False, **kwargs):

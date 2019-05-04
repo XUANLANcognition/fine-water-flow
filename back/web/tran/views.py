@@ -14,6 +14,7 @@ from rest_framework.decorators import authentication_classes, permission_classes
 from rest_framework.authentication import TokenAuthentication
 from rest_framework import permissions
 from rest_framework import generics
+from rest_framework import filters as filter_drf
 
 from django_filters import rest_framework as filters
 
@@ -145,7 +146,26 @@ class ArticleList(generics.ListCreateAPIView):
     pagination_class = ArticlePagination
     filter_backends = (filters.DjangoFilterBackend,)
     filterset_class = ArticleFilter
-    
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
+
+
+class ArticleFollowFilter(filter_drf.BaseFilterBackend):
+
+    def filter_queryset(self, request, queryset, view):
+        follow = request.user.profile.follow.all()
+        followList = [item.user_id for item in follow]
+        return queryset.filter(user_id__in=followList)
+
+
+class ArticleFollowList(generics.ListAPIView):
+    queryset = Article.objects.all().order_by('-pub_date')
+    serializer_class = ArticleSerializer
+    permission_classes = (Publish,)
+    pagination_class = ArticlePagination
+    filter_backends = (ArticleFollowFilter,)
+
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
 
