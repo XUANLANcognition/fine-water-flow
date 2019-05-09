@@ -6,6 +6,7 @@ import axios from 'axios'
 import Nav from './Nav'
 import Myfooter from './Myfooter'
 import ProfileArticleList from './ProfileArticleList'
+import FollowList from './FollowList'
 
 const TabPane = Tabs.TabPane
 const { Title, Paragraph } = Typography
@@ -57,8 +58,8 @@ class Profile extends Component {
               <TabPane tab={<span><Icon type='read' />我的文章</span>} key='1'>
                 <ProfileArticleList />
               </TabPane>
-              <TabPane tab={<span><Icon type='rest' />我的草稿</span>} key='2'>
-      等会写...
+              <TabPane tab={<span><Icon type='user' />我的关注</span>} key='2'>
+                <FollowList />
               </TabPane>
             </Tabs>
           </Col>

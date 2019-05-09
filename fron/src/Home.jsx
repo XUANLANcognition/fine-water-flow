@@ -1,8 +1,10 @@
-import { Col, Divider, Layout, Row, Button } from 'antd'
+import { Col, Divider, Layout, Row, Button, Typography } from 'antd'
 import React, { Component } from 'react'
 import Login from './Login'
 import Myfooter from './Myfooter'
 import Nav from './Nav'
+
+const { Title } = Typography
 
 class Home extends Component {
   state = {
@@ -21,9 +23,9 @@ class Home extends Component {
           <Nav />
           <Row type='flex' align='middle' style={{ flex: '1 0', height: '80vh' }}>
             <Col xl={{ span: 13, offset: 2 }} xs={{ span: 22, offset: 1 }}>
-              <h1>非机</h1>
+              <Title>Fine Water Flow</Title>
               <Divider />
-              <p>你的， 便值得分享</p>
+              <Title level={3}>细水宜长流...</Title>
             </Col>
             <Col xl={{ span: 6, offset: 1 }} xs={{ span: 22, offset: 1 }}>
               <Login />

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Layout, Avatar, Row, Col, Tabs, Icon, Typography } from 'antd'
+import { Layout, Avatar, Row, Col, Tabs, Icon, Typography, Button } from 'antd'
 import axios from 'axios'
 
 import Nav from './Nav'
@@ -44,6 +44,7 @@ class Visit extends Component {
             <Avatar size={180} shape='square' src={this.state.urlAvatar} icon='user' style={{ color: '#ffffff', backgroundColor: '#f6f6f6' }} />
             <Title level={2}>{this.state.username}</Title>
             <Paragraph>{this.state.bio}</Paragraph>
+            <Button type='primary' block>+ 关注</Button>
           </Col>
           <Col xl={{ span: 13, offset: 1 }} xs={{ span: 22, offset: 1 }} >
             <Tabs defaultActiveKey='1'>

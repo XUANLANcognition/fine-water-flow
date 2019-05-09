@@ -102,8 +102,8 @@ class Join extends Component {
         <div style={{ flex: '1 0 ', backgroundColor: '#fff' }} >
           <Row style={{ paddingTop: '20px' }}>
             <Col xl={{ span: 20, offset: 2 }} xs={{ span: 22, offset: 1 }} >
-              <h1 style={{ fontSize: '40px' }}>Join 非机</h1>
-              <p style={{ color: '#586069', fontSize: '20px', paddingBottom: '20px' }}>非 机</p>
+              <h1 style={{ fontSize: '40px' }}>Join FWF</h1>
+              <p style={{ color: '#586069', fontSize: '20px', paddingBottom: '20px' }}>Fine Water Flow, 细水宜长流</p>
             </Col>
           </Row>
           <Row>

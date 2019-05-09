@@ -11,7 +11,7 @@ class Myfooter extends Component {
     return (
       <Footer style={{ textAlign: 'center', backgroundColor: '#343a40', color: '#fff' }}>
         <img src='/icon.png' style={{ width: '60px', height: '60px', margin: '0 20px 0 20px' }} />
-            非机 ©2019 Created by XUANLAN
+            FWF ©2019 Created by XUANLAN
       </Footer>
     )
   }
