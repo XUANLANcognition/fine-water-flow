@@ -57,5 +57,6 @@ urlpatterns = [
     path('api/comments/', CommentList.as_view(), name='comment-list'),
     path('api/comments/<int:pk>', CommentDetail.as_view(), name='comment-detail'),
     path('api/user/<int:pk>/follow/', follow, name='follow-user'),
-    path('api/user/<int:pk>/unfollow/', unfollow, name='unfollow-user')
+    path('api/user/<int:pk>/unfollow/', unfollow, name='unfollow-user'),
+    path('api/user/<int:pk>/is_followed/', isfollow, name='isfollow-user')
 ]

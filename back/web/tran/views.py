@@ -140,6 +140,21 @@ def unfollow(request, pk):
     user.profile.follow.remove(following.profile)
     return Response(status = status.HTTP_201_CREATED)
 
+# conclude followed or not
+
+@api_view(['POST'])
+@permission_classes((permissions.IsAuthenticated, ))
+def isfollow(request, pk):
+    user = User.objects.get(id = request.user.id)
+    following = User.objects.get(id = pk)
+    followList = user.profile.follow.all()
+    for i in followList:
+        print(i)
+    if(following.profile in followList):
+        return Response({'m':'1'})
+    else:
+        return Response({'m':'2'})
+
 
 # Article API
 
