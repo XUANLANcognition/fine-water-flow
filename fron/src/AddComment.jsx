@@ -134,7 +134,6 @@ class AddComment extends Component {
         if (!this.state.value) {
           return
         }
-        console.log('fwefwe', this.props.authorId)
         this.setState({
           submitting: true
         })
