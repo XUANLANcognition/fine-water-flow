@@ -56,4 +56,6 @@ urlpatterns = [
     path('api/articles/<int:pk>', ArticleDetail.as_view(), name='article-detail'),
     path('api/comments/', CommentList.as_view(), name='comment-list'),
     path('api/comments/<int:pk>', CommentDetail.as_view(), name='comment-detail'),
+    path('api/user/<int:pk>/follow/', follow, name='follow-user'),
+    path('api/user/<int:pk>/unfollow/', unfollow, name='unfollow-user')
 ]

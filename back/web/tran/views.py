@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import JsonResponse
-from rest_framework import routers, serializers, viewsets
+from rest_framework import routers, serializers, viewsets, status
 from rest_framework.pagination import PageNumberPagination
 from django.contrib.auth.models import User
 from .models import Article, Comment, Profile
@@ -119,6 +119,26 @@ class UserAnotherDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = User.objects.all()
     serializer_class =  UserAnotherSerializer
     permission_classes = ()
+
+# user follow user
+
+@api_view(['POST'])
+@permission_classes((permissions.IsAuthenticated, ))
+def follow(request, pk):
+    user = User.objects.get(id = request.user.id)
+    following = User.objects.get(id = pk)
+    user.profile.follow.add(following.profile)
+    return Response(status = status.HTTP_201_CREATED)
+
+#user unfollow user
+
+@api_view(['POST'])
+@permission_classes((permissions.IsAuthenticated, ))
+def unfollow(request, pk):
+    user = User.objects.get(id = request.user.id)
+    following = User.objects.get(id = pk)
+    user.profile.follow.remove(following.profile)
+    return Response(status = status.HTTP_201_CREATED)
 
 
 # Article API
