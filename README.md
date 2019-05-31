@@ -1,3 +1,5 @@
-# no-machine-tran
+# Fine Water Flow
 
-## 小站链接 : https://guoliang.online
+## License
+
+Fine Water Flow is [BSD licensed](./LICENSE).
