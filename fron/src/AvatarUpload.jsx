@@ -26,7 +26,7 @@ class AvatarUpload extends Component {
       headers: { 'Authorization': 'Token ' + window.localStorage.getItem('token') }
     }
     const response = await axios.patch(
-      'https://guoliang.online:8080/api/users/' + window.localStorage.getItem('user_id'),
+      'https://finewf.club:8080/api/users/' + window.localStorage.getItem('user_id'),
       {
         'last_name': avatarURL
       },

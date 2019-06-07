@@ -29,7 +29,7 @@ class Profile extends Component {
         headers: { 'Authorization': 'Token ' + window.localStorage.getItem('token') }
       }
       const response = await axios.get(
-        'https://guoliang.online:8080/api/users/' + window.localStorage.getItem('user_id') + '?format=json',
+        'https://finewf.club:8080/api/users/' + window.localStorage.getItem('user_id') + '?format=json',
         config
       )
       this.data = response.data.results

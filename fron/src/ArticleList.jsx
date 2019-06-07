@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { List, Button, Skeleton, message, Avatar } from 'antd'
+import { List, Button, Skeleton, Avatar } from 'antd'
 import axios from 'axios'
 import dayjs from 'dayjs'
 import { Link } from 'react-router-dom'
@@ -23,7 +23,7 @@ class ArticleList extends Component {
     getArticleData = async (v) => {
       try {
         const response = await axios.get(
-          'https://guoliang.online:8080/api/articles/?format=json' + '&page=' + this.page + '&page_size=' + count
+          'https://finewf.club:8080/api/articles/?format=json' + '&page=' + this.page + '&page_size=' + count
         )
         this.setState({ data: response.data.results, cache: response.data.results })
       } catch (error) {
@@ -39,7 +39,7 @@ class ArticleList extends Component {
       try {
         this.page = this.page + 1
         const response = await axios.get(
-          'https://guoliang.online:8080/api/articles/?format=json' + '&page=' + this.page + '&page_size=' + count
+          'https://finewf.club:8080/api/articles/?format=json' + '&page=' + this.page + '&page_size=' + count
         )
         const temp1 = this.state.data
         if (response.status === 200) {
@@ -66,7 +66,7 @@ class ArticleList extends Component {
           textAlign: 'center', marginTop: 12, height: 32, lineHeight: '32px'
         }}
         >
-          {(data.length > 0) && <Button onClick={this.onLoadMore}>loading more</Button>}
+          {(data.length > 0) && <Button onClick={this.onLoadMore}>加载更多</Button>}
         </div>
       ) : null
 
@@ -74,7 +74,6 @@ class ArticleList extends Component {
         <List
           itemLayout='vertical'
           dataSource={cache}
-          size='large'
           loadMore={loadMore}
           loading={initLoading}
           renderItem={item => (

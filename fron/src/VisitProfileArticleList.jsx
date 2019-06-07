@@ -25,7 +25,7 @@ class ProfileArticleList extends Component {
   getArticleData = async (v) => {
     try {
       const response = await axios.get(
-        'https://guoliang.online:8080/api/articles/?format=json' + '&page=' + this.state.page + '&page_size=' + count + '&user=' + this.props.visitUserId
+        'https://finewf.club:8080/api/articles/?format=json' + '&page=' + this.state.page + '&page_size=' + count + '&user=' + this.props.visitUserId
       )
       this.data = response.data.results
       this.setState(function (state) {
@@ -46,7 +46,7 @@ class ProfileArticleList extends Component {
     try {
       this.state.page = this.state.page + 1
       const response = await axios.get(
-        'https://guoliang.online:8080/api/articles/?format=json' + '&page=' + this.state.page + '&page_size=' + count + '&user=' + this.props.visitUserId
+        'https://finewf.club:8080/api/articles/?format=json' + '&page=' + this.state.page + '&page_size=' + count + '&user=' + this.props.visitUserId
       )
       if (response.status !== 404) {
         const cache = this.state.cache.concat(response.data.results)

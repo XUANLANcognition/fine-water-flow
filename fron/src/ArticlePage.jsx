@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Row, Col, Layout, Form, Spin, Affix, Tag } from 'antd'
+import { Row, Col, Layout, Form, Spin, Affix, Tag, Typography } from 'antd'
 import axios from 'axios'
 import dayjs from 'dayjs'
 
@@ -8,6 +8,8 @@ import Myfooter from './Myfooter'
 import AuthorShowCard from './AuthorShowCard'
 import Advertisement from './Advertisement'
 import AddComment from './AddComment'
+
+const { Paragraph } = Typography
 
 class ArticlePage extends Component {
   constructor (props) {
@@ -34,7 +36,7 @@ class ArticlePage extends Component {
   getArticle = async (v) => {
     try {
       const response = await axios.get(
-        'https://guoliang.online:8080/api/articles/' + this.props.match.params.id
+        'https://finewf.club:8080/api/articles/' + this.props.match.params.id
       )
       this.setState(function (state) {
         return {
@@ -73,7 +75,9 @@ class ArticlePage extends Component {
         <Row >
           <Col xl={{ span: 18, offset: 3 }} xs={{ span: 22, offset: 1 }}>
             <div style={{ fontSize: '25px', fontWeight: 'bold', color: 'black', padding: '24px 0 24px 0' }}>
-              {this.state.title}
+              <Paragraph ellipsis={{ rows: 1, expandable: true }} strong>
+                {this.state.title}
+              </Paragraph>
             </div>
           </Col>
         </Row>

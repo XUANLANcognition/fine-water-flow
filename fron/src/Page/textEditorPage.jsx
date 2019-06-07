@@ -52,7 +52,7 @@ class textEditorPage extends Component {
             headers: { 'Authorization': 'Token ' + window.localStorage.getItem('token') }
           }
           const response = await axios.post(
-            'https://guoliang.online:8080/api/articles/',
+            'https://finewf.club:8080/api/articles/',
             {
               title: submitData.title,
               content: submitData.content

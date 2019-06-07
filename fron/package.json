@@ -9,6 +9,7 @@
     "braft-editor": "^2.2.10",
     "braft-extensions": "0.0.13",
     "dayjs": "^1.8.13",
+    "ory-editor": "^0.6.0",
     "react": "^16.5.2",
     "react-app-rewired": "^1.6.2",
     "react-dom": "^16.5.2",

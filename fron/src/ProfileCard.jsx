@@ -38,7 +38,7 @@ class ProfileCarder extends Component {
         headers: { 'Authorization': 'Token ' + window.localStorage.getItem('token') }
       }
       const response = await axios.get(
-        'https://guoliang.online:8080/api/users/' + window.localStorage.getItem('user_id'),
+        'https://finewf.club:8080/api/users/' + window.localStorage.getItem('user_id'),
         config
       )
       window.localStorage.setItem('url', response.data.url)

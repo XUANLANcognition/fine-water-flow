@@ -36,7 +36,7 @@ schema_view = get_schema_view(
       description="非机翻的好看的后端接口文档",
    ),
    public=True,
-   permission_classes = (permissions.IsAuthenticated)
+   permission_classes = ()
 )
 
 
@@ -58,5 +58,7 @@ urlpatterns = [
     path('api/comments/<int:pk>', CommentDetail.as_view(), name='comment-detail'),
     path('api/user/<int:pk>/follow/', follow, name='follow-user'),
     path('api/user/<int:pk>/unfollow/', unfollow, name='unfollow-user'),
-    path('api/user/<int:pk>/is_followed/', isfollow, name='isfollow-user')
+    path('api/user/<int:pk>/is_followed/', isfollow, name='isfollow-user'),
+    path('api/books/', BookList.as_view(), name='book-list'),
+    path('api/books/<int:pk>', BookDetail.as_view(), name='book-detail')
 ]

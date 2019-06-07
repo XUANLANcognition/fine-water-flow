@@ -20,7 +20,7 @@ class FollowList extends Component {
         headers: { 'Authorization': 'Token ' + window.localStorage.getItem('token') }
       }
       const response = await axios.get(
-        'https://guoliang.online:8080/api/users/' + window.localStorage.getItem('user_id') + '?format=json',
+        'https://finewf.club:8080/api/users/' + window.localStorage.getItem('user_id') + '?format=json',
         config
       )
       this.setState(function (state) {
@@ -35,7 +35,7 @@ class FollowList extends Component {
     return (
       <List
         grid={{
-          gutter: 16, xs: 1, sm: 2, md: 4, lg: 4, xl: 6, xxl: 3
+          gutter: 36, xs: 1, xl: 2
         }}
         dataSource={this.state.data}
         renderItem={item => (

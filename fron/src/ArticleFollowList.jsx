@@ -28,7 +28,7 @@ class ArticleFollowList extends Component {
           headers: { 'Authorization': 'Token ' + window.localStorage.getItem('token') }
         }
         const response = await axios.get(
-          'https://guoliang.online:8080/api/articles/follow/?format=json' + '&page=' + this.state.page + '&page_size=' + count,
+          'https://finewf.club:8080/api/articles/follow/?format=json' + '&page=' + this.state.page + '&page_size=' + count,
           config
         )
         this.data = response.data.results
@@ -53,7 +53,7 @@ class ArticleFollowList extends Component {
           headers: { 'Authorization': 'Token ' + window.localStorage.getItem('token') }
         }
         const response = await axios.get(
-          'https://guoliang.online:8080/api/articles/follow/?format=json' + '&page=' + this.state.page + '&page_size=' + count,
+          'https://finewf.club:8080/api/articles/follow/?format=json' + '&page=' + this.state.page + '&page_size=' + count,
           config
         )
         if (response.status !== 404) {

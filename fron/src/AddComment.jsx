@@ -3,6 +3,7 @@ import { Comment, Avatar, Form, Button, List, Input, message } from 'antd'
 import moment from 'moment'
 import axios from 'axios'
 import dayjs from 'dayjs'
+import { Link } from 'react-router-dom'
 
 const TextArea = Input.TextArea
 
@@ -14,7 +15,7 @@ const CommentList = ({ comments }) => (
     renderItem={item => (
       <Comment
         author={item.user ? item.user.username : item.username}
-        avatar={item.user ? item.user.last_name : item.last_name}
+        avatar={item.user ? (<Link to={(item.user.id + '' === window.localStorage.getItem('user_id') ? '/profile/' : '/visit/') + item.user.id}><Avatar src={item.user ? item.user.last_name : item.last_name} /></Link>) : (<Link to={(item.id + '' === window.localStorage.getItem('user_id') ? '/profile/' : '/visit/') + item.id}><Avatar src={item.user ? item.last_name : item.last_name} /></Link>)}
         content={item.content}
         datetime={dayjs(item.pub_date).fromNow()}
       />
@@ -82,7 +83,7 @@ class AddComment extends Component {
           headers: { 'Authorization': 'Token ' + window.localStorage.getItem('token') }
         }
         const response = await axios.get(
-          'https://guoliang.online:8080/api/users/' + window.localStorage.getItem('user_id'),
+          'https://finewf.club:8080/api/users/' + window.localStorage.getItem('user_id'),
           config
         )
         this.setState(function (state) {
@@ -97,7 +98,7 @@ class AddComment extends Component {
       if (this.props.articleId) {
         try {
           const response = await axios.get(
-            'https://guoliang.online:8080/api/comments/?format=json&page=' + this.state.page + '&page_size=' + count + '&article=' + this.props.articleId
+            'https://finewf.club:8080/api/comments/?format=json&page=' + this.state.page + '&page_size=' + count + '&article=' + this.props.articleId
           )
           this.comments = response.data.results
           this.setState(function (state) {
@@ -115,7 +116,7 @@ class AddComment extends Component {
           headers: { 'Authorization': 'Token ' + window.localStorage.getItem('token') }
         }
         const response = await axios.post(
-          'https://guoliang.online:8080/api/comments/',
+          'https://finewf.club:8080/api/comments/',
           {
             content: value,
             article: this.props.articleUrl

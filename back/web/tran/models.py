@@ -33,3 +33,13 @@ class Comment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     pub_date = models.DateTimeField(auto_now_add=True)
 
+class Book(models.Model):
+    title = models.CharField(max_length=256)
+    author = models.CharField(max_length=256)
+    publisher = models.CharField(max_length=256)
+    isbn = models.CharField(max_length=256)
+    pages = models.IntegerField()
+    cover = models.CharField(max_length=256, blank=True, default='')
+    pub_date = models.DateTimeField(auto_now_add=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+

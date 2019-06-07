@@ -30,7 +30,7 @@ class Visit extends Component {
         headers: { 'Authorization': 'Token ' + window.localStorage.getItem('token') }
       }
       const response = await axios.post(
-        'https://guoliang.online:8080/api/user/' + this.props.match.params.id + '/is_followed/?format=json',
+        'https://finewf.club:8080/api/user/' + this.props.match.params.id + '/is_followed/?format=json',
         {},
         config
       )
@@ -48,7 +48,7 @@ class Visit extends Component {
       }
       this.setState({ loading: true })
       axios.post(
-        'https://guoliang.online:8080/api/user/' + this.props.match.params.id + '/follow/?format=json',
+        'https://finewf.club:8080/api/user/' + this.props.match.params.id + '/follow/?format=json',
         {},
         config
       )
@@ -70,7 +70,7 @@ class Visit extends Component {
         headers: { 'Authorization': 'Token ' + window.localStorage.getItem('token') }
       }
       axios.post(
-        'https://guoliang.online:8080/api/user/' + this.props.match.params.id + '/unfollow/?format=json',
+        'https://finewf.club:8080/api/user/' + this.props.match.params.id + '/unfollow/?format=json',
         {},
         config
       )
@@ -88,7 +88,7 @@ class Visit extends Component {
   getProfileData = async (v) => {
     try {
       const response = await axios.get(
-        'https://guoliang.online:8080/api/user/' + this.props.match.params.id + '?format=json'
+        'https://finewf.club:8080/api/user/' + this.props.match.params.id + '?format=json'
       )
       this.data = response.data.results
       this.setState(function (state) {

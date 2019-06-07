@@ -9,11 +9,14 @@ import THome from './THome'
 import ArticlePage from './ArticlePage'
 import Profile from './Profile'
 import Visit from './Visit'
+import Editor1 from './Editor'
 
 import textEditorPage from './Page/textEditorPage'
 import Join from './Page/Join'
 import Settings from './Page/Settings'
 import Agreement from './Page/Agreement'
+import BookPage from './Page/BookPage'
+import MoviePage from './Page/MoviePage'
 
 const MainPage = props => {
   const token = window.localStorage.getItem('token')
@@ -33,6 +36,8 @@ class App extends Component {
           <Switch>
             <Route exact path='/' component={MainPage} />
             <Route path='/notice' component={Notice} />
+            <Route path='/book' component={BookPage} />
+            <Route path='/movie' component={MoviePage} />
             <Route path='/join' component={Join} />
             <Route path='/textEditorPage' component={textEditorPage} />
             <Route path='/article/:id' component={ArticlePage} />
@@ -40,6 +45,7 @@ class App extends Component {
             <Route path='/visit/:id' component={Visit} />
             <Route path='/settings/profile' component={Settings} />
             <Route path='/agreement' component={Agreement} />
+            <Route path='/editor' component={Editor1} />
             <Route component={NoMatch} />
           </Switch>
         </Router>

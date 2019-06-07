@@ -3,7 +3,7 @@ from django.http import JsonResponse
 from rest_framework import routers, serializers, viewsets, status
 from rest_framework.pagination import PageNumberPagination
 from django.contrib.auth.models import User
-from .models import Article, Comment, Profile
+from .models import Article, Comment, Profile, Book
 from rest_framework.authtoken.models import Token
 
 from rest_framework.authtoken.views import ObtainAuthToken
@@ -218,6 +218,51 @@ class ArticleFollowList(generics.ListAPIView):
 class ArticleDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Article.objects.all()
     serializer_class = ArticleSerializer
+    permission_classes = (Read,)
+
+
+# Book API
+
+
+class BookSerializer(serializers.HyperlinkedModelSerializer):
+
+    class Meta:
+        model = Book
+        fields = ('url', 'id', 'title', 'author', 'publisher', 'isbn', 'pages', 'cover', 'pub_date', 'user')
+
+
+class BookPagination(PageNumberPagination):
+    page_size = 8
+    page_size_query_param = 'page_size'
+    max_page_size = 128
+
+    class Meta:
+        model = Book
+        fields = '__all__'
+
+
+class BookFilter(filters.FilterSet):
+    
+    class Meta:
+        model = Book
+        fields = '__all__'
+
+
+class BookList(generics.ListCreateAPIView):
+    queryset = Book.objects.all().order_by('-pub_date')
+    serializer_class = BookSerializer
+    permission_classes = (Publish,)
+    pagination_class = BookPagination
+    filter_backends = (filters.DjangoFilterBackend,)
+    filterset_class = BookFilter
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
+
+
+class BookDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Book.objects.all()
+    serializer_class = BookSerializer
     permission_classes = (Read,)
 
 
