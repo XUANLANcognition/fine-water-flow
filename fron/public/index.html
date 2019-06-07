@@ -25,16 +25,89 @@
     <noscript>
       You need to enable JavaScript to run this app.
     </noscript>
-    <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
+    <div id="root">
+      <div
+        style="height: 100vh; width: 100vw; display: flex; justify-content: center; align-items: center;"
+      >
+        <div class="cssload-loading">
+          <div class="cssload-dot"></div>
+          <div class="cssload-dot2"></div>
+        </div>
+        <style>
+          .cssload-loading {
+            position: absolute;
+            left: 50%;
+            width: 19px;
+            height: 19px;
+            transform: translate(-50%, -50%);
+          }
+          .cssload-loading .cssload-dot {
+            position: absolute;
+            border-radius: 50%;
+            left: 1px;
+            top: 1px;
+            width: 18px;
+            height: 18px;
+            background: rgb(0, 0, 0);
+            animation: cssload-spin 2.88s 0s infinite both;
+          }
+          .cssload-loading .cssload-dot2 {
+            position: absolute;
+            border-radius: 50%;
+            width: 19px;
+            height: 19px;
+            background: rgb(0, 0, 0);
+            animation: cssload-spin2 2.88s 0s infinite both;
+          }
 
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
+          @keyframes cssload-spin {
+            0%,
+            100% {
+              box-shadow: 0 0 0 rgb(0, 0, 0), 0 0 0 rgb(0, 0, 0),
+                0 0 0 rgb(0, 0, 0), 0 0 0 rgb(0, 0, 0), 0 0 0 rgb(0, 0, 0),
+                0 0 0 rgb(0, 0, 0), 0 0 0 rgb(0, 0, 0), 0 0 0 rgb(0, 0, 0);
+            }
+            50% {
+              transform: rotate(180deg);
+            }
+            25%,
+            75% {
+              box-shadow: 27px 0 0 rgb(0, 0, 0), -27px 0 0 rgb(0, 0, 0),
+                0 27px 0 rgb(0, 0, 0), 0 -27px 0 rgb(0, 0, 0),
+                19px -19px 0 rgb(0, 0, 0), 19px 19px 0 rgb(0, 0, 0),
+                -19px -19px 0 #000, -19px 19px 0 #000;
+            }
+            100% {
+              transform: rotate(360deg);
+              box-shadow: 0 0 0 #000, 0 0 0 #000, 0 0 0 #000, 0 0 0 #000,
+                0 0 0 #000, 0 0 0 #000, 0 0 0 #000, 0 0 0 #000;
+            }
+          }
 
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
+          @keyframes cssload-spin2 {
+            0%,
+            100% {
+              box-shadow: 0 0 0 #000, 0 0 0 #000, 0 0 0 #000, 0 0 0 #000,
+                0 0 0 #000, 0 0 0 #000, 0 0 0 #000, 0 0 0 #000;
+            }
+            50% {
+              transform: rotate(-180deg);
+            }
+            25%,
+            75% {
+              box-shadow: 51px 0 0 #000, -51px 0 0 #000, 0 51px 0 #000,
+                0 -51px 0 #000, 37px -37px 0 #000, 37px 37px 0 #000,
+                -37px -37px 0 #000, -37px 37px 0 #000;
+              background: transparent;
+            }
+            100% {
+              transform: rotate(-360deg);
+              box-shadow: 0 0 0 #000, 0 0 0 #000, 0 0 0 #000, 0 0 0 #000,
+                0 0 0 #000, 0 0 0 #000, 0 0 0 #000, 0 0 0 #000;
+            }
+          }
+        </style>
+      </div>
+    </div>
   </body>
 </html>
