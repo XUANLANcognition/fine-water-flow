@@ -60,5 +60,9 @@ urlpatterns = [
     path('api/user/<int:pk>/unfollow/', unfollow, name='unfollow-user'),
     path('api/user/<int:pk>/is_followed/', isfollow, name='isfollow-user'),
     path('api/books/', BookList.as_view(), name='book-list'),
-    path('api/books/<int:pk>', BookDetail.as_view(), name='book-detail')
+    path('api/books/<int:pk>', BookDetail.as_view(), name='book-detail'),
+    path('api/booktags/', BookTagList.as_view(), name='booktag-list'),
+    path('api/booktags/<int:pk>', BookTagDetail.as_view(), name='booktag-detail'),
+    path('api/bookblocks/', BookBlockList.as_view(), name='bookblock-list'),
+    path('api/bookblocks/<int:pk>', BookBlockDetail.as_view(), name='bookblock-detail')
 ]

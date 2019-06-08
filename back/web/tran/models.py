@@ -33,6 +33,16 @@ class Comment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     pub_date = models.DateTimeField(auto_now_add=True)
 
+class BookBlock(models.Model):
+    title = models.CharField(max_length=128)
+
+class BookTag(models.Model):
+    title = models.CharField(max_length=128)
+    block = models.ForeignKey(BookBlock, on_delete=models.CASCADE, related_name='tags', default='')
+
+    def __str__(self):
+        return '%s' % (self.title)
+
 class Book(models.Model):
     title = models.CharField(max_length=256)
     author = models.CharField(max_length=256)
@@ -42,4 +52,5 @@ class Book(models.Model):
     cover = models.CharField(max_length=256, blank=True, default='')
     pub_date = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    tag = models.ManyToManyField('Booktag', related_name='booktag', blank=True)
 

@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "antd": "^3.16.6",
+    "antd": "^3.19.2",
     "axios": "^0.18.0",
     "babel-plugin-import": "^1.9.1",
     "braft-editor": "^2.2.10",

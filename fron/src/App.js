@@ -17,6 +17,7 @@ import Settings from './Page/Settings'
 import Agreement from './Page/Agreement'
 import BookPage from './Page/BookPage'
 import MoviePage from './Page/MoviePage'
+import BookDetailPage from './Page/BookDetailPage'
 
 const MainPage = props => {
   const token = window.localStorage.getItem('token')
@@ -36,7 +37,8 @@ class App extends Component {
           <Switch>
             <Route exact path='/' component={MainPage} />
             <Route path='/notice' component={Notice} />
-            <Route path='/book' component={BookPage} />
+            <Route exact path='/book' component={BookPage} />
+            <Route path='/book/:id' component={BookDetailPage} />
             <Route path='/movie' component={MoviePage} />
             <Route path='/join' component={Join} />
             <Route path='/textEditorPage' component={textEditorPage} />

@@ -3,7 +3,7 @@ from django.http import JsonResponse
 from rest_framework import routers, serializers, viewsets, status
 from rest_framework.pagination import PageNumberPagination
 from django.contrib.auth.models import User
-from .models import Article, Comment, Profile, Book
+from .models import Article, Comment, Profile, Book, BookTag, BookBlock
 from rest_framework.authtoken.models import Token
 
 from rest_framework.authtoken.views import ObtainAuthToken
@@ -264,6 +264,53 @@ class BookDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
     permission_classes = (Read,)
+
+
+# BookBlock API
+
+
+class BookBlockSerializer(serializers.HyperlinkedModelSerializer):
+    tags = serializers.StringRelatedField(many=True)
+
+    class Meta:
+        model = BookBlock
+        fields = ('title','tags')
+
+
+class BookBlockDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = BookBlock.objects.all()
+    serializer_class = BookBlockSerializer
+    permission_classes = (Read,)
+
+
+class BookBlockList(generics.ListCreateAPIView):
+    queryset = BookBlock.objects.all()
+    serializer_class = BookBlockSerializer
+    permission_classes = (Publish,)
+
+
+
+# BookTag API
+
+
+class BookTagSerializer(serializers.HyperlinkedModelSerializer):
+    block = BookBlockSerializer(read_only = True)
+
+    class Meta:
+        model = BookTag
+        fields = '__all__'
+
+
+class BookTagDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = BookTag.objects.all()
+    serializer_class = BookTagSerializer
+    permission_classes = (Read,)
+
+
+class BookTagList(generics.ListCreateAPIView):
+    queryset = BookTag.objects.all()
+    serializer_class = BookTagSerializer
+    permission_classes = (Publish,)
 
 
 # Comment API

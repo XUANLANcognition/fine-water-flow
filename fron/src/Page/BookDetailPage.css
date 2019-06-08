@@ -1,0 +1,27 @@
+  .wrap {
+    display: flex;
+  }
+  .content {
+    flex: 1;
+  }
+  .extraContent {
+    min-width: 240px;
+    text-align: right;
+  }
+  .contentLink {
+    padding-top: 16px;
+  }
+  .contentLink a {
+    display: inline-block;
+    vertical-align: text-top;
+    margin-right: 32px;
+  }
+  .contentLink a img {
+    margin-right: 8px;
+  }
+  .pageheader {
+    background: hsla(0, 0%, 97%, 0.8)
+  }
+  .pageheader::before {
+    filter: blur(20px)
+  }
