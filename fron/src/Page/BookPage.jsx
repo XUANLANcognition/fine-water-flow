@@ -53,40 +53,42 @@ class BookPage extends Component {
           <Row style={{ paddingTop: '30px', paddingBottom: '30px' }}>
             <Col xl={{ span: 18, offset: 3 }} xs={{ span: 22, offset: 1 }}>
               <Title level={2}>品读 | 书籍</Title>
-              <Divider>标签区</Divider>
-              <Row style={{ paddingTop: '3px', paddingBottom: '3px' }}>
-                <div>
-                  <h5 style={{ marginRight: 8, display: 'inline' }}>Categories:</h5>
-                  {tagsFromServer.map(tag => (
-                    <CheckableTag
-                      key={tag}
-                      checked={this.state.selectedTags.indexOf(tag) > -1}
-                      onChange={checked => this.handleChange(tag, checked)}
-                    >
-                      {tag}
-                    </CheckableTag>
-                  ))}
-                </div>
-              </Row>
-              <Row style={{ paddingTop: '3px', paddingBottom: '3px' }}>
-                <div>
-                  <h5 style={{ marginRight: 8, display: 'inline' }}>Categories:</h5>
-                  {tagsFromServer.map(tag => (
-                    <CheckableTag
-                      key={tag}
-                      checked={this.state.selectedTags.indexOf(tag) > -1}
-                      onChange={checked => this.handleChange(tag, checked)}
-                    >
-                      {tag}
-                    </CheckableTag>
-                  ))}
-                </div>
-              </Row>
+              <div style={{ backgroundColor: '#f8f8f8', borderRadius: '10px', padding: '20px' }}>
+                <Row style={{ paddingTop: '3px', paddingBottom: '3px' }}>
+                  <div>
+                    <h5 style={{ marginRight: 8, display: 'inline', backgroundColor: '#7f7f8b', borderRadius: '16px 0 16px 16px', padding: '10px', color: 'white' }}>Categories:</h5>
+                    {tagsFromServer.map(tag => (
+                      <CheckableTag
+                        key={tag}
+                        checked={this.state.selectedTags.indexOf(tag) > -1}
+                        onChange={checked => this.handleChange(tag, checked)}
+                      >
+                        {tag}
+                      </CheckableTag>
+                    ))}
+                  </div>
+                </Row>
+                <Row style={{ paddingTop: '30px', paddingBottom: '3px' }}>
+                  <div>
+                    <h5 style={{ marginRight: 8, display: 'inline', backgroundColor: '#7f7f8b', borderRadius: '16px 0 16px 16px', padding: '10px', color: 'white' }}>Categories:</h5>
+                    {tagsFromServer.map(tag => (
+                      <CheckableTag
+                        key={tag}
+                        checked={this.state.selectedTags.indexOf(tag) > -1}
+                        onChange={checked => this.handleChange(tag, checked)}
+                      >
+                        {tag}
+                      </CheckableTag>
+                    ))}
+                  </div>
+                </Row>
+              </div>
             </Col>
           </Row>
-          <Row>
+          <Row style={{ paddingTop: '0px', paddingBottom: '30px' }}>
             <Col xl={{ span: 12, offset: 3 }} xs={{ span: 22, offset: 1 }}>
               <List
+                loading={this.state.loading}
                 grid={{
                   gutter: 24,
                   xs: 2,

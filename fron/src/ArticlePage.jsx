@@ -91,7 +91,7 @@ class ArticlePage extends Component {
               <div style={{ textAlign: 'center' }}>
                 <Spin spinning={this.state.loading} size='large' tip='loading...' />
               </div>
-              <AddComment authorId={this.state.authorId} articleId={this.state.id} articleUrl={this.state.url} />
+              <AddComment articleId={this.state.id} articleUrl={this.state.url} />
             </div>
           </Col>
           <Col xl={{ span: 5, offset: 1 }} xs={{ span: 22, offset: 1 }} style={{ paddingBottom: '20px' }}>

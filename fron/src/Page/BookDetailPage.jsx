@@ -6,7 +6,7 @@ import './BookDetailPage.css'
 
 import Nav from '../Nav'
 import Myfooter from '../Myfooter'
-import AddComment from '../AddComment'
+import AddBookComment from '../AddBookComment'
 import Advertisement from '../Advertisement'
 
 const { Title } = Typography
@@ -19,7 +19,10 @@ class BookDetailPage extends Component {
       publisher: '',
       isbn: '',
       pages: '',
-      cover: ''
+      cover: '',
+      overview: '',
+      id: '',
+      url: ''
     }
 
     componentDidMount = async (v) => {
@@ -39,7 +42,10 @@ class BookDetailPage extends Component {
             publisher: response.data.publisher,
             isbn: response.data.isbn,
             pages: response.data.pages,
-            cover: response.data.cover
+            cover: response.data.cover,
+            overview: response.data.overview,
+            id: response.data.id,
+            url: response.data.url
           }
         })
       } catch (error) {
@@ -99,12 +105,10 @@ class BookDetailPage extends Component {
               <Col xl={{ span: 12, offset: 3 }} xs={{ span: 22, offset: 1 }}>
                 <Title level={3}>内容简介 · · · · · ·</Title>
                 <Paragraph ellipsis={{ rows: 2, expandable: true }} style={{ fontSize: '24' }}>
-                12岁的阿富汗富家少爷阿米尔与仆人哈桑情同手足。然而，在一场风筝比赛后，发生了一件悲惨不堪的事，阿米尔为自己的懦弱感到自责和痛苦，逼走了哈桑，不久，自己也跟随父亲逃往美国。
-                成年后的阿米尔始终无法原谅自己当年对哈桑的背叛。为了赎罪，阿米尔再度踏上暌违二十多年的故乡，希望能为不幸的好友尽最后一点心力，却发现一个惊天谎言，儿时的噩梦再度重演，阿米尔该如何抉择？
-                故事如此残忍而又美丽，作者以温暖细腻的笔法勾勒人性的本质与救赎，读来令人荡气回肠。
+                  {this.state.overview}
                 </Paragraph>
                 <Title level={3}>书评 · · · · · ·</Title>
-                <AddComment />
+                <AddBookComment bookId={this.state.id} bookUrl={this.state.url} />
               </Col>
               <Col xl={{ span: 5, offset: 1 }} xs={{ span: 22, offset: 1 }}>
                 <Advertisement />
