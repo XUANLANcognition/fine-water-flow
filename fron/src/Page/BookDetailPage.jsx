@@ -6,8 +6,11 @@ import './BookDetailPage.css'
 
 import Nav from '../Nav'
 import Myfooter from '../Myfooter'
+import AddComment from '../AddComment'
+import Advertisement from '../Advertisement'
 
 const { Title } = Typography
+const { Paragraph } = Typography
 
 class BookDetailPage extends Component {
     state = {
@@ -90,6 +93,21 @@ class BookDetailPage extends Component {
                     </div>
                   </div>
                 </PageHeader>
+              </Col>
+            </Row>
+            <Row style={{ paddingTop: '30px', paddingBottom: '30px' }}>
+              <Col xl={{ span: 12, offset: 3 }} xs={{ span: 22, offset: 1 }}>
+                <Title level={3}>内容简介 · · · · · ·</Title>
+                <Paragraph ellipsis={{ rows: 2, expandable: true }} style={{ fontSize: '24' }}>
+                12岁的阿富汗富家少爷阿米尔与仆人哈桑情同手足。然而，在一场风筝比赛后，发生了一件悲惨不堪的事，阿米尔为自己的懦弱感到自责和痛苦，逼走了哈桑，不久，自己也跟随父亲逃往美国。
+                成年后的阿米尔始终无法原谅自己当年对哈桑的背叛。为了赎罪，阿米尔再度踏上暌违二十多年的故乡，希望能为不幸的好友尽最后一点心力，却发现一个惊天谎言，儿时的噩梦再度重演，阿米尔该如何抉择？
+                故事如此残忍而又美丽，作者以温暖细腻的笔法勾勒人性的本质与救赎，读来令人荡气回肠。
+                </Paragraph>
+                <Title level={3}>书评 · · · · · ·</Title>
+                <AddComment />
+              </Col>
+              <Col xl={{ span: 5, offset: 1 }} xs={{ span: 22, offset: 1 }}>
+                <Advertisement />
               </Col>
             </Row>
           </div>

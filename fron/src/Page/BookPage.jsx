@@ -8,14 +8,17 @@ import Myfooter from '../Myfooter'
 import Advertisement from '../Advertisement'
 
 const { Meta } = Card
+const CheckableTag = Tag.CheckableTag
 const { Title } = Typography
 const count = 8
+const tagsFromServer = ['Movies', 'Books', 'Music', 'Sports']
 
 class BookPage extends Component {
   page = 1
   state = {
     data: [],
     cache: [],
+    selectedTags: [],
     loading: true
   }
 
@@ -35,6 +38,13 @@ class BookPage extends Component {
     }
   }
 
+  handleChange (tag, checked) {
+    const { selectedTags } = this.state
+    const nextSelectedTags = checked ? [...selectedTags, tag] : selectedTags.filter(t => t !== tag)
+    console.log('You are interested in: ', nextSelectedTags)
+    this.setState({ selectedTags: nextSelectedTags })
+  }
+
   render () {
     return (
       <Layout style={{ minHeight: '100vh' }}>
@@ -45,25 +55,32 @@ class BookPage extends Component {
               <Title level={2}>品读 | 书籍</Title>
               <Divider>标签区</Divider>
               <Row style={{ paddingTop: '3px', paddingBottom: '3px' }}>
-                <Col xl={{ span: 1, offset: 0 }} xs={{ span: 2, offset: 0 }}>
-                  文学
-                </Col>
-                <Col xl={{ span: 23, offset: 0 }} xs={{ span: 21, offset: 1 }}>
-                  <div>
-                    <Tag color='#f50'>#f50</Tag>
-                  </div>
-                </Col>
+                <div>
+                  <h5 style={{ marginRight: 8, display: 'inline' }}>Categories:</h5>
+                  {tagsFromServer.map(tag => (
+                    <CheckableTag
+                      key={tag}
+                      checked={this.state.selectedTags.indexOf(tag) > -1}
+                      onChange={checked => this.handleChange(tag, checked)}
+                    >
+                      {tag}
+                    </CheckableTag>
+                  ))}
+                </div>
               </Row>
               <Row style={{ paddingTop: '3px', paddingBottom: '3px' }}>
-                <Col xl={{ span: 1, offset: 0 }} xs={{ span: 2, offset: 0 }}>
-                  科技
-                </Col>
-                <Col xl={{ span: 23, offset: 0 }} xs={{ span: 21, offset: 1 }}>
-                  <div>
-                    <Tag color='#f50'>#f50</Tag>
-                    <Tag color='#2db7f5'>#2db7f5</Tag>
-                  </div>
-                </Col>
+                <div>
+                  <h5 style={{ marginRight: 8, display: 'inline' }}>Categories:</h5>
+                  {tagsFromServer.map(tag => (
+                    <CheckableTag
+                      key={tag}
+                      checked={this.state.selectedTags.indexOf(tag) > -1}
+                      onChange={checked => this.handleChange(tag, checked)}
+                    >
+                      {tag}
+                    </CheckableTag>
+                  ))}
+                </div>
               </Row>
             </Col>
           </Row>
