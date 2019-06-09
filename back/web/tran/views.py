@@ -3,7 +3,7 @@ from django.http import JsonResponse
 from rest_framework import routers, serializers, viewsets, status
 from rest_framework.pagination import PageNumberPagination
 from django.contrib.auth.models import User
-from .models import Article, Comment, Profile, Book, BookTag, BookBlock
+from .models import Article, Comment, Profile, Book, BookTag, BookBlock, BookComment
 from rest_framework.authtoken.models import Token
 
 from rest_framework.authtoken.views import ObtainAuthToken
@@ -221,6 +221,52 @@ class ArticleDetail(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = (Read,)
 
 
+# BookComment API
+
+
+class BookCommentSerializer(serializers.HyperlinkedModelSerializer):
+    user = UserAnotherSerializer(read_only = True)
+
+    class Meta:
+        model = BookComment
+        fields = ('url', 'id', 'content', 'pub_date', 'user', 'book')
+
+
+class BookCommentPagination(PageNumberPagination):
+    page_size = 8
+    page_size_query_param = 'page_size'
+    max_page_size = 128
+
+    class Meta:
+        model = BookComment
+        fields = '__all__'
+
+
+class BookCommentFilter(filters.FilterSet):
+
+    class Meta:
+        model = BookComment
+        fields = "__all__"
+
+
+class BookCommentList(generics.ListCreateAPIView):
+    queryset = BookComment.objects.all().order_by('-pub_date')
+    serializer_class = BookCommentSerializer
+    permission_classes = (Publish, )
+    pagination_class = BookCommentPagination
+    filter_backends = (filters.DjangoFilterBackend, )
+    filterset_class = BookCommentFilter
+
+    def perform_create(self, serializer):
+        serializer.save(user = self.request.user)
+
+
+class BookCommentDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = BookComment.objects.all()
+    serializer_class = BookCommentSerializer
+    permission_classes = (Read, )
+
+
 # Book API
 
 
@@ -228,7 +274,7 @@ class BookSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Book
-        fields = ('url', 'id', 'title', 'author', 'publisher', 'isbn', 'pages', 'cover', 'pub_date', 'user')
+        fields = ('url', 'id', 'title', 'overview', 'author', 'publisher', 'isbn', 'pages', 'cover', 'pub_date', 'user')
 
 
 class BookPagination(PageNumberPagination):

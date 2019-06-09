@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 
 # Register your models here.
 
-from .models import Article, Comment, Profile, Book, BookTag, BookBlock
+from .models import Article, Comment, Profile, Book, BookTag, BookBlock, BookComment
 
 class ProfileInline(admin.StackedInline):
     model = Profile
@@ -22,3 +22,4 @@ admin.site.register(Comment)
 admin.site.register(Book)
 admin.site.register(BookBlock)
 admin.site.register(BookTag)
+admin.site.register(BookComment)

@@ -45,6 +45,7 @@ class BookTag(models.Model):
 
 class Book(models.Model):
     title = models.CharField(max_length=256)
+    overview =  models.TextField(default='')
     author = models.CharField(max_length=256)
     publisher = models.CharField(max_length=256)
     isbn = models.CharField(max_length=256)
@@ -54,3 +55,8 @@ class Book(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     tag = models.ManyToManyField('Booktag', related_name='booktag', blank=True)
 
+class BookComment(models.Model):
+    book = models.ForeignKey(Book, on_delete=models.CASCADE)
+    content = models.CharField(max_length=1024)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    pub_date = models.DateTimeField(auto_now_add=True)
