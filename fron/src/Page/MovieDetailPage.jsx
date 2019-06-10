@@ -7,7 +7,7 @@ import './BookDetailPage.css'
 
 import Nav from '../Nav'
 import Myfooter from '../Myfooter'
-import AddBookComment from '../AddBookComment'
+import AddMovieComment from '../AddMovieComment'
 import Advertisement from '../Advertisement'
 
 const { Title } = Typography
@@ -206,7 +206,7 @@ class BookDetailPage extends Component {
                   )}
                 />
                 <Title level={3}>影评 · · · · · ·</Title>
-                <AddBookComment bookId={this.state.id} bookUrl={this.state.url} />
+                <AddMovieComment movieId={this.state.id} movieUrl={this.state.url} />
               </Col>
               <Col xl={{ span: 5, offset: 1 }} xs={{ span: 22, offset: 1 }}>
                 <Advertisement />
