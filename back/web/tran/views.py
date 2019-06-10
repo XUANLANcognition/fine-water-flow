@@ -3,7 +3,7 @@ from django.http import JsonResponse
 from rest_framework import routers, serializers, viewsets, status
 from rest_framework.pagination import PageNumberPagination
 from django.contrib.auth.models import User
-from .models import Article, Comment, Profile, Book, BookTag, BookBlock, BookComment, Figure, Movie
+from .models import Article, Comment, Profile, Book, BookTag, BookBlock, BookComment, Figure, Movie, MovieComment
 from rest_framework.authtoken.models import Token
 
 from rest_framework.authtoken.views import ObtainAuthToken
@@ -496,6 +496,52 @@ class MovieDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Movie.objects.all()
     serializer_class = MovieSerializer
     permission_classes = (Read,)
+
+
+# MovieComment API
+
+
+class MovieCommentSerializer(serializers.HyperlinkedModelSerializer):
+    user = UserAnotherSerializer(read_only = True)
+
+    class Meta:
+        model = MovieComment
+        fields = ('url', 'id', 'content', 'pub_date', 'user', 'movie')
+
+
+class MovieCommentPagination(PageNumberPagination):
+    page_size = 8
+    page_size_query_param = 'page_size'
+    max_page_size = 128
+
+    class Meta:
+        model = MovieComment
+        fields = '__all__'
+
+
+class MovieCommentFilter(filters.FilterSet):
+
+    class Meta:
+        model = MovieComment
+        fields = "__all__"
+
+
+class MovieCommentList(generics.ListCreateAPIView):
+    queryset = MovieComment.objects.all().order_by('-pub_date')
+    serializer_class = MovieCommentSerializer
+    permission_classes = (Publish, )
+    pagination_class = MovieCommentPagination
+    filter_backends = (filters.DjangoFilterBackend, )
+    filterset_class = MovieCommentFilter
+
+    def perform_create(self, serializer):
+        serializer.save(user = self.request.user)
+
+
+class MovieCommentDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = MovieComment.objects.all()
+    serializer_class = MovieCommentSerializer
+    permission_classes = (Read, )
 
 
 # Sign on API
