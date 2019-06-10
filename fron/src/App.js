@@ -18,6 +18,8 @@ import Agreement from './Page/Agreement'
 import BookPage from './Page/BookPage'
 import MoviePage from './Page/MoviePage'
 import BookDetailPage from './Page/BookDetailPage'
+import MovieDetailPage from './Page/MovieDetailPage'
+import FigureDetailPage from './Page/FigureDetailPage'
 
 const MainPage = props => {
   const token = window.localStorage.getItem('token')
@@ -39,7 +41,9 @@ class App extends Component {
             <Route path='/notice' component={Notice} />
             <Route exact path='/book' component={BookPage} />
             <Route path='/book/:id' component={BookDetailPage} />
-            <Route path='/movie' component={MoviePage} />
+            <Route exact path='/movie' component={MoviePage} />
+            <Route path='/movie/:id' component={MovieDetailPage} />
+            <Route path='/figure/:id' component={FigureDetailPage} />
             <Route path='/join' component={Join} />
             <Route path='/textEditorPage' component={textEditorPage} />
             <Route path='/article/:id' component={ArticlePage} />
