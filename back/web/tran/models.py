@@ -33,6 +33,20 @@ class Comment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     pub_date = models.DateTimeField(auto_now_add=True)
 
+class Figure(models.Model):
+    name = models.CharField(max_length=128)
+    birthday = models.DateField(blank=True, null=True)
+    deathday = models.DateField(blank=True, null=True)
+    GENDER_CHOICES = (
+        ('M', 'Homme'),
+        ('F', 'Femme'),
+    )
+    gender = models.CharField(max_length=1, choices=GENDER_CHOICES)
+    place = models.CharField(max_length=128, blank=True)
+    cover = models.CharField(max_length=128, blank=True)
+    user = models.ForeignKey(User, on_delete=models.PROTECT)
+    pub_date = models.DateTimeField(auto_now_add=True)
+
 class BookBlock(models.Model):
     title = models.CharField(max_length=128)
 
@@ -60,3 +74,16 @@ class BookComment(models.Model):
     content = models.CharField(max_length=1024)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     pub_date = models.DateTimeField(auto_now_add=True)
+
+class Movie(models.Model):
+    title = models.CharField(max_length=256)
+    director = models.ManyToManyField('Figure', related_name='director', blank=True)
+    writer = models.ManyToManyField('Figure', related_name='write', blank=True)
+    actor = models.ManyToManyField('Figure', related_name='actor', blank=True)
+    region = models.CharField(max_length=256, blank=True)
+    number = models.IntegerField(blank=True)
+    runtime = models.IntegerField(blank=True)
+    overview =  models.TextField(default='', blank=True)
+    cover = models.CharField(max_length=256, blank=True, default='')
+    pub_date = models.DateTimeField(auto_now_add=True)
+    user = models.ForeignKey(User, on_delete=models.PROTECT)

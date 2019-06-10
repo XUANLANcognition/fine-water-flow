@@ -3,7 +3,7 @@ from django.http import JsonResponse
 from rest_framework import routers, serializers, viewsets, status
 from rest_framework.pagination import PageNumberPagination
 from django.contrib.auth.models import User
-from .models import Article, Comment, Profile, Book, BookTag, BookBlock, BookComment
+from .models import Article, Comment, Profile, Book, BookTag, BookBlock, BookComment, Figure, Movie
 from rest_framework.authtoken.models import Token
 
 from rest_framework.authtoken.views import ObtainAuthToken
@@ -403,6 +403,99 @@ class CommentDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
     permission_classes = (Read, )
+
+
+# Figure API
+
+
+class FigureSerializer(serializers.HyperlinkedModelSerializer):
+
+    class Meta:
+        model = Figure
+        fields = ('url', 'id', 'name', 'birthday', 'deathday', 'gender', 'place', 'cover')
+
+
+class FigurePagination(PageNumberPagination):
+    page_size = 8
+    page_size_query_param = 'page_size'
+    max_page_size = 128
+
+    class Meta:
+        model = Figure
+        fields = '__all__'
+
+
+class FigureFilter(filters.FilterSet):
+    
+    class Meta:
+        model = Figure
+        fields = '__all__'
+
+
+class FigureList(generics.ListCreateAPIView):
+    queryset = Figure.objects.all().order_by('-pub_date')
+    serializer_class = FigureSerializer
+    permission_classes = (Publish,)
+    pagination_class = FigurePagination
+    filter_backends = (filters.DjangoFilterBackend,)
+    filterset_class = FigureFilter
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
+
+
+class FigureDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Figure.objects.all()
+    serializer_class = FigureSerializer
+    permission_classes = (Read,)
+
+
+# Movie API
+
+
+class MovieSerializer(serializers.HyperlinkedModelSerializer):
+    director = FigureSerializer(many=True, read_only=True)
+    actor = FigureSerializer(many=True, read_only=True)
+    writer = FigureSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Movie
+        fields = ('url', 'id', 'title' , 'cover', 'number', 'runtime' ,'region','director','writer', 'actor', 'overview')
+
+
+class MoviePagination(PageNumberPagination):
+    page_size = 8
+    page_size_query_param = 'page_size'
+    max_page_size = 128
+
+    class Meta:
+        model = Movie
+        fields = '__all__'
+
+
+class MovieFilter(filters.FilterSet):
+    
+    class Meta:
+        model = Movie
+        fields = '__all__'
+
+
+class MovieList(generics.ListCreateAPIView):
+    queryset = Movie.objects.all().order_by('-pub_date')
+    serializer_class = MovieSerializer
+    permission_classes = (Publish,)
+    pagination_class = MoviePagination
+    filter_backends = (filters.DjangoFilterBackend,)
+    filterset_class = MovieFilter
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
+
+
+class MovieDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Movie.objects.all()
+    serializer_class = MovieSerializer
+    permission_classes = (Read,)
 
 
 # Sign on API
