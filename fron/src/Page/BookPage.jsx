@@ -27,8 +27,7 @@ class BookPage extends Component {
     cache: [],
     selectedTags: [],
     loading: true,
-    tags: [],
-    temp: []
+    tags: []
   }
 
   componentDidMount = async (v) => {
@@ -41,7 +40,6 @@ class BookPage extends Component {
       const response = await axios.get(
         'https://finewf.club:8080/api/books/?format=json' + '&page=' + this.page + '&page_size=' + count
       )
-      this.state.temp = response.data.results
       this.setState({ data: response.data.results, cache: response.data.results })
       const responseTag = await axios.get(
         'https://finewf.club:8080/api/bookblocks/?format=json'
@@ -52,34 +50,29 @@ class BookPage extends Component {
     }
   }
 
-  check = (book) => {
-    const { selectedTags } = this.state
-    if (selectedTags.length === 0) {
-      return true
-    }
-    for (let i of book.tag) {
-      if (selectedTags.includes(i.title)) {
-        return true
-      }
-    }
-    return false
-  }
-
   handleChange = async (tag, checked) => {
     const { selectedTags } = this.state
     const nextSelectedTags = checked ? [...selectedTags, tag] : selectedTags.filter(t => t !== tag)
     await this.setState({
       selectedTags: nextSelectedTags
     })
-    if (selectedTags.length === 0) {
-      this.setState({
-        cache: this.state.temp
-      })
+    if (nextSelectedTags.length !== 0) {
+      const temp = []
+      for (let i of nextSelectedTags) {
+        temp.push(i.id)
+      }
+      const fliterTag = '&tag=' + temp.join('&tag=')
+      try {
+        const response = await axios.get(
+          'https://finewf.club:8080/api/books/?format=json' + '&page=' + this.page + '&page_size=' + count + fliterTag
+        )
+        this.setState({ data: response.data.results, cache: response.data.results })
+      } catch (error) {
+        console.log(error)
+      }
+    } else {
+      this.getData()
     }
-    const t = this.state.temp.filter(this.check)
-    this.setState({
-      cache: t
-    })
   }
 
   render () {
@@ -120,7 +113,7 @@ class BookPage extends Component {
                                 checked={this.state.selectedTags.indexOf(tag) > -1}
                                 onChange={checked => this.handleChange(tag, checked)}
                               >
-                                {tag}
+                                {tag.title}
                               </CheckableTag>
                             </List.Item>
                           )}
