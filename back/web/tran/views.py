@@ -267,14 +267,60 @@ class BookCommentDetail(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = (Read, )
 
 
+# BookBlock API
+
+
+class BookBlockSerializer(serializers.HyperlinkedModelSerializer):
+    tags = serializers.StringRelatedField(many=True)
+
+    class Meta:
+        model = BookBlock
+        fields = ('title','tags')
+
+
+class BookBlockDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = BookBlock.objects.all()
+    serializer_class = BookBlockSerializer
+    permission_classes = (Read,)
+
+
+class BookBlockList(generics.ListCreateAPIView):
+    queryset = BookBlock.objects.all()
+    serializer_class = BookBlockSerializer
+    permission_classes = (Publish,)
+
+
+# BookTag API
+
+
+class BookTagSerializer(serializers.HyperlinkedModelSerializer):
+
+    class Meta:
+        model = BookTag
+        fields = ('title',)
+
+
+class BookTagDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = BookTag.objects.all()
+    serializer_class = BookTagSerializer
+    permission_classes = (Read,)
+
+
+class BookTagList(generics.ListCreateAPIView):
+    queryset = BookTag.objects.all()
+    serializer_class = BookTagSerializer
+    permission_classes = (Publish,)
+
+
 # Book API
 
 
 class BookSerializer(serializers.HyperlinkedModelSerializer):
+    tag = BookTagSerializer(many=True, read_only=True)
 
     class Meta:
         model = Book
-        fields = ('url', 'id', 'title', 'overview', 'author', 'publisher', 'isbn', 'pages', 'cover', 'pub_date', 'user')
+        fields = ('url', 'id', 'title', 'overview', 'author', 'publisher', 'isbn', 'pages', 'cover', 'pub_date', 'user', 'tag')
 
 
 class BookPagination(PageNumberPagination):
@@ -310,53 +356,6 @@ class BookDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
     permission_classes = (Read,)
-
-
-# BookBlock API
-
-
-class BookBlockSerializer(serializers.HyperlinkedModelSerializer):
-    tags = serializers.StringRelatedField(many=True)
-
-    class Meta:
-        model = BookBlock
-        fields = ('title','tags')
-
-
-class BookBlockDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = BookBlock.objects.all()
-    serializer_class = BookBlockSerializer
-    permission_classes = (Read,)
-
-
-class BookBlockList(generics.ListCreateAPIView):
-    queryset = BookBlock.objects.all()
-    serializer_class = BookBlockSerializer
-    permission_classes = (Publish,)
-
-
-
-# BookTag API
-
-
-class BookTagSerializer(serializers.HyperlinkedModelSerializer):
-    block = BookBlockSerializer(read_only = True)
-
-    class Meta:
-        model = BookTag
-        fields = '__all__'
-
-
-class BookTagDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = BookTag.objects.all()
-    serializer_class = BookTagSerializer
-    permission_classes = (Read,)
-
-
-class BookTagList(generics.ListCreateAPIView):
-    queryset = BookTag.objects.all()
-    serializer_class = BookTagSerializer
-    permission_classes = (Publish,)
 
 
 # Comment API
