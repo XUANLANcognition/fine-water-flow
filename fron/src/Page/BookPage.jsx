@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Layout, Row, Col, Typography, Card, Divider, Tag, List } from 'antd'
+import { Layout, Row, Col, Typography, Card, Tag, List, Collapse, Icon } from 'antd'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 
@@ -10,8 +10,15 @@ import Advertisement from '../Advertisement'
 const { Meta } = Card
 const CheckableTag = Tag.CheckableTag
 const { Title } = Typography
-const count = 8
-const tagsFromServer = ['Movies', 'Books', 'Music', 'Sports']
+const count = 128
+const customPanelStyle = {
+  background: '#f7f7f7',
+  borderRadius: 4,
+  marginBottom: 24,
+  border: 0,
+  overflow: 'hidden'
+}
+const Panel = Collapse.Panel
 
 class BookPage extends Component {
   page = 1
@@ -19,7 +26,9 @@ class BookPage extends Component {
     data: [],
     cache: [],
     selectedTags: [],
-    loading: true
+    loading: true,
+    tags: [],
+    temp: []
   }
 
   componentDidMount = async (v) => {
@@ -32,17 +41,45 @@ class BookPage extends Component {
       const response = await axios.get(
         'https://finewf.club:8080/api/books/?format=json' + '&page=' + this.page + '&page_size=' + count
       )
+      this.state.temp = response.data.results
       this.setState({ data: response.data.results, cache: response.data.results })
+      const responseTag = await axios.get(
+        'https://finewf.club:8080/api/bookblocks/?format=json'
+      )
+      this.setState({ tags: responseTag.data })
     } catch (error) {
       console.log(error)
     }
   }
 
-  handleChange (tag, checked) {
+  check = (book) => {
+    const { selectedTags } = this.state
+    if (selectedTags.length === 0) {
+      return true
+    }
+    for (let i of book.tag) {
+      if (selectedTags.includes(i.title)) {
+        return true
+      }
+    }
+    return false
+  }
+
+  handleChange = async (tag, checked) => {
     const { selectedTags } = this.state
     const nextSelectedTags = checked ? [...selectedTags, tag] : selectedTags.filter(t => t !== tag)
-    console.log('You are interested in: ', nextSelectedTags)
-    this.setState({ selectedTags: nextSelectedTags })
+    await this.setState({
+      selectedTags: nextSelectedTags
+    })
+    if (selectedTags.length === 0) {
+      this.setState({
+        cache: this.state.temp
+      })
+    }
+    const t = this.state.temp.filter(this.check)
+    this.setState({
+      cache: t
+    })
   }
 
   render () {
@@ -52,37 +89,47 @@ class BookPage extends Component {
         <div style={{ flex: '1 0 ', backgroundColor: '#ffffff' }}>
           <Row style={{ paddingTop: '30px', paddingBottom: '30px' }}>
             <Col xl={{ span: 18, offset: 3 }} xs={{ span: 22, offset: 1 }}>
-              <Title level={2}>品读 | 书籍</Title>
-              <div style={{ backgroundColor: '#f8f8f8', borderRadius: '10px', padding: '20px' }}>
-                <Row style={{ paddingTop: '3px', paddingBottom: '3px' }}>
-                  <div>
-                    <h5 style={{ marginRight: 8, display: 'inline', backgroundColor: '#7f7f8b', borderRadius: '16px 0 16px 16px', padding: '10px', color: 'white' }}>Categories:</h5>
-                    {tagsFromServer.map(tag => (
-                      <CheckableTag
-                        key={tag}
-                        checked={this.state.selectedTags.indexOf(tag) > -1}
-                        onChange={checked => this.handleChange(tag, checked)}
-                      >
-                        {tag}
-                      </CheckableTag>
-                    ))}
-                  </div>
-                </Row>
-                <Row style={{ paddingTop: '30px', paddingBottom: '3px' }}>
-                  <div>
-                    <h5 style={{ marginRight: 8, display: 'inline', backgroundColor: '#7f7f8b', borderRadius: '16px 0 16px 16px', padding: '10px', color: 'white' }}>Categories:</h5>
-                    {tagsFromServer.map(tag => (
-                      <CheckableTag
-                        key={tag}
-                        checked={this.state.selectedTags.indexOf(tag) > -1}
-                        onChange={checked => this.handleChange(tag, checked)}
-                      >
-                        {tag}
-                      </CheckableTag>
-                    ))}
-                  </div>
-                </Row>
-              </div>
+              <Collapse
+                bordered={false}
+                defaultActiveKey={['1']}
+                expandIcon={({ isActive }) => <Icon type='caret-right' rotate={isActive ? 90 : 0} />}
+              >
+                <Panel header={<Title level={4}>热门标签</Title>} key='1' style={customPanelStyle}>
+                  <List
+                    loading={this.state.loading}
+                    size='small'
+                    dataSource={this.state.tags}
+                    renderItem={item => (
+                      <List.Item>
+                        <span style={{ backgroundColor: '#7f7f8b', borderRadius: '16px 0 16px 16px', padding: '5px 15px', color: 'white', margin: '0 24px' }}>{item.title}
+                        </span>
+                        <List
+                          loading={this.state.loading}
+                          size='small'
+                          grid={{
+                            gutter: 72,
+                            xs: 3,
+                            xl: 8,
+                            xxl: 8
+                          }}
+                          dataSource={item.tags}
+                          renderItem={tag => (
+                            <List.Item>
+                              <CheckableTag
+                                key={tag}
+                                checked={this.state.selectedTags.indexOf(tag) > -1}
+                                onChange={checked => this.handleChange(tag, checked)}
+                              >
+                                {tag}
+                              </CheckableTag>
+                            </List.Item>
+                          )}
+                        />
+                      </List.Item>
+                    )}
+                  />
+                </Panel>
+              </Collapse>
             </Col>
           </Row>
           <Row style={{ paddingTop: '0px', paddingBottom: '30px' }}>

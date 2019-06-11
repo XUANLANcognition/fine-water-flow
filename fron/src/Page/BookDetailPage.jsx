@@ -104,8 +104,8 @@ class BookDetailPage extends Component {
             <Row style={{ paddingTop: '30px', paddingBottom: '30px' }}>
               <Col xl={{ span: 12, offset: 3 }} xs={{ span: 22, offset: 1 }}>
                 <Title level={3}>内容简介 · · · · · ·</Title>
-                <Paragraph ellipsis={{ rows: 2, expandable: true }} style={{ fontSize: '24' }}>
-                  {this.state.overview}
+                <Paragraph ellipsis={{ rows: 4, expandable: true }} style={{ fontSize: '24' }} >
+                  {this.state.overview }
                 </Paragraph>
                 <Title level={3}>书评 · · · · · ·</Title>
                 <AddBookComment bookId={this.state.id} bookUrl={this.state.url} />

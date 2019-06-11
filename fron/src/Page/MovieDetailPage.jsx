@@ -26,7 +26,8 @@ class BookDetailPage extends Component {
       url: '',
       actor: [''],
       director: [''],
-      writer: ['']
+      writer: [''],
+      loading: true
     }
 
     componentDidMount = async (v) => {
@@ -51,7 +52,8 @@ class BookDetailPage extends Component {
             url: response.data.url,
             director: response.data.director,
             writer: response.data.writer,
-            actor: response.data.actor
+            actor: response.data.actor,
+            loading: false
           }
         })
       } catch (error) {
