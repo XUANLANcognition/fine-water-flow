@@ -22,6 +22,18 @@ class CommentInline(admin.StackedInline):
     list_per_page = 10
     search_fields = ('user',)
 
+class BookTagInline(admin.StackedInline):
+    model = BookTag
+    list_display = ('title',)
+    list_filter = ('pub_date',)
+    list_per_page = 10
+    search_fields = ('title',)
+
+class BookBlockAdmin(admin.ModelAdmin):
+    list_display = ('title',)
+    list_per_page = 10
+    inlines = [BookTagInline, ]
+
 class ArticleAdmin(admin.ModelAdmin):
     list_display = ('title', 'user')
     list_filter = ('pub_date', 'user')
@@ -57,7 +69,7 @@ admin.site.register(User, UserAdmin)
 admin.site.register(Article, ArticleAdmin)
 admin.site.register(Comment, CommentAdmin)
 admin.site.register(Book, BookAdmin)
-admin.site.register(BookBlock)
+admin.site.register(BookBlock, BookBlockAdmin)
 admin.site.register(BookTag)
 admin.site.register(BookComment)
 admin.site.register(Movie, MovieAdmin)
