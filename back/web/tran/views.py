@@ -297,7 +297,7 @@ class BookTagSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = BookTag
-        fields = ('title',)
+        fields = ('title', 'id')
 
 
 class BookTagDetail(generics.RetrieveUpdateDestroyAPIView):
