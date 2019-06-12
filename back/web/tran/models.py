@@ -58,7 +58,6 @@ class BookBlock(models.Model):
 
 class BookTag(models.Model):
     title = models.CharField(max_length=128)
-    subtitle = models.CharField(max_length=128, default='')
     block = models.ForeignKey(BookBlock, on_delete=models.CASCADE, related_name='tags', default='')
 
     def __str__(self):
@@ -66,6 +65,7 @@ class BookTag(models.Model):
 
 class Book(models.Model):
     title = models.CharField(max_length=256)
+    subtitle = models.CharField(max_length=128, default='')
     overview =  models.TextField(default='')
     author = models.CharField(max_length=256)
     publisher = models.CharField(max_length=256)
