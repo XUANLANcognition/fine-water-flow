@@ -65,7 +65,7 @@ class BookTag(models.Model):
 
 class Book(models.Model):
     title = models.CharField(max_length=256)
-    subtitle = models.CharField(max_length=128, default='')
+    subtitle = models.CharField(max_length=128, default='', blank=True)
     overview =  models.TextField(default='')
     author = models.CharField(max_length=256)
     publisher = models.CharField(max_length=256)
