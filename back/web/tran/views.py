@@ -68,7 +68,7 @@ class UserProfileSerializer(serializers.ModelSerializer):
     follow = FollowerSerializer(many=True, read_only=True)
     class Meta:
         model = Profile
-        fields = ('bio', 'follow',)
+        fields = ('bio', 'follow', 'media_editor_auth')
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer): 

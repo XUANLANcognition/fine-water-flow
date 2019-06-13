@@ -15,6 +15,12 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     bio = models.CharField(max_length=100, blank=True, default='I am just a baby.')
     follow = models.ManyToManyField('Profile', related_name='followed_by', blank=True)
+    MEDIA_EDITOR_AUTH_CHOICES = (
+        ('未审核', '未审核'),
+        ('审核中', '审核中'),
+        ('审核通过', '审核通过')
+    )
+    media_editor_auth = models.CharField(max_length=24, choices=MEDIA_EDITOR_AUTH_CHOICES, default='未审核', blank=True)
 
     @receiver(post_save, sender = User)
     def create_profile_for_user(sender, instance = None, created = False, **kwargs):
