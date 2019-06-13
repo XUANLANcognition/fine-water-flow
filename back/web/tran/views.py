@@ -140,6 +140,26 @@ def unfollow(request, pk):
     user.profile.follow.remove(following.profile)
     return Response(status = status.HTTP_201_CREATED)
 
+# user apply media editor
+
+@api_view(['POST'])
+@permission_classes((permissions.IsAuthenticated, ))
+def apply_media_editor(request, pk):
+    user = User.objects.get(id = request.user.id)
+    user.profile.media_editor_auth = '审核中'
+    user.profile.save()
+    return Response(status = status.HTTP_201_CREATED)
+
+# user unapply media editor
+
+@api_view(['POST'])
+@permission_classes((permissions.IsAuthenticated, ))
+def unapply_media_editor(request, pk):
+    user = User.objects.get(id = request.user.id)
+    user.profile.media_editor_auth = '未审核'
+    user.profile.save()
+    return Response(status = status.HTTP_201_CREATED)
+
 # conclude followed or not
 
 @api_view(['POST'])
