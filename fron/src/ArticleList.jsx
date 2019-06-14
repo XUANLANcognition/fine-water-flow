@@ -87,7 +87,7 @@ class ArticleList extends Component {
                     <Link to={((item.user && item.user.id) + '' === window.localStorage.getItem('user_id') ? '/profile/' : '/visit/') + (item.user && item.user.id)}>
                       <div>
                         {item.user && item.user.username}
-                        {item.user.profile.media_editor_auth === '审核通过' ? <IconFont type='icon-renzhenghuizhang' style={{ paddingLeft: '10px' }} /> : null}
+                        {(item.user && item.user.profile.media_editor_auth) === '审核通过' ? <IconFont type='icon-renzhenghuizhang' style={{ paddingLeft: '10px' }} /> : null}
                       </div>
                     </Link>
                   }
