@@ -1,15 +1,16 @@
 import React, { Component } from 'react'
-import { Layout, Col, Row, Menu, Icon, Divider, Typography } from 'antd'
+import { Layout, Col, Row, Menu, Icon, Typography, Tabs } from 'antd'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 
 import Nav from '../Nav'
 import Myfooter from '../Myfooter'
-import AvatarUpload from '../AvatarUpload'
+import StepAuth from '../StepAuth'
 
-const { Title, Paragraph, Text } = Typography
+const { Title } = Typography
+const { TabPane } = Tabs
 
-class Settings extends Component {
+class SettingAccount extends Component {
   componentDidMount () {
     this.getProfileData()
   }
@@ -62,32 +63,47 @@ class Settings extends Component {
                 onClick={this.handleClick}
                 selectedKeys={[this.state.current]}
               >
-                <Menu.Item key='Profile'>
-                  <Icon type='user' />Profile
+                <Menu.Item key='profile'>
+                  <Icon type='user' />个人信息
                   <Link to='/settings/profile' />
                 </Menu.Item>
-                <Menu.Item key='Account'>
-                  <Icon type='user' />Account
-                  <Link to='#' />
+                <Menu.Item key='account'>
+                  <Icon type='user' />账号设置
+                  <Link to='/settings/account' />
                 </Menu.Item>
               </Menu>
             </Col>
             <Col xl={{ span: 13, offset: 1 }} xs={{ span: 22, offset: 1 }} >
               <Row>
                 <Col xl={{ span: 24, offset: 0 }} xs={{ span: 22, offset: 1 }}>
-                  <Title level={2}>Public profile</Title>
-                  <Divider />
+                  <Title level={3}>账号设置</Title>
                 </Col>
               </Row>
               <Row>
-                <Col xl={{ span: 16, offset: 0 }} xs={{ span: 22, offset: 1 }} style={{ paddingBottom: '20px' }}>
-                  <h3>Username : {this.state.username}</h3>
-                  <h3>Bio : {this.state.bio}</h3>
-                  <h3>E-mail : {this.state.email}</h3>
-                </Col>
-                <Col xl={{ span: 6, offset: 2 }} xs={{ span: 22, offset: 1 }} >
-                  <AvatarUpload avatarUrl={this.state.urlAvatar} />
-                  <h1>点击上传头像</h1>
+                <Col xl={{ span: 24, offset: 0 }} xs={{ span: 22, offset: 1 }}>
+                  <Tabs defaultActiveKey='1'>
+                    <TabPane
+                      tab={
+                        <span>
+                          <Icon type='apple' />权限申请
+                        </span>
+                      }
+                      key='1'
+                    >
+                      <Title style={{ padding: '24px 0' }} level={4}>1.书籍影视资源编辑</Title>
+                      <StepAuth />
+                    </TabPane>
+                    <TabPane
+                      tab={
+                        <span>
+                          <Icon type='android' />敬请期待
+                        </span>
+                      }
+                      key='2'
+                    >
+                        Tab 2
+                    </TabPane>
+                  </Tabs>
                 </Col>
               </Row>
             </Col>
@@ -99,4 +115,4 @@ class Settings extends Component {
   }
 }
 
-export default Settings
+export default SettingAccount

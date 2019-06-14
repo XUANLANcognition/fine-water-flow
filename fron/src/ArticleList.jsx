@@ -1,10 +1,13 @@
 import React, { Component } from 'react'
-import { List, Button, Skeleton, Avatar } from 'antd'
+import { List, Button, Skeleton, Avatar, Icon } from 'antd'
 import axios from 'axios'
 import dayjs from 'dayjs'
 import { Link } from 'react-router-dom'
 
 const count = 8
+const IconFont = Icon.createFromIconfontCN({
+  scriptUrl: '//at.alicdn.com/t/font_1242637_iqt57v9lv7b.js'
+})
 
 class ArticleList extends Component {
     page = 1
@@ -80,7 +83,14 @@ class ArticleList extends Component {
             <List.Item>
               <Skeleton avatar title={false} loading={item.loading} active>
                 <List.Item.Meta
-                  title={<Link to={((item.user && item.user.id) + '' === window.localStorage.getItem('user_id') ? '/profile/' : '/visit/') + (item.user && item.user.id)}>{item.user && item.user.username}</Link>}
+                  title={
+                    <Link to={((item.user && item.user.id) + '' === window.localStorage.getItem('user_id') ? '/profile/' : '/visit/') + (item.user && item.user.id)}>
+                      <div>
+                        {item.user && item.user.username}
+                        {item.user.profile.media_editor_auth === '审核通过' ? <IconFont type='icon-renzhenghuizhang' style={{ paddingLeft: '10px' }} /> : null}
+                      </div>
+                    </Link>
+                  }
                   avatar={<Link to={((item.user && item.user.id) + '' === window.localStorage.getItem('user_id') ? '/profile/' : '/visit/') + (item.user && item.user.id)}><Avatar icon='user' src={item.user && item.user.last_name} /></Link>}
                   description={dayjs(item.pub_date).fromNow()}
                 />

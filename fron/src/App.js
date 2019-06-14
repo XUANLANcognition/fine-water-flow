@@ -13,7 +13,8 @@ import Editor1 from './Editor'
 
 import textEditorPage from './Page/textEditorPage'
 import Join from './Page/Join'
-import Settings from './Page/Settings'
+import SettingProfile from './Page/SettingProfile'
+import SettingAccount from './Page/SettingAccount'
 import Agreement from './Page/Agreement'
 import BookPage from './Page/BookPage'
 import MoviePage from './Page/MoviePage'
@@ -49,7 +50,8 @@ class App extends Component {
             <Route path='/article/:id' component={ArticlePage} />
             <Route path='/profile/:id' component={Profile} />
             <Route path='/visit/:id' component={Visit} />
-            <Route path='/settings/profile' component={Settings} />
+            <Route path='/settings/profile' component={SettingProfile} />
+            <Route path='/settings/account' component={SettingAccount} />
             <Route path='/agreement' component={Agreement} />
             <Route path='/editor' component={Editor1} />
             <Route component={NoMatch} />

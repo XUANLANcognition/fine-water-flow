@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Upload, Icon, message, Avatar } from 'antd'
+import { Upload, message, Avatar } from 'antd'
 import axios from 'axios'
 
 function beforeUpload (file) {

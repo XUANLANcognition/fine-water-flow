@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Layout, Row, Col, Descriptions, PageHeader, Typography } from 'antd'
+import { Layout, Row, Col, Descriptions, PageHeader, Typography, Tag, BackTop } from 'antd'
 import axios from 'axios'
 
 import './BookDetailPage.css'
@@ -21,6 +21,8 @@ class BookDetailPage extends Component {
       pages: '',
       cover: '',
       overview: '',
+      subtitle: '',
+      tags: [],
       id: '',
       url: ''
     }
@@ -44,6 +46,8 @@ class BookDetailPage extends Component {
             pages: response.data.pages,
             cover: response.data.cover,
             overview: response.data.overview,
+            subtitle: response.data.subtitle,
+            tags: response.data.tag,
             id: response.data.id,
             url: response.data.url
           }
@@ -57,6 +61,7 @@ class BookDetailPage extends Component {
       return (
         <Layout style={{ minHeight: '100vh', background: 'unset' }}>
           <Nav />
+          <BackTop />
           <div style={{ flex: '1 0 ' }}>
             <Row style={{ paddingTop: '30px', paddingBottom: '30px' }}>
               <Col xl={{ span: 18, offset: 3 }} xs={{ span: 22, offset: 1 }}>
@@ -82,13 +87,19 @@ class BookDetailPage extends Component {
                       <Title level={2}>{this.state.title}</Title>
                       <Descriptions
                         border
-                        column={{ xxl: 4, xl: 3, lg: 3, md: 3, sm: 2, xs: 1 }}
+                        column={{ xxl: 2, xl: 2, lg: 2, md: 2, sm: 2, xs: 1 }}
                       >
+                        <Descriptions.Item label='副标题'>{this.state.subtitle}</Descriptions.Item>
                         <Descriptions.Item label='作者'>{this.state.author}</Descriptions.Item>
                         <Descriptions.Item label='出版社'>{this.state.publisher}</Descriptions.Item>
                         <Descriptions.Item label='页数'>{this.state.pages}</Descriptions.Item>
                         <Descriptions.Item label='ISBN'>{this.state.isbn}</Descriptions.Item>
                       </Descriptions>
+                      {this.state.tags.map(tag => (
+                        <Tag key={tag.title} color='#f50' style={{ margin: '5px' }}>
+                          {tag.title}
+                        </Tag>
+                      ))}
                     </div>
                     <div className='extraContent'>
                       <img
@@ -103,11 +114,9 @@ class BookDetailPage extends Component {
             </Row>
             <Row style={{ paddingTop: '30px', paddingBottom: '30px' }}>
               <Col xl={{ span: 12, offset: 3 }} xs={{ span: 22, offset: 1 }}>
-                <Title level={3}>内容简介 · · · · · ·</Title>
-                <Paragraph ellipsis={{ rows: 4, expandable: true }} style={{ fontSize: '24' }} >
-                  {this.state.overview }
-                </Paragraph>
-                <Title level={3}>书评 · · · · · ·</Title>
+                <Title level={4}>内容简介 · · · · · ·</Title>
+                <div style={{ padding: '24px 0' }} dangerouslySetInnerHTML={{ __html: this.state.overview.replace(/\r/g, '</br>') }} />
+                <Title level={4}>书评 · · · · · ·</Title>
                 <AddBookComment bookId={this.state.id} bookUrl={this.state.url} />
               </Col>
               <Col xl={{ span: 5, offset: 1 }} xs={{ span: 22, offset: 1 }}>

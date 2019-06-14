@@ -1,11 +1,15 @@
 import React, { Component } from 'react'
-import { Card, Avatar, Divider, Button, message, Modal } from 'antd'
+import { Card, Avatar, Divider, Button, message, Modal, Icon } from 'antd'
 import axios from 'axios'
 import { withRouter } from 'react-router'
 import { Link } from 'react-router-dom'
 
 const { Meta } = Card
 const confirm = Modal.confirm
+
+const IconFont = Icon.createFromIconfontCN({
+  scriptUrl: '//at.alicdn.com/t/font_1242637_iqt57v9lv7b.js'
+})
 
 class ProfileCarder extends Component {
   state = {
@@ -59,7 +63,12 @@ class ProfileCarder extends Component {
       <Card >
         <Meta
           avatar={<Avatar size='large' src={this.state.avatarUrl} icon='user' style={{ color: '#ffffff', backgroundColor: '#f6f6f6' }} />}
-          title={this.state.username}
+          title={
+            <div>
+              {this.state.username}
+              <IconFont type='icon-renzhenghuizhang' style={{ paddingLeft: '10px' }} />
+            </div>
+          }
           description={this.state.bio}
         />
         <Divider> Infomation </Divider>

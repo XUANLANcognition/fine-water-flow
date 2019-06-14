@@ -54,7 +54,8 @@ class BookPage extends Component {
     const { selectedTags } = this.state
     const nextSelectedTags = checked ? [...selectedTags, tag] : selectedTags.filter(t => t !== tag)
     await this.setState({
-      selectedTags: nextSelectedTags
+      selectedTags: nextSelectedTags,
+      loading: true
     })
     if (nextSelectedTags.length !== 0) {
       const temp = []
@@ -66,12 +67,15 @@ class BookPage extends Component {
         const response = await axios.get(
           'https://finewf.club:8080/api/books/?format=json' + '&page=' + this.page + '&page_size=' + count + fliterTag
         )
-        this.setState({ data: response.data.results, cache: response.data.results })
+        this.setState({ data: response.data.results, cache: response.data.results, loading: false })
       } catch (error) {
         console.log(error)
       }
     } else {
       this.getData()
+      this.setState({
+        loading: false
+      })
     }
   }
 
@@ -84,40 +88,29 @@ class BookPage extends Component {
             <Col xl={{ span: 18, offset: 3 }} xs={{ span: 22, offset: 1 }}>
               <Collapse
                 bordered={false}
-                defaultActiveKey={['1']}
+                defaultActiveKey={['']}
                 expandIcon={({ isActive }) => <Icon type='caret-right' rotate={isActive ? 90 : 0} />}
               >
-                <Panel header={<Title level={4}>热门标签</Title>} key='1' style={customPanelStyle}>
+                <Panel header={<Title level={4}>全部标签</Title>} key='1' style={customPanelStyle}>
                   <List
-                    loading={this.state.loading}
                     size='small'
                     dataSource={this.state.tags}
                     renderItem={item => (
                       <List.Item>
-                        <span style={{ backgroundColor: '#7f7f8b', borderRadius: '16px 0 16px 16px', padding: '5px 15px', color: 'white', margin: '0 24px' }}>{item.title}
-                        </span>
-                        <List
-                          loading={this.state.loading}
-                          size='small'
-                          grid={{
-                            gutter: 72,
-                            xs: 3,
-                            xl: 8,
-                            xxl: 8
-                          }}
-                          dataSource={item.tags}
-                          renderItem={tag => (
-                            <List.Item>
-                              <CheckableTag
-                                key={tag}
-                                checked={this.state.selectedTags.indexOf(tag) > -1}
-                                onChange={checked => this.handleChange(tag, checked)}
-                              >
-                                {tag.title}
-                              </CheckableTag>
-                            </List.Item>
-                          )}
-                        />
+                        <div style={{ display: 'flex', justifyContent: 'flex-start', flexWrap: 'wrap', alignItems: 'center' }}>
+                          <span style={{ backgroundColor: '#ff5c38', borderRadius: '16px 0 16px 16px', padding: '5px 15px', color: 'white', margin: '0 24px 0 0' }}>{item.title}
+                          </span>
+                          {item.tags.map(tag => (
+                            <CheckableTag
+                              style={{ padding: '5px 10px', borderRadius: '20px' }}
+                              key={tag}
+                              checked={this.state.selectedTags.indexOf(tag) > -1}
+                              onChange={checked => this.handleChange(tag, checked)}
+                            >
+                              {tag.title}
+                            </CheckableTag>
+                          ))}
+                        </div>
                       </List.Item>
                     )}
                   />
@@ -144,7 +137,7 @@ class BookPage extends Component {
                   onChange: page => {
                     console.log(page)
                   },
-                  pageSize: 8
+                  pageSize: 12
                 }}
                 renderItem={item => (
                   <List.Item>
@@ -153,7 +146,7 @@ class BookPage extends Component {
                         style={{ borderRadius: '10px' }}
                         loading={this.state.loading}
                         hoverable
-                        cover={<img alt='example' src={item.cover} style={{ borderRadius: '10px', maxHeight: '180px' }} />}
+                        cover={<img alt='example' src={item.cover} style={{ borderRadius: '10px', maxHeight: '160px' }} />}
                       >
                         <Meta title={item.title} description={item.author.slice(0, 5) + '...'} />
                       </Card>
