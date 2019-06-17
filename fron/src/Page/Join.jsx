@@ -101,13 +101,13 @@ class Join extends Component {
         <Nav />
         <div style={{ flex: '1 0 ', backgroundColor: '#fff' }} >
           <Row style={{ paddingTop: '20px' }}>
-            <Col xl={{ span: 20, offset: 2 }} xs={{ span: 22, offset: 1 }} >
+            <Col xxl={{ span: 16, offset: 4 }} xl={{ span: 20, offset: 2 }} xs={{ span: 22, offset: 1 }} >
               <h1 style={{ fontSize: '40px' }}>Join FWF</h1>
               <p style={{ color: '#586069', fontSize: '20px', paddingBottom: '20px' }}>Fine Water Flow, 细水宜长流</p>
             </Col>
           </Row>
           <Row>
-            <Col xl={{ span: 5, offset: 2 }} xs={{ span: 22, offset: 1 }}
+            <Col xxl={{ span: 4, offset: 4 }} xl={{ span: 5, offset: 2 }} xs={{ span: 22, offset: 1 }}
               style={{ paddingBottom: '30px' }}>
               <Card
                 title='Why Join?'
@@ -117,8 +117,25 @@ class Join extends Component {
                 <p><Icon type='check' style={{ color: 'green' }} /> 我编不下去了. </p>
               </Card>
             </Col>
-            <Col xl={{ span: 14, offset: 1 }} xs={{ span: 22, offset: 1 }}>
+            <Col xxl={{ span: 11, offset: 1 }} xl={{ span: 14, offset: 1 }} xs={{ span: 22, offset: 1 }}>
               <Form onSubmit={this.handleSubmit}>
+                <FormItem
+                  {...formItemLayout}
+                  label={(
+                    <span>
+                  用户名&nbsp;
+                      <Tooltip title='What do you want others to call you?'>
+                        <Icon type='question-circle-o' />
+                      </Tooltip>
+                    </span>
+                  )}
+                >
+                  {getFieldDecorator('username', {
+                    rules: [{ required: true, message: 'Please input your nickname!', whitespace: true }]
+                  })(
+                    <Input />
+                  )}
+                </FormItem>
                 <FormItem
                   {...formItemLayout}
                   label='E-mail'
@@ -135,7 +152,7 @@ class Join extends Component {
                 </FormItem>
                 <FormItem
                   {...formItemLayout}
-                  label='Password'
+                  label='密码'
                 >
                   {getFieldDecorator('password', {
                     rules: [{
@@ -149,7 +166,7 @@ class Join extends Component {
                 </FormItem>
                 <FormItem
                   {...formItemLayout}
-                  label='Confirm Password'
+                  label='确认密码'
                 >
                   {getFieldDecorator('confirm', {
                     rules: [{
@@ -161,23 +178,6 @@ class Join extends Component {
                     <Input type='password' onBlur={this.handleConfirmBlur} />
                   )}
                 </FormItem>
-                <FormItem
-                  {...formItemLayout}
-                  label={(
-                    <span>
-              Nickname&nbsp;
-                      <Tooltip title='What do you want others to call you?'>
-                        <Icon type='question-circle-o' />
-                      </Tooltip>
-                    </span>
-                  )}
-                >
-                  {getFieldDecorator('username', {
-                    rules: [{ required: true, message: 'Please input your nickname!', whitespace: true }]
-                  })(
-                    <Input />
-                  )}
-                </FormItem>
                 <FormItem {...tailFormItemLayout}>
                   {getFieldDecorator('agreement', {
                     valuePropName: 'checked'
@@ -186,7 +186,7 @@ class Join extends Component {
                   )}
                 </FormItem>
                 <FormItem {...tailFormItemLayout}>
-                  <Button type='primary' htmlType='submit'>Register</Button>
+                  <Button type='primary' htmlType='submit'>注册</Button>
                 </FormItem>
               </Form>
             </Col>

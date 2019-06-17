@@ -85,7 +85,7 @@ class BookPage extends Component {
         <Nav />
         <div style={{ flex: '1 0 ', backgroundColor: '#ffffff' }}>
           <Row style={{ paddingTop: '30px', paddingBottom: '30px' }}>
-            <Col xl={{ span: 18, offset: 3 }} xs={{ span: 22, offset: 1 }}>
+            <Col xxl={{ span: 16, offset: 4 }} xl={{ span: 20, offset: 2 }} xs={{ span: 22, offset: 1 }}>
               <Collapse
                 bordered={false}
                 defaultActiveKey={['']}
@@ -119,17 +119,17 @@ class BookPage extends Component {
             </Col>
           </Row>
           <Row style={{ paddingTop: '0px', paddingBottom: '30px' }}>
-            <Col xl={{ span: 12, offset: 3 }} xs={{ span: 22, offset: 1 }}>
+            <Col xxl={{ span: 11, offset: 4 }} xl={{ span: 13, offset: 2 }} xs={{ span: 22, offset: 1 }}>
               <List
                 loading={this.state.loading}
                 grid={{
-                  gutter: 24,
+                  gutter: 12,
                   xs: 2,
                   sm: 2,
                   md: 4,
                   lg: 4,
                   xl: 4,
-                  xxl: 6
+                  xxl: 5
                 }}
                 size='large'
                 dataSource={this.state.cache}
@@ -155,7 +155,7 @@ class BookPage extends Component {
                 )}
               />
             </Col>
-            <Col xl={{ span: 5, offset: 1 }} xs={{ span: 22, offset: 1 }}>
+            <Col xxl={{ span: 4, offset: 1 }} xl={{ span: 6, offset: 1 }} xs={{ span: 22, offset: 1 }}>
               <Advertisement />
             </Col>
           </Row>

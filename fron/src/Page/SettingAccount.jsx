@@ -58,7 +58,7 @@ class SettingAccount extends Component {
         <Nav />
         <div style={{ flex: '1 0' }}>
           <Row style={{ flex: '1 0', paddingTop: '20px' }} >
-            <Col xl={{ span: 4, offset: 3 }} xs={{ span: 22, offset: 1 }} >
+            <Col xxl={{ span: 3, offset: 4 }} xl={{ span: 4, offset: 2 }} xs={{ span: 22, offset: 1 }} >
               <Menu
                 onClick={this.handleClick}
                 selectedKeys={[this.state.current]}
@@ -73,7 +73,7 @@ class SettingAccount extends Component {
                 </Menu.Item>
               </Menu>
             </Col>
-            <Col xl={{ span: 13, offset: 1 }} xs={{ span: 22, offset: 1 }} >
+            <Col xxl={{ span: 12, offset: 1 }} xl={{ span: 15, offset: 1 }} xs={{ span: 22, offset: 1 }} >
               <Row>
                 <Col xl={{ span: 24, offset: 0 }} xs={{ span: 22, offset: 1 }}>
                   <Title level={3}>账号设置</Title>

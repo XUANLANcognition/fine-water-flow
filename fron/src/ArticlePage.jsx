@@ -74,7 +74,7 @@ class ArticlePage extends Component {
       <Layout style={{ minHeight: '100vh', backgroundColor: '#fff' }}>
         <Nav />
         <Row >
-          <Col xl={{ span: 18, offset: 3 }} xs={{ span: 22, offset: 1 }}>
+          <Col xxl={{ span: 16, offset: 4 }} xl={{ span: 20, offset: 2 }} xs={{ span: 22, offset: 1 }}>
             <div style={{ fontSize: '25px', fontWeight: 'bold', color: 'black', padding: '24px 0 24px 0' }}>
               <Paragraph ellipsis={{ rows: 1, expandable: true }} strong>
                 {this.state.title}
@@ -83,7 +83,7 @@ class ArticlePage extends Component {
           </Col>
         </Row>
         <Row style={{ flex: '1 0' }} >
-          <Col xl={{ span: 12, offset: 3 }} xs={{ span: 22, offset: 1 }}>
+          <Col xxl={{ span: 10, offset: 4 }} xl={{ span: 13, offset: 2 }} xs={{ span: 22, offset: 1 }}>
             <div type='flex' style={{ flex: '1 0', background: '#fff' }}>
               <div style={{ fontSize: '16px' }}>
                 <div style={{ overflow: 'auto' }} dangerouslySetInnerHTML={{ __html: this.state.content }} />
@@ -96,7 +96,7 @@ class ArticlePage extends Component {
               <AddComment articleId={this.state.id} articleUrl={this.state.url} />
             </div>
           </Col>
-          <Col xl={{ span: 5, offset: 1 }} xs={{ span: 22, offset: 1 }} style={{ paddingBottom: '20px' }}>
+          <Col xxl={{ span: 5, offset: 1 }} xl={{ span: 6, offset: 1 }} xs={{ span: 22, offset: 1 }} style={{ paddingBottom: '20px' }}>
             <Advertisement />
             <Affix offsetTop={0}>
               <AuthorShowCard authorId={this.state.authorId} />

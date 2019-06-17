@@ -16,7 +16,7 @@ class Nav extends Component {
   render () {
     return (
       <Row style={{ backgroundColor: '#343a40' }}>
-        <Col xl={{ span: 18, offset: 3 }} xs={{ span: 22, offset: 1 }}>
+        <Col xxl={{ span: 16, offset: 4 }} xl={{ span: 20, offset: 2 }} xs={{ span: 22, offset: 1 }}>
           <Menu
             onClick={this.handleClick}
             selectedKeys={this.state.current}

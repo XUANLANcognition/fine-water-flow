@@ -13,7 +13,7 @@ class Agreement extends Component {
         <Nav />
         <div style={{ flex: '1 0 ', backgroundColor: '#fff' }}>
           <Row style={{ paddingTop: '30px', paddingBottom: '30px' }}>
-            <Col xl={{ span: 18, offset: 3 }} xs={{ span: 22, offset: 1 }}>
+            <Col xxl={{ span: 16, offset: 4 }} xl={{ span: 20, offset: 2 }} xs={{ span: 22, offset: 1 }}>
               <Typography>
                 <Title>Introduction</Title>
                 <Paragraph>

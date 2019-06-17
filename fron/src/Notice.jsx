@@ -11,7 +11,7 @@ class Notice extends Component {
         <Nav />
         <div style={{ flex: '1 0 ', backgroundColor: '#ffffff' }}>
           <Row style={{ paddingTop: '30px', paddingBottom: '30px' }}>
-            <Col xl={{ span: 18, offset: 3 }} xs={{ span: 22, offset: 1 }}>
+            <Col xxl={{ span: 16, offset: 4 }} xl={{ span: 20, offset: 2 }} xs={{ span: 22, offset: 1 }}>
               <Timeline>
                 <Timeline.Item color='blue'>🎉 关注功能正式上线. ( 2019.05.10 )</Timeline.Item>
                 <Timeline.Item color='blue'>🎂 正式更名为Fine Water Flow. ( 2019.05.09 )</Timeline.Item>

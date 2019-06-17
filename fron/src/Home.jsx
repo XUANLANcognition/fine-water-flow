@@ -22,17 +22,16 @@ class Home extends Component {
         <div style={{ height: '100vh' }}>
           <Nav />
           <Row type='flex' align='middle' style={{ flex: '1 0', height: '80vh' }}>
-            <Col xl={{ span: 13, offset: 2 }} xs={{ span: 22, offset: 1 }}>
+            <Col xxl={{ span: 12, offset: 3 }} xl={{ span: 13, offset: 2 }} xs={{ span: 22, offset: 1 }}>
               <Title>Fine Water Flow</Title>
               <Divider />
               <Title level={3}>细水宜长流...</Title>
             </Col>
-            <Col xl={{ span: 6, offset: 1 }} xs={{ span: 22, offset: 1 }}>
+            <Col xxl={{ span: 5, offset: 1 }} xl={{ span: 6, offset: 1 }} xs={{ span: 22, offset: 1 }}>
               <Login />
             </Col>
           </Row>
         </div>
-
         <Row type='flex' justify='center' align='middle' style={{ height: '100vh', backgroundColor: '#2b3137', flexDirection: 'column' }}>
           <Col xl={{ span: 20, offset: 2 }} xs={{ span: 22, offset: 1 }}>
             <p style={{ fontSize: '45px', color: '#fff' }}>SHARE</p>

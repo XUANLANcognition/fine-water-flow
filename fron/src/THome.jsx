@@ -30,7 +30,7 @@ class THome extends Component {
       <Layout style={{ minHeight: '100vh', backgroundColor: '#fff' }}>
         <Nav />
         <Row style={{ flex: '1 0', paddingTop: '30px', paddingBottom: '30px' }}>
-          <Col xl={{ span: 12, offset: 3 }} xs={{ span: 22, offset: 1 }} style={{ paddingBottom: '20px' }}>
+          <Col xxl={{ span: 11, offset: 4 }} xl={{ span: 13, offset: 2 }} xs={{ span: 22, offset: 1 }} style={{ paddingBottom: '20px' }}>
             <Tabs defaultActiveKey='1'>
               <TabPane tab='全部' key='1'>
                 <ArticleList />
@@ -40,7 +40,7 @@ class THome extends Component {
               </TabPane>
             </Tabs>
           </Col>
-          <Col xl={{ span: 5, offset: 1 }} xs={{ span: 22, offset: 1 }}>
+          <Col xxl={{ span: 4, offset: 1 }} xl={{ span: 6, offset: 1 }} xs={{ span: 22, offset: 1 }}>
             <Affix offsetTop={0}>
               <ProfileCard callback={this.goToEditorPage} />
             </Affix>
