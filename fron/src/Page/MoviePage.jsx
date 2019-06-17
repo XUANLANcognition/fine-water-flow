@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Layout, Row, Col, Typography, Card, Divider, Tag, List } from 'antd'
+import { Layout, Row, Col, Typography, Card, List } from 'antd'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 
@@ -8,10 +8,8 @@ import Myfooter from '../Myfooter'
 import Advertisement from '../Advertisement'
 
 const { Meta } = Card
-const CheckableTag = Tag.CheckableTag
 const { Title } = Typography
 const count = 8
-const tagsFromServer = ['Movies', 'Books', 'Music', 'Sports']
 
 class MoviePage extends Component {
   page = 1
@@ -51,41 +49,6 @@ class MoviePage extends Component {
         <Nav />
         <div style={{ flex: '1 0 ', backgroundColor: '#ffffff' }}>
           <Row style={{ paddingTop: '30px', paddingBottom: '30px' }}>
-            <Col xl={{ span: 18, offset: 3 }} xs={{ span: 22, offset: 1 }}>
-              <Title level={2}>观赏 | 影视</Title>
-              <div style={{ backgroundColor: '#f8f8f8', borderRadius: '10px', padding: '20px' }}>
-                <Row style={{ paddingTop: '3px', paddingBottom: '3px' }}>
-                  <div>
-                    <h5 style={{ marginRight: 8, display: 'inline', backgroundColor: '#7f7f8b', borderRadius: '16px 0 16px 16px', padding: '10px', color: 'white' }}>Categories:</h5>
-                    {tagsFromServer.map(tag => (
-                      <CheckableTag
-                        key={tag}
-                        checked={this.state.selectedTags.indexOf(tag) > -1}
-                        onChange={checked => this.handleChange(tag, checked)}
-                      >
-                        {tag}
-                      </CheckableTag>
-                    ))}
-                  </div>
-                </Row>
-                <Row style={{ paddingTop: '30px', paddingBottom: '3px' }}>
-                  <div>
-                    <h5 style={{ marginRight: 8, display: 'inline', backgroundColor: '#7f7f8b', borderRadius: '16px 0 16px 16px', padding: '10px', color: 'white' }}>Categories:</h5>
-                    {tagsFromServer.map(tag => (
-                      <CheckableTag
-                        key={tag}
-                        checked={this.state.selectedTags.indexOf(tag) > -1}
-                        onChange={checked => this.handleChange(tag, checked)}
-                      >
-                        {tag}
-                      </CheckableTag>
-                    ))}
-                  </div>
-                </Row>
-              </div>
-            </Col>
-          </Row>
-          <Row style={{ paddingTop: '0px', paddingBottom: '30px' }}>
             <Col xl={{ span: 12, offset: 3 }} xs={{ span: 22, offset: 1 }}>
               <List
                 loading={this.state.loading}
@@ -104,7 +67,7 @@ class MoviePage extends Component {
                   onChange: page => {
                     console.log(page)
                   },
-                  pageSize: 8
+                  pageSize: 128
                 }}
                 renderItem={item => (
                   <List.Item>
@@ -113,7 +76,7 @@ class MoviePage extends Component {
                         style={{ borderRadius: '10px' }}
                         loading={this.state.loading}
                         hoverable
-                        cover={<img alt='example' src={item.cover} style={{ borderRadius: '10px', maxHeight: '180px' }} />}
+                        cover={<img alt='example' src={item.cover} style={{ borderRadius: '10px', maxHeight: '160px' }} />}
                       >
                         <Meta title={item.title} />
                       </Card>

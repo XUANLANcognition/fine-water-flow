@@ -20,7 +20,7 @@ const Second = ({ onClick }) => (
 
 const Third = ({ onClick }) => (
   <div style={{ margin: '24px 0' }}>
-        去上传书籍了
+        去上传书籍喽（这功能我还没写，等会）
   </div>
 )
 

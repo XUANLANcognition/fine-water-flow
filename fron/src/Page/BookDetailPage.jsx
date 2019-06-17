@@ -10,7 +10,6 @@ import AddBookComment from '../AddBookComment'
 import Advertisement from '../Advertisement'
 
 const { Title } = Typography
-const { Paragraph } = Typography
 
 class BookDetailPage extends Component {
     state = {

@@ -11,7 +11,6 @@ import AddMovieComment from '../AddMovieComment'
 import Advertisement from '../Advertisement'
 
 const { Title } = Typography
-const { Paragraph } = Typography
 const { Meta } = Card
 
 class BookDetailPage extends Component {
@@ -110,11 +109,9 @@ class BookDetailPage extends Component {
             </Row>
             <Row style={{ paddingTop: '30px', paddingBottom: '30px' }}>
               <Col xl={{ span: 12, offset: 3 }} xs={{ span: 22, offset: 1 }}>
-                <Title level={3}>内容简介 · · · · · ·</Title>
-                <Paragraph ellipsis={{ rows: 2, expandable: true }} style={{ fontSize: '24' }}>
-                  {this.state.overview}
-                </Paragraph>
-                <Title level={3}>导演 · · · · · ·</Title>
+                <Title level={4}>内容简介 · · · · · ·</Title>
+                <div style={{ padding: '24px 0' }} dangerouslySetInnerHTML={{ __html: this.state.overview.replace(/\r/g, '</br>') }} />
+                <Title level={4}>导演 · · · · · ·</Title>
                 <List
                   loading={this.state.loading}
                   grid={{
@@ -131,19 +128,15 @@ class BookDetailPage extends Component {
                   renderItem={item => (
                     <List.Item>
                       <Link to={'/figure/' + item.id}>
-                        <Card
-                          style={{ borderRadius: '10px' }}
-                          loading={this.state.loading}
-                          hoverable
-                          cover={<img alt='example' src={item.cover} style={{ borderRadius: '10px', maxHeight: '180px' }} />}
-                        >
-                          <Meta title={item.name} />
-                        </Card>
+                        <div style={{ display: 'flex', flexDirection: 'column' }}>
+                          <img alt='example' src={item.cover} style={{ borderRadius: '10px', height: '150px', width: '110px' }} />
+                          {item.name}
+                        </div>
                       </Link>
                     </List.Item>
                   )}
                 />
-                <Title level={3}>编剧 · · · · · ·</Title>
+                <Title level={4}>编剧 · · · · · ·</Title>
                 <List
                   loading={this.state.loading}
                   grid={{
@@ -160,19 +153,15 @@ class BookDetailPage extends Component {
                   renderItem={item => (
                     <List.Item>
                       <Link to={'/figure/' + item.id}>
-                        <Card
-                          style={{ borderRadius: '10px' }}
-                          loading={this.state.loading}
-                          hoverable
-                          cover={<img alt='example' src={item.cover} style={{ borderRadius: '10px', maxHeight: '180px' }} />}
-                        >
-                          <Meta title={item.name} />
-                        </Card>
+                        <div style={{ display: 'flex', flexDirection: 'column' }}>
+                          <img alt='example' src={item.cover} style={{ borderRadius: '10px', height: '150px', width: '110px' }} />
+                          {item.name}
+                        </div>
                       </Link>
                     </List.Item>
                   )}
                 />
-                <Title level={3}>演员表 · · · · · ·</Title>
+                <Title level={4}>演员表 · · · · · ·</Title>
                 <List
                   loading={this.state.loading}
                   grid={{
@@ -195,19 +184,15 @@ class BookDetailPage extends Component {
                   renderItem={item => (
                     <List.Item>
                       <Link to={'/figure/' + item.id}>
-                        <Card
-                          style={{ borderRadius: '10px' }}
-                          loading={this.state.loading}
-                          hoverable
-                          cover={<img alt='example' src={item.cover} style={{ borderRadius: '10px', maxHeight: '180px' }} />}
-                        >
-                          <Meta title={item.name} />
-                        </Card>
+                        <div style={{ display: 'flex', flexDirection: 'column' }}>
+                          <img alt='example' src={item.cover} style={{ borderRadius: '10px', height: '150px', width: '110px' }} />
+                          {item.name}
+                        </div>
                       </Link>
                     </List.Item>
                   )}
                 />
-                <Title level={3}>影评 · · · · · ·</Title>
+                <Title level={4}>影评 · · · · · ·</Title>
                 <AddMovieComment movieId={this.state.id} movieUrl={this.state.url} />
               </Col>
               <Col xl={{ span: 5, offset: 1 }} xs={{ span: 22, offset: 1 }}>

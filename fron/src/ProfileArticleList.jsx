@@ -111,7 +111,7 @@ class ProfileArticleList extends Component {
         loadMore={loadMore}
         loading={initLoading}
         renderItem={item => (
-          <List.Item actions={[<a>Modify</a>, <a onClick={() => this.deleteArticle(item.id)} style={{ color: 'red' }}>Delete</a>]}>
+          <List.Item actions={[<a onClick={() => this.deleteArticle(item.id)} style={{ color: 'red' }}>删除</a>]}>
             <Skeleton title={false} loading={item.loading} actives>
               <List.Item.Meta
                 title={<Link to={'/article/' + item.id}>{item.title}</Link>}

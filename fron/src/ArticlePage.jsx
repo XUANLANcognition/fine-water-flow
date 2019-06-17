@@ -10,6 +10,7 @@ import Advertisement from './Advertisement'
 import AddComment from './AddComment'
 
 const { Paragraph } = Typography
+const { Title } = Typography
 
 class ArticlePage extends Component {
   constructor (props) {
@@ -91,6 +92,7 @@ class ArticlePage extends Component {
               <div style={{ textAlign: 'center' }}>
                 <Spin spinning={this.state.loading} size='large' tip='loading...' />
               </div>
+              <Title level={4} style={{ paddingTop: '20px' }}>评论 · · · · · ·</Title>
               <AddComment articleId={this.state.id} articleUrl={this.state.url} />
             </div>
           </Col>
