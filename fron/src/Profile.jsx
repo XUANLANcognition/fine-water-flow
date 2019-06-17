@@ -11,6 +11,10 @@ import FollowList from './FollowList'
 const TabPane = Tabs.TabPane
 const { Title, Paragraph } = Typography
 
+const IconFont = Icon.createFromIconfontCN({
+  scriptUrl: '//at.alicdn.com/t/font_1242637_bctqp8owe4o.js'
+})
+
 class Profile extends Component {
   state = {
     data: [],
@@ -55,10 +59,10 @@ class Profile extends Component {
           </Col>
           <Col xxl={{ span: 12, offset: 1 }} xl={{ span: 14, offset: 1 }} xs={{ span: 22, offset: 1 }} >
             <Tabs defaultActiveKey='1'>
-              <TabPane tab={<span><Icon type='read' />我的文章</span>} key='1'>
+              <TabPane tab={<span><IconFont type='icon-wenzhang' />我的文章</span>} key='1'>
                 <ProfileArticleList />
               </TabPane>
-              <TabPane tab={<span><Icon type='user' />我的关注</span>} key='2'>
+              <TabPane tab={<span><IconFont type='icon-meishi1' />我的关注</span>} key='2'>
                 <FollowList />
               </TabPane>
             </Tabs>

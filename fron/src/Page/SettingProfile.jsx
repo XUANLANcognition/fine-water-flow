@@ -57,12 +57,12 @@ class SettingProfile extends Component {
         <Nav />
         <div style={{ flex: '1 0' }}>
           <Row style={{ flex: '1 0', paddingTop: '20px' }} >
-            <Col xxl={{ span: 3, offset: 4 }} xl={{ span: 4, offset: 2 }} xs={{ span: 22, offset: 1 }} >
+            <Col xxl={{ span: 3, offset: 4 }} xl={{ span: 4, offset: 2 }} xs={{ span: 22, offset: 1 }}>
               <Menu
                 onClick={this.handleClick}
                 selectedKeys={[this.state.current]}
               >
-                <Menu.Item key='profile'>
+                <Menu.Item key='profile' >
                   <Icon type='user' />个人信息
                   <Link to='/settings/profile' />
                 </Menu.Item>

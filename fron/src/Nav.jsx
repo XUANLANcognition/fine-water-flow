@@ -2,6 +2,10 @@ import React, { Component } from 'react'
 import { Menu, Icon, Row, Col } from 'antd'
 import { Link } from 'react-router-dom'
 
+const IconFont = Icon.createFromIconfontCN({
+  scriptUrl: '//at.alicdn.com/t/font_1242637_xap1h8gomve.js'
+})
+
 class Nav extends Component {
   state = {
     current: ''
@@ -28,19 +32,19 @@ class Nav extends Component {
               <Link to='/' />
             </Menu.Item>
             <Menu.Item key='home'>
-              <Icon type='home' />主页
+              <IconFont type='icon-zhuye' />主页
               <Link to='/' />
             </Menu.Item>
             <Menu.Item key='book'>
-              <Icon type='book' />读书
+              <IconFont type='icon-shu1' />读书
               <Link to='/book' />
             </Menu.Item>
             <Menu.Item key='movie'>
-              <Icon type='book' />观影
+              <IconFont type='icon-dianying' />观影
               <Link to='/movie' />
             </Menu.Item>
             <Menu.Item key='notice'>
-              <Icon type='mail' />消息
+              <IconFont type='icon-xiaoxi' />消息
               <Link to='/notice' />
             </Menu.Item>
           </Menu>

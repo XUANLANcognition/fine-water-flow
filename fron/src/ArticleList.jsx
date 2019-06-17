@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 
 const count = 8
 const IconFont = Icon.createFromIconfontCN({
-  scriptUrl: '//at.alicdn.com/t/font_1242637_iqt57v9lv7b.js'
+  scriptUrl: '//at.alicdn.com/t/font_1242637_tb2emfivmbd.js'
 })
 
 class ArticleList extends Component {
@@ -69,7 +69,7 @@ class ArticleList extends Component {
           textAlign: 'center', marginTop: 12, height: 32, lineHeight: '32px'
         }}
         >
-          {(data.length > 0) && <Button onClick={this.onLoadMore}>加载更多</Button>}
+          {(data.length > 0) && <Button onClick={this.onLoadMore}><IconFont type='icon-more1-copy-copy' />加载更多</Button>}
         </div>
       ) : null
 

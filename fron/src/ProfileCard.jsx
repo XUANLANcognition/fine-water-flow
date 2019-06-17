@@ -8,7 +8,7 @@ const { Meta } = Card
 const confirm = Modal.confirm
 
 const IconFont = Icon.createFromIconfontCN({
-  scriptUrl: '//at.alicdn.com/t/font_1242637_iqt57v9lv7b.js'
+  scriptUrl: '//at.alicdn.com/t/font_1242637_m57rpr4woh.js'
 })
 
 class ProfileCarder extends Component {
@@ -72,7 +72,12 @@ class ProfileCarder extends Component {
           description={this.state.bio}
         />
         <Divider> Infomation </Divider>
-        <p><Link to={'/profile/' + this.state.username} >My Profile</Link></p>
+        <div>
+          <Link to={'/profile/' + this.state.username} >
+            <IconFont type='icon-geren1' style={{ paddingRight: '10px' }} />
+            My Profile
+          </Link>
+        </div>
         <Divider> Action </Divider>
         <Button type='primary' block onClick={e => this.props.callback(e)}>New Text</Button>
         <Divider />
