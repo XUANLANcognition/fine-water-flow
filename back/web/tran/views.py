@@ -337,6 +337,7 @@ class BookBlockList(generics.ListCreateAPIView):
 
 class BookSerializer(serializers.HyperlinkedModelSerializer):
     tag = BookTagSerializer(many=True, read_only=True)
+    user = UserAnotherSerializer(read_only = True)
 
     class Meta:
         model = Book
