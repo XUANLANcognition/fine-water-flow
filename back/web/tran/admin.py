@@ -6,6 +6,11 @@ from django.contrib.auth.models import User
 
 from .models import Article, Comment, Profile, Book, BookTag, BookBlock, BookComment, Movie, Figure, MovieComment
 
+class ProfileAdmin(admin.ModelAdmin):
+    list_display = ('user', 'media_editor_auth')
+    list_filter = ('media_editor_auth',)
+    list_per_page = 10
+
 class ProfileInline(admin.StackedInline):
     model = Profile
     can_delete = False
@@ -75,3 +80,4 @@ admin.site.register(BookComment)
 admin.site.register(Movie, MovieAdmin)
 admin.site.register(Figure, FigureAdmin)
 admin.site.register(MovieComment)
+admin.site.register(Profile, ProfileAdmin)
