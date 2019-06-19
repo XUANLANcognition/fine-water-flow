@@ -50,15 +50,6 @@ class Publish(permissions.BasePermission):
             return permissions.IsAuthenticated
         return True
 
-class BookPublish(permissions.BasePermission):
-
-    def has_permission(self, request, view):
-        if request.method == 'POST':
-            if permissions.IsAuthenticated:
-                return (request.user.profile.media_editor_auth == '审核通过')
-            else:
-                return False
-        return True
 
 # User API
 
@@ -373,7 +364,7 @@ class BookFilter(filters.FilterSet):
 class BookList(generics.ListCreateAPIView):
     queryset = Book.objects.all().order_by('-pub_date')
     serializer_class = BookSerializer
-    permission_classes = (Publish,)
+    permission_classes = (BookPublish,)
     pagination_class = BookPagination
     filter_backends = (filters.DjangoFilterBackend,)
     filterset_class = BookFilter
