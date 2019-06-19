@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Layout, Row, Col, Typography, Card, List } from 'antd'
+import { Layout, Row, Col, Card, List } from 'antd'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 
@@ -8,7 +8,6 @@ import Myfooter from '../Myfooter'
 import Advertisement from '../Advertisement'
 
 const { Meta } = Card
-const { Title } = Typography
 const count = 8
 
 class MoviePage extends Component {

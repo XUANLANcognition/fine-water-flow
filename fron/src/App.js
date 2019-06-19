@@ -21,6 +21,7 @@ import MoviePage from './Page/MoviePage'
 import BookDetailPage from './Page/BookDetailPage'
 import MovieDetailPage from './Page/MovieDetailPage'
 import FigureDetailPage from './Page/FigureDetailPage'
+import BookEditorPage from './Page/BookEditorPage'
 
 const MainPage = props => {
   const token = window.localStorage.getItem('token')
@@ -54,6 +55,7 @@ class App extends Component {
             <Route path='/settings/account' component={SettingAccount} />
             <Route path='/agreement' component={Agreement} />
             <Route path='/editor' component={Editor1} />
+            <Route path='/book_editor_page' component={BookEditorPage} />
             <Route component={NoMatch} />
           </Switch>
         </Router>
