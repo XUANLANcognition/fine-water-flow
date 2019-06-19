@@ -373,7 +373,7 @@ class BookFilter(filters.FilterSet):
 class BookList(generics.ListCreateAPIView):
     queryset = Book.objects.all().order_by('-pub_date')
     serializer_class = BookSerializer
-    permission_classes = (BookPublish,)
+    permission_classes = (Publish,)
     pagination_class = BookPagination
     filter_backends = (filters.DjangoFilterBackend,)
     filterset_class = BookFilter
