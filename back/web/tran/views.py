@@ -589,4 +589,5 @@ class CustomAuthToken(ObtainAuthToken):
             'user_id': user.pk,
             'email': user.email,
             'user_name': user.username,
+            'user_avatar': user.last_name,
         })
