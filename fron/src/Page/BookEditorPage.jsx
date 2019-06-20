@@ -9,13 +9,21 @@ import Myfooter from '../Myfooter'
 import './BookEditorPage.css'
 
 const { Title } = Typography
-const openNotificationWithIcon = (type) => {
+const openNotificationWithIconS = (type) => {
   notification[type]({
-    message: 'successful',
+    message: 'Successful',
     description: '发布成功',
     duration: 2
   })
 }
+const openNotificationWithIconE = (type) => {
+  notification[type]({
+    message: 'Error',
+    description: '你还未通过编辑审核',
+    duration: 2
+  })
+}
+const { TextArea } = Input
 
 function beforeUpload (file) {
   const isLt2M = file.size / 1024 / 1024 < 2
@@ -31,10 +39,13 @@ class BookEditor extends Component {
     loading: false
   }
 
-  handleSubmit = (e) => {
+  handleSubmit = async (e) => {
     e.preventDefault()
     this.props.form.validateFields(async (error, values) => {
       if (!error) {
+        this.setState({
+          loading: true
+        })
         const submitData = {
           title: values.title,
           subtitle: values.subtitle,
@@ -42,7 +53,8 @@ class BookEditor extends Component {
           publisher: values.publisher,
           isbn: values.isbn,
           pages: values.pages,
-          cover: values.cover[0].response.data.url
+          cover: values.cover[0].response.data.url,
+          overview: values.overview
         }
         try {
           let config = {
@@ -57,29 +69,30 @@ class BookEditor extends Component {
               publisher: submitData.publisher,
               isbn: submitData.isbn,
               pages: submitData.pages,
-              cover: submitData.cover
+              cover: submitData.cover,
+              overview: submitData.overview
             },
             config
           )
-          this.setState(function (state) {
-            return {
-              uploading: false
-            }
+          this.setState({
+            loading: false
           })
           if (response.status === 201) {
-            openNotificationWithIcon('success')
-          } else {
-            openNotificationWithIcon('error')
+            openNotificationWithIconS('success')
           }
         } catch (error) {
-          console.log(error)
+          if (error.response.status === 403) {
+            openNotificationWithIconE('error')
+            this.setState({
+              loading: false
+            })
+          }
         }
       }
     })
   }
 
     normFile = e => {
-      console.log('Upload event:', e.file)
       if (Array.isArray(e)) {
         return e
       }
@@ -174,7 +187,17 @@ class BookEditor extends Component {
                         }
                       ]
                     })(<InputNumber min={0} max={100000000000} />)}
-                    <span className='ant-form-text'> machines</span>
+                    <span className='ant-form-text'>页</span>
+                  </Form.Item>
+                  <Form.Item label='简述'>
+                    {getFieldDecorator('overview', {
+                      rules: [
+                        {}
+                      ]
+                    })(<TextArea
+                      placeholder='简要说说这本书吧'
+                      autosize={{ minRows: 2, maxRows: 20 }}
+                    />)}
                   </Form.Item>
                   <Form.Item label='封面'>
                     {getFieldDecorator('cover', {
@@ -192,8 +215,8 @@ class BookEditor extends Component {
                       </Upload>
                     )}
                   </Form.Item>
-                  <Form.Item wrapperCol={{ span: 2, offset: 22 }}>
-                    <Button type='primary' htmlType='submit'>
+                  <Form.Item>
+                    <Button type='primary' htmlType='submit' loading={this.state.loading}>
                         上传
                     </Button>
                   </Form.Item>

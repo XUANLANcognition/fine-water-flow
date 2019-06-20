@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Steps, Button } from 'antd'
 import axios from 'axios'
+import { Link } from 'react-router-dom'
 
 const { Step } = Steps
 
@@ -20,7 +21,10 @@ const Second = ({ onClick }) => (
 
 const Third = ({ onClick }) => (
   <div style={{ margin: '24px 0' }}>
-        去上传书籍喽（这功能我还没写，等会）
+        去上传书籍喽
+    <Link to='/book_editor_page'>
+      <Button onClick={onClick} type='primary' size='small' style={{ margin: '0 10px' }}>去上传</Button>
+    </Link>
   </div>
 )
 

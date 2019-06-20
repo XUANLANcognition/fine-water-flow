@@ -9,6 +9,7 @@ class Advertisement extends Component {
       <Card
         title='广告位'
         bordered={false}
+        style={{ margin: '0' }}
       >
         <Carousel autoplay effect='fade'>
           <div>

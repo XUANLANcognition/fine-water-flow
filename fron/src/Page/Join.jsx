@@ -124,7 +124,7 @@ class Join extends Component {
                   label={(
                     <span>
                   用户名&nbsp;
-                      <Tooltip title='What do you want others to call you?'>
+                      <Tooltip title='这个以后改不了的，想好喽'>
                         <Icon type='question-circle-o' />
                       </Tooltip>
                     </span>

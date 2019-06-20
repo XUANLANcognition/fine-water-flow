@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Layout, Tooltip, notification, Form, Input, Button } from 'antd'
+import { Layout, Tooltip, notification, Form, Input, Button, Row, Col } from 'antd'
 import axios from 'axios'
 
 import BraftEditor from 'braft-editor'
@@ -34,15 +34,13 @@ class textEditorPage extends Component {
   }
 
   handleSubmit = async (event) => {
-    this.setState(function (state) {
-      return {
-        uploading: true
-      }
-    })
     event.preventDefault()
 
     this.props.form.validateFields(async (error, values) => {
       if (!error) {
+        this.setState({
+          uploading: true
+        })
         const submitData = {
           title: values.title,
           content: values.content.toHTML() // or values.content.toHTML()
@@ -82,47 +80,51 @@ class textEditorPage extends Component {
     return (
       <Layout style={{ minHeight: '100vh' }}>
         <Nav />
-        <Content style={{ backgroundColor: '#fff', padding: '20px 80px 20px 80px' }}>
-          <div className='editor-wrapper' style={{ padding: '10px 100px 10px 100px' }}>
-            <Form onSubmit={this.handleSubmit}>
-              <FormItem label='标题'>
-                {getFieldDecorator('title', {
-                  rules: [{
-                    required: true,
-                    message: '请输入标题'
-                  }]
-                })(
-                  <Input size='large' placeholder='请输入标题' />
-                )}
-              </FormItem>
-              <FormItem label='正文'>
-                {getFieldDecorator('content', {
-                  validateTrigger: 'onBlur',
-                  rules: [{
-                    required: true,
-                    validator: (_, value, callback) => {
-                      if (value.isEmpty()) {
-                      } else {
-                        callback()
-                      }
-                    }
-                  }]
-                })(
-                  <BraftEditor
-                    className='my-editor'
-                    placeholder='请输入正文内容'
-                    media={{ image: true }}
-                  />
-                )}
-              </FormItem>
-              <FormItem >
-                <Button loading={this.state.uploading} size='large' type='primary' htmlType='submit' style={{ position: 'fixed', top: '80px', right: '60px' }}>
-                提交
-                </Button>
-              </FormItem>
-            </Form>
-          </div>
-        </Content>
+        <Row style={{ backgroundColor: '#fff', paddingTop: '30px' }}>
+          <Col xxl={{ span: 12, offset: 6 }} xl={{ span: 16, offset: 4 }} xs={{ span: 22, offset: 1 }}>
+            <Content>
+              <div className='editor-wrapper' >
+                <Form onSubmit={this.handleSubmit}>
+                  <FormItem label='标题'>
+                    {getFieldDecorator('title', {
+                      rules: [{
+                        required: true,
+                        message: '请输入标题'
+                      }]
+                    })(
+                      <Input size='large' placeholder='请输入标题' />
+                    )}
+                  </FormItem>
+                  <FormItem label='正文'>
+                    {getFieldDecorator('content', {
+                      validateTrigger: 'onBlur',
+                      rules: [{
+                        required: true,
+                        validator: (_, value, callback) => {
+                          if (value.isEmpty()) {
+                          } else {
+                            callback()
+                          }
+                        }
+                      }]
+                    })(
+                      <BraftEditor
+                        className='my-editor'
+                        placeholder='请输入正文内容'
+                        media={{ image: true }}
+                      />
+                    )}
+                  </FormItem>
+                  <FormItem >
+                    <Button loading={this.state.uploading} size='large' type='primary' htmlType='submit' >
+                      发布
+                    </Button>
+                  </FormItem>
+                </Form>
+              </div>
+            </Content>
+          </Col>
+        </Row>
         <Myfooter />
       </Layout>
     )

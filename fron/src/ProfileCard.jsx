@@ -75,12 +75,10 @@ class ProfileCarder extends Component {
         <div>
           <Link to={'/profile/' + this.state.username} >
             <IconFont type='icon-geren1' style={{ paddingRight: '10px' }} />
-            My Profile
+            我的主页
           </Link>
         </div>
         <Divider> Action </Divider>
-        <Button type='primary' block onClick={e => this.props.callback(e)}>New Text</Button>
-        <Divider />
         <Button type='danger' ghost onClick={this.showConfirm} block>Logout</Button>
       </Card>
     )

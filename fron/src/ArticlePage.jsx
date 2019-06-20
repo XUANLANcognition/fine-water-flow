@@ -76,7 +76,7 @@ class ArticlePage extends Component {
         <Row >
           <Col xxl={{ span: 16, offset: 4 }} xl={{ span: 20, offset: 2 }} xs={{ span: 22, offset: 1 }}>
             <div style={{ fontSize: '25px', fontWeight: 'bold', color: 'black', padding: '24px 0 24px 0' }}>
-              <Paragraph ellipsis={{ rows: 1, expandable: true }} strong>
+              <Paragraph ellipsis={{ rows: 1, expandable: true }} strong style={{ color: 'black' }}>
                 {this.state.title}
               </Paragraph>
             </div>

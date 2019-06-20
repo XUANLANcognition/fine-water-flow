@@ -78,7 +78,7 @@ class ProfileArticleList extends Component {
       <List
         itemLayout='vertical'
         dataSource={data}
-        size='large'
+        size='middle'
         loadMore={loadMore}
         loading={initLoading}
         renderItem={item => (

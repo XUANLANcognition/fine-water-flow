@@ -1,10 +1,18 @@
 import React, { Component } from 'react'
-import { Menu, Icon, Row, Col } from 'antd'
+import { Menu, Icon, Row, Col, Avatar, Popover } from 'antd'
 import { Link } from 'react-router-dom'
+
+import ProfileCard from './ProfileCard'
 
 const IconFont = Icon.createFromIconfontCN({
   scriptUrl: '//at.alicdn.com/t/font_1242637_xap1h8gomve.js'
 })
+
+const Card = (
+  <div style={{ width: '298px', padding: '0' }}>
+    <ProfileCard />
+  </div>
+)
 
 class Nav extends Component {
   state = {
@@ -46,6 +54,11 @@ class Nav extends Component {
             <Menu.Item key='notice'>
               <IconFont type='icon-xiaoxi' />消息
               <Link to='/notice' />
+            </Menu.Item>
+            <Menu.Item key='user'>
+              <Popover content={Card} placement='bottomRight' >
+                <Avatar size='large' icon='user' />
+              </Popover>
             </Menu.Item>
           </Menu>
         </Col>

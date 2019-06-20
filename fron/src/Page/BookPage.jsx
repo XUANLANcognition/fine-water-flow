@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom'
 import Nav from '../Nav'
 import Myfooter from '../Myfooter'
 import Advertisement from '../Advertisement'
+import CategoryList from '../CategoryList'
 
 const { Meta } = Card
 const CheckableTag = Tag.CheckableTag
@@ -84,7 +85,7 @@ class BookPage extends Component {
       <Layout style={{ minHeight: '100vh' }}>
         <Nav />
         <div style={{ flex: '1 0 ', backgroundColor: '#ffffff' }}>
-          <Row style={{ paddingTop: '30px', paddingBottom: '30px' }}>
+          <Row style={{ paddingBottom: '30px' }}>
             <Col xxl={{ span: 16, offset: 4 }} xl={{ span: 20, offset: 2 }} xs={{ span: 22, offset: 1 }}>
               <Collapse
                 bordered={false}
@@ -119,17 +120,17 @@ class BookPage extends Component {
             </Col>
           </Row>
           <Row style={{ paddingTop: '0px', paddingBottom: '30px' }}>
-            <Col xxl={{ span: 11, offset: 4 }} xl={{ span: 13, offset: 2 }} xs={{ span: 22, offset: 1 }}>
+            <Col xxl={{ span: 11, offset: 4 }} xl={{ span: 13, offset: 2 }} xs={{ span: 22, offset: 1 }} style={{ paddingTop: '0px', paddingBottom: '30px' }}>
               <List
                 loading={this.state.loading}
                 grid={{
-                  gutter: 12,
+                  gutter: 28,
                   xs: 2,
                   sm: 2,
                   md: 4,
                   lg: 4,
                   xl: 4,
-                  xxl: 5
+                  xxl: 6
                 }}
                 size='large'
                 dataSource={this.state.cache}
@@ -142,20 +143,20 @@ class BookPage extends Component {
                 renderItem={item => (
                   <List.Item>
                     <Link to={'/book/' + item.id}>
-                      <Card
-                        style={{ borderRadius: '10px' }}
-                        loading={this.state.loading}
-                        hoverable
-                        cover={<img alt='example' src={item.cover} style={{ borderRadius: '10px', maxHeight: '160px' }} />}
-                      >
-                        <Meta title={item.title} description={item.author.slice(0, 5) + '...'} />
-                      </Card>
+                      <div>
+                        <div alt={item.title} style={{ width: '128px', paddingBottom: '133%', borderRadius: '5px', backgroundClip: 'border-box', backgroundSize: 'contain', backgroundPosition: 'center', backgroundImage: `url(${item.cover})` }} />
+                        <br />
+                        {item.title.slice(0, 6)}
+                        <br />
+                        {item.author.slice(0, 8) + '...'}
+                      </div>
                     </Link>
                   </List.Item>
                 )}
               />
             </Col>
             <Col xxl={{ span: 4, offset: 1 }} xl={{ span: 6, offset: 1 }} xs={{ span: 22, offset: 1 }}>
+              <CategoryList />
               <Advertisement />
             </Col>
           </Row>
