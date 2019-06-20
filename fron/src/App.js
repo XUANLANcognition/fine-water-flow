@@ -23,6 +23,8 @@ import MovieDetailPage from './Page/MovieDetailPage'
 import FigureDetailPage from './Page/FigureDetailPage'
 import BookEditorPage from './Page/BookEditorPage'
 
+import './Global.css'
+
 const MainPage = props => {
   const token = window.localStorage.getItem('token')
   const { history } = props

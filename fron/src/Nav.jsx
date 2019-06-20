@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Menu, Icon, Row, Col, Avatar, Popover } from 'antd'
+import { Icon, Row, Col, Avatar, Popover } from 'antd'
 import { Link } from 'react-router-dom'
 
 import ProfileCard from './ProfileCard'
@@ -9,58 +9,70 @@ const IconFont = Icon.createFromIconfontCN({
 })
 
 const Card = (
-  <div style={{ width: '298px', padding: '0' }}>
+  <div style={{ width: '298px' }}>
     <ProfileCard />
   </div>
 )
 
 class Nav extends Component {
-  state = {
-    current: ''
-  }
-
-  handleClick = (e) => {
-    this.setState({
-      current: e.key
-    })
-  }
-
   render () {
     return (
       <Row style={{ backgroundColor: '#343a40' }}>
         <Col xxl={{ span: 16, offset: 4 }} xl={{ span: 20, offset: 2 }} xs={{ span: 22, offset: 1 }}>
-          <Menu
-            onClick={this.handleClick}
-            selectedKeys={this.state.current}
-            mode='horizontal'
-            style={{ backgroundColor: '#343a40', color: '#fff', border: '10px' }}
+          <div style={{ backgroundColor: '#343a40', color: '#fff', lineHeight: '64px', display: 'flex', flexDirection: 'row' }}
           >
-            <Menu.Item>
-              <img src='/icon.png' style={{ width: '50px', height: '50px' }} />
-              <Link to='/' />
-            </Menu.Item>
-            <Menu.Item key='home'>
-              <IconFont type='icon-zhuye' />主页
-              <Link to='/' />
-            </Menu.Item>
-            <Menu.Item key='book'>
-              <IconFont type='icon-shu1' />读书
-              <Link to='/book' />
-            </Menu.Item>
-            <Menu.Item key='movie'>
-              <IconFont type='icon-dianying' />观影
-              <Link to='/movie' />
-            </Menu.Item>
-            <Menu.Item key='notice'>
-              <IconFont type='icon-xiaoxi' />消息
-              <Link to='/notice' />
-            </Menu.Item>
-            <Menu.Item key='user'>
-              <Popover content={Card} placement='bottomRight' >
-                <Avatar size='large' icon='user' />
-              </Popover>
-            </Menu.Item>
-          </Menu>
+            <div style={{ paddingRight: '24px', display: 'flex', alignItems: 'center' }}>
+              <Link to='/' >
+                <img src='/icon.png' style={{ width: '60px', height: '60px' }} />
+              </Link>
+            </div>
+
+            <Link to='/'>
+              <div style={{ width: '96px', display: 'flex', justifyContent: 'center', flexDirection: 'row', alignItems: 'center' }}>
+                <IconFont type='icon-zhuye' style={{ fontSize: '24px' }} />
+                <div style={{ color: 'white', paddingLeft: '10px' }}>
+                   主页
+                </div>
+              </div>
+            </Link>
+
+            <Link to='/book' >
+              <div style={{ width: '96px', display: 'flex', justifyContent: 'center', flexDirection: 'row', alignItems: 'center' }}>
+                <IconFont type='icon-shu1' style={{ fontSize: '24px' }} />
+                <div style={{ color: 'white', paddingLeft: '10px' }}>
+                读书
+                </div>
+              </div>
+            </Link>
+
+            <Link to='/movie' >
+              <div style={{ width: '96px', display: 'flex', justifyContent: 'center', flexDirection: 'row', alignItems: 'center' }}>
+                <IconFont type='icon-dianying' style={{ fontSize: '24px' }} />
+                <div style={{ color: 'white', paddingLeft: '10px' }}>
+                观影
+                </div>
+              </div>
+            </Link>
+
+            <Link to='/notice' >
+              <div style={{ width: '96px', display: 'flex', justifyContent: 'center', flexDirection: 'row', alignItems: 'center' }}>
+                <IconFont type='icon-xiaoxi' style={{ fontSize: '24px' }} />
+                <div style={{ color: 'white', paddingLeft: '10px' }}>
+                消息
+                </div>
+              </div>
+            </Link>
+
+            <div style={{ width: '96px', display: 'flex', justifyContent: 'space-start', flexGrow: '1', flexDirection: 'row-reverse' }}>
+              <div>
+                <Link to='#'>
+                  <Popover content={Card} placement='bottomRight' trigger='click' >
+                    <Avatar size='large' icon='user' src={window.localStorage.getItem('user_avatar')} />
+                  </Popover>
+                </Link>
+              </div>
+            </div>
+          </div>
         </Col>
       </Row>
 

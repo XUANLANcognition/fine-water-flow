@@ -7,7 +7,7 @@ import Advertisement from './Advertisement'
 import ArticleList from './ArticleList'
 import ArticleFollowList from './ArticleFollowList'
 import Myfooter from './Myfooter'
-import ProfileCard from './ProfileCard'
+import CategoryList from './CategoryList'
 
 const TabPane = Tabs.TabPane
 
@@ -42,7 +42,7 @@ class THome extends Component {
           </Col>
           <Col xxl={{ span: 4, offset: 1 }} xl={{ span: 6, offset: 1 }} xs={{ span: 22, offset: 1 }}>
             <Affix offsetTop={0}>
-              <ProfileCard callback={this.goToEditorPage} />
+              <CategoryList />
             </Affix>
             <Advertisement />
           </Col>
