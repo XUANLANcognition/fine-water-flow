@@ -8,10 +8,9 @@ import Myfooter from '../Myfooter'
 import Advertisement from '../Advertisement'
 import CategoryList from '../CategoryList'
 
-const { Meta } = Card
 const CheckableTag = Tag.CheckableTag
 const { Title } = Typography
-const count = 128
+const count = 12
 const customPanelStyle = {
   background: '#f7f7f7',
   borderRadius: 4,
@@ -24,11 +23,11 @@ const Panel = Collapse.Panel
 class BookPage extends Component {
   page = 1
   state = {
-    data: [],
     cache: [],
     selectedTags: [],
     loading: true,
-    tags: []
+    tags: [],
+    count: 0
   }
 
   componentDidMount = async (v) => {
@@ -41,11 +40,48 @@ class BookPage extends Component {
       const response = await axios.get(
         'https://finewf.club:8080/api/books/?format=json' + '&page=' + this.page + '&page_size=' + count
       )
-      this.setState({ data: response.data.results, cache: response.data.results })
+      const temp = []
+      for (let index = 0; index < response.data.count; index++) {
+        temp.push({ title: '', cover: '', author: '', id: index })
+      }
+      this.setState({
+        cache: temp
+      })
+      for (let index = 0; index < count; index++) {
+        temp[index] = response.data.results[index]
+      }
+      this.setState({
+        cache: temp,
+        count: response.data.count
+      })
       const responseTag = await axios.get(
         'https://finewf.club:8080/api/bookblocks/?format=json'
       )
       this.setState({ tags: responseTag.data })
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  handleBook = async (page) => {
+    this.setState({
+      loading: true
+    })
+    try {
+      const response = await axios.get(
+        'https://finewf.club:8080/api/books/?format=json' + '&page=' + page + '&page_size=' + count
+      )
+      let temp = this.state.cache
+      let i = (page - 1) * count
+      for (let index = 0; index < response.data.results.length; index++) {
+        temp[i] = response.data.results[index]
+        i++
+      }
+      this.setState({
+        cache: temp,
+        loading: false
+      })
+      console.log(this.state.cache)
     } catch (error) {
       console.log(error)
     }
@@ -68,7 +104,7 @@ class BookPage extends Component {
         const response = await axios.get(
           'https://finewf.club:8080/api/books/?format=json' + '&page=' + this.page + '&page_size=' + count + fliterTag
         )
-        this.setState({ data: response.data.results, cache: response.data.results, loading: false })
+        this.setState({ cache: response.data.results, loading: false })
       } catch (error) {
         console.log(error)
       }
@@ -135,9 +171,7 @@ class BookPage extends Component {
                 size='large'
                 dataSource={this.state.cache}
                 pagination={{
-                  onChange: page => {
-                    console.log(page)
-                  },
+                  onChange: this.handleBook,
                   pageSize: 12
                 }}
                 renderItem={item => (

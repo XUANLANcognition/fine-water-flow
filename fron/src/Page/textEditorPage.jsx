@@ -11,10 +11,17 @@ const { Content } = Layout
 const FormItem = Form.Item
 
 // 提示框
-const openNotificationWithIcon = (type) => {
+const openNotificationWithIconS = (type) => {
   notification[type]({
     message: 'successful',
     description: '发布成功',
+    duration: 2
+  })
+}
+const openNotificationWithIconE = (type) => {
+  notification[type]({
+    message: 'error',
+    description: '发布失败',
     duration: 2
   })
 }
@@ -63,12 +70,10 @@ class textEditorPage extends Component {
             }
           })
           if (response.status === 201) {
-            openNotificationWithIcon('success')
-          } else {
-            openNotificationWithIcon('error')
+            openNotificationWithIconS('success')
           }
         } catch (error) {
-          console.log(error)
+          openNotificationWithIconE('error')
         }
       }
     })
@@ -116,9 +121,11 @@ class textEditorPage extends Component {
                     )}
                   </FormItem>
                   <FormItem >
-                    <Button loading={this.state.uploading} size='large' type='primary' htmlType='submit' >
+                    <div style={{ display: 'flex', flexDirection: 'row-reverse' }}>
+                      <Button loading={this.state.uploading} size='large' type='primary' htmlType='submit' >
                       发布
-                    </Button>
+                      </Button>
+                    </div>
                   </FormItem>
                 </Form>
               </div>

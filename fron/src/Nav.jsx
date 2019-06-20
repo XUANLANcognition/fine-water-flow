@@ -19,7 +19,7 @@ class Nav extends Component {
     return (
       <Row style={{ backgroundColor: '#343a40' }}>
         <Col xxl={{ span: 16, offset: 4 }} xl={{ span: 20, offset: 2 }} xs={{ span: 22, offset: 1 }}>
-          <div style={{ backgroundColor: '#343a40', color: '#fff', lineHeight: '64px', display: 'flex', flexDirection: 'row' }}
+          <div style={{ backgroundColor: '#343a40', color: '#fff', lineHeight: '64px', display: 'flex', flexDirection: 'row', flexWrap: 'wrap' }}
           >
             <div style={{ paddingRight: '24px', display: 'flex', alignItems: 'center' }}>
               <Link to='/' >
