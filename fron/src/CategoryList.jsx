@@ -33,8 +33,16 @@ class CategoryList extends Component {
             <IconFont type='icon-book' style={{ fontSize: '36px' }} />
           </Card.Grid>
         </Link>
+        <Link to='/movie_editor_page'>
+          <Card.Grid style={gridStyle} >
+            <IconFont type='icon-movie' style={{ fontSize: '36px' }} />
+          </Card.Grid>
+        </Link>
         <Card.Grid style={gridStyle} >
-          <IconFont type='icon-movie' style={{ fontSize: '36px' }} />
+        </Card.Grid>
+        <Card.Grid style={gridStyle} >
+        </Card.Grid>
+        <Card.Grid style={gridStyle} >
         </Card.Grid>
       </Card>
     )

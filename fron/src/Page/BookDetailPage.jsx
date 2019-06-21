@@ -114,7 +114,7 @@ class BookDetailPage extends Component {
             <Row style={{ paddingTop: '30px', paddingBottom: '30px' }}>
               <Col xxl={{ span: 10, offset: 4 }} xl={{ span: 12, offset: 2 }} xs={{ span: 22, offset: 1 }}>
                 <Title level={4}>内容简介 · · · · · ·</Title>
-                <div style={{ padding: '24px 0' }} dangerouslySetInnerHTML={{ __html: this.state.overview.replace(/\r/g, '</br>') }} />
+                <div style={{ padding: '24px 0' }} dangerouslySetInnerHTML={{ __html: this.state.overview.replace(/\n/g, '</br>') }} />
                 <Title level={4}>书评 · · · · · ·</Title>
                 <AddBookComment bookId={this.state.id} bookUrl={this.state.url} />
               </Col>

@@ -47,7 +47,7 @@ class BookPage extends Component {
       this.setState({
         cache: temp
       })
-      for (let index = 0; index < count; index++) {
+      for (let index = 0; index < response.data.results.length; index++) {
         temp[index] = response.data.results[index]
       }
       this.setState({
@@ -178,7 +178,7 @@ class BookPage extends Component {
                   <List.Item>
                     <Link to={'/book/' + item.id}>
                       <div>
-                        <div alt={item.title} style={{ width: '128px', paddingBottom: '133%', borderRadius: '5px', backgroundClip: 'border-box', backgroundSize: 'contain', backgroundPosition: 'center', backgroundImage: `url(${item.cover})` }} />
+                        <div alt={item.title} style={{ width: '102%', paddingBottom: '133%', borderRadius: '5px', backgroundClip: 'border-box', backgroundSize: 'contain', backgroundPosition: 'center', backgroundImage: `url(${item.cover})` }} />
                         <br />
                         {item.title.slice(0, 6)}
                         <br />

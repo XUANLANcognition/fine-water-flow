@@ -33,7 +33,7 @@ function beforeUpload (file) {
   return isLt2M
 }
 
-class BookEditor extends Component {
+class MovieEditor extends Component {
   state = {
     imageUrl: '',
     loading: false
@@ -48,11 +48,9 @@ class BookEditor extends Component {
         })
         const submitData = {
           title: values.title,
-          subtitle: values.subtitle,
-          author: values.author,
-          publisher: values.publisher,
-          isbn: values.isbn,
-          pages: values.pages,
+          region: values.region,
+          number: values.number,
+          runtime: values.runtime,
           cover: values.cover ? values.cover[0].response.data.url : '',
           overview: values.overview
         }
@@ -61,14 +59,12 @@ class BookEditor extends Component {
             headers: { 'Authorization': 'Token ' + window.localStorage.getItem('token') }
           }
           const response = await axios.post(
-            'https://finewf.club:8080/api/books/',
+            'https://finewf.club:8080/api/movies/',
             {
               title: submitData.title,
-              subtitle: submitData.subtitle,
-              author: submitData.author,
-              publisher: submitData.publisher,
-              isbn: submitData.isbn,
-              pages: submitData.pages,
+              region: submitData.region,
+              number: submitData.number,
+              runtime: submitData.runtime,
               cover: submitData.cover,
               overview: submitData.overview
             },
@@ -130,7 +126,7 @@ class BookEditor extends Component {
                 <Title level={3}>Welcome!</Title>
                 <Form onSubmit={this.handleSubmit} className='book-editor-form'>
                   <Form.Item
-                    label='书名'>
+                    label='片名'>
                     {getFieldDecorator('title', {
                       rules: [
                         {
@@ -140,45 +136,27 @@ class BookEditor extends Component {
                       ]
                     })(<Input />)}
                   </Form.Item>
-                  <Form.Item label='副标题'>
-                    {getFieldDecorator('subtitle', {
+                  <Form.Item label='地区'>
+                    {getFieldDecorator('region', {
                       rules: [
                         {}
                       ]
                     })(<Input />)}
                   </Form.Item>
-                  <Form.Item label='作者'>
-                    {getFieldDecorator('author', {
+                  <Form.Item label='集数'>
+                    {getFieldDecorator('number', {
+                      initialValue: 0,
                       rules: [
                         {
                           required: true,
-                          message: 'Please input the author of book!'
+                          message: 'Please input the pages of book!'
                         }
                       ]
-                    })(<Input />)}
+                    })(<InputNumber min={0} max={100000000000} />)}
+                    <span className='ant-form-text'>页</span>
                   </Form.Item>
-                  <Form.Item label='出版社'>
-                    {getFieldDecorator('publisher', {
-                      rules: [
-                        {
-                          required: true,
-                          message: 'Please input the publisher of book!'
-                        }
-                      ]
-                    })(<Input />)}
-                  </Form.Item>
-                  <Form.Item label='ISBN'>
-                    {getFieldDecorator('isbn', {
-                      rules: [
-                        {
-                          required: true,
-                          message: 'Please input the isbn of book!'
-                        }
-                      ]
-                    })(<Input />)}
-                  </Form.Item>
-                  <Form.Item label='页数'>
-                    {getFieldDecorator('pages', {
+                  <Form.Item label='片长'>
+                    {getFieldDecorator('runtime', {
                       initialValue: 0,
                       rules: [
                         {
@@ -230,6 +208,6 @@ class BookEditor extends Component {
     }
 }
 
-const BookEditorPage = withRouter(Form.create()(BookEditor))
+const MovieEditorPage = withRouter(Form.create()(MovieEditor))
 
-export default BookEditorPage
+export default MovieEditorPage

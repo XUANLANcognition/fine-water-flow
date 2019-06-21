@@ -8,16 +8,15 @@ import Myfooter from '../Myfooter'
 import Advertisement from '../Advertisement'
 import CategoryList from '../CategoryList'
 
-const { Meta } = Card
-const count = 8
+const count = 12
 
 class MoviePage extends Component {
   page = 1
   state = {
-    data: [],
     cache: [],
     selectedTags: [],
-    loading: true
+    loading: true,
+    count: 0
   }
 
   componentDidMount = async (v) => {
@@ -30,17 +29,47 @@ class MoviePage extends Component {
       const response = await axios.get(
         'https://finewf.club:8080/api/movies/?format=json' + '&page=' + this.page + '&page_size=' + count
       )
-      this.setState({ data: response.data.results, cache: response.data.results })
+      const temp = []
+      for (let index = 0; index < response.data.count; index++) {
+        temp.push({ title: '', cover: '', id: index })
+      }
+      this.setState({
+        cache: temp
+      })
+      for (let index = 0; index < response.data.results.length; index++) {
+        temp[index] = response.data.results[index]
+      }
+      this.setState({
+        cache: temp,
+        count: response.data.count
+      })
     } catch (error) {
       console.log(error)
     }
   }
 
-  handleChange (tag, checked) {
-    const { selectedTags } = this.state
-    const nextSelectedTags = checked ? [...selectedTags, tag] : selectedTags.filter(t => t !== tag)
-    console.log('You are interested in: ', nextSelectedTags)
-    this.setState({ selectedTags: nextSelectedTags })
+  handleMovie = async (page) => {
+    this.setState({
+      loading: true
+    })
+    try {
+      const response = await axios.get(
+        'https://finewf.club:8080/api/movies/?format=json' + '&page=' + page + '&page_size=' + count
+      )
+      let temp = this.state.cache
+      let i = (page - 1) * count
+      for (let index = 0; index < response.data.results.length; index++) {
+        temp[i] = response.data.results[index]
+        i++
+      }
+      this.setState({
+        cache: temp,
+        loading: false
+      })
+      console.log(this.state.cache)
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   render () {
@@ -64,16 +93,14 @@ class MoviePage extends Component {
                 size='large'
                 dataSource={this.state.cache}
                 pagination={{
-                  onChange: page => {
-                    console.log(page)
-                  },
-                  pageSize: 128
+                  onChange: this.handleMovie,
+                  pageSize: 12
                 }}
                 renderItem={item => (
                   <List.Item>
                     <Link to={'/movie/' + item.id}>
                       <div>
-                        <div alt={item.title} style={{ width: '128px', paddingBottom: '133%', borderRadius: '5px', backgroundClip: 'border-box', backgroundSize: 'contain', backgroundPosition: 'center', backgroundImage: `url(${item.cover})` }} />
+                        <div alt={item.title} style={{ width: '102%', paddingBottom: '133%', borderRadius: '5px', backgroundClip: 'border-box', backgroundSize: 'contain', backgroundPosition: 'center', backgroundImage: `url(${item.cover})` }} />
                         <br />
                         {item.title.slice(0, 6) + '...'}
                       </div>
