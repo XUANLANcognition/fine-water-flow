@@ -486,10 +486,11 @@ class MovieSerializer(serializers.HyperlinkedModelSerializer):
     director = FigureSerializer(many=True, read_only=True)
     actor = FigureSerializer(many=True, read_only=True)
     writer = FigureSerializer(many=True, read_only=True)
+    user = UserAnotherSerializer(read_only = True)
 
     class Meta:
         model = Movie
-        fields = ('url', 'id', 'title' , 'cover', 'number', 'runtime' ,'region','director','writer', 'actor', 'overview')
+        fields = ('url', 'id', 'title' , 'cover', 'number', 'runtime' ,'region','director','writer', 'actor', 'overview', 'user')
 
 
 class MoviePagination(PageNumberPagination):
