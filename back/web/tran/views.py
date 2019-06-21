@@ -50,7 +50,7 @@ class Publish(permissions.BasePermission):
             return permissions.IsAuthenticated
         return True
 
-class BookPublish(permissions.BasePermission):
+class MediaPublish(permissions.BasePermission):
 
     def has_permission(self, request, view):
         if request.method == 'POST':
@@ -373,7 +373,7 @@ class BookFilter(filters.FilterSet):
 class BookList(generics.ListCreateAPIView):
     queryset = Book.objects.all().order_by('-pub_date')
     serializer_class = BookSerializer
-    permission_classes = (BookPublish,)
+    permission_classes = (MediaPublish,)
     pagination_class = BookPagination
     filter_backends = (filters.DjangoFilterBackend,)
     filterset_class = BookFilter
@@ -513,7 +513,7 @@ class MovieFilter(filters.FilterSet):
 class MovieList(generics.ListCreateAPIView):
     queryset = Movie.objects.all().order_by('-pub_date')
     serializer_class = MovieSerializer
-    permission_classes = (Publish,)
+    permission_classes = (MediaPublish,)
     pagination_class = MoviePagination
     filter_backends = (filters.DjangoFilterBackend,)
     filterset_class = MovieFilter
