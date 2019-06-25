@@ -279,7 +279,7 @@ class BookCommentFilter(filters.FilterSet):
 
 
 class BookCommentList(generics.ListCreateAPIView):
-    queryset = BookComment.objects.all().order_by('-pub_date')
+    queryset = BookComment.objects.all().order_by('pub_date')
     serializer_class = BookCommentSerializer
     permission_classes = (Publish, )
     pagination_class = BookCommentPagination
@@ -557,7 +557,7 @@ class MovieCommentFilter(filters.FilterSet):
 
 
 class MovieCommentList(generics.ListCreateAPIView):
-    queryset = MovieComment.objects.all().order_by('-pub_date')
+    queryset = MovieComment.objects.all().order_by('pub_date')
     serializer_class = MovieCommentSerializer
     permission_classes = (Publish, )
     pagination_class = MovieCommentPagination
