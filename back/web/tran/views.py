@@ -142,7 +142,7 @@ class PropertyRankSerializer(serializers.ModelSerializer):
 
 
 class PropertyRank(generics.ListAPIView):
-    queryset = Profile.objects.all().order_by('property')[:5]
+    queryset = Profile.objects.all().order_by('-property')[:5]
     serializer_class = PropertyRankSerializer
     permission_classes = ()
 
