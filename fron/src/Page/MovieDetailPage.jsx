@@ -88,7 +88,7 @@ class BookDetailPage extends Component {
                       <Title level={2}>{this.state.title}</Title>
                       <Descriptions
                         border
-                        column={{ xxl: 4, xl: 3, lg: 3, md: 3, sm: 2, xs: 1 }}
+                        column={{ xxl: 2, xl: 2, lg: 3, md: 3, sm: 2, xs: 1 }}
                       >
                         <Descriptions.Item label='集数'>{this.state.number}</Descriptions.Item>
                         <Descriptions.Item label='单集片长'>{this.state.runtime}</Descriptions.Item>

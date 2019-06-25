@@ -144,13 +144,13 @@ class AddBookComment extends Component {
             submitting: false,
             value: '',
             comments: [
+              ...this.state.comments,
               {
                 username: this.state.username,
                 last_name: this.state.avatarUrl,
                 content: <p>{this.state.value}</p>,
                 pub_date: moment()
-              },
-              ...this.state.comments
+              }
             ]
           })
         }, 500)

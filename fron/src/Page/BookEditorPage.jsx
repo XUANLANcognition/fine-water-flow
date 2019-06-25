@@ -126,7 +126,7 @@ class BookEditor extends Component {
           <Nav />
           <div style={{ flex: '1 0 ', backgroundColor: '#ffffff' }}>
             <Row style={{ paddingTop: '30px', paddingBottom: '30px' }}>
-              <Col xxl={{ span: 16, offset: 4 }} xl={{ span: 20, offset: 2 }} xs={{ span: 22, offset: 1 }}>
+              <Col xxl={{ span: 12, offset: 6 }} xl={{ span: 16, offset: 4 }} xs={{ span: 22, offset: 1 }}>
                 <Title level={3}>Welcome!</Title>
                 <Form onSubmit={this.handleSubmit} className='book-editor-form'>
                   <Form.Item
@@ -210,7 +210,7 @@ class BookEditor extends Component {
                         customRequest={this.customRequest}
                         beforeUpload={beforeUpload}>
                         <Button>
-                          <Icon type='upload' /> Click to upload
+                          <Icon type='upload' /> 点击上传
                         </Button>
                       </Upload>
                     )}

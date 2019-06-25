@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Layout, Row, Col, Typography, Form, Button, Icon, Input, Upload, message, InputNumber, notification } from 'antd'
+import { Layout, Row, Col, Typography, Form, Button, Icon, Input, Upload, message, InputNumber, notification, Tooltip } from 'antd'
 import { withRouter } from 'react-router'
 import axios from 'axios'
 
@@ -122,7 +122,7 @@ class MovieEditor extends Component {
           <Nav />
           <div style={{ flex: '1 0 ', backgroundColor: '#ffffff' }}>
             <Row style={{ paddingTop: '30px', paddingBottom: '30px' }}>
-              <Col xxl={{ span: 16, offset: 4 }} xl={{ span: 20, offset: 2 }} xs={{ span: 22, offset: 1 }}>
+              <Col xxl={{ span: 12, offset: 6 }} xl={{ span: 16, offset: 4 }} xs={{ span: 22, offset: 1 }}>
                 <Title level={3}>Welcome!</Title>
                 <Form onSubmit={this.handleSubmit} className='book-editor-form'>
                   <Form.Item
@@ -131,7 +131,7 @@ class MovieEditor extends Component {
                       rules: [
                         {
                           required: true,
-                          message: 'Please input the title of book!'
+                          message: 'Please input the title of movie!'
                         }
                       ]
                     })(<Input />)}
@@ -143,29 +143,43 @@ class MovieEditor extends Component {
                       ]
                     })(<Input />)}
                   </Form.Item>
-                  <Form.Item label='集数'>
+                  <Form.Item label={(
+                    <span>
+                  集数&nbsp;
+                      <Tooltip title='电影就是默认一集'>
+                        <Icon type='question-circle-o' />
+                      </Tooltip>
+                    </span>
+                  )}>
                     {getFieldDecorator('number', {
-                      initialValue: 0,
+                      initialValue: 1,
                       rules: [
                         {
                           required: true,
-                          message: 'Please input the pages of book!'
+                          message: 'Please input the numbers of movie!'
                         }
                       ]
                     })(<InputNumber min={0} max={100000000000} />)}
-                    <span className='ant-form-text'>页</span>
+                    <span className='ant-form-text'>集</span>
                   </Form.Item>
-                  <Form.Item label='片长'>
+                  <Form.Item label={(
+                    <span>
+                  单集片长&nbsp;
+                      <Tooltip title='电影就是总时长'>
+                        <Icon type='question-circle-o' />
+                      </Tooltip>
+                    </span>
+                  )}>
                     {getFieldDecorator('runtime', {
                       initialValue: 0,
                       rules: [
                         {
                           required: true,
-                          message: 'Please input the pages of book!'
+                          message: 'Please input the runtime of movie!'
                         }
                       ]
                     })(<InputNumber min={0} max={100000000000} />)}
-                    <span className='ant-form-text'>页</span>
+                    <span className='ant-form-text'>分钟</span>
                   </Form.Item>
                   <Form.Item label='简述'>
                     {getFieldDecorator('overview', {
@@ -173,7 +187,7 @@ class MovieEditor extends Component {
                         {}
                       ]
                     })(<TextArea
-                      placeholder='简要说说这本书吧'
+                      placeholder='简要说说这部片吧'
                       autosize={{ minRows: 2, maxRows: 20 }}
                     />)}
                   </Form.Item>
@@ -188,7 +202,7 @@ class MovieEditor extends Component {
                         customRequest={this.customRequest}
                         beforeUpload={beforeUpload}>
                         <Button>
-                          <Icon type='upload' /> Click to upload
+                          <Icon type='upload' /> 点击上传
                         </Button>
                       </Upload>
                     )}

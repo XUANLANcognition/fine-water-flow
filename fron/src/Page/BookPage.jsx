@@ -122,11 +122,49 @@ class BookPage extends Component {
         <Nav />
         <div style={{ flex: '1 0 ', backgroundColor: '#ffffff' }}>
           <Row style={{ paddingBottom: '30px' }}>
-            <Col xxl={{ span: 16, offset: 4 }} xl={{ span: 20, offset: 2 }} xs={{ span: 22, offset: 1 }}>
+            <Col xxl={{ span: 16, offset: 4 }} xl={{ span: 20, offset: 2 }} xs={{ span: 22, offset: 1 }} />
+          </Row>
+          <Row style={{ paddingTop: '0px', paddingBottom: '30px' }}>
+            <Col xxl={{ span: 11, offset: 4 }} xl={{ span: 13, offset: 2 }} xs={{ span: 22, offset: 1 }} style={{ paddingTop: '0px', paddingBottom: '30px' }}>
+              <List
+                loading={this.state.loading}
+                grid={{
+                  gutter: 128,
+                  xs: 2,
+                  sm: 2,
+                  md: 4,
+                  lg: 4,
+                  xl: 3,
+                  xxl: 4
+                }}
+                size='large'
+                dataSource={this.state.cache}
+                pagination={{
+                  onChange: this.handleBook,
+                  pageSize: 12
+                }}
+                renderItem={item => (
+                  <List.Item>
+                    <Link to={'/book/' + item.id}>
+                      <div>
+                        <div alt={item.title} style={{ width: '102%', paddingBottom: '133%', borderRadius: '5px', backgroundClip: 'border-box', backgroundSize: 'contain', backgroundPosition: 'center', backgroundImage: `url(${item.cover})` }} />
+                        <br />
+                        {item.title.slice(0, 6)}
+                        <br />
+                        {item.author.slice(0, 8) + '...'}
+                      </div>
+                    </Link>
+                  </List.Item>
+                )}
+              />
+            </Col>
+            <Col xxl={{ span: 4, offset: 1 }} xl={{ span: 6, offset: 1 }} xs={{ span: 22, offset: 1 }}>
+              <CategoryList />
               <Collapse
                 bordered={false}
-                defaultActiveKey={['']}
+                defaultActiveKey={['1']}
                 expandIcon={({ isActive }) => <Icon type='caret-right' rotate={isActive ? 90 : 0} />}
+                style={{ paddingTop: '10px' }}
               >
                 <Panel header={<Title level={4}>全部标签</Title>} key='1' style={customPanelStyle}>
                   <List
@@ -153,44 +191,6 @@ class BookPage extends Component {
                   />
                 </Panel>
               </Collapse>
-            </Col>
-          </Row>
-          <Row style={{ paddingTop: '0px', paddingBottom: '30px' }}>
-            <Col xxl={{ span: 11, offset: 4 }} xl={{ span: 13, offset: 2 }} xs={{ span: 22, offset: 1 }} style={{ paddingTop: '0px', paddingBottom: '30px' }}>
-              <List
-                loading={this.state.loading}
-                grid={{
-                  gutter: 28,
-                  xs: 2,
-                  sm: 2,
-                  md: 4,
-                  lg: 4,
-                  xl: 4,
-                  xxl: 6
-                }}
-                size='large'
-                dataSource={this.state.cache}
-                pagination={{
-                  onChange: this.handleBook,
-                  pageSize: 12
-                }}
-                renderItem={item => (
-                  <List.Item>
-                    <Link to={'/book/' + item.id}>
-                      <div>
-                        <div alt={item.title} style={{ width: '102%', paddingBottom: '133%', borderRadius: '5px', backgroundClip: 'border-box', backgroundSize: 'contain', backgroundPosition: 'center', backgroundImage: `url(${item.cover})` }} />
-                        <br />
-                        {item.title.slice(0, 6)}
-                        <br />
-                        {item.author.slice(0, 8) + '...'}
-                      </div>
-                    </Link>
-                  </List.Item>
-                )}
-              />
-            </Col>
-            <Col xxl={{ span: 4, offset: 1 }} xl={{ span: 6, offset: 1 }} xs={{ span: 22, offset: 1 }}>
-              <CategoryList />
               <Advertisement />
             </Col>
           </Row>
