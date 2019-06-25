@@ -8,6 +8,7 @@ import ArticleList from './ArticleList'
 import ArticleFollowList from './ArticleFollowList'
 import Myfooter from './Myfooter'
 import CategoryList from './CategoryList'
+import PropertyRank from './PropertyRank'
 
 const TabPane = Tabs.TabPane
 
@@ -45,6 +46,7 @@ class THome extends Component {
               <CategoryList />
             </Affix>
             <Advertisement />
+            <PropertyRank />
           </Col>
         </Row>
         <Myfooter />

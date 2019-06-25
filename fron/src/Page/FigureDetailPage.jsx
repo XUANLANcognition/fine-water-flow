@@ -56,7 +56,7 @@ class FigureDetailPage extends Component {
           <Nav />
           <div style={{ flex: '1 0 ' }}>
             <Row style={{ paddingTop: '30px', paddingBottom: '30px' }}>
-              <Col xl={{ span: 18, offset: 3 }} xs={{ span: 22, offset: 1 }}>
+              <Col xxl={{ span: 16, offset: 4 }} xl={{ span: 20, offset: 2 }} xs={{ span: 22, offset: 1 }}>
                 <PageHeader className='pageheader'
                   style={{
                     position: 'relative',
@@ -98,11 +98,11 @@ class FigureDetailPage extends Component {
               </Col>
             </Row>
             <Row style={{ paddingTop: '30px', paddingBottom: '30px' }}>
-              <Col xl={{ span: 12, offset: 3 }} xs={{ span: 22, offset: 1 }}>
+              <Col xxl={{ span: 10, offset: 4 }} xl={{ span: 12, offset: 2 }} xs={{ span: 22, offset: 1 }}>
                 <Title level={3}>个人简介 · · · · · ·</Title>
                 <Paragraph ellipsis={{ rows: 2, expandable: true }} style={{ fontSize: '24' }} />
               </Col>
-              <Col xl={{ span: 5, offset: 1 }} xs={{ span: 22, offset: 1 }}>
+              <Col xxl={{ span: 5, offset: 1 }} xl={{ span: 7, offset: 1 }} xs={{ span: 22, offset: 1 }}>
                 <Advertisement />
               </Col>
             </Row>

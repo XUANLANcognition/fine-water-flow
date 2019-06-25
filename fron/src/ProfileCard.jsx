@@ -4,6 +4,8 @@ import axios from 'axios'
 import { withRouter } from 'react-router'
 import { Link } from 'react-router-dom'
 
+import PropertyList from './PropertyList'
+
 const { Meta } = Card
 const confirm = Modal.confirm
 
@@ -15,7 +17,8 @@ class ProfileCarder extends Component {
   state = {
     username: '',
     avatarUrl: '',
-    bio: ''
+    bio: '',
+    property: 0
   }
 
   onClickLogout = () => {
@@ -47,7 +50,12 @@ class ProfileCarder extends Component {
       )
       window.localStorage.setItem('url', response.data.url)
       this.setState(function (state) {
-        return { username: response.data.username, avatarUrl: response.data.last_name, bio: response.data.profile.bio }
+        return {
+          username: response.data.username,
+          avatarUrl: response.data.last_name,
+          bio: response.data.profile.bio,
+          property: response.data.profile.property
+        }
       })
     } catch (error) {
       console.log(error)
@@ -71,6 +79,8 @@ class ProfileCarder extends Component {
           }
           description={this.state.bio}
         />
+        <br />
+        <PropertyList property={this.state.property} />
         <Divider> Infomation </Divider>
         <div>
           <Link to={'/profile/' + this.state.username} >

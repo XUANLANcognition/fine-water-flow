@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Layout, Tooltip, notification, Form, Input, Button, Row, Col } from 'antd'
+import { Layout, notification, Form, Input, Button, Row, Col } from 'antd'
 import axios from 'axios'
 
 import BraftEditor from 'braft-editor'

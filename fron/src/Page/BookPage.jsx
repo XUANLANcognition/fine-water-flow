@@ -129,13 +129,13 @@ class BookPage extends Component {
               <List
                 loading={this.state.loading}
                 grid={{
-                  gutter: 128,
+                  gutter: 28,
                   xs: 2,
                   sm: 2,
                   md: 4,
                   lg: 4,
-                  xl: 3,
-                  xxl: 4
+                  xl: 4,
+                  xxl: 6
                 }}
                 size='large'
                 dataSource={this.state.cache}

@@ -7,6 +7,7 @@ import Nav from './Nav'
 import Myfooter from './Myfooter'
 import ProfileArticleList from './ProfileArticleList'
 import FollowList from './FollowList'
+import PropertyList from './PropertyList'
 
 const TabPane = Tabs.TabPane
 const { Title, Paragraph } = Typography
@@ -20,7 +21,8 @@ class Profile extends Component {
     data: [],
     urlAvatar: '',
     username: '',
-    bio: ''
+    bio: '',
+    property: 0
   }
 
   componentDidMount = async (v) => {
@@ -38,7 +40,12 @@ class Profile extends Component {
       )
       this.data = response.data.results
       this.setState(function (state) {
-        return { urlAvatar: response.data.last_name, username: response.data.username, bio: response.data.profile.bio }
+        return {
+          urlAvatar: response.data.last_name,
+          username: response.data.username,
+          bio: response.data.profile.bio,
+          property: response.data.profile.property
+        }
       })
     } catch (error) {
       console.log(error)
@@ -53,6 +60,8 @@ class Profile extends Component {
             <Avatar size={180} shape='square' src={this.state.urlAvatar} icon='user' style={{ color: '#ffffff', backgroundColor: '#f6f6f6' }} />
             <Title level={2}>{this.state.username}</Title>
             <Paragraph>{this.state.bio}</Paragraph>
+            <PropertyList property={this.state.property} />
+            <br />
             <Button block style={{ backgroundColor: '#f6f6f6' }}>
               <Link to='/settings/profile'>Edit</Link>
             </Button>
