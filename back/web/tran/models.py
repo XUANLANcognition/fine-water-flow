@@ -20,6 +20,7 @@ class Profile(models.Model):
         ('审核中', '审核中'),
         ('审核通过', '审核通过')
     )
+    property = models.IntegerField(default=100)
     media_editor_auth = models.CharField(max_length=24, choices=MEDIA_EDITOR_AUTH_CHOICES, default='未审核', blank=True)
 
     @receiver(post_save, sender = User)

@@ -75,12 +75,14 @@ class FollowerSerializer(serializers.ModelSerializer):
 
 class UserProfileSerializer(serializers.ModelSerializer):
     follow = FollowerSerializer(many=True, read_only=True)
+
     class Meta:
         model = Profile
-        fields = ('bio', 'follow', 'media_editor_auth')
+        fields = ('bio', 'media_editor_auth', 'property', 'follow')
+        read_only_fields = ('property', )
 
 
-class UserSerializer(serializers.HyperlinkedModelSerializer): 
+class UserSerializer(serializers.HyperlinkedModelSerializer):
     profile = UserProfileSerializer(required=False)
 
     class Meta:
