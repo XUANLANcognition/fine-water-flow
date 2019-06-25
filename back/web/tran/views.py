@@ -417,7 +417,7 @@ class CommentFilter(filters.FilterSet):
 
 
 class CommentList(generics.ListCreateAPIView):
-    queryset = Comment.objects.all().order_by('-pub_date')
+    queryset = Comment.objects.all().order_by('pub_date')
     serializer_class = CommentSerializer
     permission_classes = (Publish, )
     pagination_class = CommentPagination
