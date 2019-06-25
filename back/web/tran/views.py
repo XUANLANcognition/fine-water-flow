@@ -108,6 +108,7 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 class UserList(generics.ListCreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+    permission_classes = (CreateUser, )
 
 
 class UserDetail(generics.RetrieveUpdateDestroyAPIView):
