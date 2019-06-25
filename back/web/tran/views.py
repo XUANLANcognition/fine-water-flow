@@ -382,6 +382,8 @@ class BookList(generics.ListCreateAPIView):
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
+        self.request.user.profile.property = self.request.user.profile.property + 5
+        self.request.user.profile.save()
 
 
 class BookDetail(generics.RetrieveUpdateDestroyAPIView):
