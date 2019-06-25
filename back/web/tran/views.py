@@ -108,7 +108,6 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 class UserList(generics.ListCreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
-    permission_classes = (CreateUser, )
 
 
 class UserDetail(generics.RetrieveUpdateDestroyAPIView):
@@ -130,6 +129,23 @@ class UserAnotherDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = User.objects.all()
     serializer_class =  UserAnotherSerializer
     permission_classes = ()
+
+
+class PropertyRankSerializer(serializers.ModelSerializer):
+    username = serializers.CharField(source='user.username')
+    last_name = serializers.CharField(source='user.last_name')
+    id = serializers.CharField(source='user.id')
+
+    class Meta:
+        model = Profile
+        fields = ('username', 'last_name', 'id', 'bio', 'property', 'media_editor_auth')
+
+
+class PropertyRank(generics.ListAPIView):
+    queryset = Profile.objects.all().order_by('property')[:5]
+    serializer_class = PropertyRankSerializer
+    permission_classes = ()
+
 
 # user follow user
 
@@ -241,9 +257,6 @@ class ArticleFollowList(generics.ListAPIView):
     permission_classes = (Publish,)
     pagination_class = ArticlePagination
     filter_backends = (ArticleFollowFilter,)
-
-    def perform_create(self, serializer):
-        serializer.save(user=self.request.user)
 
 
 class ArticleDetail(generics.RetrieveUpdateDestroyAPIView):

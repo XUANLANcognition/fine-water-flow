@@ -74,5 +74,6 @@ urlpatterns = [
     path('api/booktags/', BookTagList.as_view(), name='booktag-list'),
     path('api/booktags/<int:pk>', BookTagDetail.as_view(), name='booktag-detail'),
     path('api/bookblocks/', BookBlockList.as_view(), name='bookblock-list'),
-    path('api/bookblocks/<int:pk>', BookBlockDetail.as_view(), name='bookblock-detail')
+    path('api/bookblocks/<int:pk>', BookBlockDetail.as_view(), name='bookblock-detail'),
+    path('api/property_rank/', PropertyRank.as_view(), name='property-rank')
 ]
