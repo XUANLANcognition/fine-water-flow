@@ -75,6 +75,7 @@ class MovieEditor extends Component {
           })
           if (response.status === 201) {
             openNotificationWithIconS('success')
+            this.props.history.replace('/movie')
           }
         } catch (error) {
           if (error.response.status === 403) {

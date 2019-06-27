@@ -164,7 +164,7 @@ class BookPage extends Component {
                 bordered={false}
                 defaultActiveKey={['1']}
                 expandIcon={({ isActive }) => <Icon type='caret-right' rotate={isActive ? 90 : 0} />}
-                style={{ paddingTop: '10px' }}
+                style={{ paddingTop: '10px 0' }}
               >
                 <Panel header={<Title level={4}>全部标签</Title>} key='1' style={customPanelStyle}>
                   <List

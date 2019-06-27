@@ -1,32 +1,44 @@
 import React, { Component } from 'react'
 import { Layout, notification, Form, Input, Button, Row, Col } from 'antd'
 import axios from 'axios'
-
+import { withRouter } from 'react-router'
 import BraftEditor from 'braft-editor'
 import 'braft-editor/dist/index.css'
+
 import Nav from '../Nav'
 import Myfooter from '../Myfooter'
-
-const { Content } = Layout
-const FormItem = Form.Item
 
 // 提示框
 const openNotificationWithIconS = (type) => {
   notification[type]({
-    message: 'successful',
+    message: 'Succeed',
     description: '发布成功',
     duration: 2
   })
 }
 const openNotificationWithIconE = (type) => {
   notification[type]({
-    message: 'error',
+    message: 'Error',
     description: '发布失败',
     duration: 2
   })
 }
 
-class textEditorPage extends Component {
+const excludeControls = [
+  'letter-spacing',
+  'line-height',
+  'clear',
+  'headings',
+  'list-ol',
+  'list-ul',
+  'remove-styles',
+  'superscript',
+  'subscript',
+  'hr',
+  'text-align'
+]
+
+class TextEditor extends Component {
   state = {
     uploading: false
   }
@@ -42,7 +54,6 @@ class textEditorPage extends Component {
 
   handleSubmit = async (event) => {
     event.preventDefault()
-
     this.props.form.validateFields(async (error, values) => {
       if (!error) {
         this.setState({
@@ -71,6 +82,7 @@ class textEditorPage extends Component {
           })
           if (response.status === 201) {
             openNotificationWithIconS('success')
+            this.props.history.replace('/')
           }
         } catch (error) {
           openNotificationWithIconE('error')
@@ -87,49 +99,48 @@ class textEditorPage extends Component {
         <Nav />
         <Row style={{ backgroundColor: '#fff', paddingTop: '30px' }}>
           <Col xxl={{ span: 12, offset: 6 }} xl={{ span: 16, offset: 4 }} xs={{ span: 22, offset: 1 }}>
-            <Content>
-              <div className='editor-wrapper' >
-                <Form onSubmit={this.handleSubmit}>
-                  <FormItem label='标题'>
-                    {getFieldDecorator('title', {
-                      rules: [{
-                        required: true,
-                        message: '请输入标题'
-                      }]
-                    })(
-                      <Input size='large' placeholder='请输入标题' />
-                    )}
-                  </FormItem>
-                  <FormItem label='正文'>
-                    {getFieldDecorator('content', {
-                      validateTrigger: 'onBlur',
-                      rules: [{
-                        required: true,
-                        validator: (_, value, callback) => {
-                          if (value.isEmpty()) {
-                          } else {
-                            callback()
-                          }
+            <div className='editor-wrapper' >
+              <Form onSubmit={this.handleSubmit} className='text-editor-form'>
+                <Form.Item >
+                  <div style={{ display: 'flex', flexDirection: 'row-reverse', justifyContent: 'space-between' }}>
+                    <Button loading={this.state.uploading} type='primary' htmlType='submit' >
+                        发布
+                    </Button>
+                  </div>
+                </Form.Item>
+                <Form.Item >
+                  {getFieldDecorator('title', {
+                    rules: [{
+                      required: true,
+                      message: 'Please input title.'
+                    }]
+                  })(
+                    <Input size='large' placeholder='请输入标题' />
+                  )}
+                </Form.Item>
+                <Form.Item>
+                  {getFieldDecorator('content', {
+                    validateTrigger: 'onBlur',
+                    rules: [{
+                      required: true,
+                      validator: (_, value, callback) => {
+                        if (value.isEmpty()) {
+                        } else {
+                          callback()
                         }
-                      }]
-                    })(
-                      <BraftEditor
-                        className='my-editor'
-                        placeholder='请输入正文内容'
-                        media={{ image: true }}
-                      />
-                    )}
-                  </FormItem>
-                  <FormItem >
-                    <div style={{ display: 'flex', flexDirection: 'row-reverse' }}>
-                      <Button loading={this.state.uploading} size='large' type='primary' htmlType='submit' >
-                      发布
-                      </Button>
-                    </div>
-                  </FormItem>
-                </Form>
-              </div>
-            </Content>
+                      }
+                    }]
+                  })(
+                    <BraftEditor
+                      className='my-editor'
+                      excludeControls={excludeControls}
+                      placeholder='请输入正文内容'
+                      media={{ image: true }}
+                    />
+                  )}
+                </Form.Item>
+              </Form>
+            </div>
           </Col>
         </Row>
         <Myfooter />
@@ -137,5 +148,5 @@ class textEditorPage extends Component {
     )
   }
 }
-
-export default Form.create()(textEditorPage)
+const TextEditorPage = withRouter(Form.create()(TextEditor))
+export default TextEditorPage

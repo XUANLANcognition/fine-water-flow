@@ -79,6 +79,7 @@ class BookEditor extends Component {
           })
           if (response.status === 201) {
             openNotificationWithIconS('success')
+            this.props.history.replace('/book')
           }
         } catch (error) {
           if (error.response.status === 403) {
@@ -149,12 +150,10 @@ class BookEditor extends Component {
                   </Form.Item>
                   <Form.Item label='作者'>
                     {getFieldDecorator('author', {
-                      rules: [
-                        {
-                          required: true,
-                          message: 'Please input the author of book!'
-                        }
-                      ]
+                      rules: [{
+                        required: true,
+                        message: 'Please input the author of book!'
+                      }]
                     })(<Input />)}
                   </Form.Item>
                   <Form.Item label='出版社'>

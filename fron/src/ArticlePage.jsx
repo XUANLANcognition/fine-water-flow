@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Row, Col, Layout, Form, Spin, Affix, Tag, Typography } from 'antd'
 import axios from 'axios'
 import dayjs from 'dayjs'
+import 'braft-editor/dist/output.css'
 
 import Nav from './Nav'
 import Myfooter from './Myfooter'
@@ -86,7 +87,7 @@ class ArticlePage extends Component {
           <Col xxl={{ span: 10, offset: 4 }} xl={{ span: 13, offset: 2 }} xs={{ span: 22, offset: 1 }}>
             <div type='flex' style={{ flex: '1 0', background: '#fff' }}>
               <div style={{ fontSize: '16px' }}>
-                <div style={{ overflow: 'auto' }} dangerouslySetInnerHTML={{ __html: this.state.content }} />
+                <div className='braft-output-content' style={{ overflow: 'auto' }} dangerouslySetInnerHTML={{ __html: this.state.content }} />
                 <Tag style={{ marginTop: '10px' }} color='#108ee9'>编辑于 {dayjs(this.state.pubDate).fromNow()}</Tag>
               </div>
               <div style={{ textAlign: 'center' }}>
