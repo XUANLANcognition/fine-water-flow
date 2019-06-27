@@ -25,7 +25,6 @@ from rest_framework.decorators import permission_classes
 
 from tran.views import *
 
-
 router = routers.DefaultRouter()
 
 
