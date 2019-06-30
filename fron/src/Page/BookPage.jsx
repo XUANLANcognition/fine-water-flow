@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import { Layout, Row, Col, Typography, Card, Tag, List, Collapse, Icon } from 'antd'
+import { Layout, Row, Col, Typography, Tag, List, Collapse, Icon, Divider, BackTop } from 'antd'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
+import QueueAnim from 'rc-queue-anim'
 
 import Nav from '../Nav'
 import Myfooter from '../Myfooter'
@@ -55,7 +56,7 @@ class BookPage extends Component {
         count: response.data.count
       })
       const responseTag = await axios.get(
-        'https://finewf.club:8080/api/bookblocks/?format=json'
+        'https://finewf.club:8080/api/bookblocks/?format=json' + (this.state.selectedTags.length === 0 ? '' : '123')
       )
       this.setState({ tags: responseTag.data })
     } catch (error) {
@@ -120,43 +121,67 @@ class BookPage extends Component {
     return (
       <Layout style={{ minHeight: '100vh' }}>
         <Nav />
+        <BackTop />
         <div style={{ flex: '1 0 ', backgroundColor: '#ffffff' }}>
           <Row style={{ paddingBottom: '30px' }}>
             <Col xxl={{ span: 16, offset: 4 }} xl={{ span: 20, offset: 2 }} xs={{ span: 22, offset: 1 }} />
           </Row>
           <Row style={{ paddingTop: '0px', paddingBottom: '30px' }}>
             <Col xxl={{ span: 11, offset: 4 }} xl={{ span: 13, offset: 2 }} xs={{ span: 22, offset: 1 }} style={{ paddingTop: '0px', paddingBottom: '30px' }}>
-              <List
-                loading={this.state.loading}
-                grid={{
-                  gutter: 28,
-                  xs: 2,
-                  sm: 2,
-                  md: 4,
-                  lg: 4,
-                  xl: 4,
-                  xxl: 6
-                }}
-                size='large'
-                dataSource={this.state.cache}
-                pagination={{
-                  onChange: this.handleBook,
-                  pageSize: 12
-                }}
-                renderItem={item => (
-                  <List.Item>
-                    <Link to={'/book/' + item.id}>
-                      <div>
-                        <div alt={item.title} style={{ width: '102%', paddingBottom: '133%', borderRadius: '5px', backgroundClip: 'border-box', backgroundSize: 'contain', backgroundPosition: 'center', backgroundImage: `url(${item.cover})` }} />
-                        <br />
-                        {item.title.slice(0, 6)}
-                        <br />
-                        {item.author.slice(0, 8) + '...'}
+              <Title level={4}>FWF 全库</Title>
+              <Divider />
+              <QueueAnim>
+                <List
+                  itemLayout='vertical'
+                  loading={this.state.loading}
+                  grid={{
+                    gutter: 28,
+                    xs: 1,
+                    sm: 2,
+                    md: 2,
+                    lg: 2,
+                    xl: 2,
+                    xxl: 2
+                  }}
+                  pagination={{
+                    onChange: this.handleBook,
+                    pageSize: count,
+                    total: this.state.count,
+                    showQuickJumper: true
+                  }}
+                  size='large'
+                  dataSource={this.state.cache}
+                  renderItem={item => (
+                    <List.Item key={item.id}>
+                      <div style={{ padding: '20px 0px' }}>
+                        <Link to={'/book/' + item.id} >
+                          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                            <div style={{ display: 'flex', flexDirection: 'column' }}>
+                              <div style={{ fontSize: '16px', color: '#3377aa' }}>
+                                {item.title}
+                              </div>
+                              <div style={{ fontSize: '13px', color: 'grey', paddingTop: '5px' }}>
+                                {item.author}
+                              </div>
+                              <div style={{ paddingTop: '5px', display: 'flex', flexWrap: 'wrap' }}>
+                                {item.tag && (item.tag.map(tag => (
+                                  <Tag key={tag.title} color='#f7f7f7' style={{ margin: '5px 5px', color: 'black' }}>
+                                    {tag.title}
+                                  </Tag>
+                                )))}
+                              </div>
+                            </div>
+                            <div alt={item.title} style={{ width: '32%', paddingBottom: '46%', borderRadius: '10px', backgroundClip: 'border-box', backgroundSize: 'contain', backgroundPosition: 'center', backgroundImage: `url(${item.cover})` }} />
+                          </div>
+                        </Link>
+                        <div style={{ fontSize: '14px', color: 'grey', paddingTop: '5px' }}>
+                          {item.overview && item.overview.slice(0, 42) + '...'}
+                        </div>
                       </div>
-                    </Link>
-                  </List.Item>
-                )}
-              />
+                    </List.Item>
+                  )}
+                />
+              </QueueAnim>
             </Col>
             <Col xxl={{ span: 4, offset: 1 }} xl={{ span: 6, offset: 1 }} xs={{ span: 22, offset: 1 }}>
               <CategoryList />

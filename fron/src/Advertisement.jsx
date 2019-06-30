@@ -8,8 +8,8 @@ const { Title } = Typography
 class Advertisement extends Component {
   render () {
     return (
-      <div style={{ padding: '20px', background: '#f7f7f7', borderRadius: '5px' }}>
-        <Title level={4} style={{}}>广告</Title>
+      <div style={{ borderRadius: '5px', background: '#f7f7f7', padding: '20px' }}>
+        <Title level={4}>广告</Title>
         <Carousel autoplay effect='fade'>
           <div style={{ borderRadius: '5px' }}>
             <h3>搭飞机坐火车去哪里都好</h3>

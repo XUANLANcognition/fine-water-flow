@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Row, Col, Layout, Form, Spin, Affix, Tag, Typography } from 'antd'
+import { Row, Col, Layout, Form, Spin, Affix, Tag, Typography, BackTop } from 'antd'
 import axios from 'axios'
 import dayjs from 'dayjs'
 import 'braft-editor/dist/output.css'
@@ -74,6 +74,7 @@ class ArticlePage extends Component {
     return (
       <Layout style={{ minHeight: '100vh', backgroundColor: '#fff' }}>
         <Nav />
+        <BackTop />
         <Row >
           <Col xxl={{ span: 16, offset: 4 }} xl={{ span: 20, offset: 2 }} xs={{ span: 22, offset: 1 }}>
             <div style={{ fontSize: '25px', fontWeight: 'bold', color: 'black', padding: '24px 0 24px 0' }}>

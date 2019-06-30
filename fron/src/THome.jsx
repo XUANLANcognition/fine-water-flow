@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Layout, Row, Col, Tabs, Form, Affix } from 'antd'
+import { Layout, Row, Col, Tabs, Form, BackTop } from 'antd'
 import { withRouter } from 'react-router'
 
 import Nav from './Nav'
@@ -30,6 +30,7 @@ class THome extends Component {
     return (
       <Layout style={{ minHeight: '100vh', backgroundColor: '#fff' }}>
         <Nav />
+        <BackTop />
         <Row style={{ flex: '1 0', paddingTop: '30px', paddingBottom: '30px' }}>
           <Col xxl={{ span: 11, offset: 4 }} xl={{ span: 13, offset: 2 }} xs={{ span: 22, offset: 1 }} style={{ paddingBottom: '20px' }}>
             <Tabs defaultActiveKey='1'>
@@ -42,11 +43,9 @@ class THome extends Component {
             </Tabs>
           </Col>
           <Col xxl={{ span: 4, offset: 1 }} xl={{ span: 6, offset: 1 }} xs={{ span: 22, offset: 1 }}>
-            <Affix offsetTop={0}>
-              <CategoryList />
-            </Affix>
-            <Advertisement />
+            <CategoryList />
             <PropertyRank />
+            <Advertisement />
           </Col>
         </Row>
         <Myfooter />

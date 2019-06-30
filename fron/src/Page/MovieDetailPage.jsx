@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Layout, Row, Col, Descriptions, PageHeader, Typography, List, Card } from 'antd'
+import { Layout, Row, Col, Descriptions, PageHeader, Typography, List, Card, BackTop } from 'antd'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 
@@ -63,6 +63,7 @@ class BookDetailPage extends Component {
       return (
         <Layout style={{ minHeight: '100vh', background: 'unset' }}>
           <Nav />
+          <BackTop />
           <div style={{ flex: '1 0 ' }}>
             <Row style={{ paddingTop: '30px', paddingBottom: '30px' }}>
               <Col xxl={{ span: 16, offset: 4 }} xl={{ span: 20, offset: 2 }} xs={{ span: 22, offset: 1 }}>
@@ -107,7 +108,7 @@ class BookDetailPage extends Component {
               </Col>
             </Row>
             <Row style={{ paddingTop: '30px', paddingBottom: '30px' }}>
-              <Col xxl={{ span: 10, offset: 4 }} xl={{ span: 12, offset: 2 }} xs={{ span: 22, offset: 1 }}>
+              <Col xxl={{ span: 10, offset: 4 }} xl={{ span: 13, offset: 2 }} xs={{ span: 22, offset: 1 }}>
                 <Title level={4}>内容简介 · · · · · ·</Title>
                 <div style={{ padding: '24px 0' }} dangerouslySetInnerHTML={{ __html: this.state.overview.replace(/\r/g, '</br>') }} />
                 <Title level={4}>导演 · · · · · ·</Title>
@@ -194,7 +195,7 @@ class BookDetailPage extends Component {
                 <Title level={4}>影评 · · · · · ·</Title>
                 <AddMovieComment movieId={this.state.id} movieUrl={this.state.url} />
               </Col>
-              <Col xxl={{ span: 5, offset: 1 }} xl={{ span: 7, offset: 1 }} xs={{ span: 22, offset: 1 }}>
+              <Col xxl={{ span: 5, offset: 1 }} xl={{ span: 6, offset: 1 }} xs={{ span: 22, offset: 1 }}>
                 <Advertisement />
               </Col>
             </Row>

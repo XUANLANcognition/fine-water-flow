@@ -37,7 +37,7 @@ class AuthorShowCard extends Component {
 
   render () {
     return (
-      <Card title='关于作者'>
+      <Card title='关于作者' bordered={false} style={{ background: '#f7f7f7' }}>
         <Meta
           avatar={<Link to={(this.state.id + '' === window.localStorage.getItem('user_id') ? '/profile/' : '/visit/') + this.state.id}><Avatar src={this.state.urlAvatar} /></Link>}
           title={this.state.username}

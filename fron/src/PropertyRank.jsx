@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
-import { List, Avatar } from 'antd'
+import { List, Avatar, Typography } from 'antd'
 import axios from 'axios'
 
 import PropertyList from './PropertyList'
+
+const { Title } = Typography
 
 class PropertyRank extends Component {
     state = {
@@ -28,21 +30,24 @@ class PropertyRank extends Component {
 
       render () {
         return (
-          <List
-            header={<div>财富榜</div>}
-            itemLayout='horizontal'
-            dataSource={this.state.data}
-            renderItem={item => (
-              <List.Item>
-                <List.Item.Meta
-                  avatar={<Avatar src={item.last_name} />}
-                  title={item.username}
-                  description={item.bio}
-                />
-                <PropertyList property={item.property} />
-              </List.Item>
-            )}
-          />
+          <div style={{ padding: '0 20px', background: '#f7f7f7', borderRadius: '10px' }}>
+            <List
+              header={<Title level={4}>果榜</Title>}
+              itemLayout='horizontal'
+              dataSource={this.state.data}
+              split={false}
+              renderItem={item => (
+                <List.Item>
+                  <List.Item.Meta
+                    avatar={<Avatar src={item.last_name} />}
+                    title={item.username}
+                    description={item.bio}
+                  />
+                  <PropertyList property={item.property} />
+                </List.Item>
+              )}
+            />
+          </div>
         )
       }
 }

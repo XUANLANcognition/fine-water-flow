@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Layout, Row, Col, Card, List } from 'antd'
+import { Layout, Row, Col, Typography, List, Divider, BackTop } from 'antd'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 
@@ -9,6 +9,7 @@ import Advertisement from '../Advertisement'
 import CategoryList from '../CategoryList'
 
 const count = 12
+const { Title } = Typography
 
 class MoviePage extends Component {
   page = 1
@@ -31,7 +32,7 @@ class MoviePage extends Component {
       )
       const temp = []
       for (let index = 0; index < response.data.count; index++) {
-        temp.push({ title: '', cover: '', id: index })
+        temp.push({ title: '', cover: '', author: '', id: index })
       }
       this.setState({
         cache: temp
@@ -43,6 +44,10 @@ class MoviePage extends Component {
         cache: temp,
         count: response.data.count
       })
+      const responseTag = await axios.get(
+        'https://finewf.club:8080/api/bookblocks/?format=json' + (this.state.selectedTags.length === 0 ? '' : '123')
+      )
+      this.setState({ tags: responseTag.data })
     } catch (error) {
       console.log(error)
     }
@@ -76,35 +81,49 @@ class MoviePage extends Component {
     return (
       <Layout style={{ minHeight: '100vh' }}>
         <Nav />
+        <BackTop />
         <div style={{ flex: '1 0 ', backgroundColor: '#ffffff' }}>
           <Row style={{ paddingTop: '30px', paddingBottom: '30px' }}>
             <Col xxl={{ span: 11, offset: 4 }} xl={{ span: 13, offset: 2 }} xs={{ span: 22, offset: 1 }}>
+              <Title level={4}>FWF 全库</Title>
+              <Divider />
               <List
+                itemLayout='vertical'
                 loading={this.state.loading}
                 grid={{
                   gutter: 28,
-                  xs: 2,
+                  xs: 1,
                   sm: 2,
-                  md: 4,
-                  lg: 4,
-                  xl: 4,
-                  xxl: 6
+                  md: 2,
+                  lg: 2,
+                  xl: 2,
+                  xxl: 2
+                }}
+                pagination={{
+                  pageSize: count,
+                  total: this.state.count,
+                  showQuickJumper: true,
+                  onChange: this.handleMovie
                 }}
                 size='large'
                 dataSource={this.state.cache}
-                pagination={{
-                  onChange: this.handleMovie,
-                  pageSize: 12
-                }}
                 renderItem={item => (
-                  <List.Item>
-                    <Link to={'/movie/' + item.id}>
-                      <div>
-                        <div alt={item.title} style={{ width: '102%', paddingBottom: '133%', borderRadius: '5px', backgroundClip: 'border-box', backgroundSize: 'contain', backgroundPosition: 'center', backgroundImage: `url(${item.cover})` }} />
-                        <br />
-                        {item.title.slice(0, 6) + '...'}
+                  <List.Item key={item.id}>
+                    <div style={{ padding: '20px 0px' }}>
+                      <Link to={'/movie/' + item.id} >
+                        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                          <div style={{ display: 'flex', flexDirection: 'column' }}>
+                            <div style={{ fontSize: '16px', color: '#3377aa' }}>
+                              {item.title}
+                            </div>
+                          </div>
+                          <div alt={item.title} style={{ width: '32%', paddingBottom: '46%', borderRadius: '10px', backgroundClip: 'border-box', backgroundSize: 'contain', backgroundPosition: 'center', backgroundImage: `url(${item.cover})` }} />
+                        </div>
+                      </Link>
+                      <div style={{ fontSize: '14px', color: 'grey', paddingTop: '5px' }}>
+                        {item.overview && item.overview.slice(0, 42) + '...'}
                       </div>
-                    </Link>
+                    </div>
                   </List.Item>
                 )}
               />
