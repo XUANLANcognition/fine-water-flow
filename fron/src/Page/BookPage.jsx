@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Layout, Row, Col, Typography, Tag, List, Collapse, Icon, Divider, BackTop } from 'antd'
+import { Layout, Row, Col, Typography, Tag, List, Collapse, Icon, Descriptions, BackTop } from 'antd'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 import QueueAnim from 'rc-queue-anim'
@@ -13,7 +13,7 @@ const CheckableTag = Tag.CheckableTag
 const { Title } = Typography
 const count = 12
 const customPanelStyle = {
-  background: '#f7f7f7',
+  background: '#fff',
   borderRadius: 4,
   marginBottom: 24,
   border: 0,
@@ -128,60 +128,62 @@ class BookPage extends Component {
           </Row>
           <Row style={{ paddingTop: '0px', paddingBottom: '30px' }}>
             <Col xxl={{ span: 11, offset: 4 }} xl={{ span: 13, offset: 2 }} xs={{ span: 22, offset: 1 }} style={{ paddingTop: '0px', paddingBottom: '30px' }}>
-              <Title level={4}>FWF 全库</Title>
-              <Divider />
-              <QueueAnim>
-                <List
-                  itemLayout='vertical'
-                  loading={this.state.loading}
-                  grid={{
-                    gutter: 28,
-                    xs: 1,
-                    sm: 2,
-                    md: 2,
-                    lg: 2,
-                    xl: 2,
-                    xxl: 2
-                  }}
-                  pagination={{
-                    onChange: this.handleBook,
-                    pageSize: count,
-                    total: this.state.count,
-                    showQuickJumper: true
-                  }}
-                  size='large'
-                  dataSource={this.state.cache}
-                  renderItem={item => (
-                    <List.Item key={item.id}>
-                      <div style={{ padding: '20px 0px' }}>
-                        <Link to={'/book/' + item.id} >
-                          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                            <div style={{ display: 'flex', flexDirection: 'column' }}>
-                              <div style={{ fontSize: '16px', color: '#3377aa' }}>
-                                {item.title}
-                              </div>
-                              <div style={{ fontSize: '13px', color: 'grey', paddingTop: '5px' }}>
-                                {item.author}
-                              </div>
-                              <div style={{ paddingTop: '5px', display: 'flex', flexWrap: 'wrap' }}>
-                                {item.tag && (item.tag.map(tag => (
-                                  <Tag key={tag.title} color='#f7f7f7' style={{ margin: '5px 5px', color: 'black' }}>
-                                    {tag.title}
-                                  </Tag>
-                                )))}
-                              </div>
+              <Title level={4} style={{ padding: '10px 0' }}>FWF 全库 ({this.state.cache.length})</Title>
+
+              <List
+                itemLayout='vertical'
+                loading={this.state.loading}
+                grid={{
+                  gutter: 28,
+                  xs: 1,
+                  sm: 1,
+                  md: 1,
+                  lg: 1,
+                  xl: 1,
+                  xxl: 1
+                }}
+                pagination={{
+                  onChange: this.handleBook,
+                  pageSize: count,
+                  total: this.state.count,
+                  showQuickJumper: true
+                }}
+                size='large'
+                dataSource={this.state.cache}
+                renderItem={item => (
+                  <List.Item key={item.id}>
+                    <div style={{ padding: '20px', background: '#f7f7f7', borderRadius: '20px' }}>
+                      <Link to={'/book/' + item.id} >
+                        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                          <div style={{ display: 'flex', flexDirection: 'column' }}>
+                            <div style={{ fontSize: '16px', color: '#3377aa', marginBottom: '15px' }}>
+                              {item.title}
                             </div>
-                            <div alt={item.title} style={{ width: '32%', paddingBottom: '46%', borderRadius: '10px', backgroundClip: 'border-box', backgroundSize: 'contain', backgroundPosition: 'center', backgroundImage: `url(${item.cover})` }} />
+                            <Descriptions
+                              border
+                              column={1}
+                            >
+                              <Descriptions.Item label='作者'>{item.author}</Descriptions.Item>
+                              <Descriptions.Item label='出版社'>{item.publisher}</Descriptions.Item>
+                            </Descriptions>
+                            <div style={{ display: 'flex', flexWrap: 'wrap', margin: '10px 0' }}>
+                              {item.tag && (item.tag.map(tag => (
+                                <Tag key={tag.title} color='#343a40' style={{ color: 'white' }}>
+                                  {tag.title}
+                                </Tag>
+                              )))}
+                            </div>
                           </div>
-                        </Link>
-                        <div style={{ fontSize: '14px', color: 'grey', paddingTop: '5px' }}>
-                          {item.overview && item.overview.slice(0, 42) + '...'}
+                          <img alt={item.title} src={item.cover} style={{ width: '135px', maxHeight: '200px' }} />
                         </div>
+                      </Link>
+                      <div style={{ fontSize: '14px', color: 'grey', paddingTop: '5px' }}>
+                        {item.overview && item.overview.slice(0, 96) + '......'}
                       </div>
-                    </List.Item>
-                  )}
-                />
-              </QueueAnim>
+                    </div>
+                  </List.Item>
+                )}
+              />
             </Col>
             <Col xxl={{ span: 4, offset: 1 }} xl={{ span: 6, offset: 1 }} xs={{ span: 22, offset: 1 }}>
               <CategoryList />

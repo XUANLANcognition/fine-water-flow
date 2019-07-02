@@ -86,10 +86,10 @@ class BookDetailPage extends Component {
                   }} />
                   <div className='wrap' style={{ background: 'rgba(0,30%,100%,90%)' }}>
                     <div className='content'>
-                      <Title level={2}>{this.state.title}</Title>
+                      <Title level={3}>{this.state.title}</Title>
                       <Descriptions
                         border
-                        column={{ xxl: 2, xl: 2, lg: 3, md: 3, sm: 2, xs: 1 }}
+                        column={{ xxl: 2, xl: 2, lg: 2, md: 2, sm: 2, xs: 1 }}
                       >
                         <Descriptions.Item label='集数'>{this.state.number}</Descriptions.Item>
                         <Descriptions.Item label='单集片长'>{this.state.runtime}</Descriptions.Item>
@@ -100,7 +100,7 @@ class BookDetailPage extends Component {
                       <img
                         src={this.state.cover}
                         alt={this.state.title}
-                        style={{ maxWidth: '180px', borderRadius: '10px' }}
+                        style={{ width: '135px', maxHeight: '200px', borderRadius: '10px' }}
                       />
                     </div>
                   </div>

@@ -76,10 +76,10 @@ class FigureDetailPage extends Component {
                   }} />
                   <div className='wrap' style={{ background: 'rgba(0,30%,100%,90%)' }}>
                     <div className='content'>
-                      <Title level={2}>{this.state.name}</Title>
+                      <Title level={3}>{this.state.name}</Title>
                       <Descriptions
                         border
-                        column={{ xxl: 4, xl: 3, lg: 3, md: 3, sm: 2, xs: 1 }}
+                        column={{ xxl: 2, xl: 2, lg: 2, md: 2, sm: 2, xs: 1 }}
                       >
                         <Descriptions.Item label='性别'>{this.state.gender}</Descriptions.Item>
                         <Descriptions.Item label='出生日期'>{this.state.birthday}</Descriptions.Item>
@@ -90,7 +90,7 @@ class FigureDetailPage extends Component {
                       <img
                         src={this.state.cover}
                         alt={this.state.title}
-                        style={{ maxWidth: '180px', borderRadius: '10px' }}
+                        style={{ width: '135px', maxHeight: '200px', borderRadius: '10px' }}
                       />
                     </div>
                   </div>
@@ -99,7 +99,7 @@ class FigureDetailPage extends Component {
             </Row>
             <Row style={{ paddingTop: '30px', paddingBottom: '30px' }}>
               <Col xxl={{ span: 10, offset: 4 }} xl={{ span: 12, offset: 2 }} xs={{ span: 22, offset: 1 }}>
-                <Title level={3}>个人简介 · · · · · ·</Title>
+                <Title level={4}>个人简介 · · · · · ·</Title>
                 <Paragraph ellipsis={{ rows: 2, expandable: true }} style={{ fontSize: '24' }} />
               </Col>
               <Col xxl={{ span: 5, offset: 1 }} xl={{ span: 7, offset: 1 }} xs={{ span: 22, offset: 1 }}>

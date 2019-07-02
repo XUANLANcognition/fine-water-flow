@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Icon, Card, Typography } from 'antd'
+import { Icon, Typography } from 'antd'
 import { Link } from 'react-router-dom'
 
 const IconFont = Icon.createFromIconfontCN({
@@ -21,8 +21,8 @@ class CategoryList extends Component {
 
   render () {
     return (
-      <div style={{ padding: '20px', background: '#f7f7f7', borderRadius: '5px' }}>
-        <Title level={4}>改变</Title>
+      <div style={{ padding: '30px 20px', background: '#fff', borderRadius: '5px' }}>
+        <Title level={4} style={{ marginBottom: '30px' }}>改变</Title>
         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
           <Link to='/textEditorPage'>
             <IconFont type='icon-article' style={{ fontSize: '36px' }} />

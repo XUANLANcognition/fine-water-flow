@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Layout, Row, Col, Typography, List, Divider, BackTop } from 'antd'
+import { Layout, Row, Col, Typography, List, Descriptions, BackTop } from 'antd'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 
@@ -83,21 +83,23 @@ class MoviePage extends Component {
         <Nav />
         <BackTop />
         <div style={{ flex: '1 0 ', backgroundColor: '#ffffff' }}>
-          <Row style={{ paddingTop: '30px', paddingBottom: '30px' }}>
-            <Col xxl={{ span: 11, offset: 4 }} xl={{ span: 13, offset: 2 }} xs={{ span: 22, offset: 1 }}>
-              <Title level={4}>FWF 全库</Title>
-              <Divider />
+          <Row style={{ paddingBottom: '30px' }}>
+            <Col xxl={{ span: 16, offset: 4 }} xl={{ span: 20, offset: 2 }} xs={{ span: 22, offset: 1 }} />
+          </Row>
+          <Row style={{ paddingTop: '0px', paddingBottom: '30px' }}>
+            <Col xxl={{ span: 11, offset: 4 }} xl={{ span: 13, offset: 2 }} xs={{ span: 22, offset: 1 }} style={{ paddingTop: '0px', paddingBottom: '30px' }}>
+              <Title level={4} style={{ padding: '10px 0' }}>FWF 全库 ({this.state.cache.length})</Title>
               <List
                 itemLayout='vertical'
                 loading={this.state.loading}
                 grid={{
                   gutter: 28,
                   xs: 1,
-                  sm: 2,
-                  md: 2,
-                  lg: 2,
-                  xl: 2,
-                  xxl: 2
+                  sm: 1,
+                  md: 1,
+                  lg: 1,
+                  xl: 1,
+                  xxl: 1
                 }}
                 pagination={{
                   pageSize: count,
@@ -109,19 +111,28 @@ class MoviePage extends Component {
                 dataSource={this.state.cache}
                 renderItem={item => (
                   <List.Item key={item.id}>
-                    <div style={{ padding: '20px 0px' }}>
+                    <div style={{ padding: '20px', background: '#f7f7f7', borderRadius: '20px' }}>
                       <Link to={'/movie/' + item.id} >
                         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                           <div style={{ display: 'flex', flexDirection: 'column' }}>
-                            <div style={{ fontSize: '16px', color: '#3377aa' }}>
+                            <div style={{ fontSize: '16px', color: '#3377aa', marginBottom: '15px' }}>
                               {item.title}
                             </div>
+                            <Descriptions
+                              border
+                              column={1}
+                            >
+
+                              <Descriptions.Item label='集数'>{item.number}</Descriptions.Item>
+                              <Descriptions.Item label='单集片长'>{item.number}</Descriptions.Item>
+                              <Descriptions.Item label='制片国家/地区'>{item.region}</Descriptions.Item>
+                            </Descriptions>
                           </div>
-                          <div alt={item.title} style={{ width: '32%', paddingBottom: '46%', borderRadius: '10px', backgroundClip: 'border-box', backgroundSize: 'contain', backgroundPosition: 'center', backgroundImage: `url(${item.cover})` }} />
+                          <img alt={item.title} src={item.cover} style={{ width: '135px', maxHeight: '200px' }} />
                         </div>
                       </Link>
                       <div style={{ fontSize: '14px', color: 'grey', paddingTop: '5px' }}>
-                        {item.overview && item.overview.slice(0, 42) + '...'}
+                        {item.overview && item.overview.slice(0, 96) + '......'}
                       </div>
                     </div>
                   </List.Item>
