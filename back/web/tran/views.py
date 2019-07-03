@@ -212,7 +212,7 @@ class ArticleSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Article
-        fields = ('url', 'id', 'title', 'description', 'pub_date', 'user', 'content')
+        fields = ('url', 'id', 'title', 'description', 'pub_date', 'user', 'content', 'views')
 
 
 class ArticlePagination(PageNumberPagination):
@@ -264,6 +264,12 @@ class ArticleDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Article.objects.all()
     serializer_class = ArticleSerializer
     permission_classes = (Read,)
+
+    def get(self, request, *args, **kwargs):
+        article = Article.objects.get(id = kwargs['pk'])
+        article.views = article.views + 1
+        article.save()
+        return self.retrieve(request, *args, **kwargs)
 
 
 # BookComment API
