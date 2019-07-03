@@ -105,7 +105,7 @@ class BookPage extends Component {
         const response = await axios.get(
           'https://finewf.club:8080/api/books/?format=json' + '&page=' + this.page + '&page_size=' + count + fliterTag
         )
-        this.setState({ cache: response.data.results, loading: false })
+        this.setState({ cache: response.data.results, loading: false, count: response.data.count })
       } catch (error) {
         console.log(error)
       }
@@ -128,7 +128,7 @@ class BookPage extends Component {
           </Row>
           <Row style={{ paddingTop: '0px', paddingBottom: '30px' }}>
             <Col xxl={{ span: 11, offset: 4 }} xl={{ span: 13, offset: 2 }} xs={{ span: 22, offset: 1 }} style={{ paddingTop: '0px', paddingBottom: '30px' }}>
-              <Title level={4} style={{ padding: '10px 0' }}>FWF 全库 ({this.state.cache.length})</Title>
+              <Title level={4} style={{ padding: '10px 0' }}>FWF 全库 ({this.state.count})</Title>
 
               <List
                 itemLayout='vertical'
@@ -145,7 +145,7 @@ class BookPage extends Component {
                 pagination={{
                   onChange: this.handleBook,
                   pageSize: count,
-                  total: this.state.count,
+                  total: this.state.cache.length,
                   showQuickJumper: true
                 }}
                 size='large'
@@ -156,19 +156,20 @@ class BookPage extends Component {
                       <Link to={'/book/' + item.id} >
                         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                           <div style={{ display: 'flex', flexDirection: 'column' }}>
-                            <div style={{ fontSize: '16px', color: '#3377aa', marginBottom: '15px' }}>
+                            <div style={{ fontSize: '18px', color: '#3377aa', marginBottom: '15px' }}>
                               {item.title}
                             </div>
                             <Descriptions
                               border
                               column={1}
                             >
+                              <Descriptions.Item label='副标题'>{item.subtitle}</Descriptions.Item>
                               <Descriptions.Item label='作者'>{item.author}</Descriptions.Item>
                               <Descriptions.Item label='出版社'>{item.publisher}</Descriptions.Item>
                             </Descriptions>
                             <div style={{ display: 'flex', flexWrap: 'wrap', margin: '10px 0' }}>
                               {item.tag && (item.tag.map(tag => (
-                                <Tag key={tag.title} color='#343a40' style={{ color: 'white' }}>
+                                <Tag key={tag.title} color='#343a40' style={{ color: 'white', margin: '5px' }}>
                                   {tag.title}
                                 </Tag>
                               )))}

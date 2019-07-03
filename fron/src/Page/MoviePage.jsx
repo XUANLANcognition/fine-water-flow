@@ -115,7 +115,7 @@ class MoviePage extends Component {
                       <Link to={'/movie/' + item.id} >
                         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                           <div style={{ display: 'flex', flexDirection: 'column' }}>
-                            <div style={{ fontSize: '16px', color: '#3377aa', marginBottom: '15px' }}>
+                            <div style={{ fontSize: '18px', color: '#3377aa', marginBottom: '15px' }}>
                               {item.title}
                             </div>
                             <Descriptions

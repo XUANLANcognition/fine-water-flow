@@ -95,7 +95,7 @@ class BookDetailPage extends Component {
                         <Descriptions.Item label='ISBN'>{this.state.isbn}</Descriptions.Item>
                       </Descriptions>
                       {this.state.tags.map(tag => (
-                        <Tag key={tag.title} color='#f50' style={{ margin: '5px' }}>
+                        <Tag key={tag.title} color='#343a40' style={{ margin: '5px' }}>
                           {tag.title}
                         </Tag>
                       ))}
