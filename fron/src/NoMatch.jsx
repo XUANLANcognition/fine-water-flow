@@ -1,12 +1,20 @@
 import React, { Component } from 'react'
+import { Result, Button } from 'antd'
+import { Link } from 'react-router-dom'
 
 class NoMatch extends Component {
   render () {
     return (
       <div>
-        <h1 style={{ textAlign: 'center' }}>404 : Not Found</h1>
-        <hr />
-        <h2 style={{ textAlign: 'center' }}>Not found the page</h2>
+        <Result
+          title='404'
+          subTitle='Sorry, the page you visited does not exist.'
+          extra={
+            <Link to='/'>
+              <Button type='primary'>Back Home</Button>
+            </Link>
+          }
+        />
       </div>
     )
   }
