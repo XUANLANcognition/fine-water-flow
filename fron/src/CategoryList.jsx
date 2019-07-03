@@ -21,7 +21,7 @@ class CategoryList extends Component {
 
   render () {
     return (
-      <div style={{ padding: '30px 20px', background: '#fff', borderRadius: '5px' }}>
+      <div style={{ padding: '30px 0px', background: '#fff', borderRadius: '5px' }}>
         <Title level={4} style={{ marginBottom: '30px' }}>改变</Title>
         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
           <Link to='/textEditorPage'>

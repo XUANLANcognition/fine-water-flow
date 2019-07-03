@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { Layout, Row, Col, Typography, Tag, List, Collapse, Icon, Descriptions, BackTop } from 'antd'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
-import QueueAnim from 'rc-queue-anim'
 
 import Nav from '../Nav'
 import Myfooter from '../Myfooter'
@@ -192,7 +191,7 @@ class BookPage extends Component {
                 bordered={false}
                 defaultActiveKey={['1']}
                 expandIcon={({ isActive }) => <Icon type='caret-right' rotate={isActive ? 90 : 0} />}
-                style={{ paddingTop: '10px 0' }}
+                style={{ paddingTop: '10px' }}
               >
                 <Panel header={<Title level={4}>全部标签</Title>} key='1' style={customPanelStyle}>
                   <List

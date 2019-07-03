@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Card, Carousel, Typography } from 'antd'
+import { Carousel, Typography } from 'antd'
 
 import './Advertisement.css'
 
