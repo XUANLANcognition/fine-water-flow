@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Row, Col, Layout, Form, Spin, Affix, Tag, Typography, BackTop } from 'antd'
+import { Row, Col, Layout, Form, Spin, Affix, Tag, Typography, BackTop, Statistic, Divider } from 'antd'
 import axios from 'axios'
 import dayjs from 'dayjs'
 import 'braft-editor/dist/output.css'
@@ -27,7 +27,8 @@ class ArticlePage extends Component {
       modalContent: '',
       loading: true,
       authorId: '',
-      pubDate: ''
+      pubDate: '',
+      count: 0
     }
   }
 
@@ -75,12 +76,18 @@ class ArticlePage extends Component {
       <Layout style={{ minHeight: '100vh', backgroundColor: '#fff' }}>
         <Nav />
         <BackTop />
-        <Row >
-          <Col xxl={{ span: 16, offset: 4 }} xl={{ span: 20, offset: 2 }} xs={{ span: 22, offset: 1 }}>
-            <div style={{ fontSize: '25px', fontWeight: 'bold', color: 'black', padding: '24px 0 24px 0' }}>
+        <Row style={{ background: '#fff', padding: '20px 0', marginBottom: '20px', boxShadow: '0px 0px 10px #888888' }}>
+          <Col xxl={{ span: 10, offset: 4 }} xl={{ span: 13, offset: 2 }} xs={{ span: 22, offset: 1 }}>
+            <div style={{ fontSize: '22px', fontWeight: 'bold', color: 'black' }}>
               <Paragraph ellipsis={{ rows: 1, expandable: true }} strong style={{ color: 'black' }}>
                 {this.state.title}
               </Paragraph>
+            </div>
+          </Col>
+          <Col xxl={{ span: 5, offset: 1 }} xl={{ span: 6, offset: 1 }} xs={{ span: 22, offset: 1 }}>
+            <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-around' }}>
+              <Statistic title='浏览次数' suffix='次' value={this.state.count} />
+              <Statistic title='发布时间' value={dayjs(this.state.pubDate).fromNow()} />
             </div>
           </Col>
         </Row>
@@ -89,7 +96,6 @@ class ArticlePage extends Component {
             <div type='flex' style={{ flex: '1 0', background: '#fff' }}>
               <div style={{ fontSize: '16px' }}>
                 <div className='braft-output-content' style={{ overflow: 'auto' }} dangerouslySetInnerHTML={{ __html: this.state.content }} />
-                <Tag style={{ marginTop: '10px' }} color='#108ee9'>编辑于 {dayjs(this.state.pubDate).fromNow()}</Tag>
               </div>
               <div style={{ textAlign: 'center' }}>
                 <Spin spinning={this.state.loading} size='large' tip='loading...' />
@@ -99,10 +105,11 @@ class ArticlePage extends Component {
             </div>
           </Col>
           <Col xxl={{ span: 5, offset: 1 }} xl={{ span: 6, offset: 1 }} xs={{ span: 22, offset: 1 }} style={{ paddingBottom: '20px' }}>
-            <Advertisement />
             <Affix offsetTop={0}>
               <AuthorShowCard authorId={this.state.authorId} />
             </Affix>
+            <br />
+            <Advertisement />
           </Col>
         </Row>
         <Myfooter />
