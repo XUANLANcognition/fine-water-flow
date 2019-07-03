@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Row, Col, Layout, Form, Spin, Affix, Tag, Typography, BackTop, Statistic, Divider } from 'antd'
+import { Row, Col, Layout, Form, Spin, Affix, Tag, Typography, BackTop, Statistic } from 'antd'
 import axios from 'axios'
 import dayjs from 'dayjs'
 import 'braft-editor/dist/output.css'
@@ -28,7 +28,7 @@ class ArticlePage extends Component {
       loading: true,
       authorId: '',
       pubDate: '',
-      count: 0
+      views: 0
     }
   }
 
@@ -49,7 +49,8 @@ class ArticlePage extends Component {
           url: response.data.url,
           loading: false,
           authorId: response.data.user.id,
-          pubDate: response.data.pub_date
+          pubDate: response.data.pub_date,
+          views: response.data.views
         }
       })
     } catch (error) {
@@ -86,7 +87,7 @@ class ArticlePage extends Component {
           </Col>
           <Col xxl={{ span: 5, offset: 1 }} xl={{ span: 6, offset: 1 }} xs={{ span: 22, offset: 1 }}>
             <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-around' }}>
-              <Statistic title='浏览次数' suffix='次' value={this.state.count} />
+              <Statistic title='浏览次数' suffix='次' value={this.state.views} />
               <Statistic title='发布时间' value={dayjs(this.state.pubDate).fromNow()} />
             </div>
           </Col>
