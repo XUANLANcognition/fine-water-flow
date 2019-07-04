@@ -20,7 +20,8 @@ class MoviePage extends Component {
     selectedTags: [],
     loading: true,
     count: 0,
-    tip: tip[0]
+    tip: tip[0],
+    search: ''
   }
 
   componentDidMount = async (v) => {
@@ -31,7 +32,7 @@ class MoviePage extends Component {
   getData = async (v) => {
     try {
       const response = await axios.get(
-        'https://finewf.club:8080/api/movies/?format=json' + '&page=' + this.page + '&page_size=' + count
+        'https://finewf.club:8080/api/movies/?format=json' + '&page=' + this.page + '&page_size=' + count + '&search=' + this.state.search
       )
       const temp = []
       for (let index = 0; index < response.data.count; index++) {
@@ -62,7 +63,7 @@ class MoviePage extends Component {
     })
     try {
       const response = await axios.get(
-        'https://finewf.club:8080/api/movies/?format=json' + '&page=' + page + '&page_size=' + count
+        'https://finewf.club:8080/api/movies/?format=json' + '&page=' + page + '&page_size=' + count + '&search=' + this.state.search
       )
       let temp = this.state.cache
       let i = (page - 1) * count
@@ -81,21 +82,16 @@ class MoviePage extends Component {
   }
 
   search = async (value) => {
-    this.setState({
-      loading: true
+    await this.setState({
+      loading: true,
+      search: value
     })
-    try {
-      const response = await axios.get(
-        'https://finewf.club:8080/api/movies/?format=json' + '&page=' + this.page + '&page_size=' + count + '&search=' + value
-      )
-      const temp = tip[1] + '  : { ' + value + ' }'
-      this.setState({ cache: response.data.results,
-        loading: false,
-        count: response.data.count,
-        tip: temp })
-    } catch (error) {
-      console.log(error)
-    }
+    this.getData()
+    const temp = tip[1] + '  : { ' + value + ' }'
+    this.setState({
+      loading: false,
+      tip: temp
+    })
   }
 
   render () {

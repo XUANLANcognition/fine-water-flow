@@ -30,7 +30,9 @@ class BookPage extends Component {
     loading: true,
     tags: [],
     count: 0,
-    tip: tip[0]
+    tip: tip[0],
+    search: '',
+    fliterTag: ''
   }
 
   componentDidMount = async (v) => {
@@ -40,9 +42,13 @@ class BookPage extends Component {
 
   getData = async (v) => {
     try {
-      const response = await axios.get(
-        'https://finewf.club:8080/api/books/?format=json' + '&page=' + this.page + '&page_size=' + count
-      )
+      let url = ''
+      if (this.state.fliterTag.length === 0) {
+        url = 'https://finewf.club:8080/api/books/?format=json' + '&page=' + this.page + '&page_size=' + count + '&search=' + this.state.search
+      } else {
+        url = 'https://finewf.club:8080/api/books/?format=json' + '&page=' + this.page + '&page_size=' + count + '&search=' + this.state.search + '&tag=' + this.state.fliterTag
+      }
+      const response = await axios.get(url)
       const temp = []
       for (let index = 0; index < response.data.count; index++) {
         temp.push({ title: '', cover: '', author: '', id: index })
@@ -57,10 +63,12 @@ class BookPage extends Component {
         cache: temp,
         count: response.data.count
       })
-      const responseTag = await axios.get(
-        'https://finewf.club:8080/api/bookblocks/?format=json' + (this.state.selectedTags.length === 0 ? '' : '123')
-      )
-      this.setState({ tags: responseTag.data })
+      if (this.state.selectedTags.length === 0) {
+        const responseTag = await axios.get(
+          'https://finewf.club:8080/api/bookblocks/?format=json'
+        )
+        this.setState({ tags: responseTag.data })
+      }
     } catch (error) {
       console.log(error)
     }
@@ -71,9 +79,13 @@ class BookPage extends Component {
       loading: true
     })
     try {
-      const response = await axios.get(
-        'https://finewf.club:8080/api/books/?format=json' + '&page=' + page + '&page_size=' + count
-      )
+      let url = ''
+      if (this.state.fliterTag.length === 0) {
+        url = 'https://finewf.club:8080/api/books/?format=json' + '&page=' + page + '&page_size=' + count + '&search=' + this.state.search
+      } else {
+        url = 'https://finewf.club:8080/api/books/?format=json' + '&page=' + page + '&page_size=' + count + '&search=' + this.state.search + '&tag=' + this.state.fliterTag
+      }
+      const response = await axios.get(url)
       let temp = this.state.cache
       let i = (page - 1) * count
       for (let index = 0; index < response.data.results.length; index++) {
@@ -97,41 +109,31 @@ class BookPage extends Component {
       selectedTags: nextSelectedTags,
       loading: true
     })
-    if (nextSelectedTags.length !== 0) {
-      const temp = []
-      for (let i of nextSelectedTags) {
-        temp.push(i.id)
-      }
-      const fliterTag = '&tag=' + temp.join('&tag=')
-      try {
-        const response = await axios.get(
-          'https://finewf.club:8080/api/books/?format=json' + '&page=' + this.page + '&page_size=' + count + fliterTag
-        )
-        this.setState({ cache: response.data.results, loading: false, count: response.data.count })
-      } catch (error) {
-        console.log(error)
-      }
-    } else {
-      this.getData()
-      this.setState({
-        loading: false
-      })
+    const temp = []
+    for (let i of nextSelectedTags) {
+      temp.push(i.id)
     }
+    const fliterTag = temp.join('&tag=')
+    await this.setState({
+      fliterTag: fliterTag
+    })
+    this.getData()
+    this.setState({
+      loading: false
+    })
   }
 
   search = async (value) => {
-    this.setState({
-      loading: true
+    await this.setState({
+      loading: true,
+      search: value
     })
-    try {
-      const response = await axios.get(
-        'https://finewf.club:8080/api/books/?format=json' + '&page=' + this.page + '&page_size=' + count + '&search=' + value
-      )
-      const temp = tip[1] + '  : { ' + value + ' }'
-      this.setState({ cache: response.data.results, loading: false, count: response.data.count, tip: temp })
-    } catch (error) {
-      console.log(error)
-    }
+    this.getData()
+    const temp = tip[1] + '  : { ' + value + ' }'
+    this.setState({
+      loading: false,
+      tip: temp
+    })
   }
 
   render () {
