@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Layout, Row, Col, Descriptions, PageHeader, Typography, List, Card, BackTop } from 'antd'
+import { Layout, Row, Col, Descriptions, Tag, Typography, List, BackTop } from 'antd'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 
@@ -25,7 +25,8 @@ class BookDetailPage extends Component {
       actor: [''],
       director: [''],
       writer: [''],
-      loading: true
+      loading: true,
+      tags: []
     }
 
     componentDidMount = async (v) => {
@@ -51,7 +52,8 @@ class BookDetailPage extends Component {
             director: response.data.director,
             writer: response.data.writer,
             actor: response.data.actor,
-            loading: false
+            loading: false,
+            tags: response.data.tag
           }
         })
       } catch (error) {
@@ -67,7 +69,7 @@ class BookDetailPage extends Component {
           <div style={{ flex: '1 0 ' }}>
             <Row style={{ paddingTop: '30px', paddingBottom: '30px' }}>
               <Col xxl={{ span: 16, offset: 4 }} xl={{ span: 20, offset: 2 }} xs={{ span: 22, offset: 1 }}>
-                <PageHeader className='pageheader'
+                <div className='MovieHeader'
                   style={{
                     position: 'relative',
                     overflow: 'hidden',
@@ -84,7 +86,7 @@ class BookDetailPage extends Component {
                     right: 0,
                     zIndex: -1
                   }} />
-                  <div className='wrap' style={{ background: 'rgba(0,30%,100%,90%)' }}>
+                  <div className='wrap' style={{ background: 'rgba(0,30%,100%,90%)', display: 'flex', justifyContent: 'space-between', padding: '20px 30px' }}>
                     <div className='content'>
                       <Title level={3}>{this.state.title}</Title>
                       <Descriptions
@@ -95,16 +97,21 @@ class BookDetailPage extends Component {
                         <Descriptions.Item label='单集片长'>{this.state.runtime}</Descriptions.Item>
                         <Descriptions.Item label='制片国家/地区'>{this.state.region}</Descriptions.Item>
                       </Descriptions>
+                      {this.state.tags.map(tag => (
+                        <Tag key={tag.title} color='#343a40' style={{ margin: '5px' }}>
+                          {tag.title}
+                        </Tag>
+                      ))}
                     </div>
-                    <div className='extraContent'>
+                    <div className='MovieCover'>
                       <img
                         src={this.state.cover}
                         alt={this.state.title}
-                        style={{ width: '135px', maxHeight: '200px', borderRadius: '10px' }}
+                        style={{ width: '135px', maxHeight: '200px' }}
                       />
                     </div>
                   </div>
-                </PageHeader>
+                </div>
               </Col>
             </Row>
             <Row style={{ paddingTop: '30px', paddingBottom: '30px' }}>

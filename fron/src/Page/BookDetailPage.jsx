@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Layout, Row, Col, Descriptions, PageHeader, Typography, Tag, BackTop } from 'antd'
+import { Layout, Row, Col, Descriptions, Typography, Tag, BackTop } from 'antd'
 import axios from 'axios'
 
 import './BookDetailPage.css'
@@ -64,7 +64,7 @@ class BookDetailPage extends Component {
           <div style={{ flex: '1 0 ' }}>
             <Row style={{ paddingTop: '30px', paddingBottom: '30px' }}>
               <Col xxl={{ span: 16, offset: 4 }} xl={{ span: 20, offset: 2 }} xs={{ span: 22, offset: 1 }}>
-                <PageHeader className='pageheader'
+                <div className='Bookheader'
                   style={{
                     position: 'relative',
                     overflow: 'hidden',
@@ -81,7 +81,7 @@ class BookDetailPage extends Component {
                     right: 0,
                     zIndex: -1
                   }} />
-                  <div className='wrap' style={{ background: 'rgba(0,30%,100%,90%)' }}>
+                  <div className='wrap' style={{ background: 'rgba(0,30%,100%,90%)', display: 'flex', justifyContent: 'space-between', padding: '20px 30px' }}>
                     <div className='content'>
                       <Title level={3}>{this.state.title}</Title>
                       <Descriptions
@@ -100,15 +100,15 @@ class BookDetailPage extends Component {
                         </Tag>
                       ))}
                     </div>
-                    <div className='extraContent'>
+                    <div className='BookCover'>
                       <img
                         src={this.state.cover}
                         alt={this.state.title}
-                        style={{ width: '135px', maxHeight: '200px', borderRadius: '10px' }}
+                        style={{ width: '135px', maxHeight: '200px' }}
                       />
                     </div>
                   </div>
-                </PageHeader>
+                </div>
               </Col>
             </Row>
             <Row style={{ paddingTop: '30px', paddingBottom: '30px' }}>

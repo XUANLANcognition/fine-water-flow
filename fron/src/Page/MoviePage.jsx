@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Layout, Row, Col, Typography, List, Descriptions, BackTop, Input, Affix } from 'antd'
+import { Layout, Row, Col, Typography, List, Descriptions, BackTop, Input, Affix, Collapse, Icon, Tag } from 'antd'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 
@@ -8,10 +8,19 @@ import Myfooter from '../Myfooter'
 import Advertisement from '../Advertisement'
 import CategoryList from '../CategoryList'
 
+const CheckableTag = Tag.CheckableTag
 const count = 12
 const { Title } = Typography
 const { Search } = Input
 const tip = ['全库', '搜索结果']
+const Panel = Collapse.Panel
+const customPanelStyle = {
+  background: '#fff',
+  borderRadius: 4,
+  marginBottom: 24,
+  border: 0,
+  overflow: 'hidden'
+}
 
 class MoviePage extends Component {
   page = 1
@@ -21,7 +30,9 @@ class MoviePage extends Component {
     loading: true,
     count: 0,
     tip: tip[0],
-    search: ''
+    search: '',
+    tags: [],
+    fliterTag: ''
   }
 
   componentDidMount = async (v) => {
@@ -31,9 +42,13 @@ class MoviePage extends Component {
 
   getData = async (v) => {
     try {
-      const response = await axios.get(
-        'https://finewf.club:8080/api/movies/?format=json' + '&page=' + this.page + '&page_size=' + count + '&search=' + this.state.search
-      )
+      let url = ''
+      if (this.state.fliterTag.length === 0) {
+        url = 'https://finewf.club:8080/api/movies/?format=json' + '&page=' + this.page + '&page_size=' + count + '&search=' + this.state.search
+      } else {
+        url = 'https://finewf.club:8080/api/movies/?format=json' + '&page=' + this.page + '&page_size=' + count + '&search=' + this.state.search + '&tag=' + this.state.fliterTag
+      }
+      const response = await axios.get(url)
       const temp = []
       for (let index = 0; index < response.data.count; index++) {
         temp.push({ title: '', cover: '', author: '', id: index })
@@ -48,10 +63,12 @@ class MoviePage extends Component {
         cache: temp,
         count: response.data.count
       })
-      const responseTag = await axios.get(
-        'https://finewf.club:8080/api/bookblocks/?format=json' + (this.state.selectedTags.length === 0 ? '' : '123')
-      )
-      this.setState({ tags: responseTag.data })
+      if (this.state.selectedTags.length === 0) {
+        const responseTag = await axios.get(
+          'https://finewf.club:8080/api/movieblocks/?format=json'
+        )
+        this.setState({ tags: responseTag.data })
+      }
     } catch (error) {
       console.log(error)
     }
@@ -62,9 +79,13 @@ class MoviePage extends Component {
       loading: true
     })
     try {
-      const response = await axios.get(
-        'https://finewf.club:8080/api/movies/?format=json' + '&page=' + page + '&page_size=' + count + '&search=' + this.state.search
-      )
+      let url = ''
+      if (this.state.fliterTag.length === 0) {
+        url = 'https://finewf.club:8080/api/movies/?format=json' + '&page=' + page + '&page_size=' + count + '&search=' + this.state.search
+      } else {
+        url = 'https://finewf.club:8080/api/movies/?format=json' + '&page=' + page + '&page_size=' + count + '&search=' + this.state.search + '&tag=' + this.state.fliterTag
+      }
+      const response = await axios.get(url)
       let temp = this.state.cache
       let i = (page - 1) * count
       for (let index = 0; index < response.data.results.length; index++) {
@@ -79,6 +100,27 @@ class MoviePage extends Component {
     } catch (error) {
       console.log(error)
     }
+  }
+
+  handleChange = async (tag, checked) => {
+    const { selectedTags } = this.state
+    const nextSelectedTags = checked ? [...selectedTags, tag] : selectedTags.filter(t => t !== tag)
+    await this.setState({
+      selectedTags: nextSelectedTags,
+      loading: true
+    })
+    const temp = []
+    for (let i of nextSelectedTags) {
+      temp.push(i.id)
+    }
+    const fliterTag = temp.join('&tag=')
+    await this.setState({
+      fliterTag: fliterTag
+    })
+    this.getData()
+    this.setState({
+      loading: false
+    })
   }
 
   search = async (value) => {
@@ -153,6 +195,13 @@ class MoviePage extends Component {
                               <Descriptions.Item label='单集片长'>{item.number}</Descriptions.Item>
                               <Descriptions.Item label='制片国家/地区'>{item.region}</Descriptions.Item>
                             </Descriptions>
+                            <div style={{ display: 'flex', flexWrap: 'wrap', margin: '10px 0' }}>
+                              {item.tag && (item.tag.map(tag => (
+                                <Tag key={tag.title} color='#343a40' style={{ color: 'white', margin: '5px' }}>
+                                  {tag.title}
+                                </Tag>
+                              )))}
+                            </div>
                           </div>
                           <img alt={item.title} src={item.cover} style={{ width: '135px', maxHeight: '200px' }} />
                         </div>
@@ -167,6 +216,37 @@ class MoviePage extends Component {
             </Col>
             <Col xxl={{ span: 4, offset: 1 }} xl={{ span: 6, offset: 1 }} xs={{ span: 22, offset: 1 }}>
               <CategoryList />
+              <Collapse
+                bordered={false}
+                defaultActiveKey={['1']}
+                expandIcon={({ isActive }) => <Icon type='caret-right' rotate={isActive ? 90 : 0} />}
+                style={{ paddingTop: '10px' }}
+              >
+                <Panel header={<Title level={4}>全部标签</Title>} key='1' style={customPanelStyle}>
+                  <List
+                    size='small'
+                    dataSource={this.state.tags}
+                    renderItem={item => (
+                      <List.Item>
+                        <div style={{ display: 'flex', justifyContent: 'flex-start', flexWrap: 'wrap', alignItems: 'center' }}>
+                          <span style={{ backgroundColor: '#ff5c38', borderRadius: '16px 0 16px 16px', padding: '5px 15px', color: 'white', margin: '0 24px 0 0' }}>{item.title}
+                          </span>
+                          {item.tags.map(tag => (
+                            <CheckableTag
+                              style={{ padding: '5px 10px', borderRadius: '20px' }}
+                              key={tag}
+                              checked={this.state.selectedTags.indexOf(tag) > -1}
+                              onChange={checked => this.handleChange(tag, checked)}
+                            >
+                              {tag.title}
+                            </CheckableTag>
+                          ))}
+                        </div>
+                      </List.Item>
+                    )}
+                  />
+                </Panel>
+              </Collapse>
               <Advertisement />
             </Col>
           </Row>
