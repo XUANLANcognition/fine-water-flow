@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Layout, Row, Col, Typography, Tag, List, Collapse, Icon, Descriptions, BackTop } from 'antd'
+import { Layout, Row, Col, Typography, Tag, List, Collapse, Icon, Descriptions, BackTop, Input, Affix } from 'antd'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 
@@ -19,6 +19,8 @@ const customPanelStyle = {
   overflow: 'hidden'
 }
 const Panel = Collapse.Panel
+const { Search } = Input
+const tip = ['全库', '搜索结果']
 
 class BookPage extends Component {
   page = 1
@@ -27,7 +29,8 @@ class BookPage extends Component {
     selectedTags: [],
     loading: true,
     tags: [],
-    count: 0
+    count: 0,
+    tip: tip[0]
   }
 
   componentDidMount = async (v) => {
@@ -116,19 +119,42 @@ class BookPage extends Component {
     }
   }
 
+  search = async (value) => {
+    this.setState({
+      loading: true
+    })
+    try {
+      const response = await axios.get(
+        'https://finewf.club:8080/api/books/?format=json' + '&page=' + this.page + '&page_size=' + count + '&search=' + value
+      )
+      const temp = tip[1] + '  : { ' + value + ' }'
+      this.setState({ cache: response.data.results, loading: false, count: response.data.count, tip: temp })
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   render () {
     return (
       <Layout style={{ minHeight: '100vh' }}>
         <Nav />
         <BackTop />
         <div style={{ flex: '1 0 ', backgroundColor: '#ffffff' }}>
-          <Row style={{ paddingBottom: '30px' }}>
-            <Col xxl={{ span: 16, offset: 4 }} xl={{ span: 20, offset: 2 }} xs={{ span: 22, offset: 1 }} />
-          </Row>
+          <Affix offsetTop={this.state.top}>
+            <Row style={{ paddingBottom: '10px', paddingTop: '10px', marginBottom: '20px', background: '#fff', boxShadow: '0px 0px 10px #888888' }}>
+              <Col xxl={{ span: 5, offset: 4 }} xl={{ span: 6, offset: 2 }} xs={{ span: 22, offset: 1 }} >
+                <div style={{ fontSize: '24px', fontWeight: 'bold', color: 'black' }}>
+                  FWF 读书
+                </div>
+              </Col>
+              <Col xxl={{ span: 10, offset: 1 }} xl={{ span: 13, offset: 1 }} xs={{ span: 22, offset: 1 }} >
+                <Search placeholder='请输入书名含有的关键字' onSearch={value => this.search(value)} enterButton />
+              </Col>
+            </Row>
+          </Affix>
           <Row style={{ paddingTop: '0px', paddingBottom: '30px' }}>
             <Col xxl={{ span: 11, offset: 4 }} xl={{ span: 13, offset: 2 }} xs={{ span: 22, offset: 1 }} style={{ paddingTop: '0px', paddingBottom: '30px' }}>
-              <Title level={4} style={{ padding: '10px 0' }}>FWF 全库 ({this.state.count})</Title>
-
+              <Title level={4} style={{ padding: '10px 0' }}>{this.state.tip} ({this.state.count})</Title>
               <List
                 itemLayout='vertical'
                 loading={this.state.loading}

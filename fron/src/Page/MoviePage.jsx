@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Layout, Row, Col, Typography, List, Descriptions, BackTop } from 'antd'
+import { Layout, Row, Col, Typography, List, Descriptions, BackTop, Input, Affix } from 'antd'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 
@@ -10,6 +10,8 @@ import CategoryList from '../CategoryList'
 
 const count = 12
 const { Title } = Typography
+const { Search } = Input
+const tip = ['全库', '搜索结果']
 
 class MoviePage extends Component {
   page = 1
@@ -17,7 +19,8 @@ class MoviePage extends Component {
     cache: [],
     selectedTags: [],
     loading: true,
-    count: 0
+    count: 0,
+    tip: tip[0]
   }
 
   componentDidMount = async (v) => {
@@ -77,18 +80,45 @@ class MoviePage extends Component {
     }
   }
 
+  search = async (value) => {
+    this.setState({
+      loading: true
+    })
+    try {
+      const response = await axios.get(
+        'https://finewf.club:8080/api/movies/?format=json' + '&page=' + this.page + '&page_size=' + count + '&search=' + value
+      )
+      const temp = tip[1] + '  : { ' + value + ' }'
+      this.setState({ cache: response.data.results,
+        loading: false,
+        count: response.data.count,
+        tip: temp })
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   render () {
     return (
       <Layout style={{ minHeight: '100vh' }}>
         <Nav />
         <BackTop />
         <div style={{ flex: '1 0 ', backgroundColor: '#ffffff' }}>
-          <Row style={{ paddingBottom: '30px' }}>
-            <Col xxl={{ span: 16, offset: 4 }} xl={{ span: 20, offset: 2 }} xs={{ span: 22, offset: 1 }} />
-          </Row>
+          <Affix offsetTop={this.state.top}>
+            <Row style={{ paddingBottom: '10px', paddingTop: '10px', marginBottom: '20px', background: '#fff', boxShadow: '0px 0px 10px #888888' }}>
+              <Col xxl={{ span: 5, offset: 4 }} xl={{ span: 6, offset: 2 }} xs={{ span: 22, offset: 1 }} >
+                <div style={{ fontSize: '24px', fontWeight: 'bold', color: 'black' }}>
+                  FWF 观影
+                </div>
+              </Col>
+              <Col xxl={{ span: 10, offset: 1 }} xl={{ span: 13, offset: 1 }} xs={{ span: 22, offset: 1 }} >
+                <Search placeholder='请输入影名含有的关键字' onSearch={value => this.search(value)} enterButton />
+              </Col>
+            </Row>
+          </Affix>
           <Row style={{ paddingTop: '0px', paddingBottom: '30px' }}>
             <Col xxl={{ span: 11, offset: 4 }} xl={{ span: 13, offset: 2 }} xs={{ span: 22, offset: 1 }} style={{ paddingTop: '0px', paddingBottom: '30px' }}>
-              <Title level={4} style={{ padding: '10px 0' }}>FWF 全库 ({this.state.cache.length})</Title>
+              <Title level={4} style={{ padding: '10px 0' }}>{this.state.tip} ({this.state.count})</Title>
               <List
                 itemLayout='vertical'
                 loading={this.state.loading}
