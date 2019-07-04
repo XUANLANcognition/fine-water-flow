@@ -55,7 +55,10 @@ class MediaPublish(permissions.BasePermission):
     def has_permission(self, request, view):
         if request.method == 'POST':
             if permissions.IsAuthenticated:
-                return (request.user.profile.media_editor_auth == '审核通过')
+                if request.user.is_authenticated:
+                    return (request.user.profile.media_editor_auth == '审核通过')
+                else:
+                    return False
             else:
                 return False
         return True
@@ -212,7 +215,7 @@ class ArticleSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Article
-        fields = ('url', 'id', 'title', 'description', 'pub_date', 'user', 'content', 'views')
+        fields = ('id', 'title', 'url', 'user', 'pub_date', 'views', 'description', 'content')
 
 
 class ArticlePagination(PageNumberPagination):
@@ -237,8 +240,9 @@ class ArticleList(generics.ListCreateAPIView):
     serializer_class = ArticleSerializer
     permission_classes = (Publish,)
     pagination_class = ArticlePagination
-    filter_backends = (filters.DjangoFilterBackend,)
+    filter_backends = (filters.DjangoFilterBackend, filter_drf.SearchFilter)
     filterset_class = ArticleFilter
+    search_fields = ('title', 'content')
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
@@ -397,7 +401,8 @@ class BookList(generics.ListCreateAPIView):
     serializer_class = BookSerializer
     permission_classes = (MediaPublish,)
     pagination_class = BookPagination
-    filter_backends = (filters.DjangoFilterBackend,)
+    filter_backends = (filters.DjangoFilterBackend, filter_drf.SearchFilter)
+    search_fields = ('title', )
     filterset_class = BookFilter
 
     def perform_create(self, serializer):
@@ -539,7 +544,8 @@ class MovieList(generics.ListCreateAPIView):
     serializer_class = MovieSerializer
     permission_classes = (MediaPublish,)
     pagination_class = MoviePagination
-    filter_backends = (filters.DjangoFilterBackend,)
+    filter_backends = (filters.DjangoFilterBackend, filter_drf.SearchFilter)
+    search_fields = ('title', )
     filterset_class = MovieFilter
 
     def perform_create(self, serializer):
