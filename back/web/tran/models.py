@@ -90,6 +90,19 @@ class BookComment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     pub_date = models.DateTimeField(auto_now_add=True)
 
+class MovieBlock(models.Model):
+    title = models.CharField(max_length=128)
+
+    def __str__(self):
+        return '%s' % (self.title)
+
+class MovieTag(models.Model):
+    title = models.CharField(max_length=128)
+    block = models.ForeignKey(MovieBlock, on_delete=models.CASCADE, related_name='tags', default='')
+
+    def __str__(self):
+        return '%s' % (self.title)
+
 class Movie(models.Model):
     title = models.CharField(max_length=256)
     director = models.ManyToManyField('Figure', related_name='director', blank=True)
@@ -102,6 +115,7 @@ class Movie(models.Model):
     cover = models.CharField(max_length=256, blank=True, default='')
     pub_date = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(User, on_delete=models.PROTECT)
+    tag = models.ManyToManyField('Movietag', related_name='movietag', blank=True)
 
 class MovieComment(models.Model):
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE)

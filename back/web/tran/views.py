@@ -3,7 +3,7 @@ from django.http import JsonResponse
 from rest_framework import routers, serializers, viewsets, status
 from rest_framework.pagination import PageNumberPagination
 from django.contrib.auth.models import User
-from .models import Article, Comment, Profile, Book, BookTag, BookBlock, BookComment, Figure, Movie, MovieComment
+from .models import Article, Comment, Profile, Book, BookTag, BookBlock, BookComment, Figure, Movie, MovieComment, MovieBlock, MovieTag
 from rest_framework.authtoken.models import Token
 
 from rest_framework.authtoken.views import ObtainAuthToken
@@ -508,6 +508,51 @@ class FigureDetail(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = (Read,)
 
 
+# MovieTag API
+
+
+class MovieTagSerializer(serializers.HyperlinkedModelSerializer):
+
+    class Meta:
+        model = MovieTag
+        fields = ('title', 'id')
+
+
+class MovieTagDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = MovieTag.objects.all()
+    serializer_class = MovieTagSerializer
+    permission_classes = (Read,)
+
+
+class MovieTagList(generics.ListCreateAPIView):
+    queryset = MovieTag.objects.all()
+    serializer_class = MovieTagSerializer
+    permission_classes = (Publish,)
+
+
+# MovieBlock API
+
+
+class MovieBlockSerializer(serializers.HyperlinkedModelSerializer):
+    tags = MovieTagSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = MovieBlock
+        fields = ('title','tags')
+
+
+class MovieBlockDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = MovieBlock.objects.all()
+    serializer_class = MovieBlockSerializer
+    permission_classes = (Read,)
+
+
+class MovieBlockList(generics.ListCreateAPIView):
+    queryset = MovieBlock.objects.all()
+    serializer_class = MovieBlockSerializer
+    permission_classes = (Publish,)
+
+
 # Movie API
 
 
@@ -516,10 +561,11 @@ class MovieSerializer(serializers.HyperlinkedModelSerializer):
     actor = FigureSerializer(many=True, read_only=True)
     writer = FigureSerializer(many=True, read_only=True)
     user = UserAnotherSerializer(read_only = True)
+    tag = BookTagSerializer(many=True, read_only=True)
 
     class Meta:
         model = Movie
-        fields = ('url', 'id', 'title' , 'cover', 'number', 'runtime' ,'region','director','writer', 'actor', 'overview', 'user')
+        fields = ('url', 'id', 'title' , 'cover', 'number', 'runtime' ,'region','director','writer', 'actor', 'tag','overview', 'user')
 
 
 class MoviePagination(PageNumberPagination):
@@ -550,6 +596,8 @@ class MovieList(generics.ListCreateAPIView):
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
+        self.request.user.profile.property = self.request.user.profile.property + 5
+        self.request.user.profile.save()
 
 
 class MovieDetail(generics.RetrieveUpdateDestroyAPIView):

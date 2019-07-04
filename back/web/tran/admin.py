@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 
 # Register your models here.
 
-from .models import Article, Comment, Profile, Book, BookTag, BookBlock, BookComment, Movie, Figure, MovieComment
+from .models import Article, Comment, Profile, Book, BookTag, BookBlock, BookComment, Movie, Figure, MovieComment, MovieBlock, MovieTag
 
 class ProfileAdmin(admin.ModelAdmin):
     list_display = ('user', 'media_editor_auth')
@@ -39,6 +39,18 @@ class BookBlockAdmin(admin.ModelAdmin):
     list_per_page = 10
     inlines = [BookTagInline, ]
 
+class MovieTagInline(admin.StackedInline):
+    model = MovieTag
+    list_display = ('title',)
+    list_filter = ('pub_date',)
+    list_per_page = 10
+    search_fields = ('title',)
+
+class MovieBlockAdmin(admin.ModelAdmin):
+    list_display = ('title',)
+    list_per_page = 10
+    inlines = [MovieTagInline, ]
+
 class ArticleAdmin(admin.ModelAdmin):
     list_display = ('title', 'user')
     list_filter = ('pub_date', 'user')
@@ -56,7 +68,7 @@ class MovieAdmin(admin.ModelAdmin):
     list_display = ('title', )
     list_filter = ('pub_date', )
     list_per_page = 10
-    filter_horizontal = ('actor', 'director', 'writer')
+    filter_horizontal = ('actor', 'director', 'writer', 'tag')
 
 class FigureAdmin(admin.ModelAdmin):
     list_display = ('name', )
@@ -75,7 +87,9 @@ admin.site.register(Article, ArticleAdmin)
 admin.site.register(Comment, CommentAdmin)
 admin.site.register(Book, BookAdmin)
 admin.site.register(BookBlock, BookBlockAdmin)
+admin.site.register(MovieBlock, MovieBlockAdmin)
 admin.site.register(BookTag)
+admin.site.register(MovieTag)
 admin.site.register(BookComment)
 admin.site.register(Movie, MovieAdmin)
 admin.site.register(Figure, FigureAdmin)
