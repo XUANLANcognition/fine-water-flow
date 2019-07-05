@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import ProfileCard from './ProfileCard'
 
 const IconFont = Icon.createFromIconfontCN({
-  scriptUrl: '//at.alicdn.com/t/font_1242637_xap1h8gomve.js'
+  scriptUrl: '//at.alicdn.com/t/font_1242637_7sypq2as9i4.js'
 })
 
 const Card = (
@@ -17,20 +17,26 @@ const Card = (
 class Nav extends Component {
   render () {
     return (
-      <Row style={{ backgroundColor: '#fff', boxShadow: '0px 2px 5px #888888' }}>
+      <Row style={{ backgroundColor: '#fafafa', boxShadow: '0px 3px 5px #888888' }}>
         <Col xxl={{ span: 16, offset: 4 }} xl={{ span: 20, offset: 2 }} xs={{ span: 22, offset: 1 }}>
-          <div style={{ backgroundColor: '#fff', color: '#fff', lineHeight: '64px', display: 'flex', flexDirection: 'row', flexWrap: 'wrap' }}
+          <div style={{ backgroundColor: '#fafafa', color: '#fff', lineHeight: '64px', display: 'flex', flexDirection: 'row', flexWrap: 'wrap' }}
           >
             <div style={{ paddingRight: '24px', display: 'flex', alignItems: 'center' }}>
               <Link to='/' >
-                <img src='/icon.png' style={{ width: '60px', height: '60px' }} />
+                <div style={{ display: 'flex', flexDirection: 'row' }}>
+                  <img src='/icon.png' style={{ width: '60px', height: '60px' }} />
+                  <div style={{ fontWeight: '700', fontSize: '18px' }}>
+                  Fine Water Flow
+                  </div>
+                </div>
+
               </Link>
             </div>
 
             <Link to='/'>
               <div style={{ width: '96px', display: 'flex', justifyContent: 'center', flexDirection: 'row', alignItems: 'center' }}>
-                <IconFont type='icon-zhuye' style={{ fontSize: '24px' }} />
-                <div style={{ color: 'black', paddingLeft: '10px' }}>
+                <IconFont type='icon-yingyongzhongxin' style={{ fontSize: '24px' }} />
+                <div style={{ color: '#1890ff', paddingLeft: '10px', fontWeight: 'bold' }}>
                    主页
                 </div>
               </div>
@@ -38,8 +44,8 @@ class Nav extends Component {
 
             <Link to='/book' >
               <div style={{ width: '96px', display: 'flex', justifyContent: 'center', flexDirection: 'row', alignItems: 'center' }}>
-                <IconFont type='icon-shu1' style={{ fontSize: '24px' }} />
-                <div style={{ color: 'black', paddingLeft: '10px' }}>
+                <IconFont type='icon-tushu' style={{ fontSize: '24px' }} />
+                <div style={{ color: '#1890ff', paddingLeft: '10px', fontWeight: 'bold' }}>
                 读书
                 </div>
               </div>
@@ -47,8 +53,8 @@ class Nav extends Component {
 
             <Link to='/movie' >
               <div style={{ width: '96px', display: 'flex', justifyContent: 'center', flexDirection: 'row', alignItems: 'center' }}>
-                <IconFont type='icon-dianying' style={{ fontSize: '24px' }} />
-                <div style={{ color: 'black', paddingLeft: '10px' }}>
+                <IconFont type='icon-dianyingpiao' style={{ fontSize: '24px' }} />
+                <div style={{ color: '#1890ff', paddingLeft: '10px', fontWeight: 'bold' }}>
                 观影
                 </div>
               </div>
@@ -56,8 +62,8 @@ class Nav extends Component {
 
             <Link to='/notice' >
               <div style={{ width: '96px', display: 'flex', justifyContent: 'center', flexDirection: 'row', alignItems: 'center' }}>
-                <IconFont type='icon-xiaoxi' style={{ fontSize: '24px' }} />
-                <div style={{ color: 'black', paddingLeft: '10px' }}>
+                <IconFont type='icon-xinxi' style={{ fontSize: '24px' }} />
+                <div style={{ color: '#1890ff', paddingLeft: '10px', fontWeight: 'bold' }}>
                 消息
                 </div>
               </div>

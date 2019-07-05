@@ -9,7 +9,7 @@ class Notice extends Component {
     return (
       <Layout style={{ minHeight: '100vh' }}>
         <Nav />
-        <div style={{ flex: '1 0 ', backgroundColor: '#ffffff' }}>
+        <div style={{ flex: '1 0 ', backgroundColor: '#fff', paddingTop: '30px' }}>
           <Row style={{ paddingTop: '30px', paddingBottom: '30px' }}>
             <Col xxl={{ span: 16, offset: 4 }} xl={{ span: 20, offset: 2 }} xs={{ span: 22, offset: 1 }}>
               <Timeline>
