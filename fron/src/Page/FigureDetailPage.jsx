@@ -2,8 +2,6 @@ import React, { Component } from 'react'
 import { Layout, Row, Col, Descriptions, PageHeader, Typography } from 'antd'
 import axios from 'axios'
 
-import './BookDetailPage.css'
-
 import Nav from '../Nav'
 import Myfooter from '../Myfooter'
 import Advertisement from '../Advertisement'
@@ -57,7 +55,7 @@ class FigureDetailPage extends Component {
           <div style={{ flex: '1 0 ' }}>
             <Row style={{ paddingTop: '30px', paddingBottom: '30px' }}>
               <Col xxl={{ span: 16, offset: 4 }} xl={{ span: 20, offset: 2 }} xs={{ span: 22, offset: 1 }}>
-                <PageHeader className='pageheader'
+                <div className='pageheader'
                   style={{
                     position: 'relative',
                     overflow: 'hidden',
@@ -74,7 +72,7 @@ class FigureDetailPage extends Component {
                     right: 0,
                     zIndex: -1
                   }} />
-                  <div className='wrap' style={{ background: 'rgba(0,30%,100%,90%)' }}>
+                  <div className='wrap' style={{ background: 'rgba(0,30%,100%,90%)', display: 'flex', justifyContent: 'space-between', padding: '20px 30px' }}>
                     <div className='content'>
                       <Title level={3}>{this.state.name}</Title>
                       <Descriptions
@@ -86,15 +84,15 @@ class FigureDetailPage extends Component {
                         <Descriptions.Item label='地区'>{this.state.place}</Descriptions.Item>
                       </Descriptions>
                     </div>
-                    <div className='extraContent'>
+                    <div className='figure-cover'>
                       <img
                         src={this.state.cover}
                         alt={this.state.title}
-                        style={{ width: '135px', maxHeight: '200px', borderRadius: '10px' }}
+                        style={{ width: '135px', maxHeight: '200px', marginLeft: '10px' }}
                       />
                     </div>
                   </div>
-                </PageHeader>
+                </div>
               </Col>
             </Row>
             <Row style={{ paddingTop: '30px', paddingBottom: '30px' }}>

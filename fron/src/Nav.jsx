@@ -17,9 +17,9 @@ const Card = (
 class Nav extends Component {
   render () {
     return (
-      <Row style={{ backgroundColor: '#343a40' }}>
+      <Row style={{ backgroundColor: '#fff', boxShadow: '0px 2px 5px #888888' }}>
         <Col xxl={{ span: 16, offset: 4 }} xl={{ span: 20, offset: 2 }} xs={{ span: 22, offset: 1 }}>
-          <div style={{ backgroundColor: '#343a40', color: '#fff', lineHeight: '64px', display: 'flex', flexDirection: 'row', flexWrap: 'wrap' }}
+          <div style={{ backgroundColor: '#fff', color: '#fff', lineHeight: '64px', display: 'flex', flexDirection: 'row', flexWrap: 'wrap' }}
           >
             <div style={{ paddingRight: '24px', display: 'flex', alignItems: 'center' }}>
               <Link to='/' >
@@ -30,7 +30,7 @@ class Nav extends Component {
             <Link to='/'>
               <div style={{ width: '96px', display: 'flex', justifyContent: 'center', flexDirection: 'row', alignItems: 'center' }}>
                 <IconFont type='icon-zhuye' style={{ fontSize: '24px' }} />
-                <div style={{ color: 'white', paddingLeft: '10px' }}>
+                <div style={{ color: 'black', paddingLeft: '10px' }}>
                    主页
                 </div>
               </div>
@@ -39,7 +39,7 @@ class Nav extends Component {
             <Link to='/book' >
               <div style={{ width: '96px', display: 'flex', justifyContent: 'center', flexDirection: 'row', alignItems: 'center' }}>
                 <IconFont type='icon-shu1' style={{ fontSize: '24px' }} />
-                <div style={{ color: 'white', paddingLeft: '10px' }}>
+                <div style={{ color: 'black', paddingLeft: '10px' }}>
                 读书
                 </div>
               </div>
@@ -48,7 +48,7 @@ class Nav extends Component {
             <Link to='/movie' >
               <div style={{ width: '96px', display: 'flex', justifyContent: 'center', flexDirection: 'row', alignItems: 'center' }}>
                 <IconFont type='icon-dianying' style={{ fontSize: '24px' }} />
-                <div style={{ color: 'white', paddingLeft: '10px' }}>
+                <div style={{ color: 'black', paddingLeft: '10px' }}>
                 观影
                 </div>
               </div>
@@ -57,7 +57,7 @@ class Nav extends Component {
             <Link to='/notice' >
               <div style={{ width: '96px', display: 'flex', justifyContent: 'center', flexDirection: 'row', alignItems: 'center' }}>
                 <IconFont type='icon-xiaoxi' style={{ fontSize: '24px' }} />
-                <div style={{ color: 'white', paddingLeft: '10px' }}>
+                <div style={{ color: 'black', paddingLeft: '10px' }}>
                 消息
                 </div>
               </div>

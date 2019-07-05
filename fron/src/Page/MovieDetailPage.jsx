@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Layout, Row, Col, Descriptions, Tag, Typography, List, BackTop } from 'antd'
+import { Layout, Row, Col, Descriptions, Tag, Typography, List, BackTop, Avatar } from 'antd'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 
@@ -9,6 +9,7 @@ import Nav from '../Nav'
 import Myfooter from '../Myfooter'
 import AddMovieComment from '../AddMovieComment'
 import Advertisement from '../Advertisement'
+import RowList from '../RowList'
 
 const { Title } = Typography
 
@@ -107,7 +108,7 @@ class BookDetailPage extends Component {
                       <img
                         src={this.state.cover}
                         alt={this.state.title}
-                        style={{ width: '135px', maxHeight: '200px' }}
+                        style={{ width: '135px', maxHeight: '200px', marginLeft: '10px' }}
                       />
                     </div>
                   </div>
@@ -118,87 +119,15 @@ class BookDetailPage extends Component {
               <Col xxl={{ span: 10, offset: 4 }} xl={{ span: 13, offset: 2 }} xs={{ span: 22, offset: 1 }}>
                 <Title level={4}>内容简介 · · · · · ·</Title>
                 <div style={{ padding: '24px 0' }} dangerouslySetInnerHTML={{ __html: this.state.overview.replace(/\n/g, '</br>') }} />
-                <Title level={4}>导演 · · · · · ·</Title>
-                <List
-                  loading={this.state.loading}
-                  grid={{
-                    gutter: 24,
-                    xs: 2,
-                    sm: 2,
-                    md: 4,
-                    lg: 4,
-                    xl: 4,
-                    xxl: 6
-                  }}
-                  size='small'
-                  dataSource={this.state.director}
-                  renderItem={item => (
-                    <List.Item>
-                      <Link to={'/figure/' + item.id}>
-                        <div style={{ display: 'flex', flexDirection: 'column' }}>
-                          <img alt='example' src={item.cover} style={{ borderRadius: '10px', height: '150px', width: '110px' }} />
-                          {item.name}
-                        </div>
-                      </Link>
-                    </List.Item>
-                  )}
-                />
-                <Title level={4}>编剧 · · · · · ·</Title>
-                <List
-                  loading={this.state.loading}
-                  grid={{
-                    gutter: 24,
-                    xs: 2,
-                    sm: 2,
-                    md: 4,
-                    lg: 4,
-                    xl: 4,
-                    xxl: 6
-                  }}
-                  size='small'
-                  dataSource={this.state.writer}
-                  renderItem={item => (
-                    <List.Item>
-                      <Link to={'/figure/' + item.id}>
-                        <div style={{ display: 'flex', flexDirection: 'column' }}>
-                          <img alt='example' src={item.cover} style={{ borderRadius: '10px', height: '150px', width: '110px' }} />
-                          {item.name}
-                        </div>
-                      </Link>
-                    </List.Item>
-                  )}
-                />
-                <Title level={4}>演员表 · · · · · ·</Title>
-                <List
-                  loading={this.state.loading}
-                  grid={{
-                    gutter: 24,
-                    xs: 2,
-                    sm: 2,
-                    md: 4,
-                    lg: 4,
-                    xl: 4,
-                    xxl: 6
-                  }}
-                  size='small'
-                  dataSource={this.state.actor}
-                  pagination={{
-                    onChange: page => {
-                      console.log(page)
-                    },
-                    pageSize: 4
-                  }}
-                  renderItem={item => (
-                    <List.Item>
-                      <Link to={'/figure/' + item.id}>
-                        <div style={{ display: 'flex', flexDirection: 'column' }}>
-                          <img alt='example' src={item.cover} style={{ borderRadius: '10px', height: '150px', width: '110px' }} />
-                          {item.name}
-                        </div>
-                      </Link>
-                    </List.Item>
-                  )}
-                />
+                {(this.state.director.length !== 0) && (
+                  <RowList data={this.state.director} title='导演' />
+                )}
+                {(this.state.writer.length !== 0) && (
+                  <RowList data={this.state.writer} title='编剧' />
+                )}
+                {(this.state.actor.length !== 0) && (
+                  <RowList data={this.state.actor} title='演员' />
+                )}
                 <Title level={4}>影评 · · · · · ·</Title>
                 <AddMovieComment movieId={this.state.id} movieUrl={this.state.url} />
               </Col>

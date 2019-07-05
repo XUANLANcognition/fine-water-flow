@@ -77,7 +77,7 @@ class ArticlePage extends Component {
       <Layout style={{ minHeight: '100vh', backgroundColor: '#fff' }}>
         <Nav />
         <BackTop />
-        <Row style={{ background: '#fff', padding: '20px 0', marginBottom: '20px', boxShadow: '0px 0px 10px #888888' }}>
+        <Row style={{ background: '#fff', padding: '20px 0', marginBottom: '20px', boxShadow: '0px 2px 2px #888888' }}>
           <Col xxl={{ span: 10, offset: 4 }} xl={{ span: 13, offset: 2 }} xs={{ span: 22, offset: 1 }}>
             <div style={{ fontSize: '22px', fontWeight: 'bold', color: 'black' }}>
               <Paragraph ellipsis={{ rows: 1, expandable: true }} strong style={{ color: 'black' }}>

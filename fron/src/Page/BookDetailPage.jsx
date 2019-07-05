@@ -104,7 +104,7 @@ class BookDetailPage extends Component {
                       <img
                         src={this.state.cover}
                         alt={this.state.title}
-                        style={{ width: '135px', maxHeight: '200px' }}
+                        style={{ width: '135px', maxHeight: '200px', marginLeft: '10px' }}
                       />
                     </div>
                   </div>

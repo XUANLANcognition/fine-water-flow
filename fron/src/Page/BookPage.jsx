@@ -143,7 +143,7 @@ class BookPage extends Component {
         <BackTop />
         <div style={{ flex: '1 0 ', backgroundColor: '#ffffff' }}>
           <Affix offsetTop={this.state.top}>
-            <Row style={{ paddingBottom: '10px', paddingTop: '10px', marginBottom: '20px', background: '#fff', boxShadow: '0px 0px 10px #888888' }}>
+            <Row style={{ paddingBottom: '10px', paddingTop: '10px', marginBottom: '20px', background: '#fff', boxShadow: '0px 2px 2px #888888' }}>
               <Col xxl={{ span: 5, offset: 4 }} xl={{ span: 6, offset: 2 }} xs={{ span: 22, offset: 1 }} >
                 <div style={{ fontSize: '24px', fontWeight: 'bold', color: 'black' }}>
                   FWF 读书
