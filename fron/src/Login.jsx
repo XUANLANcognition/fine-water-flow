@@ -19,10 +19,10 @@ class Login extends Component {
       window.localStorage.setItem('token', response.data.token)
       window.localStorage.setItem('user_id', response.data.user_id)
       window.localStorage.setItem('user_avatar', response.data.user_avatar)
-      message.success('Welcome ' + response.data.user_name)
+      message.success('欢迎 ' + response.data.user_name + ' 进入 FWF')
       this.props.history.replace('/')
     } catch (error) {
-      message.error('error')
+      message.error('账号或密码错误')
       console.log(error)
     }
   }
@@ -62,7 +62,7 @@ class Login extends Component {
           })(
             <Checkbox>自动登陆</Checkbox>
           )}
-          <a className='login-form-forgot' href='' style={{ float: 'right' }}>忘记密码？</a>
+          <Link className='login-form-forgot' to='/reset_password' style={{ float: 'right' }}>忘记密码？</Link>
           <Button type='primary' htmlType='submit' className='login-form-button'
             style={{ width: '100%' }}>
             登陆

@@ -20,7 +20,7 @@ class Home extends Component {
   render () {
     return (
       <Layout style={{ minHeight: '100vh', backgroundColor: '#fff' }}>
-        <div style={{ height: '100vh', background: `url(${'/back1.png'}) repeat center` }}>
+        <div style={{ height: '100vh', background: '#fff' }}>
           <Nav />
           <div>
             <Row type='flex' align='middle' style={{ flex: '1 0', height: '80vh' }}>

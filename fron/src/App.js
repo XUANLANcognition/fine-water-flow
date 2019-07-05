@@ -23,6 +23,7 @@ import MovieDetailPage from './Page/MovieDetailPage'
 import FigureDetailPage from './Page/FigureDetailPage'
 import BookEditorPage from './Page/BookEditorPage'
 import MovieEditorPage from './Page/MovieEditorPage'
+import ResetPassword from './Page/ResetPassword'
 
 import './Global.css'
 
@@ -60,6 +61,7 @@ class App extends Component {
             <Route path='/editor' component={Editor1} />
             <Route path='/book_editor_page' component={BookEditorPage} />
             <Route path='/movie_editor_page' component={MovieEditorPage} />
+            <Route path='/reset_password' component={ResetPassword} />
             <Route component={NoMatch} />
           </Switch>
         </Router>
