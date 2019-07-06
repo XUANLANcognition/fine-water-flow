@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 
 # Register your models here.
 
-from .models import Article, Comment, Profile, Book, BookTag, BookBlock, BookComment, Movie, Figure, MovieComment, MovieBlock, MovieTag, Picture
+from .models import Article, Comment, Profile, Book, BookTag, BookBlock, BookComment, Movie, Figure, MovieComment, MovieBlock, MovieTag, Picture, Source
 
 class ProfileAdmin(admin.ModelAdmin):
     list_display = ('user', 'media_editor_auth')
@@ -68,7 +68,7 @@ class MovieAdmin(admin.ModelAdmin):
     list_display = ('title', )
     list_filter = ('pub_date', )
     list_per_page = 10
-    filter_horizontal = ('actor', 'director', 'writer', 'tag', 'still')
+    filter_horizontal = ('actor', 'director', 'writer', 'tag', 'still', 'play_source')
 
 class FigureAdmin(admin.ModelAdmin):
     list_display = ('name', )
@@ -96,3 +96,4 @@ admin.site.register(Figure, FigureAdmin)
 admin.site.register(MovieComment)
 admin.site.register(Profile, ProfileAdmin)
 admin.site.register(Picture)
+admin.site.register(Source)

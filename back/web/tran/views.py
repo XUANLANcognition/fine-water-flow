@@ -3,7 +3,7 @@ from django.http import JsonResponse
 from rest_framework import routers, serializers, viewsets, status
 from rest_framework.pagination import PageNumberPagination
 from django.contrib.auth.models import User
-from .models import Article, Comment, Profile, Book, BookTag, BookBlock, BookComment, Figure, Movie, MovieComment, MovieBlock, MovieTag, Picture
+from .models import Article, Comment, Profile, Book, BookTag, BookBlock, BookComment, Figure, Movie, MovieComment, MovieBlock, MovieTag, Picture, Source
 from rest_framework.authtoken.models import Token
 
 from rest_framework.authtoken.views import ObtainAuthToken
@@ -70,6 +70,15 @@ class PictureSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Picture
+        fields = ('url', 'id', 'title')
+
+
+# PlaySource API
+
+class SourceSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Source
         fields = ('url', 'id', 'title')
 
 
@@ -573,10 +582,11 @@ class MovieSerializer(serializers.HyperlinkedModelSerializer):
     user = UserAnotherSerializer(read_only = True)
     tag = BookTagSerializer(many=True, read_only=True)
     still = PictureSerializer(many=True, read_only=True)
+    play_source = SourceSerializer(many=True, read_only=True)
 
     class Meta:
         model = Movie
-        fields = ('url', 'id', 'title' , 'cover', 'number', 'runtime' ,'region','director','writer', 'actor', 'tag','overview', 'user', 'still')
+        fields = ('url', 'id', 'title' , 'cover', 'number', 'runtime' ,'region','director','writer', 'actor', 'tag','overview', 'user', 'still', 'play_source')
 
 
 class MoviePagination(PageNumberPagination):

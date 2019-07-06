@@ -5,6 +5,13 @@ from django.db.models.signals import post_save, pre_delete
 
 # Create your models here.
 
+class Source(models.Model):
+    title = models.CharField(max_length=128)
+    url = models.CharField(max_length=128)
+
+    def __str__(self):
+        return '%s' % (self.title)
+
 class Picture(models.Model):
     title = models.CharField(max_length=128)
     url = models.CharField(max_length=128)
@@ -125,6 +132,7 @@ class Movie(models.Model):
     user = models.ForeignKey(User, on_delete=models.PROTECT)
     tag = models.ManyToManyField('Movietag', related_name='movietag', blank=True)
     still = models.ManyToManyField('Picture', related_name='still', blank=True)
+    play_source = models.ManyToManyField('Source', related_name='play_source', blank=True)
 
 class MovieComment(models.Model):
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
