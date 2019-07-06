@@ -4,6 +4,14 @@ from django.dispatch import receiver
 from django.db.models.signals import post_save, pre_delete
 
 # Create your models here.
+
+class Picture(models.Model):
+    title = models.CharField(max_length=128)
+    url = models.CharField(max_length=128)
+
+    def __str__(self):
+        return '%s' % (self.title)
+
 class Article(models.Model):
     title = models.CharField(max_length=256)
     description = models.CharField(max_length=512, default='description')
@@ -116,6 +124,7 @@ class Movie(models.Model):
     pub_date = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(User, on_delete=models.PROTECT)
     tag = models.ManyToManyField('Movietag', related_name='movietag', blank=True)
+    still = models.ManyToManyField('Picture', related_name='still', blank=True)
 
 class MovieComment(models.Model):
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
