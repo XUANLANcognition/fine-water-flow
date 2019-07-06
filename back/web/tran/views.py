@@ -79,7 +79,7 @@ class SourceSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Source
-        fields = ('url', 'id', 'title')
+        fields = ('url', 'id', 'title', 'plantform')
 
 
 # User API

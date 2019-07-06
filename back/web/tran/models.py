@@ -7,10 +7,11 @@ from django.db.models.signals import post_save, pre_delete
 
 class Source(models.Model):
     title = models.CharField(max_length=128)
+    plantform = models.CharField(max_length=128, default='')
     url = models.CharField(max_length=128)
 
     def __str__(self):
-        return '%s' % (self.title)
+        return '%s-%s' % (self.title, self.plantform)
 
 class Picture(models.Model):
     title = models.CharField(max_length=128)
