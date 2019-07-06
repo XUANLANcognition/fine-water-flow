@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Layout, Col, Row, Menu, Icon, Typography, Tabs } from 'antd'
+import { Layout, Col, Row, Menu, Icon, Typography, Tabs, Divider } from 'antd'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 
@@ -90,7 +90,11 @@ class SettingAccount extends Component {
                       }
                       key='1'
                     >
-                      <Title style={{ padding: '24px 0' }} level={4}>1.书籍影视资源编辑</Title>
+                      <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'baseline' }}>
+                        <Title style={{ padding: '24px 0' }} level={4}>1.书籍影视资源编辑</Title>
+                        <Divider type='vertical' />
+                        <Link to='/editor_guidance'>编辑须知</Link>
+                      </div>
                       <StepAuth />
                     </TabPane>
                     <TabPane

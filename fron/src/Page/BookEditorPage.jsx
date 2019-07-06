@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-import { Layout, Row, Col, Typography, Form, Button, Icon, Input, Upload, message, InputNumber, notification } from 'antd'
+import { Layout, Row, Col, Typography, Form, Button, Icon, Input, Upload, message, InputNumber, notification, Divider } from 'antd'
 import { withRouter } from 'react-router'
+import { Link } from 'react-router-dom'
 import axios from 'axios'
 
 import Nav from '../Nav'
@@ -128,7 +129,11 @@ class BookEditor extends Component {
           <div style={{ flex: '1 0 ', backgroundColor: '#ffffff' }}>
             <Row style={{ paddingTop: '30px', paddingBottom: '30px' }}>
               <Col xxl={{ span: 12, offset: 6 }} xl={{ span: 16, offset: 4 }} xs={{ span: 22, offset: 1 }}>
-                <Title level={3}>Welcome!</Title>
+                <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'baseline' }}>
+                  <Title level={3}>欢迎你，可爱的编辑</Title>
+                  <Divider type='vertical' />
+                  <Link to='/editor_guidance'>编辑须知</Link>
+                </div>
                 <Form onSubmit={this.handleSubmit} className='book-editor-form'>
                   <Form.Item
                     label='书名'>

@@ -26,6 +26,7 @@ import MovieEditorPage from './Page/MovieEditorPage'
 import ResetPassword from './Page/ResetPassword'
 
 import './Global.css'
+import EditorGuidance from './Page/EditorGudiance'
 
 const MainPage = props => {
   const token = window.localStorage.getItem('token')
@@ -58,6 +59,7 @@ class App extends Component {
             <Route path='/settings/profile' component={SettingProfile} />
             <Route path='/settings/account' component={SettingAccount} />
             <Route path='/agreement' component={Agreement} />
+            <Route path='/editor_guidance' component={EditorGuidance} />
             <Route path='/editor' component={Editor1} />
             <Route path='/book_editor_page' component={BookEditorPage} />
             <Route path='/movie_editor_page' component={MovieEditorPage} />
