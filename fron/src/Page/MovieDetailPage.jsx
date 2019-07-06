@@ -10,6 +10,8 @@ import Myfooter from '../Myfooter'
 import AddMovieComment from '../AddMovieComment'
 import Advertisement from '../Advertisement'
 import RowList from '../RowList'
+import StillList from '../StillList'
+import SourceList from '../SourceList'
 
 const { Title } = Typography
 
@@ -26,8 +28,11 @@ class BookDetailPage extends Component {
       actor: [''],
       director: [''],
       writer: [''],
+      still: [''],
       loading: true,
-      tags: []
+      tags: [],
+      prelock: false,
+      source: ['']
     }
 
     componentDidMount = async (v) => {
@@ -54,7 +59,10 @@ class BookDetailPage extends Component {
             writer: response.data.writer,
             actor: response.data.actor,
             loading: false,
-            tags: response.data.tag
+            tags: response.data.tag,
+            still: response.data.still,
+            source: response.data.play_source,
+            prelock: true
           }
         })
       } catch (error) {
@@ -63,6 +71,7 @@ class BookDetailPage extends Component {
     }
 
     render () {
+      const { prelock } = this.state
       return (
         <Layout style={{ minHeight: '100vh', background: 'unset' }}>
           <Nav />
@@ -119,19 +128,25 @@ class BookDetailPage extends Component {
               <Col xxl={{ span: 10, offset: 4 }} xl={{ span: 13, offset: 2 }} xs={{ span: 22, offset: 1 }}>
                 <Title level={4}>内容简介 · · · · · ·</Title>
                 <div style={{ padding: '24px 0' }} dangerouslySetInnerHTML={{ __html: this.state.overview.replace(/\n/g, '</br>') }} />
-                {(this.state.director.length !== 0) && (
+                {prelock && (this.state.still.length !== 0) && (
+                  <StillList data={this.state.still} title='剧照' />
+                )}
+                {prelock && (this.state.director.length !== 0) && (
                   <RowList data={this.state.director} title='导演' />
                 )}
-                {(this.state.writer.length !== 0) && (
+                {prelock && (this.state.writer.length !== 0) && (
                   <RowList data={this.state.writer} title='编剧' />
                 )}
-                {(this.state.actor.length !== 0) && (
+                {prelock && (this.state.actor.length !== 0) && (
                   <RowList data={this.state.actor} title='演员' />
                 )}
                 <Title level={4}>影评 · · · · · ·</Title>
                 <AddMovieComment movieId={this.state.id} movieUrl={this.state.url} />
               </Col>
               <Col xxl={{ span: 5, offset: 1 }} xl={{ span: 6, offset: 1 }} xs={{ span: 22, offset: 1 }}>
+                {prelock && (this.state.source.length !== 0) && (
+                  <SourceList data={this.state.source} title='播放源' />
+                )}
                 <Advertisement />
               </Col>
             </Row>
