@@ -77,28 +77,35 @@ class BookDetailPage extends Component {
           <Nav />
           <BackTop />
           <div style={{ flex: '1 0 ' }}>
-            <Row style={{ paddingTop: '30px', paddingBottom: '30px' }}>
-              <Col xxl={{ span: 16, offset: 4 }} xl={{ span: 20, offset: 2 }} xs={{ span: 22, offset: 1 }}>
-                <div className='MovieHeader'
-                  style={{
-                    position: 'relative',
-                    overflow: 'hidden',
-                    background: 'hsla(0, 0%, 97%, 0.8)',
-                    borderRadius: '20px'
-                  }}>
-                  <div style={{
-                    background: `url(${this.state.cover})`,
-                    position: 'absolute',
-                    filter: 'blur(20px)',
-                    top: 0,
-                    bottom: 0,
-                    left: 0,
-                    right: 0,
-                    zIndex: -1
-                  }} />
-                  <div className='wrap' style={{ background: 'rgba(0,30%,100%,90%)', display: 'flex', justifyContent: 'space-between', padding: '20px 30px' }}>
-                    <div className='content'>
-                      <Title level={3}>{this.state.title}</Title>
+            <Row style={{ boxShadow: '0px 0px 5px #888888' }}>
+              <div className='MovieHeader'
+                style={{
+                  position: 'relative',
+                  overflow: 'hidden',
+                  background: 'hsla(0, 10%, 60%, 0.5)'
+                }}>
+                <div style={{
+                  background: `url(${this.state.cover})`,
+                  position: 'absolute',
+                  filter: 'blur(20px)',
+                  top: 0,
+                  bottom: 0,
+                  left: 0,
+                  right: 0,
+                  zIndex: -1,
+                  overflow: 'hidden'
+                }} />
+                <Col xxl={{ span: 16, offset: 4 }} xl={{ span: 20, offset: 2 }} xs={{ span: 22, offset: 1 }}>
+                  <div className='wrap' style={{ background: 'rgba(0,30%,100%,90%)', display: 'flex', justifyContent: 'space-between', padding: '20px 0' }}>
+                    <div className='MovieCover'>
+                      <img
+                        src={this.state.cover}
+                        alt={this.state.title}
+                        style={{ width: '225px', maxHeight: '300px', border: '4px solid white', borderRadius: '8px' }}
+                      />
+                    </div>
+                    <div className='content' style={{ marginLeft: '20px' }}>
+                      <Title level={3} style={{ color: 'white' }}>{this.state.title}</Title>
                       <Descriptions
                         border
                         column={{ xxl: 2, xl: 2, lg: 2, md: 2, sm: 2, xs: 1 }}
@@ -108,21 +115,17 @@ class BookDetailPage extends Component {
                         <Descriptions.Item label='制片国家/地区'>{this.state.region}</Descriptions.Item>
                       </Descriptions>
                       {this.state.tags.map(tag => (
-                        <Tag key={tag.title} color='#343a40' style={{ margin: '5px' }}>
-                          {tag.title}
+                        <Tag key={tag.title} color='#fff' style={{ margin: '5px' }}>
+                          <div style={{ color: '#000' }}>
+                            {tag.title}
+                          </div>
+
                         </Tag>
                       ))}
                     </div>
-                    <div className='MovieCover'>
-                      <img
-                        src={this.state.cover}
-                        alt={this.state.title}
-                        style={{ width: '135px', maxHeight: '200px', marginLeft: '10px' }}
-                      />
-                    </div>
                   </div>
-                </div>
-              </Col>
+                </Col>
+              </div>
             </Row>
             <Row style={{ paddingTop: '30px', paddingBottom: '30px' }}>
               <Col xxl={{ span: 10, offset: 4 }} xl={{ span: 13, offset: 2 }} xs={{ span: 22, offset: 1 }}>
