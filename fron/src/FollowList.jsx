@@ -42,7 +42,7 @@ class FollowList extends Component {
           <List.Item>
             <Card>
               <Meta
-                avatar={<Link to={(item.id + '' === window.localStorage.getItem('user_id') ? '/profile/' : '/visit/') + (item.id)}><Avatar src={item.last_name} /></Link>}
+                avatar={<Link to={(item.id + '' === window.localStorage.getItem('user_id') ? '/profile/' : '/visit/') + (item.id)}><Avatar shape='square' src={item.last_name} /></Link>}
                 title={<Link to={(item.id + '' === window.localStorage.getItem('user_id') ? '/profile/' : '/visit/') + (item.id)}>{item.username}</Link>}
                 description={item.bio}
               /></Card>

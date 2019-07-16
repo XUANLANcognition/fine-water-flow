@@ -15,7 +15,7 @@ const CommentList = ({ comments }) => (
     renderItem={item => (
       <Comment
         author={item.user ? item.user.username : item.username}
-        avatar={item.user ? (<Link to={(item.user.id + '' === window.localStorage.getItem('user_id') ? '/profile/' : '/visit/') + item.user.id}><Avatar src={item.user ? item.user.last_name : item.last_name} /></Link>) : (<Link to={(item.id + '' === window.localStorage.getItem('user_id') ? '/profile/' : '/visit/') + item.id}><Avatar src={item.user ? item.last_name : item.last_name} /></Link>)}
+        avatar={item.user ? (<Link to={(item.user.id + '' === window.localStorage.getItem('user_id') ? '/profile/' : '/visit/') + item.user.id}><Avatar shape='square' src={item.user ? item.user.last_name : item.last_name} /></Link>) : (<Link to={(item.id + '' === window.localStorage.getItem('user_id') ? '/profile/' : '/visit/') + item.id}><Avatar shape='square' src={item.user ? item.last_name : item.last_name} /></Link>)}
         content={item.content}
         datetime={dayjs(item.pub_date).fromNow()}
       />
@@ -170,6 +170,7 @@ class AddComment extends Component {
             <Comment
               avatar={(
                 <Avatar
+                  shape='square'
                   src={this.state.avatarUrl}
                   alt={this.state.username}
                 />

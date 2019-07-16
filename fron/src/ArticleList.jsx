@@ -108,7 +108,7 @@ class ArticleList extends Component {
                         </div>
                       </Link>
                     }
-                    avatar={<Link to={((item.user && item.user.id) + '' === window.localStorage.getItem('user_id') ? '/profile/' : '/visit/') + (item.user && item.user.id)}><Avatar icon='user' src={item.user && item.user.last_name} /></Link>}
+                    avatar={<Link to={((item.user && item.user.id) + '' === window.localStorage.getItem('user_id') ? '/profile/' : '/visit/') + (item.user && item.user.id)}><Avatar shape='square' icon='user' src={item.user && item.user.last_name} /></Link>}
                     description={dayjs(item.pub_date).fromNow()}
                   />
                   <Link to={'/article/' + item.id}>

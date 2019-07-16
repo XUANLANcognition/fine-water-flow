@@ -70,7 +70,7 @@ class ProfileCarder extends Component {
     return (
       <Card >
         <Meta
-          avatar={<Avatar size='large' src={this.state.avatarUrl} icon='user' style={{ color: '#ffffff', backgroundColor: '#f6f6f6' }} />}
+          avatar={<Avatar shape='square' size='large' src={this.state.avatarUrl} icon='user' style={{ color: '#ffffff', backgroundColor: '#f6f6f6' }} />}
           title={
             <div>
               {this.state.username}

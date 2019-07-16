@@ -94,7 +94,7 @@ class ArticleFollowList extends Component {
               <Skeleton avatar title={false} loading={item.loading} active>
                 <List.Item.Meta
                   title={<Link to={((item.user && item.user.id) + '' === window.localStorage.getItem('user_id') ? '/profile/' : '/visit/') + (item.user && item.user.id)}>{item.user && item.user.username}</Link>}
-                  avatar={<Avatar icon='user' src={item.user && item.user.last_name} />}
+                  avatar={<Avatar shape='square' icon='user' src={item.user && item.user.last_name} />}
                   description={dayjs(item.pub_date).fromNow()}
                 />
                 <Link to={'/article/' + item.id}>

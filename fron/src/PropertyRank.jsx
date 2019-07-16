@@ -39,7 +39,7 @@ class PropertyRank extends Component {
               renderItem={item => (
                 <List.Item>
                   <List.Item.Meta
-                    avatar={<Avatar src={item.last_name} />}
+                    avatar={<Avatar shape='square' src={item.last_name} />}
                     title={item.username}
                   />
                   {item.property}
