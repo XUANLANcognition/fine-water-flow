@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Layout, notification, Form, Input, Button, Row, Col } from 'antd'
+import { Layout, notification, Form, Input, Button, Row, Col, Switch } from 'antd'
 import axios from 'axios'
 import { withRouter } from 'react-router'
 import BraftEditor from 'braft-editor'
@@ -61,7 +61,8 @@ class TextEditor extends Component {
         })
         const submitData = {
           title: values.title,
-          content: values.content.toHTML() // or values.content.toHTML()
+          content: values.content.toHTML(), // or values.content.toHTML()
+          originalitySwitch: values.originalitySwitch
         }
         try {
           let config = {
@@ -71,14 +72,13 @@ class TextEditor extends Component {
             'https://finewf.club:8080/api/articles/',
             {
               title: submitData.title,
-              content: submitData.content
+              content: submitData.content,
+              originality: submitData.originalitySwitch === true ? 'Y' : 'N'
             },
             config
           )
-          this.setState(function (state) {
-            return {
-              uploading: false
-            }
+          this.setState({
+            uploading: false
           })
           if (response.status === 201) {
             openNotificationWithIconS('success')
@@ -101,13 +101,18 @@ class TextEditor extends Component {
           <Col xxl={{ span: 12, offset: 6 }} xl={{ span: 16, offset: 4 }} xs={{ span: 22, offset: 1 }}>
             <div className='editor-wrapper' >
               <Form onSubmit={this.handleSubmit} className='text-editor-form'>
-                <Form.Item >
-                  <div style={{ display: 'flex', flexDirection: 'row-reverse', justifyContent: 'space-between' }}>
+                <div style={{ display: 'flex', flexDirection: 'row-reverse', justifyContent: 'space-between' }}>
+                  <Form.Item >
                     <Button loading={this.state.uploading} type='primary' htmlType='submit' >
                         发布
                     </Button>
-                  </div>
-                </Form.Item>
+                  </Form.Item>
+                  <Form.Item>
+                    {getFieldDecorator('originalitySwitch', {
+                      rules: []
+                    })(<Switch checkedChildren='原创' unCheckedChildren='转载整理' />)}
+                  </Form.Item>
+                </div>
                 <Form.Item >
                   {getFieldDecorator('title', {
                     rules: [{

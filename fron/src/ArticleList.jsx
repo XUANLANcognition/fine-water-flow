@@ -98,23 +98,25 @@ class ArticleList extends Component {
             loading={initLoading}
             renderItem={item => (
               <List.Item>
-                <Skeleton avatar title={false} loading={item.loading} active>
-                  <List.Item.Meta
-                    title={
-                      <Link to={((item.user && item.user.id) + '' === window.localStorage.getItem('user_id') ? '/profile/' : '/visit/') + (item.user && item.user.id)}>
-                        <div>
-                          {item.user && item.user.username}
-                          {(item.user && item.user.profile.media_editor_auth) === '审核通过' ? <IconFont type='icon-renzhenghuizhang' style={{ paddingLeft: '10px' }} /> : null}
-                        </div>
-                      </Link>
-                    }
-                    avatar={<Link to={((item.user && item.user.id) + '' === window.localStorage.getItem('user_id') ? '/profile/' : '/visit/') + (item.user && item.user.id)}><Avatar shape='square' icon='user' src={item.user && item.user.last_name} /></Link>}
-                    description={dayjs(item.pub_date).fromNow()}
-                  />
-                  <Link to={'/article/' + item.id}>
-                    <h3>{item.title}</h3>
-                  </Link>
-                </Skeleton>
+                <div style={item.originality === 'Y' ? { borderLeft: '8px solid', borderColor: '#269f42', paddingLeft: '15px' } : {}}>
+                  <Skeleton avatar title={false} loading={item.loading} active>
+                    <List.Item.Meta
+                      title={
+                        <Link to={((item.user && item.user.id) + '' === window.localStorage.getItem('user_id') ? '/profile/' : '/visit/') + (item.user && item.user.id)}>
+                          <div>
+                            {item.user && item.user.username}
+                            {(item.user && item.user.profile.media_editor_auth) === '审核通过' ? <IconFont type='icon-renzhenghuizhang' style={{ paddingLeft: '10px' }} /> : null}
+                          </div>
+                        </Link>
+                      }
+                      avatar={<Link to={((item.user && item.user.id) + '' === window.localStorage.getItem('user_id') ? '/profile/' : '/visit/') + (item.user && item.user.id)}><Avatar shape='square' icon='user' src={item.user && item.user.last_name} /></Link>}
+                      description={item.pub_date && dayjs(item.pub_date).fromNow()}
+                    />
+                    <Link to={'/article/' + item.id}>
+                      <h3>{item.title}</h3>
+                    </Link>
+                  </Skeleton>
+                </div>
               </List.Item>
             )}
           />
