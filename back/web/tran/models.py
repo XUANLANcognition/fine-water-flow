@@ -27,6 +27,11 @@ class Article(models.Model):
     pub_date = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     views = models.IntegerField(default=0)
+    ORIGINALITY_CHOICES = (
+        ('Y', '原创'),
+        ('N', '非原创')
+    )
+    originality = models.CharField(max_length=24, choices=ORIGINALITY_CHOICES, default='N', blank=True)
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)

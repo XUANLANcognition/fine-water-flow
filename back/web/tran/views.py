@@ -234,7 +234,7 @@ class ArticleSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Article
-        fields = ('id', 'title', 'url', 'user', 'pub_date', 'views', 'description', 'content')
+        fields = ('id', 'title', 'url', 'originality', 'pub_date', 'views', 'description', 'content', 'user')
 
 
 class ArticlePagination(PageNumberPagination):
