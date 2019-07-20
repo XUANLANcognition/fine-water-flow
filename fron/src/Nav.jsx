@@ -73,7 +73,7 @@ class Nav extends Component {
               <div>
                 <Link to='#'>
                   <Popover content={Card} placement='bottomRight' trigger='click' >
-                    <Avatar shape='square' size='large' icon='user' src={window.localStorage.getItem('user_avatar')} />
+                    <Avatar shape='square' size='default' icon='user' src={window.localStorage.getItem('user_avatar')} />
                   </Popover>
                 </Link>
               </div>
