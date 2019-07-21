@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Layout, Avatar, Row, Col, Tabs, Icon, Button, Typography } from 'antd'
+import { Layout, Avatar, Row, Col, Tabs, Icon, Button, Typography, Card } from 'antd'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 
@@ -53,20 +53,29 @@ class Profile extends Component {
   }
   render () {
     return (
-      <Layout style={{ minHeight: '100vh', backgroundColor: '#ffffff' }}>
+      <Layout style={{ minHeight: '100vh', backgroundColor: '#f7f7f7' }}>
         <Nav />
-        <Row style={{ flex: '1 0', paddingTop: '30px', paddingBottom: '30px' }} >
-          <Col xxl={{ span: 3, offset: 4 }} xl={{ span: 5, offset: 2 }} xs={{ span: 22, offset: 1 }} style={{ paddingBottom: '20px' }}>
-            <Avatar size={180} shape='square' src={this.state.urlAvatar} icon='user' style={{ color: '#ffffff', backgroundColor: '#f6f6f6' }} />
-            <Title level={2}>{this.state.username}</Title>
-            <Paragraph>{this.state.bio}</Paragraph>
-            <PropertyList property={this.state.property} />
-            <br />
-            <Button block style={{ backgroundColor: '#f6f6f6' }}>
-              <Link to='/settings/profile'>Edit</Link>
-            </Button>
+        <Row style={{ marginTop: '20px' }}>
+          <Col xxl={{ span: 16, offset: 4 }} xl={{ span: 20, offset: 2 }} xs={{ span: 22, offset: 1 }}>
+            <div style={{ background: `url(${'/cover.jpg'})`, display: 'flex', justifyContent: 'center', height: '200px' }} />
+            <div style={{ background: '#fff', display: 'flex', flexWrap: 'wrap' }}>
+              <div style={{ height: '200px', width: '200px', marginTop: '-100px', padding: '20px' }}>
+                <Avatar shape='square' src={this.state.urlAvatar} icon='user' style={{ height: '100%', width: '100%', border: '4px solid white', borderRadius: '10px' }} />
+              </div>
+              <div style={{ display: 'flex', flexDirection: 'column' }}>
+                <Title level={2}>{this.state.username}</Title>
+                <Paragraph>{this.state.bio}</Paragraph>
+              </div>
+              <div style={{ display: 'flex', flexGrow: '1', flexDirection: 'row-reverse', alignItems: 'center', padding: '20px' }}>
+                <Button type='primary' ghost style={{ width: '150px' }}>
+                  <Link to='/settings/profile'>设置</Link>
+                </Button>
+              </div>
+            </div>
           </Col>
-          <Col xxl={{ span: 12, offset: 1 }} xl={{ span: 14, offset: 1 }} xs={{ span: 22, offset: 1 }} >
+        </Row>
+        <Row style={{ flex: '1 0', paddingTop: '15px', paddingBottom: '30px' }} >
+          <Col xxl={{ span: 12, offset: 4 }} xl={{ span: 14, offset: 2 }} xs={{ span: 22, offset: 1 }} style={{ background: '#fff', padding: '0 20px', paddingBottom: '30px' }}>
             <Tabs defaultActiveKey='1'>
               <TabPane tab={<span><IconFont type='icon-wenzhang' />我的文章</span>} key='1'>
                 <ProfileArticleList />
@@ -76,6 +85,17 @@ class Profile extends Component {
               </TabPane>
             </Tabs>
           </Col>
+          <Col xxl={{ span: 3, offset: 1 }} xl={{ span: 5, offset: 1 }} xs={{ span: 22, offset: 1 }} >
+            <Card title={
+              <div style={{ color: '#000', fontWeight: 'bolder', fontSize: '18px' }}>
+                水果
+              </div>} bordered={false} >
+              <PropertyList property={this.state.property} />
+            </Card>
+          </Col>
+        </Row>
+        <Row>
+          <Col xxl={{ span: 16, offset: 4 }} xl={{ span: 20, offset: 2 }} xs={{ span: 22, offset: 1 }} />
         </Row>
         <Myfooter />
       </Layout>

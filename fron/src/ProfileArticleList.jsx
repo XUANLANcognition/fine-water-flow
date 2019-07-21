@@ -114,7 +114,12 @@ class ProfileArticleList extends Component {
           <List.Item actions={[<a onClick={() => this.deleteArticle(item.id)} style={{ color: 'red' }}>删除</a>]}>
             <Skeleton title={false} loading={item.loading} actives>
               <List.Item.Meta
-                title={<Link to={'/article/' + item.id}>{item.title}</Link>}
+                title={
+                  <Link to={'/article/' + item.id}>
+                    <div style={{ color: '#000', fontWeight: 'bolder', fontSize: '16px' }}>
+                      {item.title}
+                    </div>
+                  </Link>}
                 description={dayjs(item.pub_date).fromNow()}
               />
             </Skeleton>
