@@ -155,7 +155,7 @@ class MoviePage extends Component {
             </Row>
           </Affix>
           <Row style={{ paddingTop: '0px', paddingBottom: '30px' }}>
-            <Col xxl={{ span: 11, offset: 4 }} xl={{ span: 13, offset: 2 }} xs={{ span: 22, offset: 1 }} style={{ paddingTop: '0px', paddingBottom: '30px' }}>
+            <Col xxl={{ span: 11, offset: 4 }} xl={{ span: 13, offset: 2 }} md={{ span: 14, offset: 1 }} xs={{ span: 22, offset: 1 }} style={{ paddingTop: '0px', paddingBottom: '30px' }}>
               <Title level={4} style={{ padding: '10px 0' }}>{this.state.tip} ({this.state.count})</Title>
               <List
                 itemLayout='vertical'
@@ -214,7 +214,7 @@ class MoviePage extends Component {
                 )}
               />
             </Col>
-            <Col xxl={{ span: 4, offset: 1 }} xl={{ span: 6, offset: 1 }} xs={{ span: 22, offset: 1 }}>
+            <Col xxl={{ span: 4, offset: 1 }} xl={{ span: 6, offset: 1 }} md={{ span: 7, offset: 1 }} xs={{ span: 22, offset: 1 }}>
               <CategoryList />
               <Collapse
                 bordered={false}

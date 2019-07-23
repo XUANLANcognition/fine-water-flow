@@ -75,7 +75,7 @@ class Profile extends Component {
           </Col>
         </Row>
         <Row style={{ flex: '1 0', paddingTop: '15px', paddingBottom: '30px' }} >
-          <Col xxl={{ span: 12, offset: 4 }} xl={{ span: 14, offset: 2 }} xs={{ span: 22, offset: 1 }} style={{ background: '#fff', padding: '0 20px', paddingBottom: '30px' }}>
+          <Col xxl={{ span: 12, offset: 4 }} xl={{ span: 14, offset: 2 }} md={{ span: 14, offset: 1 }} xs={{ span: 22, offset: 1 }} style={{ background: '#fff', padding: '0 20px', paddingBottom: '30px' }}>
             <Tabs defaultActiveKey='1'>
               <TabPane tab={<span><IconFont type='icon-wenzhang' />我的文章</span>} key='1'>
                 <ProfileArticleList />
@@ -85,7 +85,7 @@ class Profile extends Component {
               </TabPane>
             </Tabs>
           </Col>
-          <Col xxl={{ span: 3, offset: 1 }} xl={{ span: 5, offset: 1 }} xs={{ span: 22, offset: 1 }} >
+          <Col xxl={{ span: 3, offset: 1 }} xl={{ span: 5, offset: 1 }} md={{ span: 7, offset: 1 }} xs={{ span: 22, offset: 1 }} >
             <Card title={
               <div style={{ color: '#000', fontWeight: 'bolder', fontSize: '18px' }}>
                 水果

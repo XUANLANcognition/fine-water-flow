@@ -128,7 +128,7 @@ class BookDetailPage extends Component {
               </div>
             </Row>
             <Row style={{ paddingTop: '30px', paddingBottom: '30px' }}>
-              <Col xxl={{ span: 10, offset: 4 }} xl={{ span: 13, offset: 2 }} xs={{ span: 22, offset: 1 }}>
+              <Col xxl={{ span: 10, offset: 4 }} xl={{ span: 13, offset: 2 }} md={{ span: 14, offset: 1 }} xs={{ span: 22, offset: 1 }}>
                 <Title level={4}>内容简介 · · · · · ·</Title>
                 <div style={{ padding: '24px 0' }} dangerouslySetInnerHTML={{ __html: this.state.overview.replace(/\n/g, '</br>') }} />
                 {prelock && (this.state.still.length !== 0) && (
@@ -146,7 +146,7 @@ class BookDetailPage extends Component {
                 <Title level={4}>影评 · · · · · ·</Title>
                 <AddMovieComment movieId={this.state.id} movieUrl={this.state.url} />
               </Col>
-              <Col xxl={{ span: 5, offset: 1 }} xl={{ span: 6, offset: 1 }} xs={{ span: 22, offset: 1 }}>
+              <Col xxl={{ span: 5, offset: 1 }} xl={{ span: 6, offset: 1 }} md={{ span: 7, offset: 1 }} xs={{ span: 22, offset: 1 }}>
                 {prelock && (this.state.source.length !== 0) && (
                   <SourceList data={this.state.source} title='播放源' />
                 )}
