@@ -1,11 +1,15 @@
 import React, { Component } from 'react'
-import { List, Button, Skeleton, message, Avatar, Modal } from 'antd'
+import { List, Button, Skeleton, message, Avatar, Modal, Icon } from 'antd'
 import axios from 'axios'
 import dayjs from 'dayjs'
 import { Link } from 'react-router-dom'
 
-const count = 3
+const count = 6
 const confirm = Modal.confirm
+const briefLength = 100
+const IconFont = Icon.createFromIconfontCN({
+  scriptUrl: '//at.alicdn.com/t/font_1242637_tb2emfivmbd.js'
+})
 
 class ProfileArticleList extends Component {
   state = {
@@ -21,6 +25,20 @@ class ProfileArticleList extends Component {
     this.setState(function (state) {
       return { initLoading: false }
     })
+  }
+
+  extractText = HTMLString => {
+    var span = document.createElement('span')
+    span.innerHTML = HTMLString
+    return span.textContent || span.innerText
+  }
+
+  extractBrief = HTMLString => {
+    const text = this.extractText(HTMLString)
+    if (text.length > briefLength) {
+      return text.slice(0, briefLength) + '……'
+    }
+    return text
   }
 
   getArticleData = async (v) => {
@@ -99,29 +117,38 @@ class ProfileArticleList extends Component {
         textAlign: 'center', marginTop: 12, height: 32, lineHeight: '32px'
       }}
       >
-        {(this.state.data.length > 0) && <Button onClick={this.onLoadMore}>loading more</Button>}
+        {(this.state.data.length > 0) && <Button onClick={this.onLoadMore}>加载更多</Button>}
       </div>
     ) : null
 
     return (
       <List
-        itemLayout='horizontal'
+        itemLayout='vertical'
         dataSource={data}
         size='large'
         loadMore={loadMore}
         loading={initLoading}
         renderItem={item => (
           <List.Item actions={[<a onClick={() => this.deleteArticle(item.id)} style={{ color: 'red' }}>删除</a>]}>
-            <Skeleton title={false} loading={item.loading} actives>
+            <Skeleton avatar title={false} loading={item.loading} active>
               <List.Item.Meta
                 title={
-                  <Link to={'/article/' + item.id}>
-                    <div style={{ color: '#000', fontWeight: 'bolder', fontSize: '16px' }}>
-                      {item.title}
+                  <Link to={((item.user && item.user.id) + '' === window.localStorage.getItem('user_id') ? '/profile/' : '/visit/') + (item.user && item.user.id)}>
+                    <div>
+                      {item.user && item.user.username}
+                      {(item.user && item.user.profile.media_editor_auth) === '审核通过' ? <IconFont type='icon-renzhenghuizhang' style={{ paddingLeft: '10px' }} /> : null}
                     </div>
-                  </Link>}
-                description={dayjs(item.pub_date).fromNow()}
+                  </Link>
+                }
+                avatar={<Link to={((item.user && item.user.id) + '' === window.localStorage.getItem('user_id') ? '/profile/' : '/visit/') + (item.user && item.user.id)}><Avatar shape='square' icon='user' src={item.user && item.user.last_name} /></Link>}
+                description={item.pub_date && dayjs(item.pub_date).fromNow()}
               />
+              <Link to={'/article/' + item.id}>
+                <h3 style={{ color: '#1a1a1a', fontWeight: '600', fontSize: '18px', fontStretch: '100%' }}>{item.title}</h3>
+                <div style={{ color: '#646464', fontSize: '15px' }}>
+                  {this.extractBrief(item.content)}
+                </div>
+              </Link>
             </Skeleton>
           </List.Item>
         )}

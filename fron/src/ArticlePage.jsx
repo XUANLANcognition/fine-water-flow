@@ -93,7 +93,7 @@ class ArticlePage extends Component {
           </Col>
         </Row>
         <Row style={{ flex: '1 0' }} >
-          <Col xxl={{ span: 10, offset: 4 }} xl={{ span: 13, offset: 2 }} xs={{ span: 22, offset: 1 }}>
+          <Col xxl={{ span: 10, offset: 4 }} xl={{ span: 13, offset: 2 }} md={{ span: 14, offset: 1 }} xs={{ span: 22, offset: 1 }}>
             <div type='flex' style={{ flex: '1 0', background: '#fff' }}>
               <div style={{ fontSize: '16px' }}>
                 <div className='braft-output-content' style={{ overflow: 'auto' }} dangerouslySetInnerHTML={{ __html: this.state.content }} />
@@ -105,7 +105,7 @@ class ArticlePage extends Component {
               <AddComment articleId={this.state.id} articleUrl={this.state.url} />
             </div>
           </Col>
-          <Col xxl={{ span: 5, offset: 1 }} xl={{ span: 6, offset: 1 }} xs={{ span: 22, offset: 1 }} style={{ paddingBottom: '20px' }}>
+          <Col xxl={{ span: 5, offset: 1 }} xl={{ span: 6, offset: 1 }} md={{ span: 7, offset: 1 }} xs={{ span: 22, offset: 1 }} style={{ paddingBottom: '20px' }}>
             <Affix offsetTop={0}>
               <AuthorShowCard authorId={this.state.authorId} />
             </Affix>

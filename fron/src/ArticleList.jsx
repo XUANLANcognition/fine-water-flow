@@ -5,6 +5,7 @@ import dayjs from 'dayjs'
 import { Link } from 'react-router-dom'
 
 const count = 8
+const briefLength = 100
 const IconFont = Icon.createFromIconfontCN({
   scriptUrl: '//at.alicdn.com/t/font_1242637_tb2emfivmbd.js'
 })
@@ -22,6 +23,20 @@ class ArticleList extends Component {
     componentDidMount = async (v) => {
       await this.getArticleData()
       this.setState({ initLoading: false })
+    }
+
+    extractText = HTMLString => {
+      var span = document.createElement('span')
+      span.innerHTML = HTMLString
+      return span.textContent || span.innerText
+    }
+
+    extractBrief = HTMLString => {
+      const text = this.extractText(HTMLString)
+      if (text.length > briefLength) {
+        return text.slice(0, briefLength) + '……'
+      }
+      return text
     }
 
     getArticleData = async (v) => {
@@ -113,7 +128,10 @@ class ArticleList extends Component {
                       description={item.pub_date && dayjs(item.pub_date).fromNow()}
                     />
                     <Link to={'/article/' + item.id}>
-                      <h3>{item.title}</h3>
+                      <h3 style={{ color: '#1a1a1a', fontWeight: '600', fontSize: '18px', fontStretch: '100%' }}>{item.title}</h3>
+                      <div style={{ color: '#646464', fontSize: '15px' }}>
+                        {this.extractBrief(item.content)}
+                      </div>
                     </Link>
                   </Skeleton>
                 </div>

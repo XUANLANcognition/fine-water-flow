@@ -32,7 +32,7 @@ class THome extends Component {
         <Nav />
         <BackTop />
         <Row style={{ flex: '1 0', paddingTop: '30px', paddingBottom: '30px' }}>
-          <Col xxl={{ span: 11, offset: 4 }} xl={{ span: 13, offset: 2 }} xs={{ span: 22, offset: 1 }} style={{ paddingBottom: '20px' }}>
+          <Col xxl={{ span: 11, offset: 4 }} xl={{ span: 13, offset: 2 }} md={{ span: 14, offset: 1 }} xs={{ span: 22, offset: 1 }} style={{ paddingBottom: '20px' }}>
             <Tabs defaultActiveKey='1'>
               <TabPane tab='全部' key='1'>
                 <ArticleList />
@@ -42,7 +42,7 @@ class THome extends Component {
               </TabPane>
             </Tabs>
           </Col>
-          <Col xxl={{ span: 4, offset: 1 }} xl={{ span: 6, offset: 1 }} xs={{ span: 22, offset: 1 }}>
+          <Col xxl={{ span: 4, offset: 1 }} xl={{ span: 6, offset: 1 }} md={{ span: 7, offset: 1 }} xs={{ span: 22, offset: 1 }}>
             <CategoryList />
             <PropertyRank />
             <Advertisement />

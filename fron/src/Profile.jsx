@@ -56,8 +56,10 @@ class Profile extends Component {
       <Layout style={{ minHeight: '100vh', backgroundColor: '#f7f7f7' }}>
         <Nav />
         <Row style={{ marginTop: '20px' }}>
-          <Col xxl={{ span: 16, offset: 4 }} xl={{ span: 20, offset: 2 }} xs={{ span: 22, offset: 1 }}>
-            <div style={{ background: `url(${'/cover.jpg'})`, display: 'flex', justifyContent: 'center', height: '200px' }} />
+          <Col xxl={{ span: 14, offset: 5 }} xl={{ span: 20, offset: 2 }} xs={{ span: 22, offset: 1 }} style={{ boxShadow: '0 1px 3px rgba(26,26,26,.1)' }}>
+            <div style={{ display: 'flex', backgroundColor: '#fff', justifyContent: 'center', overflow: 'hidden', backgroundRepeat: 'no-repeat', backgroundPosition: 'center', backgroundOrigin: 'padding-box', backgroundClip: 'border-box', backgroundAttachment: 'scroll', position: 'relative' }}>
+              <img src='/cover.jpg' style={{ objectFit: 'cover', height: '240px' }} />
+            </div>
             <div style={{ background: '#fff', display: 'flex', flexWrap: 'wrap' }}>
               <div style={{ height: '200px', width: '200px', marginTop: '-100px', padding: '20px' }}>
                 <Avatar shape='square' src={this.state.urlAvatar} icon='user' style={{ height: '100%', width: '100%', border: '4px solid white', borderRadius: '10px' }} />
@@ -68,15 +70,15 @@ class Profile extends Component {
               </div>
               <div style={{ display: 'flex', flexGrow: '1', flexDirection: 'row-reverse', alignItems: 'center', padding: '20px' }}>
                 <Button type='primary' ghost style={{ width: '150px' }}>
-                  <Link to='/settings/profile'>设置</Link>
+                  <Link to='/settings/profile'>个人设置</Link>
                 </Button>
               </div>
             </div>
           </Col>
         </Row>
         <Row style={{ flex: '1 0', paddingTop: '15px', paddingBottom: '30px' }} >
-          <Col xxl={{ span: 12, offset: 4 }} xl={{ span: 14, offset: 2 }} md={{ span: 14, offset: 1 }} xs={{ span: 22, offset: 1 }} style={{ background: '#fff', padding: '0 20px', paddingBottom: '30px' }}>
-            <Tabs defaultActiveKey='1'>
+          <Col xxl={{ span: 10, offset: 5 }} xl={{ span: 14, offset: 2 }} md={{ span: 14, offset: 1 }} xs={{ span: 22, offset: 1 }} style={{ background: '#fff', padding: '0 20px', paddingBottom: '30px', boxShadow: '0 1px 3px rgba(26,26,26,.1)' }}>
+            <Tabs defaultActiveKey='1' size='large'>
               <TabPane tab={<span><IconFont type='icon-wenzhang' />我的文章</span>} key='1'>
                 <ProfileArticleList />
               </TabPane>
@@ -85,11 +87,15 @@ class Profile extends Component {
               </TabPane>
             </Tabs>
           </Col>
-          <Col xxl={{ span: 3, offset: 1 }} xl={{ span: 5, offset: 1 }} md={{ span: 7, offset: 1 }} xs={{ span: 22, offset: 1 }} >
-            <Card title={
-              <div style={{ color: '#000', fontWeight: 'bolder', fontSize: '18px' }}>
-                水果
-              </div>} bordered={false} >
+          <Col xxl={{ span: 4, offset: 0 }} xl={{ span: 6, offset: 0 }} md={{ span: 8, offset: 0 }} xs={{ span: 22, offset: 1 }} style={{ paddingLeft: '20px' }} >
+            <Card
+              title={
+                <div style={{ color: '#646464', fontWeight: '600', fontSize: '15px' }}>
+                  个人成就
+                </div>
+              }
+              bordered={false}
+              style={{ boxShadow: '0 1px 3px rgba(26,26,26,.1)' }} >
               <PropertyList property={this.state.property} />
             </Card>
           </Col>
