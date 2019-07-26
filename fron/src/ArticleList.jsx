@@ -104,7 +104,7 @@ class ArticleList extends Component {
       ) : null
 
       return (
-        <div>
+        <div style={{ backgroundColor: '#fff', boxShadow: '0 1px 3px rgba(26,26,26,.1)', borderRadius: '1px' }}>
           <Search placeholder='请输入文章标题或内容含有的关键字' onSearch={value => this.search(value)} enterButton />
           <List
             itemLayout='vertical'

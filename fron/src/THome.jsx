@@ -28,11 +28,11 @@ class THome extends Component {
 
   render () {
     return (
-      <Layout style={{ minHeight: '100vh', backgroundColor: '#fff' }}>
+      <Layout style={{ minHeight: '100vh', backgroundColor: '#f7f7f7' }}>
         <Nav />
         <BackTop />
         <Row style={{ flex: '1 0', paddingTop: '30px', paddingBottom: '30px' }}>
-          <Col xxl={{ span: 11, offset: 4 }} xl={{ span: 13, offset: 2 }} md={{ span: 14, offset: 1 }} xs={{ span: 22, offset: 1 }} style={{ paddingBottom: '20px' }}>
+          <Col xxl={{ span: 10, offset: 5 }} xl={{ span: 13, offset: 2 }} md={{ span: 14, offset: 1 }} xs={{ span: 22, offset: 1 }} style={{ paddingBottom: '20px', backgroundColor: '#fff', padding: '20px 20px' }}>
             <Tabs defaultActiveKey='1'>
               <TabPane tab='全部' key='1'>
                 <ArticleList />
@@ -42,7 +42,7 @@ class THome extends Component {
               </TabPane>
             </Tabs>
           </Col>
-          <Col xxl={{ span: 4, offset: 1 }} xl={{ span: 6, offset: 1 }} md={{ span: 7, offset: 1 }} xs={{ span: 22, offset: 1 }}>
+          <Col xxl={{ span: 4, offset: 0 }} xl={{ span: 6, offset: 1 }} md={{ span: 7, offset: 1 }} xs={{ span: 22, offset: 1 }} style={{ marginLeft: '15px' }}>
             <CategoryList />
             <PropertyRank />
             <Advertisement />

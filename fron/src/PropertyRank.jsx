@@ -30,9 +30,9 @@ class PropertyRank extends Component {
 
       render () {
         return (
-          <div style={{ padding: '10px 0px', background: '#fff', borderRadius: '10px' }}>
+          <div style={{ padding: '10px 10px', background: '#fff', borderRadius: '1px', boxShadow: '0 1px 3px rgba(26,26,26,.1)' }}>
             <List
-              header={<Title level={4}>果榜</Title>}
+              header={<Title level={4}>积分榜</Title>}
               itemLayout='horizontal'
               dataSource={this.state.data}
               split={false}

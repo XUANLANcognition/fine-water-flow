@@ -46,7 +46,7 @@ class CategoryList extends Component {
 
   render () {
     return (
-      <div style={{ padding: '30px 0px', background: '#fff', borderRadius: '5px' }}>
+      <div style={{ padding: '30px 10px', background: '#fff', borderRadius: '1px', boxShadow: '0 1px 3px rgba(26,26,26,.1)', marginBottom: '10px' }}>
         <Title level={4} style={{ marginBottom: '30px' }}>改变</Title>
         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
           <Link to={(window.localStorage.getItem('user_id') !== null) ? '/textEditorPage' : '/'}>
