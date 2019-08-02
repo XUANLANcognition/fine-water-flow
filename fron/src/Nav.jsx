@@ -18,7 +18,7 @@ class Nav extends Component {
   render () {
     return (
       <Row style={{ backgroundColor: '#fff', boxShadow: '0px 2px 2px #888888' }}>
-        <Col xxl={{ span: 16, offset: 4 }} xl={{ span: 20, offset: 2 }} xs={{ span: 22, offset: 1 }}>
+        <Col xxl={{ span: 14, offset: 5 }} xl={{ span: 20, offset: 2 }} xs={{ span: 22, offset: 1 }}>
           <div style={{ backgroundColor: '#fff', color: '#fff', lineHeight: '56px', display: 'flex', flexDirection: 'row', flexWrap: 'wrap' }}
           >
             <div style={{ paddingRight: '24px', display: 'flex', alignItems: 'center' }}>

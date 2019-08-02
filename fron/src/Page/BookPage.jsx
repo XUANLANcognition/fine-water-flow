@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Layout, Row, Col, Typography, Tag, List, Collapse, Icon, Descriptions, BackTop, Input, Affix } from 'antd'
+import { Layout, Row, Col, Typography, Tag, List, Collapse, Icon, Descriptions, BackTop, Input, Affix, Skeleton } from 'antd'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 
@@ -144,19 +144,19 @@ class BookPage extends Component {
         <div style={{ flex: '1 0 ', backgroundColor: '#ffffff' }}>
           <Affix offsetTop={this.state.top}>
             <Row style={{ paddingBottom: '10px', paddingTop: '10px', marginBottom: '20px', background: '#fff', boxShadow: '0px 2px 2px #888888' }}>
-              <Col xxl={{ span: 5, offset: 4 }} xl={{ span: 6, offset: 2 }} xs={{ span: 22, offset: 1 }} >
+              <Col xxl={{ span: 5, offset: 5 }} xl={{ span: 6, offset: 2 }} xs={{ span: 22, offset: 1 }} >
                 <div style={{ fontSize: '24px', fontWeight: 'bold', color: 'black' }}>
                   FWF 读书
                 </div>
               </Col>
-              <Col xxl={{ span: 10, offset: 1 }} xl={{ span: 13, offset: 1 }} xs={{ span: 22, offset: 1 }} >
+              <Col xxl={{ span: 8, offset: 1 }} xl={{ span: 13, offset: 1 }} xs={{ span: 22, offset: 1 }} >
                 <Search placeholder='请输入书名含有的关键字' onSearch={value => this.search(value)} enterButton />
               </Col>
             </Row>
           </Affix>
           <Row style={{ paddingTop: '0px', paddingBottom: '30px' }}>
-            <Col xxl={{ span: 11, offset: 4 }} xl={{ span: 13, offset: 2 }} md={{ span: 14, offset: 1 }} xs={{ span: 22, offset: 1 }} style={{ paddingTop: '0px', paddingBottom: '30px' }}>
-              <Title level={4} style={{ padding: '10px 0' }}>{this.state.tip} ({this.state.count})</Title>
+            <Col xxl={{ span: 10, offset: 5 }} xl={{ span: 13, offset: 2 }} md={{ span: 15, offset: 1 }} xs={{ span: 22, offset: 1 }} style={{ paddingTop: '0px', paddingBottom: '30px' }}>
+              <Title level={4} style={{ padding: '10px 20px', backgroundColor: '#f7f7f7', boxShadow: '0 1px 5px rgba(26,26,26,.1)' }}>{this.state.tip} ({this.state.count})</Title>
               <List
                 itemLayout='vertical'
                 loading={this.state.loading}
@@ -179,41 +179,43 @@ class BookPage extends Component {
                 dataSource={this.state.cache}
                 renderItem={item => (
                   <List.Item key={item.id}>
-                    <div style={{ padding: '20px', background: '#f7f7f7', borderRadius: '20px' }}>
-                      <Link to={'/book/' + item.id} >
-                        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                          <div style={{ display: 'flex', flexDirection: 'column' }}>
-                            <div style={{ fontSize: '18px', color: '#3377aa', marginBottom: '15px', fontWeight: '600' }}>
-                              {item.title}
+                    <Skeleton avatar title={false} loading={item.loading} active>
+                      <div style={{ padding: '20px', background: '#f7f7f7', borderRadius: '15px', boxShadow: '0 1px 3px rgba(26,26,26,.1)' }}>
+                        <Link to={'/book/' + item.id} >
+                          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                            <div style={{ display: 'flex', flexDirection: 'column' }}>
+                              <div style={{ fontSize: '18px', color: '#3377aa', marginBottom: '15px', fontWeight: '600' }}>
+                                {item.title}
+                              </div>
+                              <Descriptions
+                                border
+                                column={1}
+                              >
+                                <Descriptions.Item label='副标题'>{item.subtitle}</Descriptions.Item>
+                                <Descriptions.Item label='作者'>{item.author}</Descriptions.Item>
+                                <Descriptions.Item label='出版社'>{item.publisher}</Descriptions.Item>
+                              </Descriptions>
+                              <div style={{ display: 'flex', flexWrap: 'wrap', margin: '10px 0' }}>
+                                {item.tag && (item.tag.map(tag => (
+                                  <Tag key={tag.title} color='#343a40' style={{ color: 'white', margin: '5px' }}>
+                                    {tag.title}
+                                  </Tag>
+                                )))}
+                              </div>
                             </div>
-                            <Descriptions
-                              border
-                              column={1}
-                            >
-                              <Descriptions.Item label='副标题'>{item.subtitle}</Descriptions.Item>
-                              <Descriptions.Item label='作者'>{item.author}</Descriptions.Item>
-                              <Descriptions.Item label='出版社'>{item.publisher}</Descriptions.Item>
-                            </Descriptions>
-                            <div style={{ display: 'flex', flexWrap: 'wrap', margin: '10px 0' }}>
-                              {item.tag && (item.tag.map(tag => (
-                                <Tag key={tag.title} color='#343a40' style={{ color: 'white', margin: '5px' }}>
-                                  {tag.title}
-                                </Tag>
-                              )))}
-                            </div>
+                            <img alt={item.title} src={item.cover} style={{ width: '135px', maxHeight: '200px' }} />
                           </div>
-                          <img alt={item.title} src={item.cover} style={{ width: '135px', maxHeight: '200px' }} />
+                        </Link>
+                        <div style={{ fontSize: '14px', color: 'grey', paddingTop: '5px' }}>
+                          {item.overview && item.overview.slice(0, 96) + '......'}
                         </div>
-                      </Link>
-                      <div style={{ fontSize: '14px', color: 'grey', paddingTop: '5px' }}>
-                        {item.overview && item.overview.slice(0, 96) + '......'}
                       </div>
-                    </div>
+                    </Skeleton>
                   </List.Item>
                 )}
               />
             </Col>
-            <Col xxl={{ span: 4, offset: 1 }} xl={{ span: 6, offset: 1 }} md={{ span: 7, offset: 1 }} xs={{ span: 22, offset: 1 }}>
+            <Col xxl={{ span: 4, offset: 0 }} xl={{ span: 7, offset: 0 }} md={{ span: 7, offset: 0 }} xs={{ span: 22, offset: 1 }} style={{ paddingLeft: '15px' }}>
               <CategoryList />
               <Collapse
                 bordered={false}

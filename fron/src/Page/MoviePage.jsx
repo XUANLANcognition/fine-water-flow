@@ -144,19 +144,19 @@ class MoviePage extends Component {
         <div style={{ flex: '1 0 ', backgroundColor: '#ffffff' }}>
           <Affix offsetTop={this.state.top}>
             <Row style={{ paddingBottom: '10px', paddingTop: '10px', marginBottom: '20px', background: '#fff', boxShadow: '0px 2px 2px #888888' }}>
-              <Col xxl={{ span: 5, offset: 4 }} xl={{ span: 6, offset: 2 }} xs={{ span: 22, offset: 1 }} >
+              <Col xxl={{ span: 5, offset: 5 }} xl={{ span: 6, offset: 2 }} xs={{ span: 22, offset: 1 }} >
                 <div style={{ fontSize: '24px', fontWeight: 'bold', color: 'black' }}>
                   FWF 观影
                 </div>
               </Col>
-              <Col xxl={{ span: 10, offset: 1 }} xl={{ span: 13, offset: 1 }} xs={{ span: 22, offset: 1 }} >
+              <Col xxl={{ span: 8, offset: 1 }} xl={{ span: 13, offset: 1 }} xs={{ span: 22, offset: 1 }} >
                 <Search placeholder='请输入影名含有的关键字' onSearch={value => this.search(value)} enterButton />
               </Col>
             </Row>
           </Affix>
           <Row style={{ paddingTop: '0px', paddingBottom: '30px' }}>
-            <Col xxl={{ span: 11, offset: 4 }} xl={{ span: 13, offset: 2 }} md={{ span: 14, offset: 1 }} xs={{ span: 22, offset: 1 }} style={{ paddingTop: '0px', paddingBottom: '30px' }}>
-              <Title level={4} style={{ padding: '10px 0' }}>{this.state.tip} ({this.state.count})</Title>
+            <Col xxl={{ span: 10, offset: 5 }} xl={{ span: 13, offset: 2 }} md={{ span: 14, offset: 1 }} xs={{ span: 22, offset: 1 }} style={{ paddingTop: '0px', paddingBottom: '30px' }}>
+              <Title level={4} style={{ padding: '10px 20px', backgroundColor: '#f3f3f3', boxShadow: '0 1px 5px rgba(26,26,26,.1)' }}>{this.state.tip} ({this.state.count})</Title>
               <List
                 itemLayout='vertical'
                 loading={this.state.loading}
@@ -179,7 +179,7 @@ class MoviePage extends Component {
                 dataSource={this.state.cache}
                 renderItem={item => (
                   <List.Item key={item.id}>
-                    <div style={{ padding: '20px', background: '#f7f7f7', borderRadius: '20px' }}>
+                    <div style={{ padding: '20px', background: '#f7f7f7', borderRadius: '15px', boxShadow: '0 1px 3px rgba(26,26,26,.1)' }}>
                       <Link to={'/movie/' + item.id} >
                         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                           <div style={{ display: 'flex', flexDirection: 'column' }}>
@@ -214,7 +214,7 @@ class MoviePage extends Component {
                 )}
               />
             </Col>
-            <Col xxl={{ span: 4, offset: 1 }} xl={{ span: 6, offset: 1 }} md={{ span: 7, offset: 1 }} xs={{ span: 22, offset: 1 }}>
+            <Col xxl={{ span: 4, offset: 0 }} xl={{ span: 7, offset: 0 }} md={{ span: 7, offset: 1 }} xs={{ span: 22, offset: 1 }} style={{ paddingLeft: '15px' }}>
               <CategoryList />
               <Collapse
                 bordered={false}

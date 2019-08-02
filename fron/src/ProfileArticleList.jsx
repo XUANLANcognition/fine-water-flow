@@ -85,7 +85,7 @@ class ProfileArticleList extends Component {
   deleteArticle = async (v) => {
     try {
       confirm({
-        title: 'Delete!',
+        title: '删除!',
         content: '你确认要删除这篇文章吗？',
         onOk: async () => {
           let config = {
@@ -125,11 +125,12 @@ class ProfileArticleList extends Component {
       <List
         itemLayout='vertical'
         dataSource={data}
-        size='large'
+        size='small'
         loadMore={loadMore}
         loading={initLoading}
+        style={{ paddingBottom: '20px' }}
         renderItem={item => (
-          <List.Item actions={[<a onClick={() => this.deleteArticle(item.id)} style={{ color: 'red' }}>删除</a>]}>
+          <List.Item actions={[<Button onClick={() => this.deleteArticle(item.id)}>删除</Button>]}>
             <Skeleton avatar title={false} loading={item.loading} active>
               <List.Item.Meta
                 title={

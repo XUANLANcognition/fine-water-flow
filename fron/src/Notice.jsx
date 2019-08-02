@@ -11,7 +11,7 @@ class Notice extends Component {
         <Nav />
         <div style={{ flex: '1 0 ', backgroundColor: '#fff', paddingTop: '30px' }}>
           <Row style={{ paddingTop: '30px', paddingBottom: '30px' }}>
-            <Col xxl={{ span: 16, offset: 4 }} xl={{ span: 20, offset: 2 }} xs={{ span: 22, offset: 1 }}>
+            <Col xxl={{ span: 14, offset: 5 }} xl={{ span: 20, offset: 2 }} xs={{ span: 22, offset: 1 }}>
               <Timeline>
                 <Timeline.Item color='blue'>🎉🎉🎉 书籍影视区功能基本完成 ( 2019.06.27 )</Timeline.Item>
                 <Timeline.Item color='blue'>🎉 关注功能正式上线. ( 2019.05.10 )</Timeline.Item>

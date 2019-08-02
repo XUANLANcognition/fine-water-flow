@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Layout, Avatar, Row, Col, Tabs, Icon, Button, Typography, Card } from 'antd'
+import { Layout, Avatar, Row, Col, Tabs, Icon, Button, Typography, Card, Statistic } from 'antd'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 
@@ -55,8 +55,8 @@ class Profile extends Component {
     return (
       <Layout style={{ minHeight: '100vh', backgroundColor: '#f7f7f7' }}>
         <Nav />
-        <Row style={{ marginTop: '20px' }}>
-          <Col xxl={{ span: 14, offset: 5 }} xl={{ span: 20, offset: 2 }} xs={{ span: 22, offset: 1 }} style={{ boxShadow: '0 1px 3px rgba(26,26,26,.1)' }}>
+        <Row style={{ marginTop: '15px' }}>
+          <Col xxl={{ span: 14, offset: 5 }} xl={{ span: 20, offset: 2 }} xs={{ span: 24, offset: 0 }} style={{ boxShadow: '0 1px 3px rgba(26,26,26,.1)' }}>
             <div style={{ display: 'flex', backgroundColor: '#fff', justifyContent: 'center', overflow: 'hidden', backgroundRepeat: 'no-repeat', backgroundPosition: 'center', backgroundOrigin: 'padding-box', backgroundClip: 'border-box', backgroundAttachment: 'scroll', position: 'relative' }}>
               <img src='/cover.jpg' style={{ objectFit: 'cover', height: '240px' }} />
             </div>
@@ -77,7 +77,7 @@ class Profile extends Component {
           </Col>
         </Row>
         <Row style={{ flex: '1 0', paddingTop: '15px', paddingBottom: '30px' }} >
-          <Col xxl={{ span: 10, offset: 5 }} xl={{ span: 14, offset: 2 }} md={{ span: 14, offset: 1 }} xs={{ span: 22, offset: 1 }} style={{ background: '#fff', padding: '0 20px', paddingBottom: '30px', boxShadow: '0 1px 3px rgba(26,26,26,.1)' }}>
+          <Col xxl={{ span: 10, offset: 5 }} xl={{ span: 14, offset: 2 }} md={{ span: 14, offset: 1 }} xs={{ span: 24, offset: 0 }} style={{ background: '#fff', padding: '0 20px', marginBottom: '30px', boxShadow: '0 1px 3px rgba(26,26,26,.1)' }}>
             <Tabs defaultActiveKey='1' size='large'>
               <TabPane tab={<span><IconFont type='icon-wenzhang' />我的文章</span>} key='1'>
                 <ProfileArticleList />
@@ -91,12 +91,25 @@ class Profile extends Component {
             <Card
               title={
                 <div style={{ color: '#646464', fontWeight: '600', fontSize: '15px' }}>
-                  个人成就
+                  积分
+                </div>
+              }
+              bordered={false}
+              style={{ boxShadow: '0 1px 3px rgba(26,26,26,.1)', marginBottom: '20px' }} >
+              <PropertyList property={this.state.property} />
+            </Card>
+            <Card
+              title={
+                <div style={{ color: '#646464', fontWeight: '600', fontSize: '15px' }}>
+                  成就
                 </div>
               }
               bordered={false}
               style={{ boxShadow: '0 1px 3px rgba(26,26,26,.1)' }} >
-              <PropertyList property={this.state.property} />
+              <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-around' }}>
+                <Statistic title='关注了' value={112893} />
+                <Statistic title='关注者' value={112893} />
+              </div>
             </Card>
           </Col>
         </Row>

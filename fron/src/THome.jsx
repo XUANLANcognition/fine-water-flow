@@ -31,8 +31,8 @@ class THome extends Component {
       <Layout style={{ minHeight: '100vh', backgroundColor: '#f7f7f7' }}>
         <Nav />
         <BackTop />
-        <Row style={{ flex: '1 0', paddingTop: '30px', paddingBottom: '30px' }}>
-          <Col xxl={{ span: 10, offset: 5 }} xl={{ span: 13, offset: 2 }} md={{ span: 14, offset: 1 }} xs={{ span: 22, offset: 1 }} style={{ paddingBottom: '20px', backgroundColor: '#fff', padding: '20px 20px' }}>
+        <Row style={{ flex: '1 0', padding: '15px 0' }}>
+          <Col xxl={{ span: 10, offset: 5 }} xl={{ span: 13, offset: 2 }} md={{ span: 14, offset: 1 }} xs={{ span: 24, offset: 0 }} style={{ marginBottom: '20px', backgroundColor: '#fff', padding: '20px 20px' }}>
             <Tabs defaultActiveKey='1'>
               <TabPane tab='全部' key='1'>
                 <ArticleList />

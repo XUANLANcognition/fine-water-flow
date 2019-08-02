@@ -29,8 +29,8 @@ class ProfileCarder extends Component {
 
   showConfirm = () => {
     confirm({
-      title: 'Confirm',
-      content: 'Are you sure to sign out?',
+      title: '退出登陆',
+      content: '真的要离开了吗？',
       onOk: () => {
         this.onClickLogout()
       },
