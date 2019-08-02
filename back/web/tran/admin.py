@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 
 # Register your models here.
 
-from .models import Article, Comment, Profile, Book, BookTag, BookBlock, BookComment, Movie, Figure, MovieComment, MovieBlock, MovieTag, Picture, Source
+from .models import Article, Comment, Profile, Book, BookTag, BookBlock, BookComment, Movie, Figure, MovieComment, MovieBlock, MovieTag, Picture, Source, Notice
 
 class ProfileAdmin(admin.ModelAdmin):
     list_display = ('user', 'media_editor_auth')
@@ -81,6 +81,11 @@ class BookAdmin(admin.ModelAdmin):
     list_per_page = 10
     filter_horizontal = ('tag', )
 
+class NoticeAdmin(admin.ModelAdmin):
+    list_display = ('release_date', 'tab')
+    list_filter = ('tab', )
+    list_per_page = 10
+
 admin.site.unregister(User)
 admin.site.register(User, UserAdmin)
 admin.site.register(Article, ArticleAdmin)
@@ -97,3 +102,4 @@ admin.site.register(MovieComment)
 admin.site.register(Profile, ProfileAdmin)
 admin.site.register(Picture)
 admin.site.register(Source)
+admin.site.register(Notice, NoticeAdmin)

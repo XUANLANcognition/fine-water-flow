@@ -3,7 +3,7 @@ from django.http import JsonResponse
 from rest_framework import routers, serializers, viewsets, status
 from rest_framework.pagination import PageNumberPagination
 from django.contrib.auth.models import User
-from .models import Article, Comment, Profile, Book, BookTag, BookBlock, BookComment, Figure, Movie, MovieComment, MovieBlock, MovieTag, Picture, Source
+from .models import Article, Comment, Profile, Book, BookTag, BookBlock, BookComment, Figure, Movie, MovieComment, MovieBlock, MovieTag, Picture, Source, Notice
 from rest_framework.authtoken.models import Token
 
 from rest_framework.authtoken.views import ObtainAuthToken
@@ -671,6 +671,32 @@ class MovieCommentDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = MovieComment.objects.all()
     serializer_class = MovieCommentSerializer
     permission_classes = (Read, )
+
+
+# Notice API
+
+class NoticePagination(PageNumberPagination):
+    page_size = 8
+    page_size_query_param = 'page_size'
+    max_page_size = 128
+
+    class Meta:
+        model = Notice
+        fields = '__all__'
+
+
+class NoticeSerializer(serializers.HyperlinkedModelSerializer):
+
+    class Meta:
+        model = Notice
+        fields = ('id', 'content', 'release_date', 'tab')
+
+
+class NoticeList(generics.ListAPIView):
+    queryset = Notice.objects.all().order_by('-release_date')
+    serializer_class = NoticeSerializer
+    permission_classes = (Publish,)
+    pagination_class = NoticePagination
 
 
 # Sign on API

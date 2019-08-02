@@ -145,3 +145,16 @@ class MovieComment(models.Model):
     content = models.CharField(max_length=1024)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     pub_date = models.DateTimeField(auto_now_add=True)
+
+class Notice(models.Model):
+    content =  models.TextField()
+    release_date = models.DateTimeField()
+    TAB_CHOICES = (
+        ('修复BUG', 'fix'),
+        ('增加新功能', 'function'),
+        ('优化功能或显示', 'optimize'),
+        ('修改文案', 'document'),
+        ('重大改动', 'boom'),
+        ('诞生', 'birthday')
+    )
+    tab = models.CharField(max_length=24, choices=TAB_CHOICES)
