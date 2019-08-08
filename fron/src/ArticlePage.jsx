@@ -77,7 +77,7 @@ class ArticlePage extends Component {
       <Layout style={{ minHeight: '100vh', backgroundColor: '#fff' }}>
         <Nav />
         <BackTop />
-        <Row style={{ background: '#fff', padding: '20px 20px', marginBottom: '15px', boxShadow: '0px 2px 2px #888888' }}>
+        <Row style={{ background: '#fff', padding: '20px 0', marginBottom: '15px', boxShadow: '0px 2px 2px #888888' }}>
           <Col xxl={{ span: 10, offset: 5 }} xl={{ span: 13, offset: 2 }} md={{ span: 14, offset: 1 }} xs={{ span: 24, offset: 0 }}>
             <div style={{ fontSize: '22px', fontWeight: 'bold', color: 'black' }}>
               <Paragraph ellipsis={{ rows: 1, expandable: true }} strong style={{ color: 'black' }}>
@@ -94,7 +94,7 @@ class ArticlePage extends Component {
         </Row>
         <Row style={{ flex: '1 0' }}>
           <Col xxl={{ span: 10, offset: 5 }} xl={{ span: 14, offset: 2 }} md={{ span: 15, offset: 1 }} xs={{ span: 24, offset: 0 }}>
-            <div type='flex' style={{ flex: '1 0', background: '#fff', padding: '10px 20px', marginBottom: '20px' }}>
+            <div type='flex' style={{ flex: '1 0', background: '#fff', padding: '10px 0', marginBottom: '20px' }}>
               <div style={{ fontSize: '16px' }}>
                 <div className='braft-output-content' style={{ overflow: 'auto' }} dangerouslySetInnerHTML={{ __html: this.state.content }} />
               </div>

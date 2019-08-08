@@ -56,7 +56,7 @@ class Profile extends Component {
       <Layout style={{ minHeight: '100vh', backgroundColor: '#f7f7f7' }}>
         <Nav />
         <Row style={{ marginTop: '15px' }}>
-          <Col xxl={{ span: 14, offset: 5 }} xl={{ span: 20, offset: 2 }} xs={{ span: 24, offset: 0 }} style={{ boxShadow: '0 1px 3px rgba(26,26,26,.1)' }}>
+          <Col xxl={{ span: 14, offset: 5 }} xl={{ span: 20, offset: 2 }} md={{ span: 22, offset: 1 }} xs={{ span: 24, offset: 0 }} style={{ boxShadow: '0 1px 3px rgba(26,26,26,.1)' }}>
             <div style={{ display: 'flex', backgroundColor: '#fff', justifyContent: 'center', overflow: 'hidden', backgroundRepeat: 'no-repeat', backgroundPosition: 'center', backgroundOrigin: 'padding-box', backgroundClip: 'border-box', backgroundAttachment: 'scroll', position: 'relative' }}>
               <img src='/cover.jpg' style={{ objectFit: 'cover', height: '240px' }} />
             </div>

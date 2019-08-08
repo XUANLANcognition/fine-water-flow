@@ -8,6 +8,10 @@ import Myfooter from '../Myfooter'
 import Advertisement from '../Advertisement'
 import CategoryList from '../CategoryList'
 
+const IconFont = Icon.createFromIconfontCN({
+  scriptUrl: '//at.alicdn.com/t/font_1242637_lapfux51pxk.js'
+})
+
 const CheckableTag = Tag.CheckableTag
 const count = 12
 const { Title } = Typography
@@ -143,10 +147,13 @@ class MoviePage extends Component {
         <BackTop />
         <div style={{ flex: '1 0 ', backgroundColor: '#ffffff' }}>
           <Affix offsetTop={this.state.top}>
-            <Row style={{ paddingBottom: '10px', paddingTop: '10px', marginBottom: '20px', background: '#fff', boxShadow: '0px 2px 2px #888888' }}>
+            <Row style={{ padding: '10px 20px', marginBottom: '20px', background: '#fff', boxShadow: '0px 2px 2px #888888' }}>
               <Col xxl={{ span: 5, offset: 5 }} xl={{ span: 6, offset: 2 }} xs={{ span: 22, offset: 1 }} >
-                <div style={{ fontSize: '24px', fontWeight: 'bold', color: 'black' }}>
+                <div style={{ display: 'flex' }}>
+                  <IconFont type='icon-movie' style={{ fontSize: '36px' }} />
+                  <div style={{ fontSize: '24px', fontWeight: 'bold', color: 'black', paddingLeft: '15px' }}>
                   FWF 观影
+                  </div>
                 </div>
               </Col>
               <Col xxl={{ span: 8, offset: 1 }} xl={{ span: 13, offset: 1 }} xs={{ span: 22, offset: 1 }} >
