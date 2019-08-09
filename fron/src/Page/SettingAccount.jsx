@@ -58,7 +58,7 @@ class SettingAccount extends Component {
         <Nav />
         <div style={{ flex: '1 0' }}>
           <Row style={{ flex: '1 0', paddingTop: '20px' }} >
-            <Col xxl={{ span: 3, offset: 4 }} xl={{ span: 4, offset: 2 }} xs={{ span: 22, offset: 1 }} >
+            <Col xxl={{ span: 3, offset: 5 }} xl={{ span: 4, offset: 2 }} md={{ span: 5, offset: 1 }} xs={{ span: 22, offset: 1 }} >
               <Menu
                 onClick={this.handleClick}
                 selectedKeys={[this.state.current]}
@@ -73,43 +73,45 @@ class SettingAccount extends Component {
                 </Menu.Item>
               </Menu>
             </Col>
-            <Col xxl={{ span: 12, offset: 1 }} xl={{ span: 15, offset: 1 }} xs={{ span: 22, offset: 1 }} >
-              <Row>
-                <Col xl={{ span: 24, offset: 0 }} xs={{ span: 22, offset: 1 }}>
-                  <Title level={3}>账号设置</Title>
-                </Col>
-              </Row>
-              <Row>
-                <Col xl={{ span: 24, offset: 0 }} xs={{ span: 22, offset: 1 }}>
-                  <Tabs defaultActiveKey='1'>
-                    <TabPane
-                      tab={
-                        <span>
-                          <Icon type='apple' />权限申请
-                        </span>
-                      }
-                      key='1'
-                    >
-                      <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'baseline' }}>
-                        <Title style={{ padding: '24px 0' }} level={4}>1.书籍影视资源编辑</Title>
-                        <Divider type='vertical' />
-                        <Link to='/editor_guidance'>编辑须知</Link>
-                      </div>
-                      <StepAuth />
-                    </TabPane>
-                    <TabPane
-                      tab={
-                        <span>
-                          <Icon type='android' />敬请期待
-                        </span>
-                      }
-                      key='2'
-                    >
+            <Col xxl={{ span: 11, offset: 0 }} xl={{ span: 16, offset: 0 }} md={{ span: 16, offset: 0 }} xs={{ span: 22, offset: 1 }} style={{ paddingLeft: '15px' }} >
+              <div style={{ padding: '0 10px ' }}>
+                <Row>
+                  <Col xl={{ span: 24, offset: 0 }} xs={{ span: 22, offset: 1 }}>
+                    <Title level={3}>账号设置</Title>
+                  </Col>
+                </Row>
+                <Row>
+                  <Col xl={{ span: 24, offset: 0 }} xs={{ span: 22, offset: 1 }}>
+                    <Tabs defaultActiveKey='1'>
+                      <TabPane
+                        tab={
+                          <span>
+                            <Icon type='apple' />权限申请
+                          </span>
+                        }
+                        key='1'
+                      >
+                        <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'baseline' }}>
+                          <Title style={{ padding: '24px 0' }} level={4}>1.书籍影视资源编辑</Title>
+                          <Divider type='vertical' />
+                          <Link to='/editor_guidance'>编辑须知</Link>
+                        </div>
+                        <StepAuth />
+                      </TabPane>
+                      <TabPane
+                        tab={
+                          <span>
+                            <Icon type='android' />敬请期待
+                          </span>
+                        }
+                        key='2'
+                      >
                         Tab 2
-                    </TabPane>
-                  </Tabs>
-                </Col>
-              </Row>
+                      </TabPane>
+                    </Tabs>
+                  </Col>
+                </Row>
+              </div>
             </Col>
           </Row>
         </div>
