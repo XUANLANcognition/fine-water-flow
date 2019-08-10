@@ -40,12 +40,13 @@ class FollowList extends Component {
         dataSource={this.state.data}
         renderItem={item => (
           <List.Item>
-            <Card>
+            <Card style={{ borderRadius: '1px', boxShadow: '0 1px 3px rgba(26,26,26,.1)' }}>
               <Meta
                 avatar={<Link to={(item.id + '' === window.localStorage.getItem('user_id') ? '/profile/' : '/visit/') + (item.id)}><Avatar shape='square' src={item.last_name} /></Link>}
                 title={<Link to={(item.id + '' === window.localStorage.getItem('user_id') ? '/profile/' : '/visit/') + (item.id)}>{item.username}</Link>}
                 description={item.bio}
-              /></Card>
+              />
+            </Card>
           </List.Item>
         )}
       />

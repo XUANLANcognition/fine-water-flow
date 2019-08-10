@@ -2,8 +2,6 @@ import React, { Component } from 'react'
 import { List, Avatar, Typography } from 'antd'
 import axios from 'axios'
 
-import PropertyList from './PropertyList'
-
 const { Title } = Typography
 
 class PropertyRank extends Component {

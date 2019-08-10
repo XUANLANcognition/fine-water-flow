@@ -148,7 +148,7 @@ class BookPage extends Component {
         <div style={{ flex: '1 0 ', backgroundColor: '#ffffff' }}>
           <Affix offsetTop={this.state.top}>
             <Row style={{ padding: '10px 20px', marginBottom: '20px', background: '#fff', boxShadow: '0px 2px 2px #888888' }}>
-              <Col xxl={{ span: 5, offset: 5 }} xl={{ span: 6, offset: 2 }} xs={{ span: 22, offset: 1 }} >
+              <Col xxl={{ span: 5, offset: 5 }} xl={{ span: 6, offset: 2 }} md={{ span: 7, offset: 1 }} xs={{ span: 22, offset: 1 }} >
                 <div style={{ display: 'flex' }}>
                   <IconFont type='icon-book' style={{ fontSize: '36px' }} />
                   <div style={{ fontSize: '24px', fontWeight: 'bold', color: 'black', paddingLeft: '15px' }}>
@@ -156,7 +156,7 @@ class BookPage extends Component {
                   </div>
                 </div>
               </Col>
-              <Col xxl={{ span: 8, offset: 1 }} xl={{ span: 13, offset: 1 }} xs={{ span: 22, offset: 1 }} >
+              <Col xxl={{ span: 8, offset: 1 }} xl={{ span: 13, offset: 1 }} md={{ span: 13, offset: 1 }} xs={{ span: 22, offset: 1 }} >
                 <Search placeholder='请输入书名含有的关键字' onSearch={value => this.search(value)} enterButton />
               </Col>
             </Row>

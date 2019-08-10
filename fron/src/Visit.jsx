@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-import { Layout, Avatar, Row, Col, Tabs, Icon, Typography, Button, message } from 'antd'
+import { Layout, Avatar, Row, Col, Tabs, Icon, Button, Typography, Card, Statistic, message } from 'antd'
 import axios from 'axios'
+import { Link } from 'react-router-dom'
 
 import Nav from './Nav'
 import Myfooter from './Myfooter'
@@ -8,6 +9,10 @@ import VisitProfileArticleList from './VisitProfileArticleList'
 
 const TabPane = Tabs.TabPane
 const { Title, Paragraph } = Typography
+
+const IconFont = Icon.createFromIconfontCN({
+  scriptUrl: '//at.alicdn.com/t/font_1242637_bctqp8owe4o.js'
+})
 
 class Visit extends Component {
   state = {
@@ -92,7 +97,11 @@ class Visit extends Component {
       )
       this.data = response.data.results
       this.setState(function (state) {
-        return { urlAvatar: response.data.last_name, username: response.data.username, bio: response.data.profile.bio }
+        return {
+          urlAvatar: response.data.last_name,
+          username: response.data.username,
+          bio: response.data.profile.bio
+        }
       })
     } catch (error) {
       console.log(error)
@@ -101,22 +110,39 @@ class Visit extends Component {
 
   render () {
     return (
-      <Layout style={{ minHeight: '100vh', backgroundColor: '#ffffff' }}>
+      <Layout style={{ minHeight: '100vh', backgroundColor: '#f7f7f7' }}>
         <Nav />
-        <Row style={{ flex: '1 0', paddingTop: '30px', paddingBottom: '30px' }} >
-          <Col xxl={{ span: 4, offset: 4 }} xl={{ span: 5, offset: 2 }} xs={{ span: 22, offset: 1 }} style={{ paddingBottom: '20px' }} >
-            <Avatar size={180} shape='square' src={this.state.urlAvatar} icon='user' style={{ color: '#ffffff', backgroundColor: '#f6f6f6' }} />
-            <Title level={2}>{this.state.username}</Title>
-            <Paragraph>{this.state.bio}</Paragraph>
-            {this.state.follow ? <Button type='primary' onClick={this.unfollow} loading={this.state.loading} block>Unfollow</Button> : <Button type='primary' onClick={this.follow} loading={this.state.loading} block>Follow</Button>}
+        <Row style={{ marginTop: '15px' }}>
+          <Col xxl={{ span: 14, offset: 5 }} xl={{ span: 20, offset: 2 }} md={{ span: 22, offset: 1 }} xs={{ span: 24, offset: 0 }} style={{ boxShadow: '0 1px 3px rgba(26,26,26,.1)' }}>
+            <div style={{ display: 'flex', backgroundColor: '#fff', justifyContent: 'center', overflow: 'hidden', backgroundRepeat: 'no-repeat', backgroundPosition: 'center', backgroundOrigin: 'padding-box', backgroundClip: 'border-box', backgroundAttachment: 'scroll', position: 'relative' }}>
+              <img src='/cover.jpg' style={{ objectFit: 'cover', height: '240px' }} />
+            </div>
+            <div style={{ background: '#fff', display: 'flex', flexWrap: 'wrap' }}>
+              <div style={{ height: '200px', width: '200px', marginTop: '-100px', padding: '20px' }}>
+                <Avatar shape='square' src={this.state.urlAvatar} icon='user' style={{ height: '100%', width: '100%', border: '4px solid white', borderRadius: '10px' }} />
+              </div>
+              <div style={{ display: 'flex', flexDirection: 'column' }}>
+                <Title level={2}>{this.state.username}</Title>
+                <Paragraph>{this.state.bio}</Paragraph>
+              </div>
+              <div style={{ display: 'flex', flexGrow: '1', flexDirection: 'row-reverse', alignItems: 'center', padding: '20px' }}>
+                {this.state.follow ? <Button type='primary' onClick={this.unfollow} loading={this.state.loading} style={{ width: '150px' }} block>取消关注</Button> : <Button type='primary' onClick={this.follow} loading={this.state.loading} style={{ width: '150px' }} block>关注</Button>}
+              </div>
+            </div>
           </Col>
-          <Col xxl={{ span: 11, offset: 1 }} xl={{ span: 14, offset: 1 }} xs={{ span: 22, offset: 1 }} >
-            <Tabs defaultActiveKey='1'>
-              <TabPane tab={<span><Icon type='read' />Ta 的文章</span>} key='1'>
+        </Row>
+        <Row style={{ flex: '1 0', paddingTop: '15px', paddingBottom: '30px' }} >
+          <Col xxl={{ span: 10, offset: 5 }} xl={{ span: 14, offset: 2 }} md={{ span: 14, offset: 1 }} xs={{ span: 24, offset: 0 }} style={{ background: '#fff', padding: '0 20px', marginBottom: '30px', boxShadow: '0 1px 3px rgba(26,26,26,.1)' }}>
+            <Tabs defaultActiveKey='1' size='large' style={{ paddingBottom: '15px' }}>
+              <TabPane tab={<span><IconFont type='icon-wenzhang' />Ta 的文章</span>} key='1'>
                 <VisitProfileArticleList visitUserId={this.props.match.params.id} />
               </TabPane>
             </Tabs>
           </Col>
+          <Col xxl={{ span: 4, offset: 0 }} xl={{ span: 6, offset: 0 }} md={{ span: 8, offset: 0 }} xs={{ span: 22, offset: 1 }} style={{ paddingLeft: '20px' }} />
+        </Row>
+        <Row>
+          <Col xxl={{ span: 16, offset: 4 }} xl={{ span: 20, offset: 2 }} xs={{ span: 22, offset: 1 }} />
         </Row>
         <Myfooter />
       </Layout>

@@ -78,14 +78,14 @@ class ArticlePage extends Component {
         <Nav />
         <BackTop />
         <Row style={{ background: '#fff', padding: '20px 0', marginBottom: '15px', boxShadow: '0px 2px 2px #888888' }}>
-          <Col xxl={{ span: 10, offset: 5 }} xl={{ span: 13, offset: 2 }} md={{ span: 14, offset: 1 }} xs={{ span: 24, offset: 0 }}>
+          <Col xxl={{ span: 10, offset: 5 }} xl={{ span: 13, offset: 2 }} md={{ span: 14, offset: 1 }} xs={{ span: 22, offset: 1 }}>
             <div style={{ fontSize: '22px', fontWeight: 'bold', color: 'black' }}>
               <Paragraph ellipsis={{ rows: 1, expandable: true }} strong style={{ color: 'black' }}>
                 {this.state.title}
               </Paragraph>
             </div>
           </Col>
-          <Col xxl={{ span: 4, offset: 0 }} xl={{ span: 6, offset: 1 }} md={{ span: 7, offset: 1 }} xs={{ span: 24, offset: 0 }} style={{ paddingLeft: '15px' }}>
+          <Col xxl={{ span: 4, offset: 0 }} xl={{ span: 6, offset: 1 }} md={{ span: 7, offset: 1 }} xs={{ span: 22, offset: 1 }} style={{ paddingLeft: '15px' }}>
             <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-around' }}>
               <Statistic title='浏览次数' suffix='次' value={this.state.views} />
               <Statistic title='发布时间' value={dayjs(this.state.pubDate).fromNow()} />
@@ -93,7 +93,7 @@ class ArticlePage extends Component {
           </Col>
         </Row>
         <Row style={{ flex: '1 0' }}>
-          <Col xxl={{ span: 10, offset: 5 }} xl={{ span: 14, offset: 2 }} md={{ span: 15, offset: 1 }} xs={{ span: 24, offset: 0 }}>
+          <Col xxl={{ span: 10, offset: 5 }} xl={{ span: 14, offset: 2 }} md={{ span: 15, offset: 1 }} xs={{ span: 22, offset: 1 }}>
             <div type='flex' style={{ flex: '1 0', background: '#fff', padding: '10px 0', marginBottom: '20px' }}>
               <div style={{ fontSize: '16px' }}>
                 <div className='braft-output-content' style={{ overflow: 'auto' }} dangerouslySetInnerHTML={{ __html: this.state.content }} />
