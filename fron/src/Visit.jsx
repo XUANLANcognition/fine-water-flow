@@ -126,7 +126,7 @@ class Visit extends Component {
                 <Paragraph>{this.state.bio}</Paragraph>
               </div>
               <div style={{ display: 'flex', flexGrow: '1', flexDirection: 'row-reverse', alignItems: 'center', padding: '20px' }}>
-                {this.state.follow ? <Button type='primary' onClick={this.unfollow} loading={this.state.loading} style={{ width: '150px' }} block>取消关注</Button> : <Button type='primary' onClick={this.follow} loading={this.state.loading} style={{ width: '150px' }} block>关注</Button>}
+                {this.state.follow ? <Button type='primary' onClick={this.unfollow} loading={this.state.loading} style={{ width: '150px' }} block>取消关注</Button> : <Button ghost type='primary' onClick={this.follow} loading={this.state.loading} style={{ width: '150px' }} block>关注</Button>}
               </div>
             </div>
           </Col>
