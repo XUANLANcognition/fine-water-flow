@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom'
 const count = 8
 const briefLength = 100
 const IconFont = Icon.createFromIconfontCN({
-  scriptUrl: '//at.alicdn.com/t/font_1242637_tb2emfivmbd.js'
+  scriptUrl: '//at.alicdn.com/t/font_1242637_vfurgm6ec3b.js'
 })
 const { Search } = Input
 
@@ -112,7 +112,7 @@ class ArticleList extends Component {
             loadMore={loadMore}
             loading={initLoading}
             renderItem={item => (
-              <List.Item>
+              <List.Item actions={[<Button style={{ color: '#76839b', backgroundColor: 'transparent', display: 'inline-block', fontSize: '14px', fontWeight: '500' }} type='link'> <IconFont type='icon-eye-fill' style={{ paddingLeft: '5px', color: '#76839b' }} /> 浏览 {item.views}</Button>]}>
                 <div style={item.originality === 'Y' ? { borderLeft: '8px solid', borderColor: '#269f42', paddingLeft: '15px' } : {}}>
                   <Skeleton avatar title={false} loading={item.loading} active>
                     <List.Item.Meta

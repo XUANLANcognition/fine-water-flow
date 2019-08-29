@@ -8,7 +8,7 @@ const count = 6
 const confirm = Modal.confirm
 const briefLength = 100
 const IconFont = Icon.createFromIconfontCN({
-  scriptUrl: '//at.alicdn.com/t/font_1242637_tb2emfivmbd.js'
+  scriptUrl: '//at.alicdn.com/t/font_1242637_p4oxjlqcnyf.js'
 })
 
 class ProfileArticleList extends Component {
@@ -130,7 +130,7 @@ class ProfileArticleList extends Component {
         loading={initLoading}
         style={{ paddingBottom: '20px' }}
         renderItem={item => (
-          <List.Item actions={[<Button onClick={() => this.deleteArticle(item.id)}>删除</Button>]}>
+          <List.Item actions={[<Button style={{ color: '#76839b', backgroundColor: 'transparent', display: 'inline-block', fontSize: '14px', fontWeight: '500' }} type='link'> <IconFont type='icon-edit' style={{ paddingLeft: '5px', color: '#76839b' }} /> 修改(即将上线)</Button>, <Button style={{ color: '#76839b', backgroundColor: 'transparent', display: 'inline-block', fontSize: '14px', fontWeight: '500' }} type='link' onClick={() => this.deleteArticle(item.id)}><IconFont type='icon-delete-fill' style={{ paddingLeft: '5px', color: '#76839b' }} /> 删除</Button>]}>
             <Skeleton avatar title={false} loading={item.loading} active>
               <List.Item.Meta
                 title={

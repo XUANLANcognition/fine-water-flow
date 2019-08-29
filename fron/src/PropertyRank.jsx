@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { List, Avatar, Typography } from 'antd'
 import axios from 'axios'
+import { Link } from 'react-router-dom'
 
 const { Title } = Typography
 
@@ -37,7 +38,7 @@ class PropertyRank extends Component {
               renderItem={item => (
                 <List.Item>
                   <List.Item.Meta
-                    avatar={<Avatar shape='square' src={item.last_name} />}
+                    avatar={<Link to={(item.id + '' === window.localStorage.getItem('user_id') ? '/profile/' : '/visit/') + item.id}><Avatar shape='square' icon='user' src={item.last_name} /></Link>}
                     title={item.username}
                   />
                   {item.property}

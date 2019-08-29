@@ -5,7 +5,7 @@ import axios from 'axios'
 function beforeUpload (file) {
   const isLt2M = file.size / 1024 / 1024 < 2
   if (!isLt2M) {
-    message.error('Image must smaller than 2MB!')
+    message.error('文件不能大于 2MB!')
   }
   return isLt2M
 }
@@ -25,14 +25,13 @@ class AvatarUpload extends Component {
     let config = {
       headers: { 'Authorization': 'Token ' + window.localStorage.getItem('token') }
     }
-    const response = await axios.patch(
+    await axios.patch(
       'https://finewf.club:8080/api/users/' + window.localStorage.getItem('user_id'),
       {
         'last_name': avatarURL
       },
       config
     )
-    console.log('ds', response)
   }
 
   handleChange = (info) => {
