@@ -109,10 +109,17 @@ class BookDetailPage extends Component {
                       <Descriptions
                         border
                         column={{ xxl: 2, xl: 2, lg: 2, md: 2, sm: 2, xs: 1 }}
+                        style={{ color: '#fff' }}
                       >
-                        <Descriptions.Item label='集数'>{this.state.number}</Descriptions.Item>
-                        <Descriptions.Item label='单集片长'>{this.state.runtime}</Descriptions.Item>
-                        <Descriptions.Item label='制片国家/地区'>{this.state.region}</Descriptions.Item>
+                        <Descriptions.Item label={<span style={{ color: '#fff' }}>集数</span>}>
+                          <div style={{ color: '#fff', fontWeight: '700' }}>{this.state.number}</div>
+                        </Descriptions.Item>
+                        <Descriptions.Item label={<span style={{ color: '#fff' }}>单集片长</span>}>
+                          <div style={{ color: '#fff', fontWeight: '700' }}>{this.state.runtime}</div>
+                        </Descriptions.Item>
+                        <Descriptions.Item label={<span style={{ color: '#fff' }}>制片国家/地区</span>}>
+                          <div style={{ color: '#fff', fontWeight: '700' }}>{this.state.region}</div>
+                        </Descriptions.Item>
                       </Descriptions>
                       {this.state.tags.map(tag => (
                         <Tag key={tag.title} color='#fff' style={{ margin: '5px' }}>
