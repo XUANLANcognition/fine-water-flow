@@ -24,6 +24,7 @@ import FigureDetailPage from './Page/FigureDetailPage'
 import BookEditorPage from './Page/BookEditorPage'
 import MovieEditorPage from './Page/MovieEditorPage'
 import ResetPassword from './Page/ResetPassword'
+import ReviseArticle from './Page/ReviseArticle'
 
 import './Global.css'
 import EditorGuidance from './Page/EditorGudiance'
@@ -64,6 +65,7 @@ class App extends Component {
             <Route path='/book_editor_page' component={BookEditorPage} />
             <Route path='/movie_editor_page' component={MovieEditorPage} />
             <Route path='/reset_password' component={ResetPassword} />
+            <Route path='/revise_article/:id' component={ReviseArticle} />
             <Route component={NoMatch} />
           </Switch>
         </Router>

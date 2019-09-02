@@ -130,7 +130,12 @@ class ProfileArticleList extends Component {
         loading={initLoading}
         style={{ paddingBottom: '20px' }}
         renderItem={item => (
-          <List.Item actions={[<Button style={{ color: '#76839b', backgroundColor: 'transparent', display: 'inline-block', fontSize: '14px', fontWeight: '500' }} type='link'> <IconFont type='icon-edit' style={{ paddingLeft: '5px', color: '#76839b' }} /> 修改(即将上线)</Button>, <Button style={{ color: '#76839b', backgroundColor: 'transparent', display: 'inline-block', fontSize: '14px', fontWeight: '500' }} type='link' onClick={() => this.deleteArticle(item.id)}><IconFont type='icon-delete-fill' style={{ paddingLeft: '5px', color: '#76839b' }} /> 删除</Button>]}>
+          <List.Item actions={[
+            <Link to={'/revise_article/' + item.id}>
+              <Button style={{ color: '#76839b', backgroundColor: 'transparent', display: 'inline-block', fontSize: '14px', fontWeight: '500' }} type='link'> <IconFont type='icon-edit' style={{ paddingLeft: '5px', color: '#76839b' }} /> 修改 </Button>
+            </Link>,
+            <Button style={{ color: '#76839b', backgroundColor: 'transparent', display: 'inline-block', fontSize: '14px', fontWeight: '500' }} type='link' onClick={() => this.deleteArticle(item.id)}><IconFont type='icon-delete-fill' style={{ paddingLeft: '5px', color: '#76839b' }} /> 删除 </Button>
+          ]}>
             <Skeleton avatar title={false} loading={item.loading} active>
               <List.Item.Meta
                 title={
