@@ -119,7 +119,7 @@ class Visit extends Component {
             </div>
             <div style={{ background: '#fff', display: 'flex', flexWrap: 'wrap' }}>
               <div style={{ height: '200px', width: '200px', marginTop: '-100px', padding: '20px' }}>
-                <Avatar shape='square' src={this.state.urlAvatar} icon='user' style={{ height: '100%', width: '100%', border: '4px solid white', borderRadius: '10px' }} />
+                <Avatar shape='square' src={this.state.urlAvatar} icon='user' style={{ height: '100%', width: '100%', border: '4px solid white', borderRadius: '10px', backgroundColor: 'white' }} />
               </div>
               <div style={{ display: 'flex', flexDirection: 'column' }}>
                 <Title level={2}>{this.state.username}</Title>
