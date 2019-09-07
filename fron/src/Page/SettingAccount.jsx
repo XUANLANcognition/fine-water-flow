@@ -58,7 +58,7 @@ class SettingAccount extends Component {
         <Nav />
         <div style={{ flex: '1 0' }}>
           <Row style={{ flex: '1 0', paddingTop: '20px' }} >
-            <Col xxl={{ span: 3, offset: 5 }} xl={{ span: 4, offset: 2 }} md={{ span: 5, offset: 1 }} xs={{ span: 22, offset: 1 }} >
+            <Col xxl={{ span: 3, offset: 5 }} xl={{ span: 4, offset: 2 }} md={{ span: 5, offset: 1 }} xs={{ span: 22, offset: 1 }} style={{ marginBottom: '20px' }}>
               <nav style={{ border: '1px solid #d1d5da', borderRadius: '3px' }}>
                 <div style={{ backgroundColor: '#f3f5f8', color: '#586069', padding: '8px 16px', fontSize: '14px', lineHeight: '20px', borderBottom: '1px solid #e1e4e8', fontWeight: '800' }}>
                   个人设置
