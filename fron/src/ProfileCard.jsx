@@ -1,42 +1,20 @@
 import React, { Component } from 'react'
-import { Card, Avatar, Divider, Button, message, Modal, Icon } from 'antd'
+import { Button, message } from 'antd'
 import axios from 'axios'
 import { withRouter } from 'react-router'
 import { Link } from 'react-router-dom'
-
-import PropertyList from './PropertyList'
-
-const { Meta } = Card
-const confirm = Modal.confirm
-
-const IconFont = Icon.createFromIconfontCN({
-  scriptUrl: '//at.alicdn.com/t/font_1242637_m57rpr4woh.js'
-})
 
 class ProfileCarder extends Component {
   state = {
     username: '',
     avatarUrl: '',
-    bio: '',
-    property: 0
+    bio: ''
   }
 
   onClickLogout = () => {
     window.localStorage.clear()
     this.props.history.replace('/')
-    message.success('Have Logouted')
-  }
-
-  showConfirm = () => {
-    confirm({
-      title: '退出登陆',
-      content: '真的要离开了吗？',
-      onOk: () => {
-        this.onClickLogout()
-      },
-      onCancel () {
-      }
-    })
+    message.success('退出登陆')
   }
 
   getUserProfile = async (v) => {
@@ -53,8 +31,7 @@ class ProfileCarder extends Component {
         return {
           username: response.data.username,
           avatarUrl: response.data.last_name,
-          bio: response.data.profile.bio,
-          property: response.data.profile.property
+          bio: response.data.profile.bio
         }
       })
     } catch (error) {
@@ -68,29 +45,27 @@ class ProfileCarder extends Component {
 
   render () {
     return (
-      <Card >
-        <Meta
-          avatar={<Avatar shape='square' size='large' src={this.state.avatarUrl} icon='user' style={{ color: '#ffffff', backgroundColor: '#f6f6f6' }} />}
-          title={
-            <div>
-              {this.state.username}
-              <IconFont type='icon-renzhenghuizhang' style={{ paddingLeft: '10px' }} />
-            </div>
-          }
-          description={this.state.bio}
-        />
-        <br />
-        <PropertyList property={this.state.property} />
-        <Divider> Infomation </Divider>
-        <div>
-          <Link to={'/profile/' + this.state.username} >
-            <IconFont type='icon-geren1' style={{ paddingRight: '10px' }} />
-            我的主页
-          </Link>
+      <div>
+        <div style={{ padding: '8px 20px', borderBottom: '1px solid #e1e4e8' }}>
+          <div style={{ fontSize: '14px' }}>
+          当前用户 :
+          </div>
+          <div style={{ fontSize: '16px', fontWeight: 'bolder' }}>
+            {this.state.username}
+          </div>
         </div>
-        <Divider> Action </Divider>
-        <Button type='danger' ghost onClick={this.showConfirm} block>Logout</Button>
-      </Card>
+        <Link to={'/profile/' + window.localStorage.getItem('user_id')} >
+          <div style={{ marginTop: '6px', backgroundColor: 'white', padding: '4px 10px 4px 16px', display: 'flex', justifyContent: 'center', color: '#24292e', borderBottom: '1px solid #e1e4e8' }}>
+            我的主页
+          </div>
+        </Link>
+        <Link to={'/notice/' + this.state.username} >
+          <div style={{ marginTop: '6px', backgroundColor: 'white', padding: '4px 10px 4px 16px', display: 'flex', justifyContent: 'center', color: '#24292e', borderBottom: '1px solid #e1e4e8' }}>
+            关于
+          </div>
+        </Link>
+        <Button type='danger' onClick={this.onClickLogout} block>退出登陆</Button>
+      </div>
     )
   }
 }
