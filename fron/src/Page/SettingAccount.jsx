@@ -59,28 +59,32 @@ class SettingAccount extends Component {
         <div style={{ flex: '1 0' }}>
           <Row style={{ flex: '1 0', paddingTop: '20px' }} >
             <Col xxl={{ span: 3, offset: 5 }} xl={{ span: 4, offset: 2 }} md={{ span: 5, offset: 1 }} xs={{ span: 22, offset: 1 }} >
-              <Menu
-                onClick={this.handleClick}
-                selectedKeys={[this.state.current]}
-              >
-                <Menu.Item key='profile'>
-                  <Icon type='user' />个人信息
-                  <Link to='/settings/profile' />
-                </Menu.Item>
-                <Menu.Item key='account'>
-                  <Icon type='user' />账号设置
-                  <Link to='/settings/account' />
-                </Menu.Item>
-              </Menu>
+              <nav style={{ border: '1px solid #d1d5da', borderRadius: '3px' }}>
+                <div style={{ backgroundColor: '#f3f5f8', color: '#586069', padding: '8px 16px', fontSize: '14px', lineHeight: '20px', borderBottom: '1px solid #e1e4e8', fontWeight: '800' }}>
+                  个人设置
+                </div>
+                <Link to='/settings/profile'>
+                  <div style={{ padding: '8px 10px', display: 'block', borderBottom: '1px solid #e1e4e8', color: '#0366d6' }}>
+                    <Icon type='user' style={{ paddingRight: '6px' }} />个人信息
+                  </div>
+                </Link>
+                <Link to='/settings/account'>
+                  <div style={{ padding: '8px 10px', display: 'block', color: '#24292e', fontWeight: '600', cursor: 'default', borderLeft: '3px solid #e36209' }}>
+                    <Icon type='user' style={{ paddingRight: '6px' }} />账号设置
+                  </div>
+                </Link>
+              </nav>
             </Col>
             <Col xxl={{ span: 11, offset: 0 }} xl={{ span: 16, offset: 0 }} md={{ span: 16, offset: 0 }} xs={{ span: 22, offset: 1 }} style={{ paddingLeft: '15px' }} >
               <div style={{ padding: '0 10px ' }}>
                 <Row>
                   <Col xl={{ span: 24, offset: 0 }} xs={{ span: 22, offset: 1 }}>
-                    <Title level={3}>账号设置</Title>
+                    <div style={{ fontSize: '20px', borderBottom: '1px solid #e1e4e8', paddingBottom: '8px', fontWeight: '600', color: '#24292e' }}>
+                    账号设置
+                    </div>
                   </Col>
                 </Row>
-                <Row>
+                <Row style={{ marginTop: '20px' }}>
                   <Col xl={{ span: 24, offset: 0 }} xs={{ span: 22, offset: 1 }}>
                     <Tabs defaultActiveKey='1'>
                       <TabPane
