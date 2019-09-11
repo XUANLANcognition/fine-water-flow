@@ -123,7 +123,7 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
             profile_data = validated_data.pop('profile')
             profile = instance.profile
             profile.bio = profile_data.get('bio', profile.bio)
-            profile.profession = profile.get('profession', profile.profession)
+            profile.profession = profile_data.get('profession', profile.profession)
             profile.save()
         return super(UserSerializer, self).update(instance, validated_data)
 
