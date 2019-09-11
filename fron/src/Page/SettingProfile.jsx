@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Layout, Col, Row, Form, Icon, Button, Input, message } from 'antd'
+import { Layout, Col, Row, Form, Icon, Button, Input, message, Select } from 'antd'
 import axios from 'axios'
 import { withRouter } from 'react-router'
 import { Link } from 'react-router-dom'
@@ -7,6 +7,10 @@ import { Link } from 'react-router-dom'
 import Nav from '../Nav'
 import Myfooter from '../Myfooter'
 import AvatarUpload from '../AvatarUpload'
+
+const { Option } = Select
+
+const profession = ['高新科技', '互联网', '电子商务', '    电子游戏', '    计算机软件', '    计算机硬件', '信息传媒', '    出版业', '    电影录音', '    广播电视', '    通信', '金融', '    银行', '    资本投资', '    证券投资', '    保险', '    信贷', '    财务', '    审计', '服务业', '    法律', '    餐饮', '    酒店', '    旅游', '    广告', '    公关', '    景观', '    咨询分析', '    市场推广', '    人力资源', '    社工服务', '    养老服务', '教育', '    高等教育', '    基础教育', '    职业教育', '    幼儿教育', '    特殊教育', '    培训', '医疗服务', '    临床医疗', '    制药', '    保健', '    美容', '    医疗器材', '    生物工程', '    疗养服务', '    护理服务', '艺术娱乐', '    创意艺术', '    体育健身', '    娱乐休闲', '    图书馆', '    博物馆', '    策展', '    博彩', '制造加工', '    食品饮料业', '    纺织皮革业', '    服装业', '    烟草业', '    造纸业', '    印刷业', '    化工业', '    汽车', '    家具', '    电子电器', '    机械设备', '    塑料工业', '    金属加工', '    军火', '地产建筑', '    房地产', '    装饰装潢', '    物业服务', '    特殊建造', '    建筑设备', '贸易零售', '    零售', '    大宗交易', '    进出口贸易', '公共服务', '    政府', '    国防军事', '    航天', '    科研', '    给排水', '    水利能源', '    电力电网', '    公共管理', '    环境保护', '    非营利组织', '开采冶金', '    煤炭工业', '    石油工业', '    黑色金属', '    有色金属', '    土砂石开采', '    地热开采', '交通仓储', '    邮政', '    物流递送', '    地面运输', '    铁路运输', '    管线运输', '    航运业', '    民用航空业', '农林牧渔', '    种植业', '    畜牧养殖业', '    林业', '    渔业']
 
 class Setting extends Component {
   componentDidMount () {
@@ -19,8 +23,8 @@ class Setting extends Component {
     bio: '',
     username: '',
     email: '',
-    uploading: false
-
+    uploading: false,
+    profession: ''
   };
 
   onCollapse = (collapsed) => {
@@ -39,7 +43,7 @@ class Setting extends Component {
       )
       this.data = response.data.results
       this.setState(function (state) {
-        return { urlAvatar: response.data.last_name, bio: response.data.profile.bio, username: response.data.username, email: response.data.email }
+        return { urlAvatar: response.data.last_name, bio: response.data.profile.bio, username: response.data.username, email: response.data.email, profession: response.data.profile.profession }
       })
     } catch (error) {
       console.log(error)
@@ -56,7 +60,8 @@ class Setting extends Component {
         const submitData = {
           username: values.username,
           bio: values.bio,
-          email: values.email
+          email: values.email,
+          profession: values.profession
         }
         try {
           let config = {
@@ -66,7 +71,7 @@ class Setting extends Component {
             'https://finewf.club:8080/api/users/' + window.localStorage.getItem('user_id'),
             {
               username: submitData.username,
-              profile: { bio: submitData.bio },
+              profile: { bio: submitData.bio, profession: submitData.profession },
               email: submitData.email
             },
             config
@@ -79,6 +84,9 @@ class Setting extends Component {
           }
         } catch (error) {
           message.error('更新失败')
+          this.setState({
+            uploading: false
+          })
         }
       }
     })
@@ -155,6 +163,19 @@ class Setting extends Component {
                           }]
                         })(
                           <Input size='default' />
+                        )}
+                      </Form.Item>
+                      <div style={{ fontSize: '14px', fontWeight: '600', lineHeight: '21px', marginBottom: '3px', color: '#24292e' }}>所在行业</div>
+                      <Form.Item hasFeedback>
+                        {getFieldDecorator('profession', {
+                          initialValue: this.state.profession,
+                          rules: [{ required: true, message: 'Please select your peofession!' }]
+                        })(
+                          <Select placeholder='Please select a profession'>
+                            {profession.map(item => (
+                              <Option value={item}>{item}</Option>
+                            ))}
+                          </Select>
                         )}
                       </Form.Item>
                       <Form.Item >

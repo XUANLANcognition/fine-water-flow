@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Layout, Avatar, Row, Col, Tabs, Icon, Button, Typography, Card, Statistic } from 'antd'
+import { Layout, Avatar, Row, Col, Tabs, Icon, Button, Typography, Card, Statistic, Tag } from 'antd'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 
@@ -22,7 +22,8 @@ class Profile extends Component {
     urlAvatar: '',
     username: '',
     bio: '',
-    property: 0
+    property: 0,
+    profession: ''
   }
 
   componentDidMount = async (v) => {
@@ -44,7 +45,8 @@ class Profile extends Component {
           urlAvatar: response.data.last_name,
           username: response.data.username,
           bio: response.data.profile.bio,
-          property: response.data.profile.property
+          property: response.data.profile.property,
+          profession: response.data.profile.profession
         }
       })
     } catch (error) {
@@ -64,8 +66,11 @@ class Profile extends Component {
               <div style={{ height: '200px', width: '200px', marginTop: '-100px', padding: '20px' }}>
                 <Avatar shape='square' src={this.state.urlAvatar} icon='user' style={{ height: '100%', width: '100%', border: '4px solid white', borderRadius: '10px', backgroundColor: 'white' }} />
               </div>
-              <div style={{ display: 'flex', flexDirection: 'column' }}>
-                <Title level={2}>{this.state.username}</Title>
+              <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-around' }}>
+                <div style={{ display: 'flex', alignItems: 'center' }}>
+                  <span style={{ fontSize: '26px', lineHeight: '30px', fontWeight: 'bold', color: '#000', marginRight: '6px' }}>{this.state.username}</span>
+                  {this.state.profession && <Tag color='#f50' style={{ height: '22px', fontSize: '14px' }}>{ this.state.profession }</Tag>}
+                </div>
                 <Paragraph>{this.state.bio}</Paragraph>
               </div>
               <div style={{ display: 'flex', flexGrow: '1', flexDirection: 'row-reverse', alignItems: 'center', padding: '20px' }}>

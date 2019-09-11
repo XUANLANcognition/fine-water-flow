@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Card, Avatar } from 'antd'
+import { Card, Avatar, Tag } from 'antd'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 
@@ -11,7 +11,8 @@ class AuthorShowCard extends Component {
     urlAvatar: '',
     username: '',
     bio: '',
-    id: ''
+    id: '',
+    profession: ''
   }
 
   componentDidUpdate (prevProps) {
@@ -28,7 +29,8 @@ class AuthorShowCard extends Component {
         urlAvatar: response.data.last_name,
         username: response.data.username,
         bio: response.data.profile.bio,
-        id: response.data.id
+        id: response.data.id,
+        profession: response.data.profile.profession
       })
     } catch (error) {
       console.log(error)
@@ -40,7 +42,12 @@ class AuthorShowCard extends Component {
       <Card title={<div style={{ fontWeight: 'bold' }}>关于作者</div>} bordered style={{ background: '#fff', fontWeight: 'bold', borderRadius: '1px', boxShadow: '0 1px 3px rgba(26,26,26,.1)' }}>
         <Meta
           avatar={<Link to={(this.state.id + '' === window.localStorage.getItem('user_id') ? '/profile/' : '/visit/') + this.state.id}><Avatar shape='square' src={this.state.urlAvatar} /></Link>}
-          title={this.state.username}
+          title={<div>
+            <div style={{ display: 'flex', alignItems: 'center' }}>
+              <span style={{ fontWeight: 'bold', color: '#000', marginRight: '6px' }}>{this.state.username}</span>
+              {this.state.profession && <Tag color='#f50'>{ this.state.profession }</Tag>}
+            </div>
+          </div>}
           description={this.state.bio}
         />
       </Card>
