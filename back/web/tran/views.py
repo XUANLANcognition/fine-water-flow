@@ -100,7 +100,7 @@ class UserProfileSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Profile
-        fields = ('bio', 'media_editor_auth', 'property', 'follow')
+        fields = ('bio', 'media_editor_auth', 'property', 'follow', 'profession')
         read_only_fields = ('property', )
 
 
@@ -109,7 +109,7 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = User
-        fields = ('username', 'password', 'email', 'first_name', 'last_name', 'url','profile')
+        fields = ('username', 'password', 'email', 'first_name', 'last_name', 'url', 'profile')
         extra_kwargs = {'password': {'write_only': True}}
 
     def create(self, validated_data):
