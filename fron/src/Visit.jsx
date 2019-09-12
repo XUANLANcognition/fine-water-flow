@@ -22,7 +22,8 @@ class Visit extends Component {
     bio: '',
     follow: false,
     loading: false,
-    profession: ''
+    profession: '',
+    cover: ''
   }
 
   componentDidMount = async (v) => {
@@ -102,7 +103,8 @@ class Visit extends Component {
           urlAvatar: response.data.last_name,
           username: response.data.username,
           bio: response.data.profile.bio,
-          profession: response.data.profile.profession
+          profession: response.data.profile.profession,
+          cover: response.data.profile.cover
         }
       })
     } catch (error) {
@@ -116,9 +118,7 @@ class Visit extends Component {
         <Nav />
         <Row style={{ marginTop: '15px' }}>
           <Col xxl={{ span: 14, offset: 5 }} xl={{ span: 20, offset: 2 }} md={{ span: 22, offset: 1 }} xs={{ span: 24, offset: 0 }} style={{ boxShadow: '0 1px 3px rgba(26,26,26,.1)' }}>
-            <div style={{ display: 'flex', backgroundColor: '#fff', justifyContent: 'center', overflow: 'hidden', backgroundRepeat: 'no-repeat', backgroundPosition: 'center', backgroundOrigin: 'padding-box', backgroundClip: 'border-box', backgroundAttachment: 'scroll', position: 'relative' }}>
-              <img src='/cover.png' style={{ objectFit: 'cover', height: '240px' }} />
-            </div>
+            <div style={{ background: `url(${this.state.cover})`, backgroundColor: '#fff', overflow: 'hidden', backgroundRepeat: 'no-repeat', backgroundPosition: 'center', backgroundOrigin: 'padding-box', backgroundClip: 'border-box', backgroundAttachment: 'scroll', height: '240px' }} />
             <div style={{ background: '#fff', display: 'flex', flexWrap: 'wrap' }}>
               <div style={{ height: '200px', width: '200px', marginTop: '-100px', padding: '20px' }}>
                 <Avatar shape='square' src={this.state.urlAvatar} icon='user' style={{ height: '100%', width: '100%', border: '4px solid white', borderRadius: '10px', backgroundColor: 'white' }} />

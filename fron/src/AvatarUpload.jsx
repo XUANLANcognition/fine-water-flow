@@ -32,6 +32,7 @@ class AvatarUpload extends Component {
       },
       config
     )
+    window.localStorage.setItem('user_avatar', avatarURL)
   }
 
   handleChange = (info) => {

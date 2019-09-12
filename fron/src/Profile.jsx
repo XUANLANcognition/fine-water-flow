@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Layout, Avatar, Row, Col, Tabs, Icon, Button, Typography, Card, Statistic, Tag } from 'antd'
+import { Layout, Avatar, Row, Col, Tabs, Icon, Button, Typography, Card, Statistic, Tag, message, Upload } from 'antd'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 
@@ -10,7 +10,40 @@ import FollowList from './FollowList'
 import PropertyList from './PropertyList'
 
 const TabPane = Tabs.TabPane
-const { Title, Paragraph } = Typography
+const { Paragraph } = Typography
+
+function checkImageWH (file, width, height) {
+  let self = this
+  return new Promise(function (resolve, reject) {
+    let filereader = new window.FileReader()
+    filereader.onload = e => {
+      let src = e.target.result
+      const image = new window.Image()
+      image.onload = function () {
+        if (width && this.width < width) {
+          message.error('error')
+          reject()
+        } else if (height && this.height < height) {
+          message.error('error')
+          reject()
+        } else {
+          resolve()
+        }
+      }
+      image.onerror = reject
+      image.src = src
+    }
+    filereader.readAsDataURL(file)
+  })
+}
+
+function beforeUpload (file) {
+  const isLt2M = file.size / 1024 / 1024 < 2
+  if (!isLt2M) {
+    message.error('文件不能大于 2MB!')
+  }
+  return isLt2M && checkImageWH(file, 1200, 240)
+}
 
 const IconFont = Icon.createFromIconfontCN({
   scriptUrl: '//at.alicdn.com/t/font_1242637_bctqp8owe4o.js'
@@ -23,7 +56,9 @@ class Profile extends Component {
     username: '',
     bio: '',
     property: 0,
-    profession: ''
+    profession: '',
+    loading: false,
+    cover: ''
   }
 
   componentDidMount = async (v) => {
@@ -46,21 +81,82 @@ class Profile extends Component {
           username: response.data.username,
           bio: response.data.profile.bio,
           property: response.data.profile.property,
-          profession: response.data.profile.profession
+          profession: response.data.profile.profession,
+          cover: response.data.profile.cover
         }
       })
     } catch (error) {
       console.log(error)
     }
   }
+
+  CoverAvatarUrl = async (avatarURL) => {
+    let config = {
+      headers: { 'Authorization': 'Token ' + window.localStorage.getItem('token') }
+    }
+    await axios.patch(
+      'https://finewf.club:8080/api/users/' + window.localStorage.getItem('user_id'),
+      {
+        profile: { cover: avatarURL }
+      },
+      config
+    )
+    this.setState({
+      cover: avatarURL
+    })
+  }
+
+  handleChange = (info) => {
+    if (info.file.status === 'uploading') {
+      this.setState({ loading: true })
+      return
+    }
+    if (info.file.status === 'done') {
+      this.setState({ imageUrl: info.file.response.data.url, loading: false })
+    }
+    this.CoverAvatarUrl(info.file.response.data.url)
+  }
+
+  customRequest = async (info) => {
+    try {
+      let formData = new window.FormData()
+      formData.append('smfile', info.file)
+      const response = await axios.post(
+        info.action,
+        formData,
+        {
+          headers: {
+            'content-type': 'multipart/form-data'
+          }
+        }
+      )
+      info.onSuccess(response.data)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   render () {
     return (
       <Layout style={{ minHeight: '100vh', backgroundColor: '#f7f7f7' }}>
         <Nav />
         <Row style={{ marginTop: '15px' }}>
           <Col xxl={{ span: 14, offset: 5 }} xl={{ span: 20, offset: 2 }} md={{ span: 22, offset: 1 }} xs={{ span: 24, offset: 0 }} style={{ boxShadow: '0 1px 3px rgba(26,26,26,.1)' }}>
-            <div style={{ display: 'flex', backgroundColor: '#fff', justifyContent: 'center', overflow: 'hidden', backgroundRepeat: 'no-repeat', backgroundPosition: 'center', backgroundOrigin: 'padding-box', backgroundClip: 'border-box', backgroundAttachment: 'scroll', position: 'relative' }}>
-              <img src='/cover.png' style={{ objectFit: 'cover', height: '240px' }} />
+            <div style={{ background: `url(${this.state.cover})`, backgroundColor: '#fff', overflow: 'hidden', backgroundRepeat: 'no-repeat', backgroundPosition: 'center', backgroundOrigin: 'padding-box', backgroundClip: 'border-box', backgroundAttachment: 'scroll', height: '240px' }}>
+              <div style={{ display: 'flex', flexDirection: 'row-reverse', marginTop: '20px', marginRight: '20px' }}>
+                <Upload
+                  name='avatar'
+                  showUploadList={false}
+                  beforeUpload={beforeUpload}
+                  onChange={this.handleChange}
+                  customRequest={this.customRequest}
+                  action='https://sm.ms/api/upload'
+                >
+                  <Button ghost style={{ width: '150px', color: '#fff' }}>
+                    <Icon type='upload' />编辑
+                  </Button>
+                </Upload>
+              </div>
             </div>
             <div style={{ background: '#fff', display: 'flex', flexWrap: 'wrap' }}>
               <div style={{ height: '200px', width: '200px', marginTop: '-100px', padding: '20px' }}>
