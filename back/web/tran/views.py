@@ -100,7 +100,7 @@ class UserProfileSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Profile
-        fields = ('bio', 'media_editor_auth', 'property', 'follow', 'profession')
+        fields = ('bio', 'media_editor_auth', 'property', 'follow', 'profession', 'cover')
         read_only_fields = ('property', )
 
 
@@ -124,6 +124,7 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
             profile = instance.profile
             profile.bio = profile_data.get('bio', profile.bio)
             profile.profession = profile_data.get('profession', profile.profession)
+            profile.cover = profile_data.get('cover', profile.cover)
             profile.save()
         return super(UserSerializer, self).update(instance, validated_data)
 

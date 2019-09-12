@@ -45,6 +45,7 @@ class Profile(models.Model):
     property = models.IntegerField(default=100)
     media_editor_auth = models.CharField(max_length=24, choices=MEDIA_EDITOR_AUTH_CHOICES, default='未审核', blank=True)
     profession = models.CharField(max_length=24, blank=True)
+    cover = models.CharField(max_length=100, blank=True, default='/cover.png')
 
     @receiver(post_save, sender = User)
     def create_profile_for_user(sender, instance = None, created = False, **kwargs):
