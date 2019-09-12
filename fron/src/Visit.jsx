@@ -8,7 +8,7 @@ import Myfooter from './Myfooter'
 import VisitProfileArticleList from './VisitProfileArticleList'
 
 const TabPane = Tabs.TabPane
-const { Title, Paragraph } = Typography
+const { Paragraph } = Typography
 
 const IconFont = Icon.createFromIconfontCN({
   scriptUrl: '//at.alicdn.com/t/font_1242637_bctqp8owe4o.js'
@@ -118,7 +118,7 @@ class Visit extends Component {
         <Nav />
         <Row style={{ marginTop: '15px' }}>
           <Col xxl={{ span: 14, offset: 5 }} xl={{ span: 20, offset: 2 }} md={{ span: 22, offset: 1 }} xs={{ span: 24, offset: 0 }} style={{ boxShadow: '0 1px 3px rgba(26,26,26,.1)' }}>
-            <div style={{ background: `url(${this.state.cover})`, backgroundColor: '#fff', overflow: 'hidden', backgroundRepeat: 'no-repeat', backgroundPosition: 'center', backgroundOrigin: 'padding-box', backgroundClip: 'border-box', backgroundAttachment: 'scroll', height: '240px' }} />
+            <div style={{ backgroundImage: `url(${this.state.cover})`, backgroundColor: '#fff', overflow: 'hidden', backgroundRepeat: 'no-repeat', backgroundPosition: 'center', backgroundOrigin: 'padding-box', backgroundClip: 'border-box', backgroundAttachment: 'scroll', height: '240px' }} />
             <div style={{ background: '#fff', display: 'flex', flexWrap: 'wrap' }}>
               <div style={{ height: '200px', width: '200px', marginTop: '-100px', padding: '20px' }}>
                 <Avatar shape='square' src={this.state.urlAvatar} icon='user' style={{ height: '100%', width: '100%', border: '4px solid white', borderRadius: '10px', backgroundColor: 'white' }} />

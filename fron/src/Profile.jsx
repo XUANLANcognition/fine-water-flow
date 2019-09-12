@@ -142,7 +142,7 @@ class Profile extends Component {
         <Nav />
         <Row style={{ marginTop: '15px' }}>
           <Col xxl={{ span: 14, offset: 5 }} xl={{ span: 20, offset: 2 }} md={{ span: 22, offset: 1 }} xs={{ span: 24, offset: 0 }} style={{ boxShadow: '0 1px 3px rgba(26,26,26,.1)' }}>
-            <div style={{ background: `url(${this.state.cover})`, backgroundColor: '#fff', overflow: 'hidden', backgroundRepeat: 'no-repeat', backgroundPosition: 'center', backgroundOrigin: 'padding-box', backgroundClip: 'border-box', backgroundAttachment: 'scroll', height: '240px' }}>
+            <div style={{ backgroundImage: `url(${this.state.cover})`, backgroundColor: '#fff', overflow: 'hidden', backgroundRepeat: 'no-repeat', backgroundPosition: 'center', backgroundOrigin: 'padding-box', backgroundClip: 'border-box', backgroundAttachment: 'scroll', height: '240px' }}>
               <div style={{ display: 'flex', flexDirection: 'row-reverse', marginTop: '20px', marginRight: '20px' }}>
                 <Upload
                   name='avatar'
