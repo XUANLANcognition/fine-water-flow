@@ -3,7 +3,7 @@ from django.http import JsonResponse
 from rest_framework import routers, serializers, viewsets, status
 from rest_framework.pagination import PageNumberPagination
 from django.contrib.auth.models import User
-from .models import Article, Comment, Profile, Book, BookTag, BookBlock, BookComment, Figure, Movie, MovieComment, MovieBlock, MovieTag, Picture, Source, Notice
+from .models import Article, Comment, Profile, Book, BookTag, BookBlock, BookComment, Figure, Movie, MovieComment, MovieBlock, MovieTag, Picture, Source, Notice, FollowRela
 from rest_framework.authtoken.models import Token
 
 from rest_framework.authtoken.views import ObtainAuthToken
@@ -104,6 +104,14 @@ class UserProfileSerializer(serializers.ModelSerializer):
         read_only_fields = ('property', )
 
 
+class UserProfileBriefSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Profile
+        fields = ('bio', 'media_editor_auth', 'property', 'profession', 'cover')
+        read_only_fields = ('property', )
+
+
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     profile = UserProfileSerializer(required=False)
 
@@ -150,6 +158,15 @@ class UserAnotherSerializer(serializers.HyperlinkedModelSerializer):
         read_only_fields = ('username', 'first_name', 'last_name', 'url', 'id', 'profile')
 
 
+class UserBriefSerializer(serializers.ModelSerializer):
+    profile = UserProfileBriefSerializer()
+
+    class Meta:
+        model = User
+        fields = ('id', 'first_name', 'last_name', 'url', 'username', 'profile')
+        read_only_fields = ('username', 'first_name', 'last_name', 'url', 'id', 'profile')
+
+
 class UserAnotherDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = User.objects.all()
     serializer_class =  UserAnotherSerializer
@@ -177,20 +194,35 @@ class PropertyRank(generics.ListAPIView):
 @api_view(['POST'])
 @permission_classes((permissions.IsAuthenticated, ))
 def follow(request, pk):
-    user = User.objects.get(id = request.user.id)
-    following = User.objects.get(id = pk)
-    user.profile.follow.add(following.profile)
-    return Response(status = status.HTTP_201_CREATED)
+    try:
+        user = User.objects.get(id = request.user.id)
+        follow = User.objects.get(id = pk)
+    except Exception as e:
+        return Response({'code': '3', 'message': 'user or follower does not exist.'})
+    try:
+        follow_rela = FollowRela.objects.get(user = user, follow = follow)
+        return Response({'code': '2', 'message': 'have followed'})
+    except Exception as e:
+        follow_rela = FollowRela(user = user, follow = follow)
+        follow_rela.save()
+    return Response({'code': '1', 'message': 'succeed'})
 
 #user unfollow user
 
 @api_view(['POST'])
 @permission_classes((permissions.IsAuthenticated, ))
 def unfollow(request, pk):
-    user = User.objects.get(id = request.user.id)
-    following = User.objects.get(id = pk)
-    user.profile.follow.remove(following.profile)
-    return Response(status = status.HTTP_201_CREATED)
+    try:
+        user = User.objects.get(id = request.user.id)
+        follow = User.objects.get(id = pk)
+    except Exception as e:
+        return Response({'code': '3', 'message': 'user or follower does not exist.'})
+    try:
+        follow_rela = FollowRela.objects.get(user = user, follow = follow)
+        follow_rela.delete()
+        return Response({'code': '1', 'message': 'succeed'})
+    except Exception as e:
+        return Response({'code': '2', 'message': 'have unfollowed'})
 
 # user apply media editor
 
@@ -217,15 +249,16 @@ def unapply_media_editor(request, pk):
 @api_view(['POST'])
 @permission_classes((permissions.IsAuthenticated, ))
 def isfollow(request, pk):
-    user = User.objects.get(id = request.user.id)
-    following = User.objects.get(id = pk)
-    followList = user.profile.follow.all()
-    for i in followList:
-        print(i)
-    if(following.profile in followList):
-        return Response({'m':'1'})
-    else:
-        return Response({'m':'2'})
+    try:
+        user = User.objects.get(id = request.user.id)
+        follow = User.objects.get(id = pk)
+    except Exception as e:
+        return Response({'code': '3', 'message': 'user or follower does not exist.'})
+    try:
+        follow_rela = FollowRela.objects.get(user= user, follow = follow)
+        return Response({'code':'1', 'message': 'followed'})
+    except Exception as e1:
+        return Response({'code':'2', 'message': 'unfollowed'})
 
 
 # Article API
@@ -699,6 +732,45 @@ class NoticeList(generics.ListAPIView):
     serializer_class = NoticeSerializer
     permission_classes = (Publish,)
     pagination_class = NoticePagination
+
+
+# FollowRela API
+
+
+class FollowRelaSerializer(serializers.HyperlinkedModelSerializer):
+    follow = UserBriefSerializer(read_only = True)
+    user = serializers.CharField(source='user.id')
+
+    class Meta:
+        model = FollowRela
+        fields = ('id', 'user', 'follow')
+        read_only_fields = ('id', 'user', 'follow')
+
+
+class FollowRelaPagination(PageNumberPagination):
+    page_size = 8
+    page_size_query_param = 'page_size'
+    max_page_size = 128
+
+    class Meta:
+        model = FollowRela
+        fields = '__all__'
+
+ 
+class FollowRelaFilter(filters.FilterSet):
+
+    class Meta:
+        model = FollowRela
+        fields = '__all__'
+
+
+class FollowRelaList(generics.ListCreateAPIView):
+    queryset = FollowRela.objects.all()
+    serializer_class = FollowRelaSerializer
+    permission_classes = (IsOwner,)
+    pagination_class = FollowRelaPagination
+    filterset_class = FollowRelaFilter
+    filter_backends = (filters.DjangoFilterBackend, )
 
 
 # Sign on API

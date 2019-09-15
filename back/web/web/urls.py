@@ -80,4 +80,5 @@ urlpatterns = [
     path('api/movieblocks/<int:pk>', MovieBlockDetail.as_view(), name='movieblock-detail'),
     path('api/property_rank/', PropertyRank.as_view(), name='property-rank'),
     path('api/notices/', NoticeList.as_view(), name='notice-list'),
+    path('api/follow_relations/', FollowRelaList.as_view(), name='follow-relations-list'),
 ]
