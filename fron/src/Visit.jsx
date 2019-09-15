@@ -42,7 +42,7 @@ class Visit extends Component {
         config
       )
       this.setState({
-        follow: (response.data.m === '1')
+        follow: (response.data.code === '1')
       })
     } catch (error) {
     }
