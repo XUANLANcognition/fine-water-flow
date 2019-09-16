@@ -290,7 +290,7 @@ class ArticleFilter(filters.FilterSet):
 
 
 class ArticleList(generics.ListCreateAPIView):
-    queryset = Article.objects.all().order_by('-pub_date')
+    queryset = Article.objects.all().filter(status='2').order_by('-pub_date')
     serializer_class = ArticleSerializer
     permission_classes = (Publish,)
     pagination_class = ArticlePagination
