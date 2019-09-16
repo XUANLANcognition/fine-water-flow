@@ -32,6 +32,12 @@ class Article(models.Model):
         ('N', '非原创')
     )
     originality = models.CharField(max_length=24, choices=ORIGINALITY_CHOICES, default='N', blank=True)
+    STATUS_CHOICES = (
+        ('1', '草稿'),
+        ('2', '发布')
+    )
+    status = models.CharField(max_length=24, choices=STATUS_CHOICES, default='1', blank=True)
+
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
