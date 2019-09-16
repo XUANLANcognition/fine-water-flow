@@ -265,7 +265,7 @@ def isfollow(request, pk):
 
 
 class ArticleSerializer(serializers.HyperlinkedModelSerializer):
-    user = UserAnotherSerializer(read_only = True)
+    user = UserBriefSerializer(read_only = True)
 
     class Meta:
         model = Article
@@ -334,7 +334,7 @@ class ArticleDetail(generics.RetrieveUpdateDestroyAPIView):
 
 
 class BookCommentSerializer(serializers.HyperlinkedModelSerializer):
-    user = UserAnotherSerializer(read_only = True)
+    user = UserBriefSerializer(read_only = True)
 
     class Meta:
         model = BookComment
@@ -426,7 +426,7 @@ class BookBlockList(generics.ListCreateAPIView):
 
 class BookSerializer(serializers.HyperlinkedModelSerializer):
     tag = BookTagSerializer(many=True, read_only=True)
-    user = UserAnotherSerializer(read_only = True)
+    user = UserBriefSerializer(read_only = True)
 
     class Meta:
         model = Book
@@ -475,7 +475,7 @@ class BookDetail(generics.RetrieveUpdateDestroyAPIView):
 
 
 class CommentSerializer(serializers.HyperlinkedModelSerializer):
-    user = UserAnotherSerializer(read_only = True)
+    user = UserBriefSerializer(read_only = True)
 
     class Meta:
         model = Comment
@@ -614,7 +614,7 @@ class MovieSerializer(serializers.HyperlinkedModelSerializer):
     director = FigureSerializer(many=True, read_only=True)
     actor = FigureSerializer(many=True, read_only=True)
     writer = FigureSerializer(many=True, read_only=True)
-    user = UserAnotherSerializer(read_only = True)
+    user = UserBriefSerializer(read_only = True)
     tag = BookTagSerializer(many=True, read_only=True)
     still = PictureSerializer(many=True, read_only=True)
     play_source = SourceSerializer(many=True, read_only=True)
@@ -666,7 +666,7 @@ class MovieDetail(generics.RetrieveUpdateDestroyAPIView):
 
 
 class MovieCommentSerializer(serializers.HyperlinkedModelSerializer):
-    user = UserAnotherSerializer(read_only = True)
+    user = UserBriefSerializer(read_only = True)
 
     class Meta:
         model = MovieComment
