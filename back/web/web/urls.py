@@ -51,6 +51,7 @@ urlpatterns = [
     path('api/users/<int:pk>', UserDetail.as_view(), name='user-detail'),
     path('api/user/<int:pk>', UserAnotherDetail.as_view(), name='user-detail'),
     path('api/articles/', ArticleList.as_view(), name='article-list'),
+    path('api/owner_articles/', ArticleOwnerList.as_view(), name='owner-article-list'),
     path('api/articles/follow/', ArticleFollowList.as_view(), name='article-follow-list'),
     path('api/articles/<int:pk>', ArticleDetail.as_view(), name='article-detail'),
     path('api/comments/', CommentList.as_view(), name='comment-list'),

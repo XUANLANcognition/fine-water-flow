@@ -50,6 +50,7 @@ class Publish(permissions.BasePermission):
             return permissions.IsAuthenticated
         return True
 
+
 class MediaPublish(permissions.BasePermission):
 
     def has_permission(self, request, view):
@@ -302,6 +303,21 @@ class ArticleList(generics.ListCreateAPIView):
         serializer.save(user=self.request.user)
 
 
+class ArticleOwnerFilter(filter_drf.BaseFilterBackend):
+
+    def filter_queryset(self, request, queryset, view):
+        return queryset.filter(user=request.user)
+
+
+class ArticleOwnerList(generics.ListAPIView):
+    queryset = Article.objects.all().order_by('-pub_date')
+    serializer_class = ArticleSerializer
+    pagination_class = ArticlePagination
+    filter_backends = (filters.DjangoFilterBackend, filter_drf.SearchFilter, ArticleOwnerFilter)
+    filterset_class = ArticleFilter
+    search_fields = ('title', 'content')
+
+
 class ArticleFollowFilter(filter_drf.BaseFilterBackend):
 
     def filter_queryset(self, request, queryset, view):
@@ -315,7 +331,7 @@ class ArticleFollowList(generics.ListAPIView):
     serializer_class = ArticleSerializer
     permission_classes = (Publish,)
     pagination_class = ArticlePagination
-    filter_backends = (ArticleFollowFilter,)
+    filter_backends = (ArticleFollowFilter, filters.DjangoFilterBackend)
 
 
 class ArticleDetail(generics.RetrieveUpdateDestroyAPIView):
