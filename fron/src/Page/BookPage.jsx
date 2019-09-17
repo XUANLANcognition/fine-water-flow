@@ -14,7 +14,7 @@ const IconFont = Icon.createFromIconfontCN({
 
 const CheckableTag = Tag.CheckableTag
 const { Title } = Typography
-const count = 12
+const count = 6
 const customPanelStyle = {
   background: '#fff',
   borderRadius: 4,

@@ -4,7 +4,7 @@ import axios from 'axios'
 import dayjs from 'dayjs'
 import { Link } from 'react-router-dom'
 
-const count = 6
+const count = 3
 const confirm = Modal.confirm
 const briefLength = 100
 const IconFont = Icon.createFromIconfontCN({
@@ -43,8 +43,12 @@ class ProfileArticleList extends Component {
 
   getArticleData = async (v) => {
     try {
+      let config = {
+        headers: { 'Authorization': 'Token ' + window.localStorage.getItem('token') }
+      }
       const response = await axios.get(
-        'https://finewf.club:8080/api/articles/?format=json' + '&page=' + this.state.page + '&page_size=' + count + '&user=' + window.localStorage.getItem('user_id')
+        'https://finewf.club:8080/api/owner_articles/?format=json' + '&page=' + this.state.page + '&page_size=' + count,
+        config
       )
       this.data = response.data.results
       this.setState(function (state) {
@@ -64,8 +68,12 @@ class ProfileArticleList extends Component {
     })
     try {
       this.state.page = this.state.page + 1
+      let config = {
+        headers: { 'Authorization': 'Token ' + window.localStorage.getItem('token') }
+      }
       const response = await axios.get(
-        'https://finewf.club:8080/api/articles/?format=json' + '&page=' + this.state.page + '&page_size=' + count + '&user=' + window.localStorage.getItem('user_id')
+        'https://finewf.club:8080/api/owner_articles/?format=json' + '&page=' + this.state.page + '&page_size=' + count,
+        config
       )
       if (response.status !== 404) {
         const cache = this.state.cache.concat(response.data.results)

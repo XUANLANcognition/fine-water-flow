@@ -4,7 +4,7 @@ import axios from 'axios'
 import dayjs from 'dayjs'
 import { Link } from 'react-router-dom'
 
-const count = 8
+const count = 6
 const briefLength = 100
 const IconFont = Icon.createFromIconfontCN({
   scriptUrl: '//at.alicdn.com/t/font_1242637_vfurgm6ec3b.js'

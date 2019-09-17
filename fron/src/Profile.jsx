@@ -162,7 +162,7 @@ class Profile extends Component {
               <div style={{ height: '200px', width: '200px', marginTop: '-100px', padding: '20px' }}>
                 <Avatar shape='square' src={this.state.urlAvatar} icon='user' style={{ height: '100%', width: '100%', border: '4px solid white', borderRadius: '10px', backgroundColor: 'white' }} />
               </div>
-              <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-around' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-around', flexWrap: 'wrap' }}>
                 <div style={{ display: 'flex', alignItems: 'center' }}>
                   <span style={{ fontSize: '26px', lineHeight: '30px', fontWeight: 'bold', color: '#000', marginRight: '6px' }}>{this.state.username}</span>
                   {this.state.profession && <Tag color='#f50' style={{ height: '22px', fontSize: '14px' }}>{ this.state.profession }</Tag>}

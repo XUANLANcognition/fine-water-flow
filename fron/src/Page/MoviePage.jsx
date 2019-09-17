@@ -13,7 +13,7 @@ const IconFont = Icon.createFromIconfontCN({
 })
 
 const CheckableTag = Tag.CheckableTag
-const count = 12
+const count = 6
 const { Title } = Typography
 const { Search } = Input
 const tip = ['全库', '搜索结果']
