@@ -270,7 +270,7 @@ class ArticleSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Article
-        fields = ('id', 'title', 'url', 'originality', 'pub_date', 'views', 'description', 'content', 'user')
+        fields = ('id', 'title', 'url', 'originality', 'pub_date', 'views', 'description', 'content', 'user', 'status')
 
 
 class ArticlePagination(PageNumberPagination):
@@ -332,6 +332,13 @@ class ArticleFollowList(generics.ListAPIView):
     permission_classes = (Publish,)
     pagination_class = ArticlePagination
     filter_backends = (ArticleFollowFilter, filters.DjangoFilterBackend)
+
+
+class ArticleOwnerDetail(generics.RetrieveAPIView):
+    queryset = Article.objects.all()
+    serializer_class = ArticleSerializer
+    permission_classes = (Read,)
+    filter_backends = (ArticleOwnerFilter,)
 
 
 class ArticleDetail(generics.RetrieveUpdateDestroyAPIView):
