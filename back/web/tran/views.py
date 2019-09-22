@@ -343,7 +343,7 @@ class ArticleOwnerDetail(generics.RetrieveAPIView):
 
 
 class ArticleDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Article.objects.all()
+    queryset = Article.objects.all().filter(status='2')
     serializer_class = ArticleSerializer
     permission_classes = (Read,)
 

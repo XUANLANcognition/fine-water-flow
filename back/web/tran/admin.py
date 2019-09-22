@@ -52,7 +52,7 @@ class MovieBlockAdmin(admin.ModelAdmin):
     inlines = [MovieTagInline, ]
 
 class ArticleAdmin(admin.ModelAdmin):
-    list_display = ('title', 'user')
+    list_display = ('id', 'title', 'user', 'status', 'views')
     list_filter = ('pub_date', 'user')
     list_per_page = 10
     search_fields = ('user',)
