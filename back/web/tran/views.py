@@ -316,6 +316,7 @@ class ArticleOwnerList(generics.ListAPIView):
     filter_backends = (filters.DjangoFilterBackend, filter_drf.SearchFilter, ArticleOwnerFilter)
     filterset_class = ArticleFilter
     search_fields = ('title', 'content')
+    permission_classes= (IsOwner, )
 
 
 class ArticleFollowFilter(filter_drf.BaseFilterBackend):
