@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { List, Button, Skeleton, message, Avatar, Modal, Icon } from 'antd'
+import { List, Button, Skeleton, message, Avatar, Modal, Icon, Dropdown, Menu } from 'antd'
 import axios from 'axios'
 import dayjs from 'dayjs'
 import { Link } from 'react-router-dom'
@@ -17,8 +17,54 @@ class ProfileArticleList extends Component {
     cache: [],
     loading: false,
     initLoading: true,
-    page: 1
+    page: 1,
+    next: '',
+    status: 1
   }
+
+  my (list, key, status) {
+    for (let i = 0; i < list.length; i++) {
+      if (list[i].id === key) {
+        list[i].status = status
+      }
+    }
+    return list
+  }
+
+ onClick = async (key, status) => {
+   if (status === '2') {
+     try {
+       let url = 'https://finewf.club:8080/api/owner_articles/' + key
+       let config = {
+         headers: { 'Authorization': 'Token ' + window.localStorage.getItem('token') }
+       }
+       await axios.patch(url, { status: '1' }, config)
+       const temp = this.state.cache
+       this.my(temp, key, '1')
+       this.setState({
+         cache: temp
+       })
+       message.success(key + '进入草稿箱')
+     } catch (error) {
+     }
+   }
+   if (status === '1') {
+     try {
+       let url = 'https://finewf.club:8080/api/owner_articles/' + key
+       let config = {
+         headers: { 'Authorization': 'Token ' + window.localStorage.getItem('token') }
+       }
+       await axios.patch(url, { status: '2' }, config)
+       const temp = this.state.cache
+       this.my(temp, key, '2')
+       this.setState({
+         cache: temp
+       })
+       message.success(key + '发布成功')
+     } catch (error) {
+     }
+   }
+ }
 
   componentDidMount = async (v) => {
     await this.getArticleData()
@@ -50,9 +96,8 @@ class ProfileArticleList extends Component {
         'https://finewf.club:8080/api/owner_articles/?format=json' + '&page=' + this.state.page + '&page_size=' + count,
         config
       )
-      this.data = response.data.results
       this.setState(function (state) {
-        return { data: response.data.results, cache: response.data.results }
+        return { data: response.data.results, cache: response.data.results, next: response.data.next }
       })
     } catch (error) {
       console.log(error)
@@ -60,11 +105,9 @@ class ProfileArticleList extends Component {
   }
 
   onLoadMore = async (v) => {
-    this.setState(function (state) {
-      return {
-        loading: true,
-        data: this.data.concat([...new Array(count)].map(() => ({ loading: true, name: {} })))
-      }
+    await this.setState({
+      loading: true,
+      cache: this.state.data.concat([...new Array(count)].map(() => ({ loading: true, name: {} })))
     })
     try {
       this.state.page = this.state.page + 1
@@ -75,15 +118,21 @@ class ProfileArticleList extends Component {
         'https://finewf.club:8080/api/owner_articles/?format=json' + '&page=' + this.state.page + '&page_size=' + count,
         config
       )
-      if (response.status !== 404) {
-        const cache = this.state.cache.concat(response.data.results)
-        this.setState(function (state) {
-          return { cache: cache, data: cache, loading: false }
-        }, () => {
-          window.dispatchEvent(new window.Event('resize'))
-        })
+      this.setState({
+        next: response.data.next
+      })
+      const temp1 = this.state.data
+      if (response.status === 200) {
+        const temp = this.state.data.concat(response.data.results)
+        this.setState(
+          { data: temp, cache: temp, loading: false }
+          , () => {
+            window.dispatchEvent(new window.Event('resize'))
+          })
       } else {
-        message.error('No more article ^-^')
+        this.setState({
+          cache: temp1
+        })
       }
     } catch (error) {
       console.log(error)
@@ -119,20 +168,20 @@ class ProfileArticleList extends Component {
   }
 
   render () {
-    const { initLoading, loading, data } = this.state
-    const loadMore = !initLoading && !loading ? (
+    const { initLoading, loading, cache, next } = this.state
+    const loadMore = !initLoading && (!loading && next) ? (
       <div style={{
         textAlign: 'center', marginTop: 12, height: 32, lineHeight: '32px'
       }}
       >
-        {(this.state.data.length > 0) && <Button onClick={this.onLoadMore}>加载更多</Button>}
+        {(this.state.cache.length > 0) && <Button onClick={this.onLoadMore}>加载更多</Button>}
       </div>
     ) : null
 
     return (
       <List
         itemLayout='vertical'
-        dataSource={data}
+        dataSource={cache}
         size='small'
         loadMore={loadMore}
         loading={initLoading}
@@ -142,7 +191,26 @@ class ProfileArticleList extends Component {
             <Link to={'/revise_article/' + item.id}>
               <Button style={{ color: '#76839b', backgroundColor: 'transparent', display: 'inline-block', fontSize: '14px', fontWeight: '500' }} type='link'> <IconFont type='icon-edit' style={{ paddingLeft: '5px', color: '#76839b' }} /> 修改 </Button>
             </Link>,
-            <Button style={{ color: '#76839b', backgroundColor: 'transparent', display: 'inline-block', fontSize: '14px', fontWeight: '500' }} type='link' onClick={() => this.deleteArticle(item.id)}><IconFont type='icon-delete-fill' style={{ paddingLeft: '5px', color: '#76839b' }} /> 删除 </Button>
+            <Button style={{ color: '#76839b', backgroundColor: 'transparent', display: 'inline-block', fontSize: '14px', fontWeight: '500' }} type='link' onClick={() => this.deleteArticle(item.id)}><IconFont type='icon-delete-fill' style={{ paddingLeft: '5px', color: '#76839b' }} /> 删除 </Button>,
+            <Dropdown
+              overlay={
+                <Menu onClick={this.onClick.bind(this, item.id, item.status)}>
+                  <Menu.Item key='1' disabled={item.status === '2'}>
+                    <a target='_blank' rel='noopener noreferrer'>
+                      {item.status === '2' ? '* 发布' : '发布'}
+                    </a>
+                  </Menu.Item>
+                  <Menu.Item key='2' disabled={item.status === '1'}>
+                    <a target='_blank' rel='noopener noreferrer'>
+                      {item.status === '1' ? '* 进入草稿' : '进入草稿'}
+                    </a>
+                  </Menu.Item>
+                </Menu>
+              }
+              trigger={['click']}
+              placement='bottomRight'>
+              <Button style={{ color: '#76839b', backgroundColor: 'transparent', display: 'inline-block', fontSize: '14px', fontWeight: '500' }} type='link' ><IconFont type='icon-delete-fill' style={{ paddingLeft: '5px', color: '#76839b' }} /> {item.status === '2' ? '已发布' : '草稿箱'} </Button>
+            </Dropdown>
           ]}>
             <Skeleton avatar title={false} loading={item.loading} active>
               <List.Item.Meta
@@ -157,7 +225,7 @@ class ProfileArticleList extends Component {
                 avatar={<Link to={((item.user && item.user.id) + '' === window.localStorage.getItem('user_id') ? '/profile/' : '/visit/') + (item.user && item.user.id)}><Avatar shape='square' icon='user' src={item.user && item.user.last_name} /></Link>}
                 description={item.pub_date && dayjs(item.pub_date).fromNow()}
               />
-              <Link to={'/article/' + item.id}>
+              <Link to={'/owner_article/' + item.id}>
                 <h3 style={{ color: '#1a1a1a', fontWeight: '600', fontSize: '18px', fontStretch: '100%' }}>{item.title}</h3>
                 <div style={{ color: '#646464', fontSize: '15px' }}>
                   {this.extractBrief(item.content)}

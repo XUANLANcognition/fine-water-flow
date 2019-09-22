@@ -7,6 +7,7 @@ import Home from './Home'
 import Notice from './Notice'
 import THome from './THome'
 import ArticlePage from './ArticlePage'
+import ArticleOwnerPage from './ArticleOwnerPage'
 import Profile from './Profile'
 import Visit from './Visit'
 import Editor1 from './Editor'
@@ -28,6 +29,7 @@ import ReviseArticle from './Page/ReviseArticle'
 
 import './Global.css'
 import EditorGuidance from './Page/EditorGudiance'
+import TodayArticle from './Page/TodayArticle'
 
 const MainPage = props => {
   const token = window.localStorage.getItem('token')
@@ -55,6 +57,7 @@ class App extends Component {
             <Route path='/join' component={Join} />
             <Route path='/textEditorPage' component={textEditorPage} />
             <Route path='/article/:id' component={ArticlePage} />
+            <Route path='/owner_article/:id' component={ArticleOwnerPage} />
             <Route path='/profile/:id' component={Profile} />
             <Route path='/visit/:id' component={Visit} />
             <Route path='/settings/profile' component={SettingProfile} />
@@ -66,6 +69,7 @@ class App extends Component {
             <Route path='/movie_editor_page' component={MovieEditorPage} />
             <Route path='/reset_password' component={ResetPassword} />
             <Route path='/revise_article/:id' component={ReviseArticle} />
+            <Route path='/today_article' component={TodayArticle} />
             <Route component={NoMatch} />
           </Switch>
         </Router>

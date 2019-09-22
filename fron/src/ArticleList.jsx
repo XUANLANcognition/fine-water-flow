@@ -17,7 +17,8 @@ class ArticleList extends Component {
       data: [],
       cache: [],
       loading: false,
-      initLoading: true
+      initLoading: true,
+      next: ''
     }
 
     componentDidMount = async (v) => {
@@ -44,7 +45,7 @@ class ArticleList extends Component {
         const response = await axios.get(
           'https://finewf.club:8080/api/articles/?format=json' + '&page=' + this.page + '&page_size=' + count
         )
-        this.setState({ data: response.data.results, cache: response.data.results })
+        this.setState({ data: response.data.results, cache: response.data.results, next: response.data.next })
       } catch (error) {
         console.log(error)
       }
@@ -60,6 +61,9 @@ class ArticleList extends Component {
         const response = await axios.get(
           'https://finewf.club:8080/api/articles/?format=json' + '&page=' + this.page + '&page_size=' + count
         )
+        this.setState({
+          next: response.data.next
+        })
         const temp1 = this.state.data
         if (response.status === 200) {
           const temp = this.state.data.concat(response.data.results)
@@ -86,15 +90,15 @@ class ArticleList extends Component {
         const response = await axios.get(
           'https://finewf.club:8080/api/articles/?format=json' + '&page=' + this.page + '&page_size=' + count + '&search=' + value
         )
-        this.setState({ data: response.data.results, cache: response.data.results, initLoading: false })
+        this.setState({ data: response.data.results, cache: response.data.results, initLoading: false, next: response.data.next })
       } catch (error) {
         console.log(error)
       }
     }
 
     render () {
-      const { initLoading, loading, cache, data } = this.state
-      const loadMore = !initLoading && !loading ? (
+      const { initLoading, loading, cache, data, next } = this.state
+      const loadMore = !initLoading && (!loading && next) ? (
         <div style={{
           textAlign: 'center', marginTop: 12, height: 32, lineHeight: '32px'
         }}

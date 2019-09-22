@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Layout, Row, Col, Tabs, Form, BackTop } from 'antd'
 import { withRouter } from 'react-router'
+import { Link } from 'react-router-dom'
 
 import Nav from './Nav'
 import Advertisement from './Advertisement'
@@ -46,6 +47,11 @@ class THome extends Component {
             <CategoryList />
             <PropertyRank />
             <Advertisement />
+            <Link to='/today_article'>
+              <div style={{ margin: '20px 5px', color: '#8590a6' }}>
+                刷文
+              </div>
+            </Link>
           </Col>
         </Row>
         <Myfooter />

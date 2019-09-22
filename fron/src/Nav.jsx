@@ -9,7 +9,7 @@ const IconFont = Icon.createFromIconfontCN({
 })
 
 const Card = (
-  <div style={{ width: '176px' }}>
+  <div style={{ width: '176px', boxShadow: '0px 2px 5px #888888' }}>
     <ProfileCard />
   </div>
 )

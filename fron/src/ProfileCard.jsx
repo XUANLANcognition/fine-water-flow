@@ -47,24 +47,24 @@ class ProfileCarder extends Component {
     return (
       <div>
         <div style={{ padding: '8px 20px', borderBottom: '1px solid #e1e4e8' }}>
-          <div style={{ fontSize: '14px' }}>
+          <div style={{ fontSize: '14px', color: '#8590a6', fontWeight: '600' }}>
           当前用户 :
           </div>
-          <div style={{ fontSize: '16px', fontWeight: 'bolder' }}>
+          <div style={{ fontSize: '16px', fontWeight: 'bolder', color: '#8590a6' }}>
             {this.state.username}
           </div>
         </div>
         <Link to={'/profile/' + window.localStorage.getItem('user_id')} >
-          <div style={{ marginTop: '6px', backgroundColor: 'white', padding: '4px 10px 4px 16px', display: 'flex', justifyContent: 'center', color: '#24292e', borderBottom: '1px solid #e1e4e8' }}>
+          <div style={{ marginTop: '6px', backgroundColor: 'white', padding: '4px 10px 4px 16px', display: 'flex', justifyContent: 'center', color: '#8590a6', fontWeight: '600' }}>
             我的主页
           </div>
         </Link>
         <Link to={'/notice/' + this.state.username} >
-          <div style={{ marginTop: '6px', backgroundColor: 'white', padding: '4px 10px 4px 16px', display: 'flex', justifyContent: 'center', color: '#24292e', borderBottom: '1px solid #e1e4e8' }}>
+          <div style={{ marginTop: '6px', backgroundColor: 'white', padding: '4px 10px 4px 16px', display: 'flex', justifyContent: 'center', color: '#8590a6', fontWeight: '600' }}>
             关于
           </div>
         </Link>
-        <Button type='danger' onClick={this.onClickLogout} block>退出登陆</Button>
+        <Button type='link' onClick={this.onClickLogout} block style={{ fontWeight: '600', color: '#8590a6' }}>退出登陆</Button>
       </div>
     )
   }
