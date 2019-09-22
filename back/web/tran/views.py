@@ -335,7 +335,7 @@ class ArticleFollowList(generics.ListAPIView):
     filter_backends = (ArticleFollowFilter, filters.DjangoFilterBackend)
 
 
-class ArticleOwnerDetail(generics.RetrieveAPIView):
+class ArticleOwnerDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Article.objects.all()
     serializer_class = ArticleSerializer
     permission_classes = (Read,)
