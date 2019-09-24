@@ -763,12 +763,14 @@ class NoticeList(generics.ListAPIView):
 
 class FollowRelaSerializer(serializers.HyperlinkedModelSerializer):
     follow = UserBriefSerializer(read_only = True)
-    user = serializers.CharField(source='user.id')
+    user = UserBriefSerializer(read_only = True)
+    user_id = serializers.CharField(source='user.id')
+    follow_id = serializers.CharField(source='follow.id')
 
     class Meta:
         model = FollowRela
-        fields = ('id', 'user', 'follow')
-        read_only_fields = ('id', 'user', 'follow')
+        fields = ('id', 'user_id', 'follow_id', 'user', 'follow')
+        read_only_fields = ('id', 'user_id', 'follow_id', 'user', 'follow')
 
 
 class FollowRelaPagination(PageNumberPagination):
