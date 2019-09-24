@@ -764,13 +764,12 @@ class NoticeList(generics.ListAPIView):
 class FollowRelaSerializer(serializers.HyperlinkedModelSerializer):
     follow = UserBriefSerializer(read_only = True)
     user = UserBriefSerializer(read_only = True)
-    user_id = serializers.CharField(source='user.id')
-    follow_id = serializers.CharField(source='follow.id')
+
 
     class Meta:
         model = FollowRela
-        fields = ('id', 'user_id', 'follow_id', 'user', 'follow')
-        read_only_fields = ('id', 'user_id', 'follow_id', 'user', 'follow')
+        fields = ('id', 'user', 'follow')
+        read_only_fields = ('id', 'user', 'follow')
 
 
 class FollowRelaPagination(PageNumberPagination):
@@ -793,7 +792,7 @@ class FollowRelaFilter(filters.FilterSet):
 class FollowRelaList(generics.ListCreateAPIView):
     queryset = FollowRela.objects.all()
     serializer_class = FollowRelaSerializer
-    permission_classes = (IsOwner,)
+    permission_classes = ()
     pagination_class = FollowRelaPagination
     filterset_class = FollowRelaFilter
     filter_backends = (filters.DjangoFilterBackend, )
