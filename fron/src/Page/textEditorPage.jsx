@@ -62,7 +62,8 @@ class TextEditor extends Component {
         const submitData = {
           title: values.title,
           content: values.content.toHTML(), // or values.content.toHTML()
-          originalitySwitch: values.originalitySwitch
+          originalitySwitch: values.originalitySwitch,
+          statusSwitch: values.statusSwitch
         }
         try {
           let config = {
@@ -73,7 +74,8 @@ class TextEditor extends Component {
             {
               title: submitData.title,
               content: submitData.content,
-              originality: submitData.originalitySwitch === true ? 'Y' : 'N'
+              originality: submitData.originalitySwitch === true ? 'Y' : 'N',
+              status: submitData.statusSwitch === true ? '1' : '2'
             },
             config
           )
@@ -111,6 +113,11 @@ class TextEditor extends Component {
                     {getFieldDecorator('originalitySwitch', {
                       rules: []
                     })(<Switch checkedChildren='原创' unCheckedChildren='转载整理' />)}
+                  </Form.Item>
+                  <Form.Item>
+                    {getFieldDecorator('statusSwitch', {
+                      rules: []
+                    })(<Switch checkedChildren='暂存草稿' unCheckedChildren='直接发布' />)}
                   </Form.Item>
                 </div>
                 <Form.Item >

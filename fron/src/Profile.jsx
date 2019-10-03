@@ -7,13 +7,13 @@ import Nav from './Nav'
 import Myfooter from './Myfooter'
 import ProfileArticleList from './ProfileArticleList'
 import FollowList from './FollowList'
+import FollowerList from './FollowerList'
 import PropertyList from './PropertyList'
 
 const TabPane = Tabs.TabPane
 const { Paragraph } = Typography
 
 function checkImageWH (file, width, height) {
-  let self = this
   return new Promise(function (resolve, reject) {
     let filereader = new window.FileReader()
     filereader.onload = e => {
@@ -21,10 +21,10 @@ function checkImageWH (file, width, height) {
       const image = new window.Image()
       image.onload = function () {
         if (width && this.width < width) {
-          message.error('error')
+          message.error('必须上传长度大于1200px的图片')
           reject()
         } else if (height && this.height < height) {
-          message.error('error')
+          message.error('必须上传高度大于240px的图片')
           reject()
         } else {
           resolve()
@@ -158,7 +158,7 @@ class Profile extends Component {
                 </Upload>
               </div>
             </div>
-            <div style={{ background: '#fff', display: 'flex', flexWrap: 'wrap' }}>
+            <div style={{ background: '#fff', display: 'flex', flexWrap: 'wrap', justifyContent: 'space-around' }}>
               <div style={{ height: '200px', width: '200px', marginTop: '-100px', padding: '20px' }}>
                 <Avatar shape='square' src={this.state.urlAvatar} icon='user' style={{ height: '100%', width: '100%', border: '4px solid white', borderRadius: '10px', backgroundColor: 'white' }} />
               </div>
@@ -185,6 +185,9 @@ class Profile extends Component {
               </TabPane>
               <TabPane tab={<span><IconFont type='icon-meishi1' />我的关注</span>} key='2'>
                 <FollowList />
+              </TabPane>
+              <TabPane tab={<span><IconFont type='icon-meishi1' />关注我的</span>} key='3'>
+                <FollowerList />
               </TabPane>
             </Tabs>
           </Col>

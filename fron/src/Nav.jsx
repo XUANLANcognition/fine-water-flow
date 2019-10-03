@@ -21,7 +21,7 @@ class Nav extends Component {
         <Col xxl={{ span: 14, offset: 5 }} xl={{ span: 20, offset: 2 }} xs={{ span: 22, offset: 1 }}>
           <div style={{ backgroundColor: '#fff', color: '#fff', lineHeight: '56px', display: 'flex', flexDirection: 'row', flexWrap: 'wrap' }}
           >
-            <div style={{ paddingRight: '24px', display: 'flex', alignItems: 'center' }}>
+            <div style={{ paddingRight: '24px', display: 'flex', alignItems: 'center', marginLeft: '-10px' }}>
               <Link to='/' >
                 <div style={{ display: 'flex', flexDirection: 'row' }}>
                   <img src='/icon.png' style={{ width: '60px', height: '60px' }} />

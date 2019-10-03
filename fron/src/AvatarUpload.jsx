@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Upload, message, Avatar } from 'antd'
+import { Upload, message, Avatar, Icon } from 'antd'
 import axios from 'axios'
 
 function beforeUpload (file) {
@@ -77,7 +77,7 @@ class AvatarUpload extends Component {
         customRequest={this.customRequest}
         action='https://sm.ms/api/upload'
       >
-        {<Avatar size={180} shape='square' src={this.state.imageUrl} icon='user' style={{ color: '#ffffff', backgroundColor: '#f6f6f6' }} />}
+        {this.state.loading ? <Icon style={{ width: '180px', height: '180px', fontSize: '128px', display: 'flex', alignItems: 'center', justifyContent: 'center' }} type={this.state.loading ? 'loading' : 'plus'} /> : <Avatar size={180} shape='square' src={this.state.imageUrl} icon='user' style={{ color: '#ffffff', backgroundColor: '#f6f6f6' }} />}
       </Upload>
     )
   }

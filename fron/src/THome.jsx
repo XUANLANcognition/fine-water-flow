@@ -9,6 +9,7 @@ import ArticleList from './ArticleList'
 import ArticleFollowList from './ArticleFollowList'
 import Myfooter from './Myfooter'
 import CategoryList from './CategoryList'
+import MicroList from './MicroList'
 import PropertyRank from './PropertyRank'
 
 const TabPane = Tabs.TabPane
@@ -45,13 +46,9 @@ class THome extends Component {
           </Col>
           <Col xxl={{ span: 4, offset: 0 }} xl={{ span: 7, offset: 0 }} md={{ span: 7, offset: 0 }} xs={{ span: 22, offset: 1 }} style={{ paddingLeft: '15px' }}>
             <CategoryList />
+            <MicroList />
             <PropertyRank />
             <Advertisement />
-            <Link to='/today_article'>
-              <div style={{ margin: '20px 5px', color: '#8590a6' }}>
-                刷文
-              </div>
-            </Link>
           </Col>
         </Row>
         <Myfooter />

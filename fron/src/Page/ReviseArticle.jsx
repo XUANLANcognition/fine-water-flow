@@ -57,12 +57,17 @@ class Revise extends Component {
 
   getData = async (v) => {
     try {
+      let config = {
+        headers: { 'Authorization': 'Token ' + window.localStorage.getItem('token') }
+      }
       const response = await axios.get(
-        'https://finewf.club:8080/api/articles/' + this.props.match.params.id + '?format=json'
+        'https://finewf.club:8080/api/owner_articles/' + this.props.match.params.id + '?format=json',
+        config
       )
       this.setState({
         title: response.data.title,
-        content: response.data.content
+        content: response.data.content,
+        originality: response.data.originality === 'Y'
       })
     } catch (error) {
       console.log(error)
@@ -86,10 +91,11 @@ class Revise extends Component {
             headers: { 'Authorization': 'Token ' + window.localStorage.getItem('token') }
           }
           const response = await axios.patch(
-            'https://finewf.club:8080/api/articles/' + this.props.match.params.id,
+            'https://finewf.club:8080/api/owner_articles/' + this.props.match.params.id,
             {
               title: submitData.title,
-              content: submitData.content
+              content: submitData.content,
+              originality: submitData.originalitySwitch === true ? 'Y' : 'N'
             },
             config
           )
@@ -119,11 +125,12 @@ class Revise extends Component {
                 <div style={{ display: 'flex', flexDirection: 'row-reverse', justifyContent: 'space-between' }}>
                   <Form.Item >
                     <Button loading={this.state.uploading} type='primary' htmlType='submit' >
-                        修改并发布
+                        修改并保存
                     </Button>
                   </Form.Item>
                   <Form.Item>
                     {getFieldDecorator('originalitySwitch', {
+                      initialValue: this.state.originality,
                       rules: []
                     })(<Switch checkedChildren='原创' unCheckedChildren='转载整理' />)}
                   </Form.Item>
