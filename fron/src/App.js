@@ -27,6 +27,8 @@ import MovieEditorPage from './Page/MovieEditorPage'
 import ResetPassword from './Page/ResetPassword'
 import ReviseArticle from './Page/ReviseArticle'
 
+import withTracker from './components/withTracker'
+
 import './Global.css'
 import EditorGuidance from './Page/EditorGudiance'
 import TodayArticle from './Page/TodayArticle'
@@ -47,30 +49,30 @@ class App extends Component {
       <div>
         <Router>
           <Switch>
-            <Route exact path='/' component={MainPage} />
-            <Route path='/notice' component={Notice} />
-            <Route exact path='/book' component={BookPage} />
-            <Route path='/book/:id' component={BookDetailPage} />
-            <Route exact path='/movie' component={MoviePage} />
-            <Route path='/movie/:id' component={MovieDetailPage} />
-            <Route path='/figure/:id' component={FigureDetailPage} />
-            <Route path='/join' component={Join} />
-            <Route path='/textEditorPage' component={textEditorPage} />
-            <Route path='/article/:id' component={ArticlePage} />
-            <Route path='/owner_article/:id' component={ArticleOwnerPage} />
-            <Route path='/profile/:id' component={Profile} />
-            <Route path='/visit/:id' component={Visit} />
-            <Route path='/settings/profile' component={SettingProfile} />
-            <Route path='/settings/account' component={SettingAccount} />
-            <Route path='/agreement' component={Agreement} />
-            <Route path='/editor_guidance' component={EditorGuidance} />
-            <Route path='/editor' component={Editor1} />
-            <Route path='/book_editor_page' component={BookEditorPage} />
-            <Route path='/movie_editor_page' component={MovieEditorPage} />
-            <Route path='/reset_password' component={ResetPassword} />
-            <Route path='/revise_article/:id' component={ReviseArticle} />
-            <Route path='/today_article' component={TodayArticle} />
-            <Route component={NoMatch} />
+            <Route exact path='/' component={withTracker(MainPage)} />
+            <Route path='/notice' component={withTracker(Notice)} />
+            <Route exact path='/book' component={withTracker(BookPage)} />
+            <Route path='/book/:id' component={withTracker(BookDetailPage)} />
+            <Route exact path='/movie' component={withTracker(MoviePage)} />
+            <Route path='/movie/:id' component={withTracker(MovieDetailPage)} />
+            <Route path='/figure/:id' component={withTracker(FigureDetailPage)} />
+            <Route path='/join' component={withTracker(Join)} />
+            <Route path='/textEditorPage' component={withTracker(textEditorPage)} />
+            <Route path='/article/:id' component={withTracker(ArticlePage)} />
+            <Route path='/owner_article/:id' component={withTracker(ArticleOwnerPage)} />
+            <Route path='/profile/:id' component={withTracker(Profile)} />
+            <Route path='/visit/:id' component={withTracker(Visit)} />
+            <Route path='/settings/profile' component={withTracker(SettingProfile)} />
+            <Route path='/settings/account' component={withTracker(SettingAccount)} />
+            <Route path='/agreement' component={withTracker(Agreement)} />
+            <Route path='/editor_guidance' component={withTracker(EditorGuidance)} />
+            <Route path='/editor' component={withTracker(Editor1)} />
+            <Route path='/book_editor_page' component={withTracker(BookEditorPage)} />
+            <Route path='/movie_editor_page' component={withTracker(MovieEditorPage)} />
+            <Route path='/reset_password' component={withTracker(ResetPassword)} />
+            <Route path='/revise_article/:id' component={withTracker(ReviseArticle)} />
+            <Route path='/today_article' component={withTracker(TodayArticle)} />
+            <Route component={withTracker(NoMatch)} />
           </Switch>
         </Router>
       </div>
