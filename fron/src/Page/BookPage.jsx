@@ -210,7 +210,7 @@ class BookPage extends Component {
                                 )))}
                               </div>
                             </div>
-                            <img alt={item.title} src={item.cover} style={{ width: '135px', maxHeight: '200px' }} />
+                            <img alt={item.title} src={item.cover} style={{ width: '135px', maxHeight: '200px', borderRadius: '5px' }} />
                           </div>
                         </Link>
                         <div style={{ fontSize: '14px', color: 'grey', paddingTop: '5px' }}>
