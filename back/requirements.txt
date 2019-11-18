@@ -7,7 +7,7 @@ django-cors-headers==2.4.0
 django-crispy-forms==1.7.2
 django-filter==2.0.0
 django-formtools==2.1
-djangorestframework==3.9.0
+djangorestframework==3.9.1
 djangorestframework-filters==0.10.2.post0
 drf-yasg==1.11.0
 httplib2==0.9.2
