@@ -79,9 +79,6 @@ class BookPage extends Component {
   }
 
   handleBook = async (page) => {
-    this.setState({
-      loading: true
-    })
     try {
       let url = ''
       if (this.state.fliterTag.length === 0) {
@@ -97,8 +94,7 @@ class BookPage extends Component {
         i++
       }
       this.setState({
-        cache: temp,
-        loading: false
+        cache: temp
       })
       console.log(this.state.cache)
     } catch (error) {
