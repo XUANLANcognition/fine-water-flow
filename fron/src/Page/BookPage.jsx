@@ -79,6 +79,9 @@ class BookPage extends Component {
   }
 
   handleBook = async (page) => {
+    await this.setState({
+      loading: true
+    })
     try {
       let url = ''
       if (this.state.fliterTag.length === 0) {
@@ -94,7 +97,8 @@ class BookPage extends Component {
         i++
       }
       this.setState({
-        cache: temp
+        cache: temp,
+        loading: false
       })
       console.log(this.state.cache)
     } catch (error) {
@@ -103,13 +107,15 @@ class BookPage extends Component {
   }
 
   handleChange = async (tag, checked) => {
-    const { selectedTags } = this.state
-    const nextSelectedTags = checked ? [...selectedTags, tag] : selectedTags.filter(t => t !== tag)
-    await this.setState({
-      selectedTags: nextSelectedTags,
+    this.setState({
       loading: true
     })
+    const { selectedTags } = this.state
+    const nextSelectedTags = checked ? [...selectedTags, tag] : selectedTags.filter(t => t !== tag)
     const temp = []
+    this.setState({
+      selectedTags: nextSelectedTags
+    })
     for (let i of nextSelectedTags) {
       temp.push(i.id)
     }
@@ -117,10 +123,12 @@ class BookPage extends Component {
     await this.setState({
       fliterTag: fliterTag
     })
-    this.getData()
-    this.setState({
-      loading: false
-    })
+    await this.getData()
+    setTimeout(() => {
+      this.setState({
+        loading: false
+      })
+    }, 500)
   }
 
   search = async (value) => {
@@ -136,7 +144,7 @@ class BookPage extends Component {
     })
   }
 
-  render () {
+  render() {
     return (
       <Layout style={{ minHeight: '100vh' }}>
         <Nav />
@@ -148,7 +156,7 @@ class BookPage extends Component {
                 <div style={{ display: 'flex' }}>
                   <IconFont type='icon-book' style={{ fontSize: '36px' }} />
                   <div style={{ fontSize: '24px', fontWeight: 'bold', color: 'black', paddingLeft: '15px' }}>
-                  FWF 读书
+                    FWF 读书
                   </div>
                 </div>
               </Col>

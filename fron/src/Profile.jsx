@@ -211,8 +211,8 @@ class Profile extends Component {
               bordered={false}
               style={{ boxShadow: '0 1px 3px rgba(26,26,26,.1)' }} >
               <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-around' }}>
-                <Statistic title='关注了' value={112893} />
-                <Statistic title='关注者' value={112893} />
+                <Statistic title='关注了' value={0} />
+                <Statistic title='关注者' value={0} />
               </div>
             </Card>
           </Col>

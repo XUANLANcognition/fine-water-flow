@@ -11,6 +11,7 @@ import ArticleOwnerPage from './ArticleOwnerPage'
 import Profile from './Profile'
 import Visit from './Visit'
 import Editor1 from './Editor'
+import SignIn from './SignIn'
 
 import textEditorPage from './Page/textEditorPage'
 import Join from './Page/Join'
@@ -57,6 +58,7 @@ class App extends Component {
             <Route path='/movie/:id' component={withTracker(MovieDetailPage)} />
             <Route path='/figure/:id' component={withTracker(FigureDetailPage)} />
             <Route path='/join' component={withTracker(Join)} />
+            <Route path='/sign_in' component={withTracker(SignIn)}></Route>
             <Route path='/textEditorPage' component={withTracker(textEditorPage)} />
             <Route path='/article/:id' component={withTracker(ArticlePage)} />
             <Route path='/owner_article/:id' component={withTracker(ArticleOwnerPage)} />
