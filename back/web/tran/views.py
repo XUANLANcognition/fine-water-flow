@@ -129,11 +129,12 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
         user.save()
         subject = '欢迎 Welcome!'
         message = '%s, 欢迎加入 Fine Water Flow 社区，感谢您的支持。' % (user.username,)
-        from_email = settings.EMAIL_FROMif subject and message and from_email:
-        try:
-            send_mail(subject, message, from_email, [user.email])
-        except BadHeaderError:
-            pass
+        from_email = settings.EMAIL_FROM
+        if subject and message and from_email:
+            try:
+                send_mail(subject, message, from_email, [user.email])
+            except BadHeaderError:
+                pass
         else:
             pass
         return user
