@@ -5,6 +5,7 @@ from rest_framework.pagination import PageNumberPagination
 from django.contrib.auth.models import User
 from .models import Article, Comment, Profile, Book, BookTag, BookBlock, BookComment, Figure, Movie, MovieComment, MovieBlock, MovieTag, Picture, Source, Notice, FollowRela
 from rest_framework.authtoken.models import Token
+from django.conf import settings
 
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.authtoken.models import Token
@@ -15,6 +16,7 @@ from rest_framework.authentication import TokenAuthentication
 from rest_framework import permissions
 from rest_framework import generics
 from rest_framework import filters as filter_drf
+from django.core.mail import send_mail
 
 from django_filters import rest_framework as filters
 
@@ -125,6 +127,15 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
         user = super(UserSerializer, self).create(validated_data)
         user.set_password(validated_data['password'])
         user.save()
+        subject = '欢迎 Welcome!'
+        message = '%s, 欢迎加入 Fine Water Flow 社区，感谢您的支持。' % (user.username,)
+        from_email = settings.EMAIL_FROMif subject and message and from_email:
+        try:
+            send_mail(subject, message, from_email, [user.email])
+        except BadHeaderError:
+            pass
+        else:
+            pass
         return user
 
     def update(self, instance, validated_data):
