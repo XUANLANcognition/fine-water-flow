@@ -128,7 +128,7 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
         user.set_password(validated_data['password'])
         user.save()
         subject = '欢迎 Welcome!'
-        message = '%s, 欢迎加入 Fine Water Flow 社区，感谢您的支持。' % (user.username,)
+        message = '%s, 欢迎加入 Fine Water Flow 社区，感谢您的支持。\n ( ゜- ゜)つロ乾杯~ \n\n 这是一封自动发送的邮件，请不要直接回复' % (user.username,)
         from_email = settings.EMAIL_FROM
         if subject and message and from_email:
             try:
