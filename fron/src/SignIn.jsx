@@ -18,9 +18,9 @@ class SignIn extends Component {
           }}
         >
           <Nav></Nav>
-          <Row style={{ paddingTop: "30px", paddingBottom: "30px" }}>
+          <Row style={{margin: '30px 0'}}>
             <Col
-              xxl={{ span: 14, offset: 5 }}
+              xxl={{ span: 6, offset: 9 }}
               xl={{ span: 8, offset: 8 }}
               xs={{ span: 22, offset: 1 }}
             >
