@@ -14,3 +14,4 @@ yarn-error.log*
 .npm/
 /back/web/web/settings.py
 ./back/web/tran/static
+up.sh
