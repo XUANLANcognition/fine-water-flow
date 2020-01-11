@@ -3,7 +3,8 @@ import { Comment, Avatar, Form, Button, List, Input, message } from 'antd'
 import moment from 'moment'
 import axios from 'axios'
 import dayjs from 'dayjs'
-import { Link } from 'react-router-dom'
+
+import AvatarF from './AvatarF'
 
 const TextArea = Input.TextArea
 
@@ -15,7 +16,7 @@ const CommentList = ({ comments }) => (
     renderItem={item => (
       <Comment
         author={item.user ? item.user.username : item.username}
-        avatar={item.user ? (<Link to={(item.user.id + '' === window.localStorage.getItem('user_id') ? '/profile/' : '/visit/') + item.user.id}><Avatar shape='square' src={item.user ? item.user.last_name : item.last_name} /></Link>) : (<Link to={(item.id + '' === window.localStorage.getItem('user_id') ? '/profile/' : '/visit/') + item.id}><Avatar shape='square' src={item.user ? item.last_name : item.last_name} /></Link>)}
+        avatar={<AvatarF user={item.user}></AvatarF>}
         content={item.content}
         datetime={dayjs(item.pub_date).fromNow()}
       />
