@@ -9,7 +9,7 @@ import Nav from './Nav'
 import Myfooter from './Myfooter'
 
 const initialValue = Value.fromJSON({
-  document: {
+  document: { 
     nodes: [
       {
         object: 'block',

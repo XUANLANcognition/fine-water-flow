@@ -33,6 +33,7 @@ import withTracker from './components/withTracker'
 import './Global.css'
 import EditorGuidance from './Page/EditorGudiance'
 import TodayArticle from './Page/TodayArticle'
+import JsonPage from './Page/JsonPage'
 
 const MainPage = props => {
   const token = window.localStorage.getItem('token')
@@ -74,6 +75,7 @@ class App extends Component {
             <Route path='/reset_password' component={withTracker(ResetPassword)} />
             <Route path='/revise_article/:id' component={withTracker(ReviseArticle)} />
             <Route path='/today_article' component={withTracker(TodayArticle)} />
+            <Route path='/json_page' component={withTracker(JsonPage)} />
             <Route component={withTracker(NoMatch)} />
           </Switch>
         </Router>

@@ -60,7 +60,7 @@ class MovieEditor extends Component {
             headers: { 'Authorization': 'Token ' + window.localStorage.getItem('token') }
           }
           const response = await axios.post(
-            'https://finewf.club:8080/api/movies/',
+            'https://101.200.52.246:8080/api/movies/',
             {
               title: submitData.title,
               region: submitData.region,

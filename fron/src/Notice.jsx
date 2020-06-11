@@ -25,7 +25,7 @@ class Notice extends Component {
   getNoticeData = async (v) => {
     try {
       const response = await axios.get(
-        'https://finewf.club:8080/api/notices/?format=json' + '&page=' + this.page + '&page_size=' + count
+        'https://101.200.52.246:8080/api/notices/?format=json' + '&page=' + this.page + '&page_size=' + count
       )
       this.setState({ data: response.data.results, cache: response.data.results })
     } catch (error) {
@@ -41,7 +41,7 @@ class Notice extends Component {
     try {
       this.page = this.page + 1
       const response = await axios.get(
-        'https://finewf.club:8080/api/notices/?format=json' + '&page=' + this.page + '&page_size=' + count
+        'https://101.200.52.246:8080/api/notices/?format=json' + '&page=' + this.page + '&page_size=' + count
       )
       const temp1 = this.state.data
       if (response.status === 200) {

@@ -14,12 +14,12 @@ const IconFont = Icon.createFromIconfontCN({
 const { Search } = Input;
 
 class ArticleList extends Component {
-  page = 1;
   state = {
     data: [],
     cache: [],
     loading: false,
     initLoading: true,
+    page: 1,
     next: ""
   };
 
@@ -45,9 +45,9 @@ class ArticleList extends Component {
   getArticleData = async v => {
     try {
       const response = await axios.get(
-        "https://finewf.club:8080/api/articles/?format=json" +
+        "https://101.200.52.246:8080/api/articles/?format=json" +
           "&page=" +
-          this.page +
+          this.state.page +
           "&page_size=" +
           count
       );
@@ -62,18 +62,20 @@ class ArticleList extends Component {
   };
 
   onLoadMore = async v => {
-    await this.setState({
+    this.setState({
       loading: true,
       cache: this.state.data.concat(
         [...new Array(count)].map(() => ({ loading: true, name: {} }))
       )
     });
     try {
-      this.page = this.page + 1;
+      this.setState({
+        page: this.state.page + 1
+      });
       const response = await axios.get(
-        "https://finewf.club:8080/api/articles/?format=json" +
+        "https://101.200.52.246:8080/api/articles/?format=json" +
           "&page=" +
-          this.page +
+          this.state.page +
           "&page_size=" +
           count
       );
@@ -102,7 +104,7 @@ class ArticleList extends Component {
     });
     try {
       const response = await axios.get(
-        "https://finewf.club:8080/api/articles/?format=json" +
+        "https://101.200.52.246:8080/api/articles/?format=json" +
           "&page=" +
           this.page +
           "&page_size=" +

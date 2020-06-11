@@ -33,7 +33,7 @@ class FollowList extends Component {
   getProfileData = async (v) => {
     try {
       let url = ''
-      url = 'https://finewf.club:8080/api/follow_relations/' + '?format=json' + '&page=' + this.page + '&page_size=' + count + '&follow=' + window.localStorage.getItem('user_id')
+      url = 'https://101.200.52.246:8080/api/follow_relations/' + '?format=json' + '&page=' + this.page + '&page_size=' + count + '&follow=' + window.localStorage.getItem('user_id')
       const response = await axios.get(url)
       const temp = []
       for (let index = 0; index < response.data.count; index++) {
@@ -59,7 +59,7 @@ class FollowList extends Component {
     })
     try {
       let url = ''
-      url = 'https://finewf.club:8080/api/follow_relations' + '?format=json' + '&page=' + page + '&page_size=' + count + '&follow=' + window.localStorage.getItem('user_id')
+      url = 'https://101.200.52.246:8080/api/follow_relations' + '?format=json' + '&page=' + page + '&page_size=' + count + '&follow=' + window.localStorage.getItem('user_id')
       const response = await axios.get(url)
       let temp = this.state.data
       let i = (page - 1) * count

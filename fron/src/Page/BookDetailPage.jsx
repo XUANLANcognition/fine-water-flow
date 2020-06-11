@@ -33,7 +33,7 @@ class BookDetailPage extends Component {
     getData = async (v) => {
       try {
         const response = await axios.get(
-          'https://finewf.club:8080/api/books/' + this.props.match.params.id + '?format=json'
+          'https://101.200.52.246:8080/api/books/' + this.props.match.params.id + '?format=json'
         )
         this.data = response.data.results
         this.setState(function (state) {

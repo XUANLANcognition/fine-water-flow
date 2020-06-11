@@ -83,7 +83,7 @@ class AddBookComment extends Component {
           headers: { 'Authorization': 'Token ' + window.localStorage.getItem('token') }
         }
         const response = await axios.get(
-          'https://finewf.club:8080/api/users/' + window.localStorage.getItem('user_id'),
+          'https://101.200.52.246:8080/api/users/' + window.localStorage.getItem('user_id'),
           config
         )
         this.setState(function (state) {
@@ -98,7 +98,7 @@ class AddBookComment extends Component {
       if (this.props.bookId) {
         try {
           const response = await axios.get(
-            'https://finewf.club:8080/api/bookcomments/?format=json&page=' + this.state.page + '&page_size=' + count + '&book=' + this.props.bookId
+            'https://101.200.52.246:8080/api/bookcomments/?format=json&page=' + this.state.page + '&page_size=' + count + '&book=' + this.props.bookId
           )
           this.comments = response.data.results
           this.setState(function (state) {
@@ -116,7 +116,7 @@ class AddBookComment extends Component {
           headers: { 'Authorization': 'Token ' + window.localStorage.getItem('token') }
         }
         const response = await axios.post(
-          'https://finewf.club:8080/api/bookcomments/',
+          'https://101.200.52.246:8080/api/bookcomments/',
           {
             content: value,
             book: this.props.bookUrl

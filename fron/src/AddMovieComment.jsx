@@ -83,7 +83,7 @@ class AddMovieComment extends Component {
           headers: { 'Authorization': 'Token ' + window.localStorage.getItem('token') }
         }
         const response = await axios.get(
-          'https://finewf.club:8080/api/users/' + window.localStorage.getItem('user_id'),
+          'https://101.200.52.246:8080/api/users/' + window.localStorage.getItem('user_id'),
           config
         )
         this.setState(function (state) {
@@ -98,7 +98,7 @@ class AddMovieComment extends Component {
       if (this.props.movieId) {
         try {
           const response = await axios.get(
-            'https://finewf.club:8080/api/moviecomments/?format=json&page=' + this.state.page + '&page_size=' + count + '&movie=' + this.props.movieId
+            'https://101.200.52.246:8080/api/moviecomments/?format=json&page=' + this.state.page + '&page_size=' + count + '&movie=' + this.props.movieId
           )
           this.comments = response.data.results
           this.setState(function (state) {
@@ -116,7 +116,7 @@ class AddMovieComment extends Component {
           headers: { 'Authorization': 'Token ' + window.localStorage.getItem('token') }
         }
         const response = await axios.post(
-          'https://finewf.club:8080/api/moviecomments/',
+          'https://101.200.52.246:8080/api/moviecomments/',
           {
             content: value,
             movie: this.props.movieUrl

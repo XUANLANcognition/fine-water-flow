@@ -46,7 +46,7 @@ class StepAuth extends Component {
         headers: { 'Authorization': 'Token ' + window.localStorage.getItem('token') }
       }
       const response = await axios.get(
-        'https://finewf.club:8080/api/users/' + window.localStorage.getItem('user_id') + '?format=json',
+        'https://101.200.52.246:8080/api/users/' + window.localStorage.getItem('user_id') + '?format=json',
         config
       )
       let temp = 0
@@ -72,7 +72,7 @@ class StepAuth extends Component {
       headers: { 'Authorization': 'Token ' + window.localStorage.getItem('token') }
     }
     await axios.post(
-      'https://finewf.club:8080/api/user/' + window.localStorage.getItem('user_id') + '/apply_media_editor/',
+      'https://101.200.52.246:8080/api/user/' + window.localStorage.getItem('user_id') + '/apply_media_editor/',
       {},
       config
     )
@@ -85,7 +85,7 @@ class StepAuth extends Component {
       headers: { 'Authorization': 'Token ' + window.localStorage.getItem('token') }
     }
     await axios.post(
-      'https://finewf.club:8080/api/user/' + window.localStorage.getItem('user_id') + '/unapply_media_editor/',
+      'https://101.200.52.246:8080/api/user/' + window.localStorage.getItem('user_id') + '/unapply_media_editor/',
       {},
       config
     )

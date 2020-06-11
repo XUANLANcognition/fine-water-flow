@@ -61,7 +61,7 @@ class Revise extends Component {
         headers: { 'Authorization': 'Token ' + window.localStorage.getItem('token') }
       }
       const response = await axios.get(
-        'https://finewf.club:8080/api/owner_articles/' + this.props.match.params.id + '?format=json',
+        'https://101.200.52.246:8080/api/owner_articles/' + this.props.match.params.id + '?format=json',
         config
       )
       this.setState({
@@ -91,7 +91,7 @@ class Revise extends Component {
             headers: { 'Authorization': 'Token ' + window.localStorage.getItem('token') }
           }
           const response = await axios.patch(
-            'https://finewf.club:8080/api/owner_articles/' + this.props.match.params.id,
+            'https://101.200.52.246:8080/api/owner_articles/' + this.props.match.params.id,
             {
               title: submitData.title,
               content: submitData.content,

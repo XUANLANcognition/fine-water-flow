@@ -45,7 +45,7 @@ class ArticleFollowList extends Component {
           headers: { 'Authorization': 'Token ' + window.localStorage.getItem('token') }
         }
         const response = await axios.get(
-          'https://finewf.club:8080/api/articles/follow/?format=json' + '&page=' + this.page + '&page_size=' + count,
+          'https://101.200.52.246:8080/api/articles/follow/?format=json' + '&page=' + this.page + '&page_size=' + count,
           config
         )
         this.data = response.data.results
@@ -70,7 +70,7 @@ class ArticleFollowList extends Component {
           headers: { 'Authorization': 'Token ' + window.localStorage.getItem('token') }
         }
         const response = await axios.get(
-          'https://finewf.club:8080/api/articles/follow/?format=json' + '&page=' + this.page + '&page_size=' + count,
+          'https://101.200.52.246:8080/api/articles/follow/?format=json' + '&page=' + this.page + '&page_size=' + count,
           config
         )
         if (response.status !== 404) {

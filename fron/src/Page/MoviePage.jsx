@@ -62,7 +62,7 @@ class MoviePage extends Component {
       let url = "";
       if (this.state.fliterTag.length === 0) {
         url =
-          "https://finewf.club:8080/api/movies/?format=json" +
+          "https://101.200.52.246:8080/api/movies/?format=json" +
           "&page=" +
           this.page +
           "&page_size=" +
@@ -71,7 +71,7 @@ class MoviePage extends Component {
           this.state.search;
       } else {
         url =
-          "https://finewf.club:8080/api/movies/?format=json" +
+          "https://101.200.52.246:8080/api/movies/?format=json" +
           "&page=" +
           this.page +
           "&page_size=" +
@@ -98,7 +98,7 @@ class MoviePage extends Component {
       });
       if (this.state.selectedTags.length === 0) {
         const responseTag = await axios.get(
-          "https://finewf.club:8080/api/movieblocks/?format=json"
+          "https://101.200.52.246:8080/api/movieblocks/?format=json"
         );
         this.setState({ tags: responseTag.data });
       }
@@ -115,7 +115,7 @@ class MoviePage extends Component {
       let url = "";
       if (this.state.fliterTag.length === 0) {
         url =
-          "https://finewf.club:8080/api/movies/?format=json" +
+          "https://101.200.52.246:8080/api/movies/?format=json" +
           "&page=" +
           page +
           "&page_size=" +
@@ -124,7 +124,7 @@ class MoviePage extends Component {
           this.state.search;
       } else {
         url =
-          "https://finewf.club:8080/api/movies/?format=json" +
+          "https://101.200.52.246:8080/api/movies/?format=json" +
           "&page=" +
           page +
           "&page_size=" +

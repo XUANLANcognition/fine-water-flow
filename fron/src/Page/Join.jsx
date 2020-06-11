@@ -51,7 +51,7 @@ class Join extends Component {
   Join = async v => {
     try {
       const responseJoin = await axios.post(
-        "https://finewf.club:8080/api/users/",
+        "https://101.200.52.246:8080/api/users/",
         {
           username: v.username,
           password: v.password,
@@ -59,7 +59,7 @@ class Join extends Component {
         }
       );
       const response = await axios.post(
-        "https://finewf.club:8080/api-token-auth/",
+        "https://101.200.52.246:8080/api-token-auth/",
         {
           username: v.username,
           password: v.password

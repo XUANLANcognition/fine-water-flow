@@ -47,7 +47,7 @@ class ProfileArticleList extends Component {
   onClick = async (key, status, title) => {
     if (status === "2") {
       try {
-        let url = "https://finewf.club:8080/api/owner_articles/" + key;
+        let url = "https://101.200.52.246:8080/api/owner_articles/" + key;
         let config = {
           headers: {
             Authorization: "Token " + window.localStorage.getItem("token")
@@ -64,7 +64,7 @@ class ProfileArticleList extends Component {
     }
     if (status === "1") {
       try {
-        let url = "https://finewf.club:8080/api/owner_articles/" + key;
+        let url = "https://101.200.52.246:8080/api/owner_articles/" + key;
         let config = {
           headers: {
             Authorization: "Token " + window.localStorage.getItem("token")
@@ -110,7 +110,7 @@ class ProfileArticleList extends Component {
         }
       };
       const response = await axios.get(
-        "https://finewf.club:8080/api/owner_articles/?format=json" +
+        "https://101.200.52.246:8080/api/owner_articles/?format=json" +
           "&page=" +
           this.state.page +
           "&page_size=" +
@@ -145,7 +145,7 @@ class ProfileArticleList extends Component {
         }
       };
       const response = await axios.get(
-        "https://finewf.club:8080/api/owner_articles/?format=json" +
+        "https://101.200.52.246:8080/api/owner_articles/?format=json" +
           "&page=" +
           this.state.page +
           "&page_size=" +
@@ -183,7 +183,7 @@ class ProfileArticleList extends Component {
             }
           };
           const response = await axios.delete(
-            "https://finewf.club:8080/api/owner_articles/" + v,
+            "https://101.200.52.246:8080/api/owner_articles/" + v,
             config
           );
           if (response.status === 204) {

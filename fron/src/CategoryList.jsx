@@ -31,7 +31,7 @@ class CategoryList extends Component {
         headers: { 'Authorization': 'Token ' + window.localStorage.getItem('token') }
       }
       const response = await axios.get(
-        'https://finewf.club:8080/api/users/' + window.localStorage.getItem('user_id'),
+        'https://101.200.52.246:8080/api/users/' + window.localStorage.getItem('user_id'),
         config
       )
       this.setState(function (state) {
@@ -47,7 +47,7 @@ class CategoryList extends Component {
   render () {
     return (
       <div style={{ padding: '20px 20px', background: '#fff', borderRadius: '1px', boxShadow: '0 1px 3px rgba(26,26,26,.1)', marginBottom: '10px' }}>
-        <Title level={4} style={{ marginBottom: '30px' }}>行动</Title>
+        <Title level={4} style={{ marginBottom: '30px' }}>内容发布</Title>
         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
           <Link to={(window.localStorage.getItem('user_id') !== null) ? '/textEditorPage' : '/'}>
             <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>

@@ -23,7 +23,7 @@ class ProfileCarder extends Component {
         headers: { 'Authorization': 'Token ' + window.localStorage.getItem('token') }
       }
       const response = await axios.get(
-        'https://finewf.club:8080/api/users/' + window.localStorage.getItem('user_id'),
+        'https://101.200.52.246:8080/api/users/' + window.localStorage.getItem('user_id'),
         config
       )
       window.localStorage.setItem('url', response.data.url)

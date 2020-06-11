@@ -19,7 +19,7 @@ class PropertyRank extends Component {
       getData = async (v) => {
         try {
           const response = await axios.get(
-            'https://finewf.club:8080/api/property_rank/?format=json'
+            'https://101.200.52.246:8080/api/property_rank/?format=json'
           )
           this.setState({ data: response.data })
         } catch (error) {
