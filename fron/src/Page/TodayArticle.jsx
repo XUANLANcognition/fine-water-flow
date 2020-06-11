@@ -10,8 +10,7 @@ import Myfooter from '../Myfooter'
 class TodayArticle extends Component {
     state = {
       data: '',
-      loading: false,
-      dire: 'left'
+      loading: false
     }
 
     getData = async (v) => {

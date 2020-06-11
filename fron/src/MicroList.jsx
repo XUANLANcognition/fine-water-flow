@@ -3,7 +3,7 @@ import { Icon, Typography } from 'antd'
 import { Link } from 'react-router-dom'
 
 const IconFont = Icon.createFromIconfontCN({
-  scriptUrl: '//at.alicdn.com/t/font_1242637_febtqrdietj.js'
+  scriptUrl: '//at.alicdn.com/t/font_1242637_d5z7llupqu5.js'
 })
 
 const { Title } = Typography
@@ -24,6 +24,12 @@ class MicroList extends Component {
             <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
               <IconFont type='icon-JSON' style={{ fontSize: '36px' }} />
               <div style={{ fontSize: '12px' }}>JSON查看</div>
+            </div>
+          </Link>
+          <Link to={'/poker_page'}>
+            <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+              <IconFont type='icon-puke' style={{ fontSize: '36px' }} />
+              <div style={{ fontSize: '12px' }}>抽癞子</div>
             </div>
           </Link>
         </div>
