@@ -817,7 +817,7 @@ class BrandSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Brand
-        fields = ('url', 'id', 'name')
+        fields = ('url', 'id', 'name', 'icon')
 
 
 class BrandPagination(PageNumberPagination):
@@ -859,7 +859,7 @@ class GenreSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Genre
-        fields = ('url', 'id', 'name')
+        fields = ('url', 'id', 'name', 'icon')
 
 
 class GenrePagination(PageNumberPagination):
