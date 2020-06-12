@@ -83,4 +83,12 @@ urlpatterns = [
     path('api/property_rank/', PropertyRank.as_view(), name='property-rank'),
     path('api/notices/', NoticeList.as_view(), name='notice-list'),
     path('api/follow_relations/', FollowRelaList.as_view(), name='follow-relations-list'),
+    path('api/brands/', BrandList.as_view(), name='brnad-list'),
+    path('api/brands/<int:pk>', BrandDetail.as_view(), name='brand-detail'),
+    path('api/genres/', GenreList.as_view(), name='genre-list'),
+    path('api/genres/<int:pk>', GenreDetail.as_view(), name='genre-detail'),
+    path('api/cpus/', CPUList.as_view(), name='cpu-list'),
+    path('api/cpus/<int:pk>', CPUDetail.as_view(), name='cpu-detail'),
+    path('api/gpus/', GPUList.as_view(), name='gpu-list'),
+    path('api/gpus/<int:pk>', GPUDetail.as_view(), name='gpu-detail')
 ]
