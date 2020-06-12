@@ -63,137 +63,147 @@ class QRcodePage extends Component {
               xs={{ span: 22, offset: 1 }}
               style={{
                 display: "flex",
-                justifyContent: "center",
+
                 flexDirection: "column",
-                alignItems: "center",
               }}
             >
-              <h1
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  color: "#000",
-                  fontWeight: "600",
-                  marginBottom: "24px",
-                  fontSize: "28px",
-                }}
-              >
-                二维码生成器
-              </h1>
               <div
                 style={{
                   display: "flex",
-                  justifyContent: "space-between",
-                  flexDirection: "column",
-                  alignItems: "stretch",
-                  margin: "24px 0",
-                  width: "640px",
+                  color: "#000",
+                  fontWeight: "600",
+                  fontSize: "32px",
+                  marginBottom: "24px",
                 }}
               >
-                <Input
-                  size="large"
-                  addonBefore="站点地址"
-                  placeholder="Basic usage"
-                  value={this.state.value}
-                  onChange={this.onChange}
-                  style={{marginBottom: '24px'}}
-                />
+                二维码生成器
+              </div>
+              <div
+                style={{
+                  display: "flex",
+                  fontWeight: "600",
+                  fontSize: "22px",
+                  marginBottom: "24px",
+                }}
+              >
+                更加简洁的二维码生成器
+              </div>
+              <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
                 <div
                   style={{
                     display: "flex",
                     justifyContent: "space-between",
-                    flexDirection: "row",
+                    flexDirection: "column",
+                    alignItems: "stretch",
+                    margin: "24px 0",
                     width: "640px",
-                    marginBottom: '24px'
                   }}
                 >
-                  <Slider
-                    min={20}
-                    max={800}
-                    onChange={this.onChangeSize}
-                    value={this.state.size}
-                    style={{ width: "640px" }}
+                  <Input
+                    size="large"
+                    addonBefore="站点地址"
+                    placeholder="Basic usage"
+                    value={this.state.value}
+                    onChange={this.onChange}
+                    style={{ marginBottom: "24px" }}
                   />
-                  <InputNumber
-                    min={20}
-                    max={800}
-                    style={{ }}
-                    value={this.state.size}
-                    onChange={this.onChangeSize}
-                  />
-                </div>
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "row",
-                    justifyContent: "space-around",
-                    width: "640px",
-                    marginBottom: '24px'
-                  }}
-                >
-                  <div style={{ fontSize: "24px", fontWeight: "bold" }}>
-                    背景色
-                  </div>
-                  <Popover
-                    content={
-                      <SketchPicker
-                        color={this.state.bgColor}
-                        onChangeComplete={this.handleChangebg}
-                      />
-                    }
-                    title="Title"
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      flexDirection: "row",
+                      width: "640px",
+                      marginBottom: "24px",
+                    }}
                   >
-                    <div
-                      style={{
-                        width: "120px",
-                        height: "35px",
-                        boxShadow: "0 5px 30px #777777",
-                        backgroundColor: this.state.bgColor,
-                      }}
-                    ></div>
-                  </Popover>
-                </div>
+                    <Slider
+                      min={20}
+                      max={800}
+                      onChange={this.onChangeSize}
+                      value={this.state.size}
+                      style={{ width: "640px" }}
+                    />
+                    <InputNumber
+                      min={20}
+                      max={800}
+                      style={{}}
+                      value={this.state.size}
+                      onChange={this.onChangeSize}
+                    />
+                  </div>
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "row",
+                      justifyContent: "space-around",
+                      width: "640px",
+                      marginBottom: "24px",
+                    }}
+                  >
+                    <div style={{ fontSize: "24px", fontWeight: "bold" }}>
+                      背景色
+                    </div>
+                    <Popover
+                      content={
+                        <SketchPicker
+                          color={this.state.bgColor}
+                          onChangeComplete={this.handleChangebg}
+                        />
+                      }
+                      title="Title"
+                    >
+                      <div
+                        style={{
+                          width: "120px",
+                          height: "35px",
+                          boxShadow: "0 5px 30px #777777",
+                          backgroundColor: this.state.bgColor,
+                        }}
+                      ></div>
+                    </Popover>
+                  </div>
 
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "row",
-                    justifyContent: "space-around",
-                    width: "640px",
-                    marginBottom: '24px'
-                  }}
-                >
-                  <div style={{ fontSize: "24px", fontWeight: "bold" }}>
-                    前景色
-                  </div>
-                  <Popover
-                    content={
-                      <SketchPicker
-                        color={this.state.fgColor}
-                        onChangeComplete={this.handleChangefg}
-                      />
-                    }
-                    title="Title"
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "row",
+                      justifyContent: "space-around",
+                      width: "640px",
+                      marginBottom: "24px",
+                    }}
                   >
-                    <div
-                      style={{
-                        width: "120px",
-                        height: "35px",
-                        boxShadow: "0 5px 30px #777777",
-                        backgroundColor: this.state.fgColor,
-                      }}
-                    ></div>
-                  </Popover>
+                    <div style={{ fontSize: "24px", fontWeight: "bold" }}>
+                      前景色
+                    </div>
+                    <Popover
+                      content={
+                        <SketchPicker
+                          color={this.state.fgColor}
+                          onChangeComplete={this.handleChangefg}
+                        />
+                      }
+                      title="Title"
+                    >
+                      <div
+                        style={{
+                          width: "120px",
+                          height: "35px",
+                          boxShadow: "0 5px 30px #777777",
+                          backgroundColor: this.state.fgColor,
+                        }}
+                      ></div>
+                    </Popover>
+                  </div>
                 </div>
-              </div>
-              <div style={{ boxShadow: "0 3px 3px #777777" }}>
-                <QRCode
-                  value={this.state.value}
-                  size={this.state.size}
-                  bgColor={this.state.bgColor}
-                  fgColor={this.state.fgColor}
-                  includeMargin={true}
-                />
+                <div style={{ boxShadow: "0 3px 3px #777777" }}>
+                  <QRCode
+                    value={this.state.value}
+                    size={this.state.size}
+                    bgColor={this.state.bgColor}
+                    fgColor={this.state.fgColor}
+                    includeMargin={true}
+                  />
+                </div>
               </div>
             </Col>
           </Row>

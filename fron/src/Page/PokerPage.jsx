@@ -14,7 +14,7 @@ class PokerPage extends Component {
     data: init,
     dire: "left",
     cur_list: [init],
-    show: true
+    show: true,
   };
 
   componentDidMount = async (v) => {};
@@ -27,15 +27,17 @@ class PokerPage extends Component {
     temp_list.push(temp);
     this.setState({
       data: temp,
-      cur_list: temp_list
+      cur_list: temp_list,
     });
   };
 
   clear = (v) => {
-    const init = [..."A23456789", "10", ..."JQK"][Math.floor(Math.random() * 13)];
+    const init = [..."A23456789", "10", ..."JQK"][
+      Math.floor(Math.random() * 13)
+    ];
     this.setState({
       data: init,
-      cur_list: [init]
+      cur_list: [init],
     });
   };
 
@@ -46,7 +48,36 @@ class PokerPage extends Component {
         <div
           style={{ flex: "1 0", minHeight: "100vh", backgroundColor: "#fff" }}
         >
-          <Row style={{ flex: "1 0", padding: "15px 0" }}>
+          <Row style={{ paddingTop: "30px", paddingBottom: "30px" }}>
+            <Col
+              xxl={{ span: 14, offset: 5 }}
+              xl={{ span: 20, offset: 2 }}
+              xs={{ span: 22, offset: 1 }}
+            >
+              <div
+                style={{
+                  display: "flex",
+                  color: "#000",
+                  fontWeight: "600",
+                  fontSize: "32px",
+                  marginBottom: "24px",
+                }}
+              >
+                抽癞子
+              </div>
+              <div
+                style={{
+                  display: "flex",
+                  fontWeight: "600",
+                  fontSize: "22px",
+                  marginBottom: "14px",
+                }}
+              >
+                更加简洁的抽癞子
+              </div>
+            </Col>
+          </Row>
+          <Row style={{ flex: "1 0" }}>
             <Col
               xxl={{ span: 6, offset: 5 }}
               xl={{ span: 9, offset: 2 }}
@@ -56,13 +87,12 @@ class PokerPage extends Component {
             >
               <List
                 size="large"
-                style={{marginTop: '36px'}}
                 header={
                   <div
                     style={{
-                      fontSize: "36px",
+                      fontSize: "24px",
                       fontWeight: "bold",
-                      color: "black"
+                      color: "black",
                     }}
                   >
                     播报列表
@@ -71,7 +101,7 @@ class PokerPage extends Component {
                 bordered
                 dataSource={this.state.cur_list}
                 renderItem={(item) => (
-                  <List.Item style={{ fontSize: "24px", fontWeight: "bolder" }}>
+                  <List.Item style={{ fontSize: "22px", fontWeight: "bolder" }}>
                     {item}
                   </List.Item>
                 )}
@@ -86,7 +116,7 @@ class PokerPage extends Component {
                 paddingLeft: "15px",
                 display: "flex",
                 flexDirection: "column",
-                alignItems: "center"
+                alignItems: "center",
               }}
             >
               <div
@@ -98,15 +128,16 @@ class PokerPage extends Component {
                   backgroundColor: "#ffffff",
                   borderRadius: "16px",
                   color: "black",
-                  width: '320px',
+                  width: "320px",
                   minHeight: "460px",
                   alignItems: "center",
                   marginBottom: "24px",
-                  boxShadow: "0 5px 30px #777777",
-                  marginTop: '36px'
+                  boxShadow: "0 5px 30px #777777"
                 }}
               >
-                <Texty type='scaleBig'>{this.state.show && this.state.data}</Texty>
+                <Texty type="scaleBig">
+                  {this.state.show && this.state.data}
+                </Texty>
               </div>
               <Button
                 type="primary"

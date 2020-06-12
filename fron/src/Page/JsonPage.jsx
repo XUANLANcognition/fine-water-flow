@@ -68,18 +68,35 @@ const JsonPage = () => {
     <Layout style={{ minHeight: "100vh" }}>
       <Nav />
       <div style={{ flex: "1 0", minHeight: "100vh", backgroundColor: "#fff" }}>
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'center',
-            fontSize: "28px",
-            padding: "24px 18px",
-            fontWeight: "bold",
-            color: 'black'
-          }}
-        >
-          JSON 查看器
-        </div>
+      <Row style={{ paddingTop: "30px", paddingBottom: "30px" }}>
+            <Col
+              xxl={{ span: 14, offset: 5 }}
+              xl={{ span: 20, offset: 2 }}
+              xs={{ span: 22, offset: 1 }}
+            >
+              <div
+                style={{
+                  display: "flex",
+                  color: "#000",
+                  fontWeight: "600",
+                  fontSize: "32px",
+                  marginBottom: "24px",
+                }}
+              >
+                JSON查看器
+              </div>
+              <div
+                style={{
+                  display: "flex",
+                  fontWeight: "600",
+                  fontSize: "22px",
+                  marginBottom: "14px",
+                }}
+              >
+                更加简洁的JSON查看器
+              </div>
+            </Col>
+          </Row>
         <Row style={{ flex: "1 0", padding: "15px 0" }}>
           <Col
             xxl={{ span: 6, offset: 5 }}

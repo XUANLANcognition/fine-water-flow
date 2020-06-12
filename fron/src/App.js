@@ -36,6 +36,7 @@ import TodayArticle from './Page/TodayArticle'
 import JsonPage from './Page/JsonPage'
 import PokerPage from './Page/PokerPage'
 import QRcodePage from './Page/QRcodePage'
+import ChartPage from './Page/ChartPage'
 
 const MainPage = props => {
   const token = window.localStorage.getItem('token')
@@ -80,6 +81,7 @@ class App extends Component {
             <Route path='/json_page' component={withTracker(JsonPage)} />
             <Route path='/poker_page' component={withTracker(PokerPage)} />
             <Route path='/qrcode_page' component={withTracker(QRcodePage)} />
+            <Route path='/chart_page' component={withTracker(ChartPage)} />
             <Route component={withTracker(NoMatch)} />
           </Switch>
         </Router>
