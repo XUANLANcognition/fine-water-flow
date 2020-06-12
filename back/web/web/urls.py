@@ -90,5 +90,7 @@ urlpatterns = [
     path('api/cpus/', CPUList.as_view(), name='cpu-list'),
     path('api/cpus/<int:pk>', CPUDetail.as_view(), name='cpu-detail'),
     path('api/gpus/', GPUList.as_view(), name='gpu-list'),
-    path('api/gpus/<int:pk>', GPUDetail.as_view(), name='gpu-detail')
+    path('api/gpus/<int:pk>', GPUDetail.as_view(), name='gpu-detail'),
+    path('api/computers/', ComputerList.as_view(), name='computer-list'),
+    path('api/computers/<int:pk>', ComputerDetail.as_view(), name='computer-detail')
 ]
