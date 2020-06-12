@@ -182,6 +182,7 @@ class Brand(models.Model):
     user = models.ForeignKey(User, on_delete=models.PROTECT)
     name = models.CharField(max_length=128)
     pub_date = models.DateTimeField(auto_now_add=True)
+    icon = models.CharField(max_length=128)
 
     def __str__(self):
         return '%s' % (self.name)
@@ -190,6 +191,7 @@ class Genre(models.Model):
     user = models.ForeignKey(User, on_delete=models.PROTECT)
     name = models.CharField(max_length=128)
     pub_date = models.DateTimeField(auto_now_add=True)
+    icon = models.CharField(max_length=128)
 
     def __str__(self):
         return '%s' % (self.name)
