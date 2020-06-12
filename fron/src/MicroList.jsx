@@ -3,7 +3,7 @@ import { Icon, Typography } from 'antd'
 import { Link } from 'react-router-dom'
 
 const IconFont = Icon.createFromIconfontCN({
-  scriptUrl: '//at.alicdn.com/t/font_1242637_9d12q1mzx05.js'
+  scriptUrl: '//at.alicdn.com/t/font_1242637_u1kh5rvfa1p.js'
 })
 
 const { Title } = Typography
@@ -44,6 +44,12 @@ class MicroList extends Component {
             <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
               <IconFont type='icon-tubiao' style={{ fontSize: '36px' }} />
               <div style={{ fontSize: '12px' }}>图表绘</div>
+            </div>
+          </Link>
+          <Link to={'/device_page'}>
+            <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+              <IconFont type='icon-diannao' style={{ fontSize: '36px' }} />
+              <div style={{ fontSize: '12px' }}>数码</div>
             </div>
           </Link>
         </div>
