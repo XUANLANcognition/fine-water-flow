@@ -177,3 +177,97 @@ class FollowRela(models.Model):
 
     def __str__(self):
         return '%s' % (self.user.username)
+
+class Brand(models.Model):
+    user = models.ForeignKey(User, on_delete=models.PROTECT)
+    name = models.CharField(max_length=128)
+    pub_date = models.DateTimeField(auto_now_add=True)
+    icon = models.CharField(max_length=128)
+
+    def __str__(self):
+        return '%s' % (self.name)
+
+class Genre(models.Model):
+    user = models.ForeignKey(User, on_delete=models.PROTECT)
+    name = models.CharField(max_length=128)
+    pub_date = models.DateTimeField(auto_now_add=True)
+    icon = models.CharField(max_length=128)
+
+    def __str__(self):
+        return '%s' % (self.name)
+
+class Computer(models.Model):
+    user = models.ForeignKey(User, on_delete=models.PROTECT)
+    name = models.CharField(max_length=256)
+    price = models.IntegerField(blank=True)
+    ttm = models.DateTimeField(blank=True, null=True)
+    cpu = models.ManyToManyField('CPU', related_name='cpu', blank=True)
+    gpu = models.ManyToManyField('GPU', related_name='gpu', blank=True)
+    pub_date = models.DateTimeField(auto_now_add=True)
+    brand = models.ForeignKey(Brand, on_delete=models.CASCADE)
+    genre = models.ForeignKey(Genre, on_delete=models.CASCADE)
+
+class CPU(models.Model):
+    user = models.ForeignKey(User, on_delete=models.PROTECT)
+    name = models.CharField(max_length=128)
+    ttm = models.DateField(blank=True, null=True)
+    brand_v = (
+        ('A', 'AMD'),
+        ('I', 'InteI'),
+        ('G', '高通'),
+        ('H', '华为'),
+        ('L', '联发科'),
+        ('W', '未知')
+    )
+    brand = models.CharField(max_length=12, choices=brand_v, default='W')
+    pub_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return '%s' % (self.name)
+
+class GPU(models.Model):
+    user = models.ForeignKey(User, on_delete=models.PROTECT)
+    name = models.CharField(max_length=128)
+    ttm = models.DateField(blank=True, null=True)
+    brand_v = (
+        ('A', 'AMD'),
+        ('N', 'NVIDIA'),
+        ('W', '未知')
+    )
+    brand = models.CharField(max_length=12, choices=brand_v, default='W')
+    pub_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return '%s' % (self.name)
+
+class Earphone(models.Model):
+    user = models.ForeignKey(User, on_delete=models.PROTECT)
+    name = models.CharField(max_length=256)
+    price = models.IntegerField(blank=True)
+    ttm = models.DateTimeField(blank=True, null=True)
+    pub_date = models.DateTimeField(auto_now_add=True)
+    brand = models.ForeignKey(Brand, on_delete=models.CASCADE)
+    genre = models.ForeignKey(Genre, on_delete=models.CASCADE)
+
+class Phone(models.Model):
+    user = models.ForeignKey(User, on_delete=models.PROTECT)
+    name = models.CharField(max_length=256)
+    price = models.IntegerField(blank=True)
+    ttm = models.DateTimeField(blank=True, null=True)
+    pub_date = models.DateTimeField(auto_now_add=True)
+    brand = models.ForeignKey(Brand, on_delete=models.CASCADE)
+    genre = models.ForeignKey(Genre, on_delete=models.CASCADE)
+    cpu = models.ManyToManyField('CPU', related_name='pcpu', blank=True)
+    os_v = (
+        ('A', 'Android'),
+        ('I', 'IOS'),
+    )
+    os = models.CharField(max_length=12, choices=os_v)
+    screen_type_v = (
+        ('1', '刘海屏'),
+        ('2', '挖空屏'),
+        ('3', '全面屏')
+    )
+    screen_type = models.CharField(max_length=12, choices=screen_type_v)
+
+

@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 
 # Register your models here.
 
-from .models import Article, Comment, Profile, Book, BookTag, BookBlock, BookComment, Movie, Figure, MovieComment, MovieBlock, MovieTag, Picture, Source, Notice, FollowRela
+from .models import Article, Comment, Profile, Book, BookTag, BookBlock, BookComment, Movie, Figure, MovieComment, MovieBlock, MovieTag, Picture, Source, Notice, FollowRela, Brand, Genre, Computer, CPU, GPU, Earphone, Phone
 
 class ProfileAdmin(admin.ModelAdmin):
     list_display = ('user', 'media_editor_auth')
@@ -104,3 +104,10 @@ admin.site.register(Picture)
 admin.site.register(Source)
 admin.site.register(Notice, NoticeAdmin)
 admin.site.register(FollowRela)
+admin.site.register(Brand)
+admin.site.register(Genre)
+admin.site.register(Computer)
+admin.site.register(CPU)
+admin.site.register(GPU)
+admin.site.register(Earphone)
+admin.site.register(Phone)
