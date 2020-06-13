@@ -3,7 +3,7 @@ from django.http import JsonResponse
 from rest_framework import routers, serializers, viewsets, status
 from rest_framework.pagination import PageNumberPagination
 from django.contrib.auth.models import User
-from .models import Article, Comment, Profile, Book, BookTag, BookBlock, BookComment, Figure, Movie, MovieComment, MovieBlock, MovieTag, Picture, Source, Notice, FollowRela, Brand, Genre,Computer, CPU, GPU
+from .models import Article, Comment, Profile, Book, BookTag, BookBlock, BookComment, Figure, Movie, MovieComment, MovieBlock, MovieTag, Picture, Source, Notice, FollowRela, Brand, Genre,Computer, CPU, GPU, Earphone, Phone
 from rest_framework.authtoken.models import Token
 from django.conf import settings
 
@@ -983,11 +983,12 @@ class GPUDetail(generics.RetrieveUpdateDestroyAPIView):
 class ComputerSerializer(serializers.HyperlinkedModelSerializer):
     brand = BrandSerializer(read_only=True)
     genre = GenreSerializer(read_only=True)
-
+    cpu = CPUSerializer(many=True, read_only=True)
+    gpu = GPUSerializer(many=True, read_only=True)
 
     class Meta:
         model = Computer
-        fields = ('url', 'id', 'name', 'price', 'ttm', 'brand' ,'genre')
+        fields = ('url', 'id', 'name', 'price', 'ttm', 'brand' ,'genre', 'cpu', 'gpu')
 
 
 class ComputerPagination(PageNumberPagination):
@@ -1025,6 +1026,107 @@ class ComputerList(generics.ListCreateAPIView):
 class ComputerDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Computer.objects.all()
     serializer_class = ComputerSerializer
+    permission_classes = (Read,)
+
+
+# Earphone API
+
+
+class EarphoneSerializer(serializers.HyperlinkedModelSerializer):
+    brand = BrandSerializer(read_only=True)
+    genre = GenreSerializer(read_only=True)
+
+    class Meta:
+        model = Earphone
+        fields = ('url', 'id', 'name', 'price', 'ttm', 'brand' ,'genre')
+
+
+class EarphonePagination(PageNumberPagination):
+    page_size = 8
+    page_size_query_param = 'page_size'
+    max_page_size = 128
+
+    class Meta:
+        model = Earphone
+        fields = '__all__'
+
+
+class EarphoneFilter(filters.FilterSet):
+    
+    class Meta:
+        model = Earphone
+        fields = '__all__'
+
+
+class EarphoneList(generics.ListCreateAPIView):
+    queryset = Earphone.objects.all().order_by('-pub_date')
+    serializer_class = EarphoneSerializer
+    permission_classes = (MediaPublish,)
+    pagination_class = EarphonePagination
+    filter_backends = (filters.DjangoFilterBackend, filter_drf.SearchFilter)
+    search_fields = ('title', )
+    filterset_class = EarphoneFilter
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
+        self.request.user.profile.property = self.request.user.profile.property + 5
+        self.request.user.profile.save()
+
+
+class EarphoneDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Earphone.objects.all()
+    serializer_class = EarphoneSerializer
+    permission_classes = (Read,)
+
+
+# Phone API
+
+
+class PhoneSerializer(serializers.HyperlinkedModelSerializer):
+    brand = BrandSerializer(read_only=True)
+    genre = GenreSerializer(read_only=True)
+    cpu = CPUSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Phone
+        fields = ('url', 'id', 'name', 'price', 'ttm', 'brand' ,'genre', 'cpu', 'os', 'screen_type')
+
+
+class PhonePagination(PageNumberPagination):
+    page_size = 8
+    page_size_query_param = 'page_size'
+    max_page_size = 128
+
+    class Meta:
+        model = Phone
+        fields = '__all__'
+
+
+class PhoneFilter(filters.FilterSet):
+    
+    class Meta:
+        model = Phone
+        fields = '__all__'
+
+
+class PhoneList(generics.ListCreateAPIView):
+    queryset = Phone.objects.all().order_by('-pub_date')
+    serializer_class = PhoneSerializer
+    permission_classes = (MediaPublish,)
+    pagination_class = PhonePagination
+    filter_backends = (filters.DjangoFilterBackend, filter_drf.SearchFilter)
+    search_fields = ('title', )
+    filterset_class = PhoneFilter
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
+        self.request.user.profile.property = self.request.user.profile.property + 5
+        self.request.user.profile.save()
+
+
+class PhoneDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Phone.objects.all()
+    serializer_class = PhoneSerializer
     permission_classes = (Read,)
 
 

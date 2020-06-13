@@ -92,5 +92,9 @@ urlpatterns = [
     path('api/gpus/', GPUList.as_view(), name='gpu-list'),
     path('api/gpus/<int:pk>', GPUDetail.as_view(), name='gpu-detail'),
     path('api/computers/', ComputerList.as_view(), name='computer-list'),
-    path('api/computers/<int:pk>', ComputerDetail.as_view(), name='computer-detail')
+    path('api/computers/<int:pk>', ComputerDetail.as_view(), name='computer-detail'),
+    path('api/earphones/', EarphoneList.as_view(), name='earphone-list'),
+    path('api/earphones/<int:pk>', EarphoneDetail.as_view(), name='earphone-detail'),
+    path('api/phones/', PhoneList.as_view(), name='phone-list'),
+    path('api/phones/<int:pk>', PhoneDetail.as_view(), name='phone-detail')
 ]
