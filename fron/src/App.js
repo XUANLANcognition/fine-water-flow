@@ -38,6 +38,13 @@ import PokerPage from './Page/PokerPage'
 import QRcodePage from './Page/QRcodePage'
 import ChartPage from './Page/ChartPage'
 import DevicePage from './Page/DevicePage'
+import BrandPage from './Page/BrandPage'
+import ComputerList from './Page/ComputerList'
+import EarphoneList from './Page/EarphoneList'
+import PhoneList from './Page/PhoneList'
+import Computer from './Page/Computer'
+import Earphone from './Page/Earphone'
+import Phone from './Page/Phone'
 
 const MainPage = props => {
   const token = window.localStorage.getItem('token')
@@ -84,6 +91,13 @@ class App extends Component {
             <Route path='/qrcode_page' component={withTracker(QRcodePage)} />
             <Route path='/chart_page' component={withTracker(ChartPage)} />
             <Route path='/device_page' component={withTracker(DevicePage)} />
+            <Route path='/brand/:id' component={withTracker(BrandPage)} />
+            <Route path='/笔记本/:genre/:brand' component={withTracker(ComputerList)} />
+            <Route path='/耳机/:genre/:brand' component={withTracker(EarphoneList)} />
+            <Route path='/手机/:genre/:brand' component={withTracker(PhoneList)} />
+            <Route path='/computer/:id' component={withTracker(Computer)} />
+            <Route path='/earphone/:id' component={withTracker(Earphone)} />
+            <Route path='/phone/:id' component={withTracker(Phone)} />
             <Route component={withTracker(NoMatch)} />
           </Switch>
         </Router>

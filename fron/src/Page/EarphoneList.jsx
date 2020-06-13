@@ -9,27 +9,46 @@ import Nav from "../Nav";
 import Myfooter from "../Myfooter";
 
 const IconFont = Icon.createFromIconfontCN({
-  scriptUrl: "//at.alicdn.com/t/font_1242637_7si6tr5rfyr.js",
+  scriptUrl: "//at.alicdn.com/t/font_1242637_yunkf12wav.js",
 });
 
-class DevicePage extends Component {
+class EarphoneList extends Component {
   state = {
     total_device: [],
+    genre: '',
+    brand: '',
+    loading: true
   };
 
   getData = async (v) => {
     try {
       const response = await axios.get(
-        'https://101.200.52.246:8080/api/genres/?format=json'
+        'https://101.200.52.246:8080/api/earphones/?format=json&genre=' + this.props.match.params.genre + '&brand=' + this.props.match.params.brand
       )
-      this.setState({ total_device: response.data.results })
+      this.setState({ total_device: response.data.results, loading: false })
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  getPreData = async (v) => {
+    try {
+      const r1 = await axios.get(
+        'https://101.200.52.246:8080/api/genres/' + this.props.match.params.genre + '?format=json'
+      )
+      this.setState({ genre: r1.data })
+      const r2 = await axios.get(
+        'https://101.200.52.246:8080/api/brands/' + this.props.match.params.brand + '?format=json'
+      )
+      this.setState({ brand: r2.data })
     } catch (error) {
       console.log(error)
     }
   }
 
   componentDidMount = async (v) => {
-    this.getData()
+    await this.getData()
+    await this.getPreData()
   };
 
   render() {
@@ -54,7 +73,7 @@ class DevicePage extends Component {
                   marginBottom: "24px",
                 }}
               >
-                数码
+                {this.state.brand && this.state.brand.name } { this.state.genre && this.state.genre.name }
               </div>
               <div
                 style={{
@@ -69,9 +88,10 @@ class DevicePage extends Component {
               <List
                 grid={{ gutter: 16, column: 4 }}
                 dataSource={this.state.total_device}
+                loading= {this.state.loading}
                 renderItem={(item) => (
                   <List.Item>
-                    <Link to={'/brand/' + item.id}>
+                    <Link to={'/earphone/' + item.id}>
                       <div
                         style={{
                           backgroundColor: "white",
@@ -107,4 +127,4 @@ class DevicePage extends Component {
   }
 }
 
-export default DevicePage;
+export default EarphoneList;
