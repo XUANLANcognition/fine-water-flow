@@ -3,7 +3,7 @@ import { Icon, Typography } from 'antd'
 import { Link } from 'react-router-dom'
 
 const IconFont = Icon.createFromIconfontCN({
-  scriptUrl: '//at.alicdn.com/t/font_1242637_u1kh5rvfa1p.js'
+  scriptUrl: '//at.alicdn.com/t/font_1242637_w63tfkxg0ac.js'
 })
 
 const { Title } = Typography

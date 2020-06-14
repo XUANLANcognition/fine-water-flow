@@ -9,27 +9,32 @@ import Nav from "../Nav";
 import Myfooter from "../Myfooter";
 
 const IconFont = Icon.createFromIconfontCN({
-  scriptUrl: "//at.alicdn.com/t/font_1242637_7si6tr5rfyr.js",
+  scriptUrl: "//at.alicdn.com/t/font_1242637_w63tfkxg0ac.js",
 });
 
-class DevicePage extends Component {
+class BrandPage extends Component {
   state = {
     total_device: [],
+    title: ''
   };
 
   getData = async (v) => {
     try {
       const response = await axios.get(
-        'https://101.200.52.246:8080/api/genres/?format=json'
+        'https://101.200.52.246:8080/api/brands/?format=json'
       )
       this.setState({ total_device: response.data.results })
+      const temp = await axios.get(
+        'https://101.200.52.246:8080/api/genres/' + this.props.match.params.id + '?format=json'
+      )
+      this.setState({ title: temp.data.name})
     } catch (error) {
       console.log(error)
     }
   }
 
   componentDidMount = async (v) => {
-    this.getData()
+    await this.getData()
   };
 
   render() {
@@ -54,7 +59,7 @@ class DevicePage extends Component {
                   marginBottom: "24px",
                 }}
               >
-                数码
+                {this.state.title} 品牌
               </div>
               <div
                 style={{
@@ -67,11 +72,11 @@ class DevicePage extends Component {
                 选择适合自己的
               </div>
               <List
-                grid={{ gutter: 16, column: 4 }}
+                grid={{ gutter: 72, column: 4 }}
                 dataSource={this.state.total_device}
                 renderItem={(item) => (
                   <List.Item>
-                    <Link to={'/brand/' + item.id}>
+                    <Link to={'/' + this.state.title + '/' + this.props.match.params.id + '/' + item.id}>
                       <div
                         style={{
                           backgroundColor: "white",
@@ -107,4 +112,4 @@ class DevicePage extends Component {
   }
 }
 
-export default DevicePage;
+export default BrandPage;
