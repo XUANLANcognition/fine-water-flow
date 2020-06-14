@@ -1038,7 +1038,7 @@ class EarphoneSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Earphone
-        fields = ('url', 'id', 'name', 'price', 'ttm', 'brand' ,'genre')
+        fields = ('url', 'id', 'name', 'price', 'ttm', 'brand' ,'genre', 'api')
 
 
 class EarphonePagination(PageNumberPagination):
