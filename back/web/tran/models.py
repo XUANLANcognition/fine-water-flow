@@ -207,19 +207,22 @@ class Computer(models.Model):
     brand = models.ForeignKey(Brand, on_delete=models.CASCADE)
     genre = models.ForeignKey(Genre, on_delete=models.CASCADE)
 
+    def __str__(self):
+        return '%s' % (self.name)
+
 class CPU(models.Model):
     user = models.ForeignKey(User, on_delete=models.PROTECT)
     name = models.CharField(max_length=128)
     ttm = models.DateField(blank=True, null=True)
     brand_v = (
-        ('A', 'AMD'),
-        ('I', 'InteI'),
-        ('G', '高通'),
-        ('H', '华为'),
-        ('L', '联发科'),
-        ('W', '未知')
+        ('AMD', 'AMD'),
+        ('英特尔', 'InteI'),
+        ('高通', '高通'),
+        ('华为', '华为'),
+        ('联发科技', '联发科'),
+        ('Apple', '苹果')
     )
-    brand = models.CharField(max_length=12, choices=brand_v, default='W')
+    brand = models.CharField(max_length=12, choices=brand_v, blank=True)
     pub_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -230,11 +233,10 @@ class GPU(models.Model):
     name = models.CharField(max_length=128)
     ttm = models.DateField(blank=True, null=True)
     brand_v = (
-        ('A', 'AMD'),
-        ('N', 'NVIDIA'),
-        ('W', '未知')
+        ('AMD', 'AMD'),
+        ('英伟达 NVIDIA', 'NVIDIA')
     )
-    brand = models.CharField(max_length=12, choices=brand_v, default='W')
+    brand = models.CharField(max_length=12, choices=brand_v, blank=True)
     pub_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -246,8 +248,16 @@ class Earphone(models.Model):
     price = models.IntegerField(blank=True)
     ttm = models.DateTimeField(blank=True, null=True)
     pub_date = models.DateTimeField(auto_now_add=True)
+    api_v = (
+        ('有线', '有线'),
+        ('蓝牙', '蓝牙')
+    )
+    api = models.CharField(max_length=32, choices=api_v, blank=True)
     brand = models.ForeignKey(Brand, on_delete=models.CASCADE)
     genre = models.ForeignKey(Genre, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return '%s' % (self.name)
 
 class Phone(models.Model):
     user = models.ForeignKey(User, on_delete=models.PROTECT)
@@ -259,15 +269,16 @@ class Phone(models.Model):
     genre = models.ForeignKey(Genre, on_delete=models.CASCADE)
     cpu = models.ManyToManyField('CPU', related_name='pcpu', blank=True)
     os_v = (
-        ('A', 'Android'),
-        ('I', 'IOS'),
+        ('Android', 'Android'),
+        ('IOS', 'IOS'),
     )
-    os = models.CharField(max_length=12, choices=os_v)
+    os = models.CharField(max_length=12, choices=os_v, blank=True)
     screen_type_v = (
-        ('1', '刘海屏'),
-        ('2', '挖空屏'),
-        ('3', '全面屏')
+        ('刘海屏', '刘海屏'),
+        ('挖空屏', '挖空屏'),
+        ('全面屏', '全面屏')
     )
-    screen_type = models.CharField(max_length=12, choices=screen_type_v)
+    screen_type = models.CharField(max_length=12, choices=screen_type_v, blank=True)
 
-
+    def __str__(self):
+        return '%s' % (self.name)
