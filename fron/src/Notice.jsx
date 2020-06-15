@@ -89,10 +89,9 @@ class Notice extends Component {
                     <Skeleton title={false} loading={item.loading} active >
                       <div style={{ display: 'flex', flexDirection: 'column', background: '#f7f7f7', boxShadow: '0 1px 3px rgba(26,26,26,.1)', borderRadius: '10px', padding: '20px 20px', fontSize: '16px' }}>
                         <div style={{ color: '#1a1a1a', fontWeight: '600', fontSize: '18px', fontStretch: '100%', paddingBottom: '10px' }}>{item.tab}</div>
-                        <div style={{ color: '#646464', fontSize: '15px', paddingBottom: '10px' }}>
-                          {item.content}
+                        <div style={{marginBottom: '16px'}}>{item.release_date && dayjs(item.release_date).fromNow()}</div>
+                        <div dangerouslySetInnerHTML={{ __html: item.content && item.content.replace(/(\r\n)|(\n)/g,'<br/>') }} style={{ color: '#646464', fontSize: '18px', paddingBottom: '10px' }}>
                         </div>
-                        <div>{item.release_date && dayjs(item.release_date).fromNow()}</div>
                       </div>
                     </Skeleton>
                   </List.Item>

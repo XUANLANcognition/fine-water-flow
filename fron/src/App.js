@@ -45,6 +45,8 @@ import PhoneList from './Page/PhoneList'
 import Computer from './Page/Computer'
 import Earphone from './Page/Earphone'
 import Phone from './Page/Phone'
+import Cpu from './Page/Cpu'
+import Gpu from './Page/Gpu'
 
 const MainPage = props => {
   const token = window.localStorage.getItem('token')
@@ -98,6 +100,8 @@ class App extends Component {
             <Route path='/computer/:id' component={withTracker(Computer)} />
             <Route path='/earphone/:id' component={withTracker(Earphone)} />
             <Route path='/phone/:id' component={withTracker(Phone)} />
+            <Route path='/cpu/:id' component={withTracker(Cpu)} />
+            <Route path='/Gpu/:id' component={withTracker(Gpu)} />
             <Route component={withTracker(NoMatch)} />
           </Switch>
         </Router>

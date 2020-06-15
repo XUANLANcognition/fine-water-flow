@@ -15,6 +15,7 @@ const IconFont = Icon.createFromIconfontCN({
 class DevicePage extends Component {
   state = {
     total_device: [],
+    loading: true
   };
 
   getData = async (v) => {
@@ -29,7 +30,10 @@ class DevicePage extends Component {
   }
 
   componentDidMount = async (v) => {
-    this.getData()
+    await this.getData()
+    this.setState({
+      loading: false
+    })
   };
 
   render() {
@@ -69,6 +73,7 @@ class DevicePage extends Component {
               <List
                 grid={{ gutter: 16, column: 4 }}
                 dataSource={this.state.total_device}
+                loading={this.state.loading}
                 renderItem={(item) => (
                   <List.Item>
                     <Link to={'/brand/' + item.id}>

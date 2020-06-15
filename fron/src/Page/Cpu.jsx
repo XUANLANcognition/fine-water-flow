@@ -9,10 +9,10 @@ import Nav from "../Nav";
 import Myfooter from "../Myfooter";
 
 const IconFont = Icon.createFromIconfontCN({
-    scriptUrl: "//at.alicdn.com/t/font_1242637_t0ky7jmmfm.js",
+    scriptUrl: "//at.alicdn.com/t/font_1242637_0wansjki0iec.js",
   });
 
-class Earphone extends Component {
+class Computer extends Component {
   state = {
     data: "",
     loading: false,
@@ -20,7 +20,7 @@ class Earphone extends Component {
 
   getData = async (v) => {
     let url =
-      "https://101.200.52.246:8080/api/earphones/" + this.props.match.params.id;
+      "https://101.200.52.246:8080/api/cpus/" + this.props.match.params.id;
     const response = await axios.get(url);
     this.setState({
       data: response.data,
@@ -64,8 +64,8 @@ class Earphone extends Component {
                     marginBottom: '24px'
                   }}
                 >
-                  <div style={{fontSize: '32px', fontWeight: 'bold', color: 'black'}}>{this.state.data.name}</div>
-                  <IconFont type={this.state.data.api == '蓝牙' ? 'icon-pingguoerji' : 'icon-erji1'} style={{ fontSize: '216px' }} />
+                  <div style={{fontSize: '32px', fontWeight: 'bold', color: 'black', paddingRight: '24px'}}>{this.state.data.name}</div>
+                  <IconFont type='icon-huabanfuben' style={{ fontSize: '216px' }} />
                 </div>
                 <div
                   style={{
@@ -78,7 +78,7 @@ class Earphone extends Component {
                 >
                   <div style={{fontSize: '24px', fontWeight: 'bold', color: 'black', marginRight: '36px'}}>品牌 : </div>
                   <IconFont type={this.state.data && this.state.data.brand.icon} style={{ fontSize: '32px', marginRight: '12px' }} />
-                  <div style={{fontSize: '24px', fontWeight: 'bold'}}>{this.state.data && this.state.data.brand.name}</div>
+                  <div style={{fontSize: '24px', fontWeight: 'bold'}}>{this.state.data && this.state.data.brand}</div>
                 </div>
                 <div
                   style={{
@@ -92,18 +92,6 @@ class Earphone extends Component {
                   <div style={{fontSize: '24px', fontWeight: 'bold', color: 'black', marginRight: '36px'}}>上市日期 : </div>
                   <div style={{fontSize: '24px', fontWeight: 'bold'}}>{dayjs(this.state.data.ttm).format('YYYY MM-DD')}</div>
                 </div>
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "start",
-                    width: "66%",
-                    alignItems: 'center',
-                    marginBottom: '8px'
-                  }}
-                >
-                  <div style={{fontSize: '24px', fontWeight: 'bold', color: 'black', marginRight: '36px'}}>价格 : </div>
-                  <div style={{fontSize: '24px', fontWeight: 'bold'}}>{this.state.data.price}</div>
-                </div>
               </div>
             </Col>
           </Row>
@@ -114,4 +102,4 @@ class Earphone extends Component {
   }
 }
 
-export default Earphone;
+export default Computer;
