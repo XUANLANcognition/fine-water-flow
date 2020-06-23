@@ -3,7 +3,6 @@ import { Layout, Row, Col, Button, Icon } from "antd";
 import axios from "axios";
 import Texty from "rc-texty";
 import "rc-texty/assets/index.css";
-import { Link } from "react-router-dom";
 
 import Nav from "../Nav";
 import Myfooter from "../Myfooter";
