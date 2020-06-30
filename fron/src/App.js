@@ -48,6 +48,7 @@ import Earphone from './Page/Earphone'
 import Phone from './Page/Phone'
 import Cpu from './Page/Cpu'
 import Gpu from './Page/Gpu'
+import GobangPage from './Page/GobangPage'
 
 const MainPage = props => {
   const token = window.localStorage.getItem('token')
@@ -95,6 +96,7 @@ class App extends Component {
             <Route path='/chart_page' component={withTracker(ChartPage)} />
             <Route path='/device_page' component={withTracker(DevicePage)} />
             <Route path='/adobe_page' component={withTracker(AdobePage)} />
+            <Route path='/gobang_page' component={withTracker(GobangPage)} />
             <Route path='/brand/:id' component={withTracker(BrandPage)} />
             <Route path='/笔记本/:genre/:brand' component={withTracker(ComputerList)} />
             <Route path='/耳机/:genre/:brand' component={withTracker(EarphoneList)} />

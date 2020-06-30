@@ -3,7 +3,7 @@ import { Icon, Typography } from 'antd'
 import { Link } from 'react-router-dom'
 
 const IconFont = Icon.createFromIconfontCN({
-  scriptUrl: '//at.alicdn.com/t/font_1242637_yq6wiyw7sw.js'
+  scriptUrl: '//at.alicdn.com/t/font_1242637_44n8lzs19th.js'
 })
 
 const { Title } = Typography
@@ -58,6 +58,12 @@ class MicroList extends Component {
             <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
               <IconFont type='icon-adobe-01-01-01' style={{ fontSize: '36px' }} />
               <div style={{ fontSize: '12px' }}>Adobe</div>
+            </div>
+          </Link>
+          <Link to={'/gobang_page'}>
+            <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+              <IconFont type='icon-qipanqu' style={{ fontSize: '36px' }} />
+              <div style={{ fontSize: '12px' }}>五子棋</div>
             </div>
           </Link>
         </div>
