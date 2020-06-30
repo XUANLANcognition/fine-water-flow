@@ -9,6 +9,7 @@ import ProfileArticleList from './ProfileArticleList'
 import FollowList from './FollowList'
 import FollowerList from './FollowerList'
 import PropertyList from './PropertyList'
+import CollectionList from './components/CollectionList'
 
 const TabPane = Tabs.TabPane
 const { Paragraph } = Typography
@@ -46,7 +47,7 @@ function beforeUpload (file) {
 }
 
 const IconFont = Icon.createFromIconfontCN({
-  scriptUrl: '//at.alicdn.com/t/font_1242637_bctqp8owe4o.js'
+  scriptUrl: '//at.alicdn.com/t/font_1242637_c48kutpmkut.js'
 })
 
 class Profile extends Component {
@@ -180,7 +181,7 @@ class Profile extends Component {
         <Row style={{ flex: '1 0', paddingTop: '15px', paddingBottom: '30px' }} >
           <Col xxl={{ span: 10, offset: 5 }} xl={{ span: 14, offset: 2 }} md={{ span: 14, offset: 1 }} xs={{ span: 24, offset: 0 }} style={{ background: '#fff', padding: '0 20px', marginBottom: '30px', boxShadow: '0 1px 3px rgba(26,26,26,.1)' }}>
             <Tabs defaultActiveKey='1' size='large'>
-              <TabPane tab={<span><IconFont type='icon-wenzhang' />我的文章</span>} key='1'>
+              <TabPane tab={<span><IconFont type='icon-filestext' />我的文章</span>} key='1'>
                 <ProfileArticleList />
               </TabPane>
               <TabPane tab={<span><IconFont type='icon-meishi1' />我的关注</span>} key='2'>
@@ -188,6 +189,9 @@ class Profile extends Component {
               </TabPane>
               <TabPane tab={<span><IconFont type='icon-meishi1' />关注我的</span>} key='3'>
                 <FollowerList />
+              </TabPane>
+              <TabPane tab={<span><IconFont type='icon-foldertext' />我的合集</span>} key='4'>
+                <CollectionList></CollectionList>
               </TabPane>
             </Tabs>
           </Col>
