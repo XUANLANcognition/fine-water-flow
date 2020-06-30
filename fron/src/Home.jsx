@@ -20,17 +20,18 @@ class Home extends Component {
   render () {
     return (
       <Layout style={{ minHeight: '100vh', backgroundColor: '#fff' }}>
-        <div style={{ height: '100vh', background: '#fff' }}>
+        <div style={{ height: '100vh', background: '#55b9f3' }}>
           <Nav />
           <div>
             <Row type='flex' align='middle' style={{ flex: '1 0', height: '80vh' }}>
-              <Col xxl={{ span: 12, offset: 3 }} xl={{ span: 13, offset: 2 }} xs={{ span: 22, offset: 1 }}>
-                <Title>Fine Water Flow</Title>
-                <Divider />
-                <Title level={3}>细水宜长流...</Title>
+              <Col xxl={{ span: 11, offset: 4 }} xl={{ span: 13, offset: 2 }} xs={{ span: 22, offset: 1 }}>
+                <Title style={{color: '#f5f5f5', fontSize: '52px', fontWeight: 'bold'}}>Fine Water Flow</Title>
+                <Title style={{color: '#f5f5f5', fontWeight: 'bold'}} level={3}>细水长流</Title>
               </Col>
               <Col xxl={{ span: 5, offset: 1 }} xl={{ span: 6, offset: 1 }} xs={{ span: 22, offset: 1 }}>
-                <Login />
+                <div style={{padding: '86px 20px', backgroundColor: '#55b9f3', borderRadius: '22px', boxShadow: '41px 41px 82px #479bcc, -41px -41px 82px #55b9f3'}}>
+                  <Login />
+                </div>
               </Col>
             </Row>
           </div>
