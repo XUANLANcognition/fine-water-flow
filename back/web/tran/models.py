@@ -251,7 +251,7 @@ class Earphone(models.Model):
     api_v = (
         ('有线', '有线'),
         ('蓝牙', '蓝牙')
-    )
+    )  
     api = models.CharField(max_length=32, choices=api_v, blank=True)
     brand = models.ForeignKey(Brand, on_delete=models.CASCADE)
     genre = models.ForeignKey(Genre, on_delete=models.CASCADE)
@@ -282,3 +282,19 @@ class Phone(models.Model):
 
     def __str__(self):
         return '%s' % (self.name)
+
+class Advertisement(models.Model):
+    """Model definition for Advertisement."""
+
+    # TODO: Define fields here
+    name = models.CharField(max_length=50)
+
+    class Meta:
+        """Meta definition for Advertisement."""
+
+        verbose_name = 'Advertisement'
+        verbose_name_plural = 'Advertisements'
+
+    def __str__(self):
+        """Unicode representation of Advertisement."""
+        pass
