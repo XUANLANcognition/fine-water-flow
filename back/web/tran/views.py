@@ -3,7 +3,7 @@ from django.http import JsonResponse
 from rest_framework import routers, serializers, viewsets, status
 from rest_framework.pagination import PageNumberPagination
 from django.contrib.auth.models import User
-from .models import Article, Comment, Profile, Book, BookTag, BookBlock, BookComment, Figure, Movie, MovieComment, MovieBlock, MovieTag, Picture, Source, Notice, FollowRela, Brand, Genre,Computer, CPU, GPU, Earphone, Phone
+from .models import Article, Comment, Profile, Book, BookTag, BookBlock, BookComment, Figure, Movie, MovieComment, MovieBlock, MovieTag, Picture, Source, Notice, FollowRela, Brand, Genre,Computer, CPU, GPU, Earphone, Phone, Collection
 from rest_framework.authtoken.models import Token
 from django.conf import settings
 
@@ -17,6 +17,7 @@ from rest_framework import permissions
 from rest_framework import generics
 from rest_framework import filters as filter_drf
 from django.core.mail import send_mail
+import json
 
 from django_filters import rest_framework as filters
 
@@ -1128,6 +1129,97 @@ class PhoneDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Phone.objects.all()
     serializer_class = PhoneSerializer
     permission_classes = (Read,)
+
+
+# Collection API
+
+
+class ArticleBriefSerializer(serializers.HyperlinkedModelSerializer):
+    user = UserBriefSerializer(read_only = True)
+
+    class Meta:
+        model = Article
+        fields = ('id', 'title', 'url', 'originality', 'pub_date', 'views', 'description', 'user', 'status')
+
+
+class CollectionSerializer(serializers.HyperlinkedModelSerializer):
+    article = ArticleBriefSerializer(many=True, read_only=True)
+    user = UserBriefSerializer(read_only = True)
+
+    class Meta:
+        model = Collection
+        fields = ('url', 'id', 'name', 'user', 'pub_date', 'article')
+
+
+class CollectionPagination(PageNumberPagination):
+    page_size = 8
+    page_size_query_param = 'page_size'
+    max_page_size = 128
+
+    class Meta:
+        model = Collection
+        fields = '__all__'
+
+
+class CollectionFilter(filters.FilterSet):
+    
+    class Meta:
+        model = Collection
+        fields = '__all__'
+
+
+class CollectionOwnerFilter(filter_drf.BaseFilterBackend):
+
+    def filter_queryset(self, request, queryset, view):
+        return queryset.filter(user=request.user)
+
+
+class CollectionList(generics.ListCreateAPIView):
+    queryset = Collection.objects.all().filter(status='2').order_by('-pub_date')
+    serializer_class = CollectionSerializer
+    permission_classes = (Publish,)
+    pagination_class = CollectionPagination
+    filter_backends = (filters.DjangoFilterBackend, filter_drf.SearchFilter)
+    search_fields = ('name', )
+    filterset_class = CollectionFilter
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
+        try:
+            data = json.loads(self.request.data['articles'])
+            article_list = Article.objects.filter(id__in = data)
+            serializer.save(article = article_list)
+        except Exception as e:
+            pass
+
+
+class CollectionOwnerList(generics.ListAPIView):
+    queryset = Collection.objects.all().order_by('-pub_date')
+    serializer_class = CollectionSerializer
+    pagination_class = CollectionPagination
+    filter_backends = (filters.DjangoFilterBackend, filter_drf.SearchFilter, CollectionOwnerFilter)
+    filterset_class = CollectionFilter
+    search_fields = ('title', 'content')
+    permission_classes= (IsOwner, )
+
+
+class CollectionDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Collection.objects.all().filter(status='2')
+    serializer_class = CollectionSerializer
+    permission_classes = (Read,)
+
+    def get(self, request, *args, **kwargs):
+        collection = Collection.objects.get(id = kwargs['pk'])
+        collection.views = collection.views + 1
+        collection.save()
+        return self.retrieve(request, *args, **kwargs)
+
+
+class CollectionOwnerDetail(generics. RetrieveUpdateDestroyAPIView):
+    queryset = Collection.objects.all()
+    serializer_class = CollectionSerializer
+    permission_classes = (Read,)
+    filter_backends = (CollectionOwnerFilter,)
 
 
 # Sign on API
