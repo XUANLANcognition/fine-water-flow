@@ -17,6 +17,7 @@ from rest_framework import permissions
 from rest_framework import generics
 from rest_framework import filters as filter_drf
 from django.core.mail import send_mail
+import json
 
 from django_filters import rest_framework as filters
 
@@ -1133,8 +1134,16 @@ class PhoneDetail(generics.RetrieveUpdateDestroyAPIView):
 # Collection API
 
 
+class ArticleBriefSerializer(serializers.HyperlinkedModelSerializer):
+    user = UserBriefSerializer(read_only = True)
+
+    class Meta:
+        model = Article
+        fields = ('id', 'title', 'url', 'originality', 'pub_date', 'views', 'description', 'user', 'status')
+
+
 class CollectionSerializer(serializers.HyperlinkedModelSerializer):
-    article = ArticleSerializer(many=True, read_only=True)
+    article = ArticleBriefSerializer(many=True, read_only=True)
     user = UserBriefSerializer(read_only = True)
 
     class Meta:
@@ -1176,6 +1185,12 @@ class CollectionList(generics.ListCreateAPIView):
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
+        try:
+            data = json.loads(self.request.data['articles'])
+            article_list = Article.objects.filter(id__in = data)
+            serializer.save(article = article_list)
+        except Exception as e:
+            pass
 
 
 class CollectionOwnerList(generics.ListAPIView):
