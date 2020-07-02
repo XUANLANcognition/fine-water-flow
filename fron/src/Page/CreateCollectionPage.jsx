@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Layout, Row, Col, Input, Table, Button, Slider, List } from "antd";
+import { Layout, Row, Col, Input, Table, Button, Slider, List, message } from "antd";
 import axios from "axios";
 import Texty from "rc-texty";
 import "rc-texty/assets/index.css";
@@ -48,7 +48,7 @@ const columns = [
   }
 ];
 
-class CollectionPage extends Component {
+class CreateCollectionPage extends Component {
   page = 1;
   state = {
     data: [],
@@ -61,7 +61,8 @@ class CollectionPage extends Component {
     number: 0,
     search: "",
     selectedRowKeys: [],
-    y: 360
+    y: 360,
+    value: ''
   };
 
   getData = async (v) => {
@@ -174,6 +175,34 @@ class CollectionPage extends Component {
     });
   };
 
+  createCollection = async (value) => {
+    try {
+      let config = {
+        headers: { 
+          'Authorization': 'Token ' + window.localStorage.getItem('token'),
+        }
+      }
+      const response = await axios.post(
+        'https://101.200.52.246:8080/api/collections/',
+        {
+          name: this.state.value,
+          articles: JSON.stringify(this.state.selectedRowKeys)
+        },
+        config
+      )
+      message.success('创建成功' + this.state.name)
+      if (response.status !== 201) {
+        message('error')
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  onChange = e => {
+    this.setState({ value: e.target.value });
+  };
+
   render() {
     const { selectedRowKeys } = this.state;
     const rowSelection = {
@@ -220,8 +249,9 @@ class CollectionPage extends Component {
                 size="large"
                 placeholder="请输入合集名称"
                 style={{ maxWidth: "620px", marginRight: "18px" }}
+                onChange={this.onChange}
               />
-              <Button type="primary" size='large'>创建</Button>
+              <Button type="primary" size='large' onClick={this.createCollection}>创建</Button>
             </div>
             <Col
               xxl={{ span: 10, offset: 5 }}
@@ -287,4 +317,4 @@ class CollectionPage extends Component {
   }
 }
 
-export default CollectionPage;
+export default CreateCollectionPage;
