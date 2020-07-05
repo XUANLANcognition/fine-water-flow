@@ -16,9 +16,9 @@ import axios from "axios";
 import dayjs from "dayjs";
 import { Link } from "react-router-dom";
 
-const count = 12;
+const count = 8;
 const confirm = Modal.confirm;
-const briefLength = 100;
+const briefLength = 12;
 const IconFont = Icon.createFromIconfontCN({
   scriptUrl: "//at.alicdn.com/t/font_1242637_estflglakgj.js",
 });
@@ -271,10 +271,10 @@ class CollectionList extends Component {
                         fontStretch: "100%",
                       }}
                     >
-                      {item.name.slice(0, 12)}
+                      {this.extractBrief(item.name)}
                     </h2>
                     <div style={{margin: '12px 0', color: 'black'}}>
-                      {"文章数： " + item.article.length}
+                      {"文章数： " + (item.article && item.article.length)}
                     </div>
                     <div
                       style={{

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Layout, Row, Col, Input, Table, Button, Slider, List, message } from "antd";
+import { Layout, Row, Col, Input, Table, Button, Slider, List, message, notification } from "antd";
 import axios from "axios";
 import Texty from "rc-texty";
 import "rc-texty/assets/index.css";
@@ -11,6 +11,21 @@ import Myfooter from "../Myfooter";
 const { Search } = Input;
 
 const count = 8;
+
+const openNotificationWithIconS = (type) => {
+  notification[type]({
+    message: 'Succeed',
+    description: '发布成功',
+    duration: 2
+  })
+}
+const openNotificationWithIconE = (type) => {
+  notification[type]({
+    message: 'Error',
+    description: '发布失败',
+    duration: 2
+  })
+}
 
 const columns = [
   {
@@ -178,7 +193,7 @@ class CreateCollectionPage extends Component {
   createCollection = async (value) => {
     try {
       let config = {
-        headers: { 
+        headers: {
           'Authorization': 'Token ' + window.localStorage.getItem('token'),
         }
       }
@@ -190,9 +205,10 @@ class CreateCollectionPage extends Component {
         },
         config
       )
-      message.success('创建成功' + this.state.name)
+      openNotificationWithIconS('success')
+      this.props.history.replace('/owner_collection_page/' + response.data.id)
       if (response.status !== 201) {
-        message('error')
+        message.error('创建失败')
       }
     } catch (error) {
       console.log(error)
