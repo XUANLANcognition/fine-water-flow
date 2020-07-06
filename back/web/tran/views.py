@@ -1148,7 +1148,7 @@ class CollectionSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Collection
-        fields = ('url', 'id', 'name', 'user', 'pub_date', 'article')
+        fields = ('url', 'id', 'name', 'user', 'pub_date', 'article', 'status', 'views')
 
 
 class CollectionPagination(PageNumberPagination):
