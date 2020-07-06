@@ -44,7 +44,7 @@ class CollectionList extends Component {
     return list;
   }
 
-  onClick = async (key, status, title) => {
+  onClick = async (key, status, name) => {
     if (status === "2") {
       try {
         let url = "https://101.200.52.246:8080/api/owner_collections/" + key;
@@ -59,7 +59,7 @@ class CollectionList extends Component {
         this.setState({
           cache: temp,
         });
-        message.success(title + "  已进入草稿箱");
+        message.success(name + "  已进入草稿箱");
       } catch (error) {}
     }
     if (status === "1") {
@@ -76,7 +76,7 @@ class CollectionList extends Component {
         this.setState({
           cache: temp,
         });
-        message.success(title + "  已发布成功");
+        message.success(name + "  已发布成功");
       } catch (error) {}
     }
   };
@@ -175,7 +175,7 @@ class CollectionList extends Component {
     try {
       confirm({
         title: "删除!",
-        content: "你确认要删除这篇文章吗？",
+        content: "你确认要删除此合集吗？",
         onOk: async () => {
           let config = {
             headers: {
@@ -273,114 +273,94 @@ class CollectionList extends Component {
                     >
                       {this.extractBrief(item.name)}
                     </h2>
-                    <div style={{margin: '12px 0', color: 'black'}}>
+                    <div style={{ margin: "12px 0", color: "black" }}>
                       {"文章数： " + (item.article && item.article.length)}
                     </div>
-                    <div
-                      style={{
-                        display: "flex",
-                        flexDirection: "row",
-                        justifyContent: "space-around",
-                        flexWrap: 'wrap'
-                      }}
-                    >
-                      <Link to={"/revise_article/" + item.id}>
-                        <div style={{display: 'flex', justifyContent: 'center'}}>
-                          <Button
-                            style={{
-                              color: "#76839b",
-                              backgroundColor: "transparent",
-                              display: "inline-block",
-                              fontSize: "14px",
-                              fontWeight: "500",
-                            }}
-                            type="link"
-                          >
-                            {" "}
-                            <IconFont
-                              type="icon-edit"
-                              style={{ paddingLeft: "5px", color: "#76839b" }}
-                            />{" "}
-                            修改{" "}
-                          </Button>
-                        </div>
-                      </Link>
+                  </Link>
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "row",
+                      justifyContent: "space-around",
+                      flexWrap: "wrap",
+                      marginTop: '22px'
+                    }}
+                  >
 
+                    <Button
+                      style={{
+                        color: "#76839b",
+                        backgroundColor: "transparent",
+                        fontSize: "14px",
+                        fontWeight: "500",
+                      }}
+                      type="link"
+                      onClick={() => this.deleteCollection(item.id)}
+                    >
+                      <IconFont
+                        type="icon-delete-fill"
+                        style={{ paddingLeft: "5px", color: "#76839b" }}
+                      />{" "}
+                      删除{" "}
+                    </Button>
+
+                    <Dropdown
+                      overlay={
+                        <Menu
+                          onClick={this.onClick.bind(
+                            this,
+                            item.id,
+                            item.status,
+                            item.name
+                          )}
+                        >
+                          <Menu.Item
+                            key="1"
+                            disabled={item.status === "2"}
+                            style={{
+                              fontWeight: "600",
+                              display: "flex",
+                              justifyContent: "center",
+                            }}
+                          >
+                            {"发布"}
+                          </Menu.Item>
+                          <Menu.Item
+                            key="2"
+                            disabled={item.status === "1"}
+                            style={{
+                              fontWeight: "600",
+                              display: "flex",
+                              justifyContent: "center",
+                            }}
+                          >
+                            {"进入草稿"}
+                          </Menu.Item>
+                        </Menu>
+                      }
+                      trigger={["click"]}
+                      placement="bottomCenter"
+                    >
                       <Button
                         style={{
                           color: "#76839b",
                           backgroundColor: "transparent",
+                          display: "inline-block",
                           fontSize: "14px",
                           fontWeight: "500",
                         }}
                         type="link"
-                        onClick={() => this.deleteArticle(item.id)}
                       >
                         <IconFont
-                          type="icon-delete-fill"
+                          type={
+                            item.status === "2" ? "icon-fabu1" : "icon-caogao"
+                          }
                           style={{ paddingLeft: "5px", color: "#76839b" }}
                         />{" "}
-                        删除{" "}
+                        {item.status === "2" ? "已发布" : "草稿箱"}{" "}
                       </Button>
-
-                      <Dropdown
-                        overlay={
-                          <Menu
-                            onClick={this.onClick.bind(
-                              this,
-                              item.id,
-                              item.status,
-                              item.title
-                            )}
-                          >
-                            <Menu.Item
-                              key="1"
-                              disabled={item.status === "2"}
-                              style={{
-                                fontWeight: "600",
-                                display: "flex",
-                                justifyContent: "center",
-                              }}
-                            >
-                              {"发布"}
-                            </Menu.Item>
-                            <Menu.Item
-                              key="2"
-                              disabled={item.status === "1"}
-                              style={{
-                                fontWeight: "600",
-                                display: "flex",
-                                justifyContent: "center",
-                              }}
-                            >
-                              {"进入草稿"}
-                            </Menu.Item>
-                          </Menu>
-                        }
-                        trigger={["click"]}
-                        placement="bottomCenter"
-                      >
-                        <Button
-                          style={{
-                            color: "#76839b",
-                            backgroundColor: "transparent",
-                            display: "inline-block",
-                            fontSize: "14px",
-                            fontWeight: "500",
-                          }}
-                          type="link"
-                        >
-                          <IconFont
-                            type={
-                              item.status === "2" ? "icon-fabu1" : "icon-caogao"
-                            }
-                            style={{ paddingLeft: "5px", color: "#76839b" }}
-                          />{" "}
-                          {item.status === "2" ? "已发布" : "草稿箱"}{" "}
-                        </Button>
-                      </Dropdown>
-                    </div>
-                  </Link>
+                    </Dropdown>
+                  </div>
                 </Skeleton>
               </List.Item>
             )}

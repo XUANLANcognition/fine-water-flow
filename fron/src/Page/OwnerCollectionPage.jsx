@@ -165,7 +165,7 @@ class OwnerCollectionPage extends Component {
                 }}
               >
                 <div style={{ fontWeight: "bold", fontSize: "18px" }}>
-                  {"发布于" + dayjs(this.state.article && this.state.article.pubDate).fromNow()}
+                  {"发布于 " + dayjs(this.state.article.pub_date).format('YYYY MM-DD')}
                 </div>
                 <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
                   <div style={{fontSize: '16px', marginRight: '8px', fontWeight: 'bold'}}>作者 : </div>
