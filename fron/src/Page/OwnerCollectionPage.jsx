@@ -113,7 +113,7 @@ class OwnerCollectionPage extends Component {
             </Col>
             <Col
               xxl={{ span: 3, offset: 5 }}
-              xl={{ span: 3, offset: 2 }}
+              xl={{ span: 5, offset: 2 }}
               xs={{ span: 22, offset: 1 }}
             >
               <div>
