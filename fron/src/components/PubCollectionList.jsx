@@ -177,8 +177,10 @@ class PubCollectionList extends Component {
             loading={initLoading}
             grid={{
               gutter: 36,
-              xs: 2,
+              xxl: 2,
               xl: 2,
+              md: 1,
+              xs: 1
             }}
             style={{ paddingBottom: "20px", marginTop: "26px" }}
             renderItem={(item) => (
