@@ -177,7 +177,7 @@ class PubCollectionList extends Component {
             loading={initLoading}
             grid={{
               gutter: 36,
-              xxl: 2,
+              xxl: 1,
               xl: 2,
               md: 1,
               xs: 1
