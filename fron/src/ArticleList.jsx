@@ -180,7 +180,7 @@ class ArticleList extends Component {
                     type="icon-eye-fill"
                     style={{ paddingLeft: "5px", color: "#76839b" }}
                   />{" "}
-                  浏览 {item.views}
+                  浏览 {item.views} 次
                 </Button>
               ]}
             >
