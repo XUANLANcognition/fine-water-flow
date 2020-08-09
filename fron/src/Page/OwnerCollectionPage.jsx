@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Layout, Row, Col, Icon, Modal, Table } from "antd";
+import { Layout, Row, Col, Icon, Modal, Table, Affix } from "antd";
 import axios from "axios";
 import "rc-texty/assets/index.css";
 import dayjs from "dayjs";
@@ -120,9 +120,9 @@ class OwnerCollectionPage extends Component {
         },
       };
       const response = await axios.get(url, config);
-      const tempSelected = []
+      const tempSelected = [];
       for (let index = 0; index < response.data.article.length; index++) {
-        tempSelected.push(response.data.article[index].id)
+        tempSelected.push(response.data.article[index].id);
       }
       this.setState(function (state) {
         return {
@@ -137,7 +137,7 @@ class OwnerCollectionPage extends Component {
           views: response.data.views,
           key:
             response.data.article.length > 0 ? response.data.article[0].id : "",
-          selectedRowKeys: tempSelected
+          selectedRowKeys: tempSelected,
         };
       });
     } catch (error) {
@@ -259,20 +259,55 @@ class OwnerCollectionPage extends Component {
           footer={null}
           width={860}
         >
-          <div style={{display: 'flex', justifyContent: 'start', alignItems: 'center', fontWeight: 'bold', color: '#000', marginBottom: '4px'}}>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "start",
+              alignItems: "center",
+              fontWeight: "bold",
+              color: "#000",
+              marginBottom: "4px",
+            }}
+          >
             已添加文章 ：
-            {selectedRowKeys.map(item => (
-              <div style={{backgroundColor: '#ffd6e7', padding: '6px 8px', margin: '0 6px', borderRadius: '6px'}}>{item}</div>
+            {selectedRowKeys.map((item) => (
+              <div
+                style={{
+                  backgroundColor: "#ffd6e7",
+                  padding: "6px 8px",
+                  margin: "0 6px",
+                  borderRadius: "6px",
+                }}
+              >
+                {item}
+              </div>
             ))}
           </div>
-          <div style={{display: 'flex', justifyContent: 'start', alignItems: 'center', fontWeight: 'bold', color: '#000'}}>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "start",
+              alignItems: "center",
+              fontWeight: "bold",
+              color: "#000",
+            }}
+          >
             新添加文章 ：
-            {selectedRowKeys.map(item => (
-              <div style={{backgroundColor: '#b7eb8f', padding: '6px 8px', margin: '0 6px', borderRadius: '6px'}}>{item}</div>
+            {selectedRowKeys.map((item) => (
+              <div
+                style={{
+                  backgroundColor: "#b7eb8f",
+                  padding: "6px 8px",
+                  margin: "0 6px",
+                  borderRadius: "6px",
+                }}
+              >
+                {item}
+              </div>
             ))}
           </div>
           <Table
-            style={{margin: '8px 0'}}
+            style={{ margin: "8px 0" }}
             size="large"
             columns={columns}
             rowSelection={rowSelection}
@@ -321,67 +356,71 @@ class OwnerCollectionPage extends Component {
               xl={{ span: 5, offset: 2 }}
               xs={{ span: 22, offset: 1 }}
             >
-              <div
-                style={{
-                  backgroundColor: "#fff",
-                  border: "2px solid gray",
-                  borderRadius: "6px",
-                }}
-              >
+              <Affix offsetTop={10}>
                 <div
                   style={{
-                    backgroundColor: "#d6e4ff",
-                    marginBottom: "12px",
-                    fontWeight: "bold",
-                    color: "#000",
-                    fontSize: "18px",
-                    padding: "16px 14px",
+                    backgroundColor: "#fff",
+                    border: "2px solid gray",
+                    borderRadius: "6px",
                   }}
                 >
-                  目录 ({" "}
-                  {this.state.data.article && this.state.data.article.length} )
+                  <div
+                    style={{
+                      backgroundColor: "#d6e4ff",
+                      marginBottom: "12px",
+                      fontWeight: "bold",
+                      color: "#000",
+                      fontSize: "18px",
+                      padding: "16px 14px",
+                    }}
+                  >
+                    目录 ({" "}
+                    {this.state.data.article && this.state.data.article.length}{" "}
+                    )
+                  </div>
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "start",
+                      margin: "8px 12px",
+                    }}
+                  >
+                    <IconFont
+                      type="icon-zengjia1"
+                      style={{ fontSize: "32px", marginRight: "12px" }}
+                      onClick={this.showAddModal}
+                    />
+                  </div>
+                  <div style={{ margin: "0 5px" }}>
+                    {this.state.articles &&
+                      this.state.articles.map((item) => (
+                        <div
+                          onClick={() => this.handleClick(item.id)}
+                          className="box"
+                          style={{
+                            fontSize: "16px",
+                            fontWeight: "bold",
+                            color:
+                              this.state.key == item.id ? "#096dd9" : "gray",
+                            padding: "12px",
+                            marginBottom: "6px",
+                            borderRadius: "6px",
+                            display: "flex",
+                            alignItems: "center",
+                            border:
+                              this.state.key == item.id
+                                ? "2px solid gray"
+                                : "1px solid gray",
+                            backgroundColor:
+                              this.state.key == item.id ? "#bae7ff" : "white",
+                          }}
+                        >
+                          <div>{item.title}</div>
+                        </div>
+                      ))}
+                  </div>
                 </div>
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "start",
-                    margin: "8px 12px",
-                  }}
-                >
-                  <IconFont
-                    type="icon-zengjia1"
-                    style={{ fontSize: "32px", marginRight: "12px" }}
-                    onClick={this.showAddModal}
-                  />
-                </div>
-                <div style={{ margin: "0 5px" }}>
-                  {this.state.articles &&
-                    this.state.articles.map((item) => (
-                      <div
-                        onClick={() => this.handleClick(item.id)}
-                        className="box"
-                        style={{
-                          fontSize: "16px",
-                          fontWeight: "bold",
-                          color: this.state.key == item.id ? "#096dd9" : "gray",
-                          padding: "12px",
-                          marginBottom: "6px",
-                          borderRadius: "6px",
-                          display: "flex",
-                          alignItems: "center",
-                          border:
-                            this.state.key == item.id
-                              ? "2px solid gray"
-                              : "1px solid gray",
-                          backgroundColor:
-                            this.state.key == item.id ? "#bae7ff" : "white",
-                        }}
-                      >
-                        <div>{item.title}</div>
-                      </div>
-                    ))}
-                </div>
-              </div>
+              </Affix>
             </Col>
             <Col
               xxl={{ span: 10, offset: 1 }}
