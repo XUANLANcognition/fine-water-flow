@@ -7,6 +7,7 @@ import dayjs from "dayjs";
 import Nav from "../Nav";
 import Myfooter from "../Myfooter";
 import AvatarF from "../AvatarF";
+import AddComment from '../AddComment'
 
 const count = 6;
 
@@ -460,6 +461,7 @@ class PubCollectionPage extends Component {
                   __html: this.state.article && this.state.article.content,
                 }}
               ></div>
+              <AddComment articleId={this.state.article.id} articleUrl={this.state.article.url} />
             </Col>
           </Row>
         </div>
