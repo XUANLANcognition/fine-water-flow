@@ -51,6 +51,7 @@ import Gpu from './Page/Gpu'
 import GobangPage from './Page/GobangPage'
 import OwnerCollectionPage from './Page/OwnerCollectionPage'
 import CreateCollectionPage from './Page/CreateCollectionPage'
+import PubCollectionPage from './Page/PubCollectionPage'
 
 const MainPage = props => {
   const token = window.localStorage.getItem('token')
@@ -100,6 +101,7 @@ class App extends Component {
             <Route path='/adobe_page' component={withTracker(AdobePage)} />
             <Route path='/gobang_page' component={withTracker(GobangPage)} />
             <Route path='/create_collection_page' component={withTracker(CreateCollectionPage)} />
+            <Route path='/pub_collection_page/:id' component={withTracker(PubCollectionPage)} />
             <Route path='/owner_collection_page/:id' component={withTracker(OwnerCollectionPage)} />
             <Route path='/brand/:id' component={withTracker(BrandPage)} />
             <Route path='/笔记本/:genre/:brand' component={withTracker(ComputerList)} />
