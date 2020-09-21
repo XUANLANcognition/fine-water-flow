@@ -11,7 +11,7 @@ const TextArea = Input.TextArea
 const CommentList = ({ comments }) => (
   <List
     dataSource={comments}
-    header={`${comments.length} ${comments.length > 1 ? 'replies' : 'reply'}`}
+    header={<div style={{fontWeight: 'bold', color: '#000'}}>{comments.length} 条回复</div>}
     itemLayout='horizontal'
     renderItem={item => (
       <Comment
