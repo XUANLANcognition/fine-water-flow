@@ -245,7 +245,7 @@ class ProfileArticleList extends Component {
             renderItem={item => (
               <List.Item
                 actions={[
-                  <Link to={"/revise_article/" + item.id}>
+                  <Link target='_blank' to={"/revise_article/" + item.id}>
                     <Button
                       style={{
                         color: "#76839b",
@@ -383,7 +383,7 @@ class ProfileArticleList extends Component {
                       item.pub_date && dayjs(item.pub_date).fromNow()
                     }
                   />
-                  <Link to={"/owner_article/" + item.id}>
+                  <Link target='_blank' to={"/owner_article/" + item.id}>
                     <h3
                       style={{
                         color: "#1a1a1a",

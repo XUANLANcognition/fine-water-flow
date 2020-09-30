@@ -287,7 +287,7 @@ class MoviePage extends Component {
                         boxShadow: "0 1px 3px #777777"
                       }}
                     >
-                      <Link to={"/movie/" + item.id}>
+                      <Link target='_blank' to={"/movie/" + item.id}>
                         <div
                           style={{
                             display: "flex",

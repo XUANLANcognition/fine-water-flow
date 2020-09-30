@@ -192,7 +192,7 @@ class BookPage extends Component {
                   <List.Item key={item.id}>
                     <Skeleton avatar title={false} loading={item.loading} active>
                       <div style={{ padding: '20px', background: '#f7f7f7', borderRadius: '15px', boxShadow: '0 1px 3px rgba(26,26,26,.1)' }}>
-                        <Link to={'/book/' + item.id} >
+                        <Link target='_blank' to={'/book/' + item.id} >
                           <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                             <div style={{ display: 'flex', flexDirection: 'column' }}>
                               <div style={{ fontSize: '18px', color: '#3377aa', marginBottom: '15px', fontWeight: '600' }}>

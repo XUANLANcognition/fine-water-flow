@@ -264,7 +264,7 @@ class CollectionList extends Component {
                 }}
               >
                 <Skeleton avatar title={false} loading={item.loading} active>
-                  <Link to={"/owner_collection_page/" + item.id}>
+                  <Link target='_blank' to={"/owner_collection_page/" + item.id}>
                     <h2
                       style={{
                         color: "#1a1a1a",

@@ -193,7 +193,7 @@ class PubCollectionList extends Component {
                 }}
               >
                 <Skeleton avatar title={false} loading={item.loading} active>
-                  <Link to={"/pub_collection_page/" + item.id}>
+                  <Link target='_blank' to={"/pub_collection_page/" + item.id}>
                     <div style={{display: 'flex', justifyContent: 'space-between'}}>
                       <div>
                         <div

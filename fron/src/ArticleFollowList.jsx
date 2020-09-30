@@ -122,7 +122,7 @@ class ArticleFollowList extends Component {
                       avatar={<Link to={((item.user && item.user.id) + '' === window.localStorage.getItem('user_id') ? '/profile/' : '/visit/') + (item.user && item.user.id)}><Avatar shape='square' icon='user' src={item.user && item.user.last_name} /></Link>}
                       description={item.pub_date && dayjs(item.pub_date).fromNow()}
                     />
-                    <Link to={'/article/' + item.id}>
+                    <Link target='_blank' to={'/article/' + item.id}>
                       <h3 style={{ color: '#1a1a1a', fontWeight: '600', fontSize: '18px', fontStretch: '100%' }}>{item.title}</h3>
                       <div style={{ color: '#646464', fontSize: '15px' }}>
                         {this.extractBrief(item.content)}

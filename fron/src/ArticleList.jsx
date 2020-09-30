@@ -46,10 +46,10 @@ class ArticleList extends Component {
     try {
       const response = await axios.get(
         "https://101.200.52.246:8080/api/articles/?format=json" +
-          "&page=" +
-          this.state.page +
-          "&page_size=" +
-          count
+        "&page=" +
+        this.state.page +
+        "&page_size=" +
+        count
       );
       this.setState({
         data: response.data.results,
@@ -74,10 +74,10 @@ class ArticleList extends Component {
       });
       const response = await axios.get(
         "https://101.200.52.246:8080/api/articles/?format=json" +
-          "&page=" +
-          this.state.page +
-          "&page_size=" +
-          count
+        "&page=" +
+        this.state.page +
+        "&page_size=" +
+        count
       );
       this.setState({
         next: response.data.next
@@ -105,12 +105,12 @@ class ArticleList extends Component {
     try {
       const response = await axios.get(
         "https://101.200.52.246:8080/api/articles/?format=json" +
-          "&page=" +
-          this.page +
-          "&page_size=" +
-          count +
-          "&search=" +
-          value
+        "&page=" +
+        this.page +
+        "&page_size=" +
+        count +
+        "&search=" +
+        value
       );
       this.setState({
         data: response.data.results,
@@ -188,10 +188,10 @@ class ArticleList extends Component {
                 style={
                   item.originality === "Y"
                     ? {
-                        borderLeft: "8px solid",
-                        borderColor: "#269f42",
-                        paddingLeft: "15px"
-                      }
+                      borderLeft: "8px solid",
+                      borderColor: "#269f42",
+                      paddingLeft: "15px"
+                    }
                     : {}
                 }
               >
@@ -201,7 +201,7 @@ class ArticleList extends Component {
                       <Link
                         to={
                           ((item.user && item.user.id) + "" ===
-                          window.localStorage.getItem("user_id")
+                            window.localStorage.getItem("user_id")
                             ? "/profile/"
                             : "/visit/") + (item.user && item.user.id)
                         }
@@ -210,12 +210,12 @@ class ArticleList extends Component {
                           {item.user && item.user.username}
                           {(item.user &&
                             item.user.profile.media_editor_auth) ===
-                          "审核通过" ? (
-                            <IconFont
-                              type="icon-renzhenghuizhang"
-                              style={{ paddingLeft: "10px" }}
-                            />
-                          ) : null}
+                            "审核通过" ? (
+                              <IconFont
+                                type="icon-renzhenghuizhang"
+                                style={{ paddingLeft: "10px" }}
+                              />
+                            ) : null}
                         </div>
                       </Link>
                     }
@@ -224,7 +224,8 @@ class ArticleList extends Component {
                       item.pub_date && dayjs(item.pub_date).fromNow()
                     }
                   />
-                  <Link to={"/article/" + item.id}>
+                  <Link target="_blank"
+                    to={"/article/" + item.id}>
                     <h3
                       style={{
                         color: "#1a1a1a",
