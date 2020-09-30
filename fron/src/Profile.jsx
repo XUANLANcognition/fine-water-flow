@@ -180,17 +180,17 @@ class Profile extends Component {
         </Row>
         <Row style={{ flex: '1 0', paddingTop: '15px', paddingBottom: '30px' }} >
           <Col xxl={{ span: 10, offset: 5 }} xl={{ span: 14, offset: 2 }} md={{ span: 14, offset: 1 }} xs={{ span: 24, offset: 0 }} style={{ background: '#fff', padding: '0 20px', marginBottom: '30px', boxShadow: '0 1px 3px rgba(26,26,26,.1)' }}>
-            <Tabs defaultActiveKey='1' size='large'>
-              <TabPane tab={<span><IconFont type='icon-filestext' />我的文章</span>} key='1'>
+            <Tabs defaultActiveKey='1' type='card' style={{marginTop: '18px'}}>
+              <TabPane tab={<div style={{fontSize: '18px', fontWeight: 'bold', padding: '0 12px'}}><IconFont type='icon-filestext' />我的文章</div>} key='1'>
                 <ProfileArticleList />
               </TabPane>
-              <TabPane tab={<span><IconFont type='icon-meishi1' />我的关注</span>} key='2'>
+              <TabPane tab={<div style={{fontSize: '18px', fontWeight: 'bold', padding: '0 12px'}}><IconFont type='icon-meishi1' />我的关注</div>} key='2'>
                 <FollowList />
               </TabPane>
-              <TabPane tab={<span><IconFont type='icon-meishi1' />关注我的</span>} key='3'>
+              <TabPane tab={<div style={{fontSize: '18px', fontWeight: 'bold', padding: '0 12px'}}><IconFont type='icon-meishi1' />关注我的</div>} key='3'>
                 <FollowerList />
               </TabPane>
-              <TabPane tab={<span><IconFont type='icon-foldertext' />我的合集</span>} key='4'>
+              <TabPane tab={<div style={{fontSize: '18px', fontWeight: 'bold', padding: '0 12px'}}><IconFont type='icon-foldertext' />我的合集</div>} key='4'>
                 <CollectionList></CollectionList>
               </TabPane>
             </Tabs>

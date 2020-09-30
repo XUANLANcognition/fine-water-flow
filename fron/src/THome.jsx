@@ -37,14 +37,14 @@ class THome extends Component {
         <BackTop />
         <Row style={{ flex: '1 0', padding: '15px 0' }}>
           <Col xxl={{ span: 10, offset: 5 }} xl={{ span: 13, offset: 2 }} md={{ span: 15, offset: 1 }} xs={{ span: 24, offset: 0 }} style={{ marginBottom: '20px', backgroundColor: '#fff', padding: '20px 20px', boxShadow: '0 1px 3px rgba(26,26,26,.1)', borderRadius: '1px' }}>
-            <Tabs defaultActiveKey='1'>
-              <TabPane tab='文章' key='1'>
+            <Tabs defaultActiveKey='1' type='card'>
+              <TabPane tab={<div style={{fontSize: '22px', fontWeight: 'bold', padding: '0 12px'}}>全 部</div>} key='1'>
                 <ArticleList />
               </TabPane>
-              <TabPane tab='关注' key='2'>
+              <TabPane tab={<div style={{fontSize: '22px', fontWeight: 'bold', padding: '0 12px'}}>关 注</div>} key='2'>
                 <ArticleFollowList />
               </TabPane>
-              <TabPane tab='集合' key='3'>
+              <TabPane tab={<div style={{fontSize: '22px', fontWeight: 'bold', padding: '0 12px'}}>集 合</div>} key='3'>
                 <PubCollectionList />
               </TabPane>
             </Tabs>
