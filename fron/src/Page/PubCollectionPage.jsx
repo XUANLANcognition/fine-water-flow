@@ -167,12 +167,6 @@ class PubCollectionPage extends Component {
     this.getArticle(value);
   };
 
-  showAddModal = () => {
-    this.setState({
-      addVisible: true,
-    });
-  };
-
   handleCancelAdd = (e) => {
     this.setState({
       addVisible: false,
@@ -234,83 +228,6 @@ class PubCollectionPage extends Component {
     return (
       <Layout style={{ minHeight: "100vh" }}>
         <Nav />
-        <Modal
-          title="增加文章"
-          visible={this.state.addVisible}
-          onCancel={this.handleCancelAdd}
-          centered
-          footer={null}
-          width={860}
-        >
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "start",
-              alignItems: "center",
-              fontWeight: "bold",
-              color: "#000",
-              marginBottom: "4px",
-            }}
-          >
-            已添加文章 ：
-            {selectedRowKeys.map((item) => (
-              <div
-                style={{
-                  backgroundColor: "#ffd6e7",
-                  padding: "6px 8px",
-                  margin: "0 6px",
-                  borderRadius: "6px",
-                }}
-              >
-                {item}
-              </div>
-            ))}
-          </div>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "start",
-              alignItems: "center",
-              fontWeight: "bold",
-              color: "#000",
-            }}
-          >
-            新添加文章 ：
-            {selectedRowKeys.map((item) => (
-              <div
-                style={{
-                  backgroundColor: "#b7eb8f",
-                  padding: "6px 8px",
-                  margin: "0 6px",
-                  borderRadius: "6px",
-                }}
-              >
-                {item}
-              </div>
-            ))}
-          </div>
-          <Table
-            style={{ margin: "8px 0" }}
-            size="large"
-            columns={columns}
-            rowSelection={rowSelection}
-            dataSource={this.state.cache}
-            loading={this.state.loading}
-            scroll={{ y: this.state.y }}
-            bordered
-            rowKey={(record) => record.id}
-            tableLayout="fixed"
-            expandedRowRender={(record) => (
-              <div dangerouslySetInnerHTML={{ __html: record.content }}></div>
-            )}
-            pagination={{
-              onChange: this.handArticlePage,
-              pageSize: count,
-              total: this.state.cache.length,
-              showQuickJumper: true,
-            }}
-          />
-        </Modal>
         <div
           style={{ flex: "1 0", minHeight: "100vh", backgroundColor: "#fff" }}
         >
@@ -368,11 +285,6 @@ class PubCollectionPage extends Component {
                       margin: "8px 12px",
                     }}
                   >
-                    <IconFont
-                      type="icon-zengjia1"
-                      style={{ fontSize: "32px", marginRight: "12px" }}
-                      onClick={this.showAddModal}
-                    />
                   </div>
                   <div style={{ margin: "0 5px" }}>
                     {this.state.articles &&
