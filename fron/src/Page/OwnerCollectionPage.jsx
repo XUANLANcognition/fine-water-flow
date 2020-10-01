@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Layout, Row, Col, Icon, Modal, Table, Affix } from "antd";
+import { Layout, Row, Col, Icon, Modal, Table, Affix, Button } from "antd";
 import axios from "axios";
 import "rc-texty/assets/index.css";
 import dayjs from "dayjs";
@@ -8,11 +8,13 @@ import Nav from "../Nav";
 import Myfooter from "../Myfooter";
 import AvatarF from "../AvatarF";
 
-const count = 6;
+const count = 8;
 
 const IconFont = Icon.createFromIconfontCN({
   scriptUrl: "//at.alicdn.com/t/font_1242637_n0895drewt.js",
 });
+
+const { confirm } = Modal;
 
 const columns = [
   {
@@ -50,6 +52,13 @@ const columns = [
   },
 ];
 
+const difference = (currentList, oringinList) => {
+  let current = new Set(currentList);
+  let origin = new Set(oringinList);
+  let diff = currentList.filter(x => !origin.has(x));
+  return diff
+}
+
 class OwnerCollectionPage extends Component {
   page = 1;
   state = {
@@ -71,7 +80,42 @@ class OwnerCollectionPage extends Component {
     initLoading: true,
     search: "",
     page: 1,
+    originalList: [],
+    createList: [],
+    deleteList: []
   };
+
+  showConfirm = async () => {
+    confirm({
+      title: '确认要改动集合吗?',
+      onOk: async () => {
+        console.log('删除', difference(this.state.originalList, this.state.selectedRowKeys))
+        console.log('新增', difference(this.state.selectedRowKeys, this.state.originalList))
+        let config = {
+          headers: { 'Authorization': 'Token ' + window.localStorage.getItem('token') }
+        }
+        const response = await axios.patch(
+          'https://101.200.52.246:8080/api/owner_collections/' + this.state.id,
+          {
+            articles: JSON.stringify(this.state.selectedRowKeys)
+          },
+          config
+        )
+        this.setState({
+          addVisible: false
+        })
+        await this.getData();
+        await this.getArticle(this.state.key);
+        await this.getArticleData();
+        this.setState({
+          initLoading: false,
+        });
+      },
+      onCancel: () => {
+        console.log('Cancel');
+      },
+    });
+  }
 
   getArticleData = async (v) => {
     try {
@@ -82,12 +126,12 @@ class OwnerCollectionPage extends Component {
       };
       const response = await axios.get(
         "https://101.200.52.246:8080/api/owner_articles/?format=json" +
-          "&page=" +
-          this.page +
-          "&page_size=" +
-          count +
-          "&search=" +
-          this.state.search,
+        "&page=" +
+        this.page +
+        "&page_size=" +
+        count +
+        "&search=" +
+        this.state.search,
         config
       );
       const temp = [];
@@ -138,6 +182,7 @@ class OwnerCollectionPage extends Component {
           key:
             response.data.article.length > 0 ? response.data.article[0].id : "",
           selectedRowKeys: tempSelected,
+          originalList: tempSelected
         };
       });
     } catch (error) {
@@ -190,8 +235,7 @@ class OwnerCollectionPage extends Component {
     });
   };
 
-  onSelectChange = (selectedRowKeys) => {
-    console.log("selectedRowKeys changed: ", selectedRowKeys);
+  onSelectChange = async (selectedRowKeys) => {
     this.setState({ selectedRowKeys });
   };
 
@@ -218,12 +262,12 @@ class OwnerCollectionPage extends Component {
       };
       const response = await axios.get(
         "https://101.200.52.246:8080/api/owner_articles/?format=json" +
-          "&page=" +
-          page +
-          "&page_size=" +
-          count +
-          "&search=" +
-          this.state.search,
+        "&page=" +
+        page +
+        "&page_size=" +
+        count +
+        "&search=" +
+        this.state.search,
         config
       );
       let temp = this.state.cache;
@@ -257,7 +301,8 @@ class OwnerCollectionPage extends Component {
           onCancel={this.handleCancelAdd}
           centered
           footer={null}
-          width={860}
+          width={960}
+          closable
         >
           <div
             style={{
@@ -269,19 +314,19 @@ class OwnerCollectionPage extends Component {
               marginBottom: "4px",
             }}
           >
-            已添加文章 ：
-            {selectedRowKeys.map((item) => (
-              <div
-                style={{
-                  backgroundColor: "#ffd6e7",
-                  padding: "6px 8px",
-                  margin: "0 6px",
-                  borderRadius: "6px",
-                }}
-              >
-                {item}
-              </div>
-            ))}
+            新增文章 ：
+            {difference(this.state.selectedRowKeys, this.state.originalList).map((item) => (
+            <div
+              style={{
+                backgroundColor: "#ffd6e7",
+                padding: "6px 8px",
+                margin: "0 6px",
+                borderRadius: "6px",
+              }}
+            >
+              {item}
+            </div>
+          ))}
           </div>
           <div
             style={{
@@ -292,19 +337,19 @@ class OwnerCollectionPage extends Component {
               color: "#000",
             }}
           >
-            新添加文章 ：
-            {selectedRowKeys.map((item) => (
-              <div
-                style={{
-                  backgroundColor: "#b7eb8f",
-                  padding: "6px 8px",
-                  margin: "0 6px",
-                  borderRadius: "6px",
-                }}
-              >
-                {item}
-              </div>
-            ))}
+            删除文章 ：
+            {difference(this.state.originalList, this.state.selectedRowKeys).map((item) => (
+            <div
+              style={{
+                backgroundColor: "#b7eb8f",
+                padding: "6px 8px",
+                margin: "0 6px",
+                borderRadius: "6px",
+              }}
+            >
+              {item}
+            </div>
+          ))}
           </div>
           <Table
             style={{ margin: "8px 0" }}
@@ -327,6 +372,9 @@ class OwnerCollectionPage extends Component {
               showQuickJumper: true,
             }}
           />
+          <div style={{ display: 'flex', flexDirection: 'row-reverse' }}>
+            <Button type='primary' onClick={this.showConfirm}>确认修改</Button>
+          </div>
         </Modal>
         <div
           style={{ flex: "1 0", minHeight: "100vh", backgroundColor: "#fff" }}
@@ -382,14 +430,10 @@ class OwnerCollectionPage extends Component {
                     style={{
                       display: "flex",
                       justifyContent: "start",
-                      margin: "8px 12px",
+                      margin: "8px 8px",
                     }}
                   >
-                    <IconFont
-                      type="icon-zengjia1"
-                      style={{ fontSize: "32px", marginRight: "12px" }}
-                      onClick={this.showAddModal}
-                    />
+                    <Button type='primary' onClick={this.showAddModal}>综合整理</Button>
                   </div>
                   <div style={{ margin: "0 5px" }}>
                     {this.state.articles &&
