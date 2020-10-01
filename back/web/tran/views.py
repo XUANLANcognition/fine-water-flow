@@ -1221,6 +1221,17 @@ class CollectionOwnerDetail(generics. RetrieveUpdateDestroyAPIView):
     permission_classes = (Read,)
     filter_backends = (CollectionOwnerFilter,)
 
+    def update(self, request, *args, **kwargs):
+        partial = kwargs.pop('partial', False)
+        instance = self.get_object()
+        serializer = self.get_serializer(instance, data=request.data, partial=partial)
+        serializer.is_valid(raise_exception=True)
+        data = json.loads(self.request.data['articles'])
+        article_list = Article.objects.filter(id__in = data)
+        serializer.save(article = article_list)
+        self.perform_update(serializer)
+        return Response(serializer.data)
+
 
 # Sign on API
 
