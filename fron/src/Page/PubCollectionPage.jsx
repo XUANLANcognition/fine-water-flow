@@ -7,7 +7,7 @@ import dayjs from "dayjs";
 import Nav from "../Nav";
 import Myfooter from "../Myfooter";
 import AvatarF from "../AvatarF";
-import AddComment from '../AddComment'
+import AddComment from "../AddComment";
 
 const count = 6;
 
@@ -112,7 +112,9 @@ class PubCollectionPage extends Component {
 
   getData = async (v) => {
     try {
-      let url = "https://101.200.52.246:8080/api/collections/" + this.props.match.params.id
+      let url =
+        "https://101.200.52.246:8080/api/collections/" +
+        this.props.match.params.id;
       const response = await axios.get(url);
       const tempSelected = [];
       for (let index = 0; index < response.data.article.length; index++) {
@@ -201,7 +203,7 @@ class PubCollectionPage extends Component {
           "&page_size=" +
           count +
           "&search=" +
-          this.state.search,
+          this.state.search
       );
       let temp = this.state.cache;
       let i = (page - 1) * count;
@@ -284,35 +286,38 @@ class PubCollectionPage extends Component {
                       justifyContent: "start",
                       margin: "8px 12px",
                     }}
-                  >
-                  </div>
+                  ></div>
                   <div style={{ margin: "0 5px" }}>
-                    {this.state.articles &&
-                      this.state.articles.map((item) => (
-                        <div
-                          onClick={() => this.handleClick(item.id)}
-                          className="box"
-                          style={{
-                            fontSize: "16px",
-                            fontWeight: "bold",
-                            color:
-                              this.state.key == item.id ? "#096dd9" : "gray",
-                            padding: "12px",
-                            marginBottom: "6px",
-                            borderRadius: "6px",
-                            display: "flex",
-                            alignItems: "center",
-                            border:
-                              this.state.key == item.id
-                                ? "2px solid gray"
-                                : "1px solid gray",
-                            backgroundColor:
-                              this.state.key == item.id ? "#bae7ff" : "white",
-                          }}
-                        >
-                          <div>{item.title}</div>
-                        </div>
-                      ))}
+                    <div style={{ overflow: "auto", height: "260px" }}>
+                      {this.state.articles &&
+                        this.state.articles.map((item) => (
+                          <div
+                            onClick={() => this.handleClick(item.id)}
+                            className="box"
+                            style={{
+                              fontSize: "16px",
+                              fontWeight: "bold",
+                              color:
+                                this.state.key == item.id ? "#096dd9" : "gray",
+                              padding: "12px",
+                              marginBottom: "6px",
+                              borderRadius: "6px",
+                              display: "flex",
+                              alignItems: "center",
+                              border:
+                                this.state.key == item.id
+                                  ? "2px solid gray"
+                                  : "1px solid gray",
+                              backgroundColor:
+                                this.state.key == item.id ? "#bae7ff" : "white",
+                            }}
+                          >
+                            <a>
+                              <div style={{ color: "#000" }}>{item.title}</div>
+                            </a>
+                          </div>
+                        ))}
+                    </div>
                   </div>
                 </div>
               </Affix>
@@ -373,7 +378,10 @@ class PubCollectionPage extends Component {
                   __html: this.state.article && this.state.article.content,
                 }}
               ></div>
-              <AddComment articleId={this.state.article.id} articleUrl={this.state.article.url} />
+              <AddComment
+                articleId={this.state.article.id}
+                articleUrl={this.state.article.url}
+              />
             </Col>
           </Row>
         </div>

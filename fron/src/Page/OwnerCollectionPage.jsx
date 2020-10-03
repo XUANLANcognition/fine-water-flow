@@ -304,8 +304,8 @@ class OwnerCollectionPage extends Component {
 
   deleteitemConfirm = async (item) => {
     this.setState({
-      totaloading: true
-    })
+      totaloading: true,
+    });
     const list = this.state.selectedRowKeys;
     list.splice(list.indexOf(item), 1);
     let config = {
@@ -501,51 +501,59 @@ class OwnerCollectionPage extends Component {
                       </Button>
                     </div>
                     <div style={{ margin: "0 5px" }}>
-                      {this.state.articles &&
-                        this.state.articles.map((item) => (
-                          <div
-                            className="box"
-                            style={{
-                              fontSize: "16px",
-                              fontWeight: "bold",
-                              color:
-                                this.state.key == item.id ? "#096dd9" : "gray",
-                              padding: "12px",
-                              marginBottom: "6px",
-                              borderRadius: "6px",
-                              display: "flex",
-                              justifyContent: "space-between",
-                              alignItems: "center",
-                              border:
-                                this.state.key == item.id
-                                  ? "2px solid gray"
-                                  : "1px solid gray",
-                              backgroundColor:
-                                this.state.key == item.id ? "#bae7ff" : "white",
-                            }}
-                          >
-                            <a href="#">
-                              <div
-                                onClick={() => this.handleClick(item.id)}
-                                style={{ color: "#000" }}
-                              >
-                                {item.title}
-                              </div>
-                            </a>
-
-                            <Popconfirm
-                              title="确认要将这篇文章移出本集合吗？"
-                              onConfirm={() => this.deleteitemConfirm(item.id)}
-                              okText="确认"
-                              cancelText="取消"
-                              placement="right"
+                      <div style={{ overflow: "auto", height: "260px" }}>
+                        {this.state.articles &&
+                          this.state.articles.map((item) => (
+                            <div
+                              className="box"
+                              style={{
+                                fontSize: "16px",
+                                fontWeight: "bold",
+                                color:
+                                  this.state.key == item.id
+                                    ? "#096dd9"
+                                    : "gray",
+                                padding: "12px",
+                                marginBottom: "6px",
+                                borderRadius: "6px",
+                                display: "flex",
+                                justifyContent: "space-between",
+                                alignItems: "center",
+                                border:
+                                  this.state.key == item.id
+                                    ? "2px solid gray"
+                                    : "1px solid gray",
+                                backgroundColor:
+                                  this.state.key == item.id
+                                    ? "#bae7ff"
+                                    : "white",
+                              }}
                             >
-                              <Button type="danger" size="small">
-                                移除
-                              </Button>
-                            </Popconfirm>
-                          </div>
-                        ))}
+                              <a>
+                                <div
+                                  onClick={() => this.handleClick(item.id)}
+                                  style={{ color: "#000" }}
+                                >
+                                  {item.title}
+                                </div>
+                              </a>
+
+                              <Popconfirm
+                                title="确认要将这篇文章移出本集合吗？"
+                                onConfirm={() =>
+                                  this.deleteitemConfirm(item.id)
+                                }
+                                okText="确认"
+                                cancelText="取消"
+                                placement="right"
+                              >
+                                <Button type="danger" size="small">
+                                  移除
+                                </Button>
+                              </Popconfirm>
+                            </div>
+                          ))}
+                      </div>
                       <a href="#">
                         <div
                           style={{
