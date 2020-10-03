@@ -1,17 +1,36 @@
 import React, { Component } from "react";
-import { Layout, Row, Col, Icon, Modal, Table, Affix, Button } from "antd";
+import {
+  Layout,
+  Row,
+  Col,
+  Icon,
+  Modal,
+  Table,
+  Affix,
+  Button,
+  Drawer,
+  Popconfirm,
+  message,
+  Spin,
+} from "antd";
 import axios from "axios";
 import "rc-texty/assets/index.css";
 import dayjs from "dayjs";
+import "antd/dist/antd.css";
 
 import Nav from "../Nav";
 import Myfooter from "../Myfooter";
 import AvatarF from "../AvatarF";
 
-const count = 8;
+const count = 12;
+
+function cancel(e) {
+  console.log(e);
+  message.error("Click on No");
+}
 
 const IconFont = Icon.createFromIconfontCN({
-  scriptUrl: "//at.alicdn.com/t/font_1242637_n0895drewt.js",
+  scriptUrl: "//at.alicdn.com/t/font_1242637_ap4mzziw7fr.js",
 });
 
 const { confirm } = Modal;
@@ -55,15 +74,14 @@ const columns = [
 const difference = (currentList, oringinList) => {
   let current = new Set(currentList);
   let origin = new Set(oringinList);
-  let diff = currentList.filter(x => !origin.has(x));
-  return diff
-}
+  let diff = currentList.filter((x) => !origin.has(x));
+  return diff;
+};
 
 class OwnerCollectionPage extends Component {
   page = 1;
   state = {
     data: "",
-    loading: false,
     articles: [],
     id: "",
     name: "",
@@ -77,45 +95,42 @@ class OwnerCollectionPage extends Component {
     selectedRowKeys: [],
     articleData: [],
     loading: false,
-    initLoading: true,
     search: "",
     page: 1,
     originalList: [],
     createList: [],
-    deleteList: []
+    deleteList: [],
+    totaloading: false,
+  };
+
+  addItem = () => {
+    message.success("功能开发中...");
   };
 
   showConfirm = async () => {
-    confirm({
-      title: '确认要改动集合吗?',
-      onOk: async () => {
-        console.log('删除', difference(this.state.originalList, this.state.selectedRowKeys))
-        console.log('新增', difference(this.state.selectedRowKeys, this.state.originalList))
-        let config = {
-          headers: { 'Authorization': 'Token ' + window.localStorage.getItem('token') }
-        }
-        const response = await axios.patch(
-          'https://101.200.52.246:8080/api/owner_collections/' + this.state.id,
-          {
-            articles: JSON.stringify(this.state.selectedRowKeys)
-          },
-          config
-        )
-        this.setState({
-          addVisible: false
-        })
-        await this.getData();
-        await this.getArticle(this.state.key);
-        await this.getArticleData();
-        this.setState({
-          initLoading: false,
-        });
-      },
-      onCancel: () => {
-        console.log('Cancel');
-      },
+    this.setState({
+      totaloading: true,
     });
-  }
+    let config = {
+      headers: {
+        Authorization: "Token " + window.localStorage.getItem("token"),
+      },
+    };
+    const response = await axios.patch(
+      "https://101.200.52.246:8080/api/owner_collections/" + this.state.id,
+      {
+        articles: JSON.stringify(this.state.selectedRowKeys),
+      },
+      config
+    );
+    await this.getData();
+    await this.getArticle(this.state.key);
+    await this.getArticleData();
+    this.setState({
+      totaloading: false,
+      addVisible: false,
+    });
+  };
 
   getArticleData = async (v) => {
     try {
@@ -126,12 +141,12 @@ class OwnerCollectionPage extends Component {
       };
       const response = await axios.get(
         "https://101.200.52.246:8080/api/owner_articles/?format=json" +
-        "&page=" +
-        this.page +
-        "&page_size=" +
-        count +
-        "&search=" +
-        this.state.search,
+          "&page=" +
+          this.page +
+          "&page_size=" +
+          count +
+          "&search=" +
+          this.state.search,
         config
       );
       const temp = [];
@@ -182,7 +197,8 @@ class OwnerCollectionPage extends Component {
           key:
             response.data.article.length > 0 ? response.data.article[0].id : "",
           selectedRowKeys: tempSelected,
-          originalList: tempSelected
+          originalList: tempSelected,
+          initLoading: false,
         };
       });
     } catch (error) {
@@ -262,12 +278,12 @@ class OwnerCollectionPage extends Component {
       };
       const response = await axios.get(
         "https://101.200.52.246:8080/api/owner_articles/?format=json" +
-        "&page=" +
-        page +
-        "&page_size=" +
-        count +
-        "&search=" +
-        this.state.search,
+          "&page=" +
+          page +
+          "&page_size=" +
+          count +
+          "&search=" +
+          this.state.search,
         config
       );
       let temp = this.state.cache;
@@ -286,6 +302,32 @@ class OwnerCollectionPage extends Component {
     }
   };
 
+  deleteitemConfirm = async (item) => {
+    this.setState({
+      totaloading: true
+    })
+    const list = this.state.selectedRowKeys;
+    list.splice(list.indexOf(item), 1);
+    let config = {
+      headers: {
+        Authorization: "Token " + window.localStorage.getItem("token"),
+      },
+    };
+    const response = await axios.patch(
+      "https://101.200.52.246:8080/api/owner_collections/" + this.state.id,
+      {
+        articles: JSON.stringify(list),
+      },
+      config
+    );
+    await this.getData();
+    await this.getArticle(this.state.key);
+    await this.getArticleData();
+    this.setState({
+      totaloading: false,
+    });
+  };
+
   render() {
     const { selectedRowKeys } = this.state;
     const rowSelection = {
@@ -295,14 +337,14 @@ class OwnerCollectionPage extends Component {
     return (
       <Layout style={{ minHeight: "100vh" }}>
         <Nav />
-        <Modal
-          title="增加文章"
+        <Drawer
+          title="综合整理"
           visible={this.state.addVisible}
-          onCancel={this.handleCancelAdd}
-          centered
+          onClose={this.handleCancelAdd}
           footer={null}
-          width={960}
           closable
+          width="56%"
+          placement="right"
         >
           <div
             style={{
@@ -313,21 +355,7 @@ class OwnerCollectionPage extends Component {
               color: "#000",
               marginBottom: "4px",
             }}
-          >
-            新增文章 ：
-            {difference(this.state.selectedRowKeys, this.state.originalList).map((item) => (
-            <div
-              style={{
-                backgroundColor: "#ffd6e7",
-                padding: "6px 8px",
-                margin: "0 6px",
-                borderRadius: "6px",
-              }}
-            >
-              {item}
-            </div>
-          ))}
-          </div>
+          ></div>
           <div
             style={{
               display: "flex",
@@ -337,19 +365,44 @@ class OwnerCollectionPage extends Component {
               color: "#000",
             }}
           >
-            删除文章 ：
-            {difference(this.state.originalList, this.state.selectedRowKeys).map((item) => (
-            <div
-              style={{
-                backgroundColor: "#b7eb8f",
-                padding: "6px 8px",
-                margin: "0 6px",
-                borderRadius: "6px",
-              }}
-            >
-              {item}
-            </div>
-          ))}
+            {difference(this.state.selectedRowKeys, this.state.originalList)
+              .length === 0
+              ? ""
+              : "新增文章 ："}
+            {difference(
+              this.state.selectedRowKeys,
+              this.state.originalList
+            ).map((item) => (
+              <div
+                style={{
+                  backgroundColor: "#ffd6e7",
+                  padding: "6px 8px",
+                  margin: "0 6px",
+                  borderRadius: "6px",
+                }}
+              >
+                {item}
+              </div>
+            ))}
+            {difference(this.state.originalList, this.state.selectedRowKeys)
+              .length === 0
+              ? ""
+              : "删除文章 ："}
+            {difference(
+              this.state.originalList,
+              this.state.selectedRowKeys
+            ).map((item) => (
+              <div
+                style={{
+                  backgroundColor: "#b7eb8f",
+                  padding: "6px 8px",
+                  margin: "0 6px",
+                  borderRadius: "6px",
+                }}
+              >
+                {item}
+              </div>
+            ))}
           </div>
           <Table
             style={{ margin: "8px 0" }}
@@ -372,158 +425,207 @@ class OwnerCollectionPage extends Component {
               showQuickJumper: true,
             }}
           />
-          <div style={{ display: 'flex', flexDirection: 'row-reverse' }}>
-            <Button type='primary' onClick={this.showConfirm}>确认修改</Button>
+          <div style={{ display: "flex", flexDirection: "row-reverse" }}>
+            <Button type="primary" onClick={this.showConfirm}>
+              确认修改
+            </Button>
           </div>
-        </Modal>
+        </Drawer>
+
         <div
           style={{ flex: "1 0", minHeight: "100vh", backgroundColor: "#fff" }}
         >
-          <Row style={{ paddingTop: "30px", paddingBottom: "30px" }}>
-            <Col
-              xxl={{ span: 14, offset: 5 }}
-              xl={{ span: 20, offset: 2 }}
-              xs={{ span: 22, offset: 1 }}
-              style={{ marginBottom: "30px" }}
-            >
-              <div
-                style={{
-                  fontSize: "26px",
-                  fontWeight: "bold",
-                  color: "black",
-                  backgroundColor: "#d6e4ff",
-                  borderRadius: "8px",
-                  padding: "16px",
-                }}
+          <Spin tip="Loading..." spinning={this.state.totaloading}>
+            <Row style={{ paddingTop: "30px", paddingBottom: "30px" }}>
+              <Col
+                xxl={{ span: 14, offset: 5 }}
+                xl={{ span: 20, offset: 2 }}
+                xs={{ span: 22, offset: 1 }}
+                style={{ marginBottom: "30px" }}
               >
-                {this.state.name}
-              </div>
-            </Col>
-            <Col
-              xxl={{ span: 3, offset: 5 }}
-              xl={{ span: 5, offset: 2 }}
-              xs={{ span: 22, offset: 1 }}
-            >
-              <Affix offsetTop={10}>
                 <div
                   style={{
-                    backgroundColor: "#fff",
-                    border: "2px solid gray",
-                    borderRadius: "6px",
+                    fontSize: "26px",
+                    fontWeight: "bold",
+                    color: "black",
+                    backgroundColor: "#d6e4ff",
+                    borderRadius: "8px",
+                    padding: "16px",
                   }}
                 >
+                  {this.state.name}
+                </div>
+              </Col>
+              <Col
+                xxl={{ span: 3, offset: 5 }}
+                xl={{ span: 5, offset: 2 }}
+                xs={{ span: 22, offset: 1 }}
+              >
+                <Affix offsetTop={10}>
                   <div
                     style={{
-                      backgroundColor: "#d6e4ff",
-                      marginBottom: "12px",
-                      fontWeight: "bold",
-                      color: "#000",
-                      fontSize: "18px",
-                      padding: "16px 14px",
+                      backgroundColor: "#fff",
+                      border: "2px solid gray",
+                      borderRadius: "6px",
                     }}
                   >
-                    目录 ({" "}
-                    {this.state.data.article && this.state.data.article.length}{" "}
-                    )
-                  </div>
-                  <div
-                    style={{
-                      display: "flex",
-                      justifyContent: "start",
-                      margin: "8px 8px",
-                    }}
-                  >
-                    <Button type='primary' onClick={this.showAddModal}>综合整理</Button>
-                  </div>
-                  <div style={{ margin: "0 5px" }}>
-                    {this.state.articles &&
-                      this.state.articles.map((item) => (
+                    <div
+                      style={{
+                        backgroundColor: "#d6e4ff",
+                        marginBottom: "12px",
+                        fontWeight: "bold",
+                        color: "#000",
+                        fontSize: "18px",
+                        padding: "16px 14px",
+                      }}
+                    >
+                      目录 ({" "}
+                      {this.state.data.article &&
+                        this.state.data.article.length}{" "}
+                      )
+                    </div>
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "start",
+                        margin: "8px 8px",
+                      }}
+                    >
+                      <Button
+                        type="primary"
+                        onClick={this.showAddModal}
+                        block
+                        style={{ margin: "12px 6px" }}
+                      >
+                        综合整理
+                      </Button>
+                    </div>
+                    <div style={{ margin: "0 5px" }}>
+                      {this.state.articles &&
+                        this.state.articles.map((item) => (
+                          <div
+                            className="box"
+                            style={{
+                              fontSize: "16px",
+                              fontWeight: "bold",
+                              color:
+                                this.state.key == item.id ? "#096dd9" : "gray",
+                              padding: "12px",
+                              marginBottom: "6px",
+                              borderRadius: "6px",
+                              display: "flex",
+                              justifyContent: "space-between",
+                              alignItems: "center",
+                              border:
+                                this.state.key == item.id
+                                  ? "2px solid gray"
+                                  : "1px solid gray",
+                              backgroundColor:
+                                this.state.key == item.id ? "#bae7ff" : "white",
+                            }}
+                          >
+                            <a href="#">
+                              <div
+                                onClick={() => this.handleClick(item.id)}
+                                style={{ color: "#000" }}
+                              >
+                                {item.title}
+                              </div>
+                            </a>
+
+                            <Popconfirm
+                              title="确认要将这篇文章移出本集合吗？"
+                              onConfirm={() => this.deleteitemConfirm(item.id)}
+                              okText="确认"
+                              cancelText="取消"
+                              placement="right"
+                            >
+                              <Button type="danger" size="small">
+                                移除
+                              </Button>
+                            </Popconfirm>
+                          </div>
+                        ))}
+                      <a href="#">
                         <div
-                          onClick={() => this.handleClick(item.id)}
-                          className="box"
                           style={{
-                            fontSize: "16px",
-                            fontWeight: "bold",
-                            color:
-                              this.state.key == item.id ? "#096dd9" : "gray",
+                            fontSize: "18px",
+                            border: "1px dashed gray",
+                            borderStyle: "dashed",
                             padding: "12px",
                             marginBottom: "6px",
                             borderRadius: "6px",
                             display: "flex",
-                            alignItems: "center",
-                            border:
-                              this.state.key == item.id
-                                ? "2px solid gray"
-                                : "1px solid gray",
-                            backgroundColor:
-                              this.state.key == item.id ? "#bae7ff" : "white",
+                            justifyContent: "center",
                           }}
+                          onClick={() => this.addItem()}
                         >
-                          <div>{item.title}</div>
+                          <IconFont type="icon-zengjia" />
                         </div>
-                      ))}
+                      </a>
+                    </div>
                   </div>
-                </div>
-              </Affix>
-            </Col>
-            <Col
-              xxl={{ span: 10, offset: 1 }}
-              xl={{ span: 14, offset: 1 }}
-              xs={{ span: 22, offset: 1 }}
-              style={{}}
-            >
-              <div
-                style={{
-                  fontSize: "26px",
-                  fontWeight: "bold",
-                  marginBottom: "26px",
-                  display: "flex",
-                  justifyContent: "center",
-                  color: "#000",
-                }}
+                </Affix>
+              </Col>
+              <Col
+                xxl={{ span: 10, offset: 1 }}
+                xl={{ span: 14, offset: 1 }}
+                xs={{ span: 22, offset: 1 }}
+                style={{}}
               >
-                {this.state.article && this.state.article.title}
-              </div>
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                  margin: "28px 0",
-                }}
-              >
-                <div style={{ fontWeight: "bold", fontSize: "18px" }}>
-                  {"发布于 " +
-                    dayjs(this.state.article.pub_date).format("YYYY MM-DD")}
+                <div
+                  style={{
+                    fontSize: "26px",
+                    fontWeight: "bold",
+                    marginBottom: "26px",
+                    display: "flex",
+                    justifyContent: "center",
+                    color: "#000",
+                  }}
+                >
+                  {this.state.article && this.state.article.title}
                 </div>
                 <div
                   style={{
                     display: "flex",
                     justifyContent: "space-between",
                     alignItems: "center",
+                    margin: "28px 0",
                   }}
                 >
+                  <div style={{ fontWeight: "bold", fontSize: "18px" }}>
+                    {"发布于 " +
+                      dayjs(this.state.article.pub_date).format("YYYY MM-DD")}
+                  </div>
                   <div
                     style={{
-                      fontSize: "16px",
-                      marginRight: "8px",
-                      fontWeight: "bold",
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "center",
                     }}
                   >
-                    作者 :{" "}
+                    <div
+                      style={{
+                        fontSize: "16px",
+                        marginRight: "8px",
+                        fontWeight: "bold",
+                      }}
+                    >
+                      作者 :{" "}
+                    </div>
+                    <AvatarF
+                      user={this.state.article && this.state.article.user}
+                    ></AvatarF>
                   </div>
-                  <AvatarF
-                    user={this.state.article && this.state.article.user}
-                  ></AvatarF>
                 </div>
-              </div>
-              <div
-                dangerouslySetInnerHTML={{
-                  __html: this.state.article && this.state.article.content,
-                }}
-              ></div>
-            </Col>
-          </Row>
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: this.state.article && this.state.article.content,
+                  }}
+                ></div>
+              </Col>
+            </Row>
+          </Spin>
         </div>
         <Myfooter />
       </Layout>
