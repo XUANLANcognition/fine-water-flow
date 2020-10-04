@@ -1226,9 +1226,12 @@ class CollectionOwnerDetail(generics. RetrieveUpdateDestroyAPIView):
         instance = self.get_object()
         serializer = self.get_serializer(instance, data=request.data, partial=partial)
         serializer.is_valid(raise_exception=True)
-        data = json.loads(self.request.data['articles'])
-        article_list = Article.objects.filter(id__in = data)
-        serializer.save(article = article_list)
+        try:
+            data = json.loads(self.request.data['articles'])
+            article_list = Article.objects.filter(id__in = data)
+            serializer.save(article = article_list)
+        except Exception as e:
+            pass
         self.perform_update(serializer)
         return Response(serializer.data)
 
