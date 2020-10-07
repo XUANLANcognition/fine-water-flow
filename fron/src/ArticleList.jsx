@@ -1,15 +1,16 @@
 import React, { Component } from "react";
-import { List, Button, Skeleton, Avatar, Icon, Input } from "antd";
+import { List, Button, Skeleton, Avatar, Icon, Input, message } from "antd";
 import axios from "axios";
 import dayjs from "dayjs";
 import { Link } from "react-router-dom";
 
 import AvatarF from "./AvatarF";
+import LikeButton from "./components/LikeButton"
 
 const count = 6;
 const briefLength = 100;
 const IconFont = Icon.createFromIconfontCN({
-  scriptUrl: "//at.alicdn.com/t/font_1242637_vfurgm6ec3b.js"
+  scriptUrl: "//at.alicdn.com/t/font_1242637_b4hldbl6aq.js"
 });
 const { Search } = Input;
 
@@ -42,6 +43,37 @@ class ArticleList extends Component {
     }
     return text;
   };
+
+  testLike = async (id) => {
+    try {
+      let config = {
+        headers: { 'Authorization': 'Token ' + window.localStorage.getItem('token') }
+      }
+      const response = await axios.get(
+        'https://101.200.52.246:8080/api/likes/?article=' + id + '&user=' + window.localStorage.getItem('user_id'),
+        config
+      )
+      return response.data.count === 1 ? true : false
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  getLike = async (id) => {
+    try {
+      let config = {
+        headers: { 'Authorization': 'Token ' + window.localStorage.getItem('token') }
+      }
+      const response = await axios.get(
+        'https://101.200.52.246:8080/api/likes/?article=' + id,
+        config
+      )
+      message.info(response.data.count)
+      return response.data.count
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   getArticleData = async v => {
     try {
@@ -181,11 +213,12 @@ class ArticleList extends Component {
                 >
                   {" "}
                   <IconFont
-                    type="icon-eye-fill"
+                    type="icon-liulanjilu"
                     style={{ paddingLeft: "5px", color: "#76839b" }}
                   />{" "}
-                  浏览 {item.views} 次
-                </Button>
+                  被浏览 {item.views} 次
+                </Button>,
+                <LikeButton article_id={item.id}></LikeButton>
               ]}
             >
               <div
