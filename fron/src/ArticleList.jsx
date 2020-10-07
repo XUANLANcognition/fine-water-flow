@@ -20,7 +20,8 @@ class ArticleList extends Component {
     loading: false,
     initLoading: true,
     page: 1,
-    next: ""
+    next: "",
+    search: ""
   };
 
   componentDidMount = async v => {
@@ -77,7 +78,9 @@ class ArticleList extends Component {
         "&page=" +
         this.state.page +
         "&page_size=" +
-        count
+        count + 
+        "&search=" +
+        this.state.search
       );
       this.setState({
         next: response.data.next
@@ -100,13 +103,14 @@ class ArticleList extends Component {
 
   search = async value => {
     this.setState({
-      initLoading: true
+      initLoading: true,
+      search: value
     });
     try {
       const response = await axios.get(
         "https://101.200.52.246:8080/api/articles/?format=json" +
         "&page=" +
-        this.page +
+        this.state.page +
         "&page_size=" +
         count +
         "&search=" +

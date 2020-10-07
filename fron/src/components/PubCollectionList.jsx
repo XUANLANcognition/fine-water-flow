@@ -213,7 +213,7 @@ class PubCollectionList extends Component {
                       </div>
                       <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center'}}>
                         <AvatarF user={item.user}></AvatarF>
-                        <div style={{marginTop: '8px', fontSize: '12px', color: 'black'}}>{item.user.username}</div>
+                        <div style={{marginTop: '8px', fontSize: '12px', color: 'black'}}>{item.user && item.user.username}</div>
                       </div>
                     </div>
                   </Link>
