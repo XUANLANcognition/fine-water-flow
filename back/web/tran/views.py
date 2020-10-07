@@ -3,7 +3,7 @@ from django.http import JsonResponse
 from rest_framework import routers, serializers, viewsets, status
 from rest_framework.pagination import PageNumberPagination
 from django.contrib.auth.models import User
-from .models import Article, Comment, Profile, Book, BookTag, BookBlock, BookComment, Figure, Movie, MovieComment, MovieBlock, MovieTag, Picture, Source, Notice, FollowRela, Brand, Genre,Computer, CPU, GPU, Earphone, Phone, Collection
+from .models import Article, Comment, Profile, Book, BookTag, BookBlock, BookComment, Figure, Movie, MovieComment, MovieBlock, MovieTag, Picture, Source, Notice, FollowRela, Brand, Genre,Computer, CPU, GPU, Earphone, Phone, Collection, Like
 from rest_framework.authtoken.models import Token
 from django.conf import settings
 
@@ -1234,6 +1234,57 @@ class CollectionOwnerDetail(generics. RetrieveUpdateDestroyAPIView):
             pass
         self.perform_update(serializer)
         return Response(serializer.data)
+
+
+# Like API
+
+class LikeSerializer(serializers.HyperlinkedModelSerializer):
+    user = UserBriefSerializer(read_only = True)
+    article = ArticleBriefSerializer(read_only=True)
+
+    class Meta:
+        model = Like
+        fields = ('id', 'user', 'article', 'pub_date')
+
+class LikePagination(PageNumberPagination):
+    page_size = 8
+    page_size_query_param = 'page_size'
+    max_page_size = 128
+
+    class Meta:
+        model = Like
+        fields = '__all__'
+
+
+class LikeFilter(filters.FilterSet):
+    
+    class Meta:
+        model = Like
+        fields = '__all__'
+
+class LikeList(generics.ListCreateAPIView):
+    queryset = Like.objects.all()
+    serializer_class = LikeSerializer
+    permission_classes = (Publish,)
+    pagination_class = LikePagination
+    filter_backends = (filters.DjangoFilterBackend, filter_drf.SearchFilter)
+    search_fields = ('name', )
+    filterset_class = LikeFilter
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
+        try:
+            data = json.loads(self.request.data['article'])
+            article = Article.objects.get(id = data)
+            serializer.save(article = article)
+        except Exception as e:
+            pass
+
+
+class LikeDetail(generics.RetrieveDestroyAPIView):
+    queryset = Like.objects.all()
+    serializer_class = LikeSerializer
+    permission_classes = (Read,)
 
 
 # Sign on API

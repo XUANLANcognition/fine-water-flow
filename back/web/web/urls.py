@@ -100,5 +100,7 @@ urlpatterns = [
     path('api/collections/', CollectionList.as_view(), name='collection-list'),
     path('api/collections/<int:pk>', CollectionDetail.as_view(), name='collection-detail'),
     path('api/owner_collections/', CollectionOwnerList.as_view(), name='collection-list'),
-    path('api/owner_collections/<int:pk>', CollectionOwnerDetail.as_view(), name='collection-detail')
+    path('api/owner_collections/<int:pk>', CollectionOwnerDetail.as_view(), name='collection-detail'),
+    path('api/likes/', LikeList.as_view(), name='like-list'),
+    path('api/likes/<int:pk>', LikeDetail.as_view(), name='like-detail'),
 ]

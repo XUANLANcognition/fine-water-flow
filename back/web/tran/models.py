@@ -323,3 +323,22 @@ class Collection(models.Model):
     def __str__(self):
         """Unicode representation of Collection."""
         return '%s' % (self.name)
+
+class Like(models.Model):
+    """Model definition for Like."""
+
+    # TODO: Define fields here
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='like_user')
+    article = models.ForeignKey(Article, on_delete=models.CASCADE, related_name='like_article',  blank=True, null=True)
+    pub_date = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        """Meta definition for Like."""
+
+        verbose_name = 'Like'
+        verbose_name_plural = 'Likes'
+        unique_together = ['user', 'article']
+
+    def __str__(self):
+        """Unicode representation of Like."""
+        return '%s | %s' % (self.user.username, self.article)
