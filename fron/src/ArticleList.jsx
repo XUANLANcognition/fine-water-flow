@@ -5,12 +5,12 @@ import dayjs from "dayjs";
 import { Link } from "react-router-dom";
 
 import AvatarF from "./AvatarF";
-import LikeButton from "./components/LikeButton"
+import LikeButton from "./components/LikeButton";
 
 const count = 6;
-const briefLength = 100;
+
 const IconFont = Icon.createFromIconfontCN({
-  scriptUrl: "//at.alicdn.com/t/font_1242637_b4hldbl6aq.js"
+  scriptUrl: "//at.alicdn.com/t/font_1242637_b4hldbl6aq.js",
 });
 const { Search } = Input;
 
@@ -22,21 +22,21 @@ class ArticleList extends Component {
     initLoading: true,
     page: 1,
     next: "",
-    search: ""
+    search: "",
   };
 
-  componentDidMount = async v => {
+  componentDidMount = async (v) => {
     await this.getArticleData();
     this.setState({ initLoading: false });
   };
 
-  extractText = HTMLString => {
+  extractText = (HTMLString) => {
     var span = document.createElement("span");
     span.innerHTML = HTMLString;
     return span.textContent || span.innerText;
   };
 
-  extractBrief = HTMLString => {
+  extractBrief = (HTMLString, briefLength) => {
     const text = this.extractText(HTMLString);
     if (text.length > briefLength) {
       return text.slice(0, briefLength) + "……";
@@ -47,75 +47,82 @@ class ArticleList extends Component {
   testLike = async (id) => {
     try {
       let config = {
-        headers: { 'Authorization': 'Token ' + window.localStorage.getItem('token') }
-      }
+        headers: {
+          Authorization: "Token " + window.localStorage.getItem("token"),
+        },
+      };
       const response = await axios.get(
-        'https://101.200.52.246:8080/api/likes/?article=' + id + '&user=' + window.localStorage.getItem('user_id'),
+        "https://101.200.52.246:8080/api/likes/?article=" +
+          id +
+          "&user=" +
+          window.localStorage.getItem("user_id"),
         config
-      )
-      return response.data.count === 1 ? true : false
+      );
+      return response.data.count === 1 ? true : false;
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
 
   getLike = async (id) => {
     try {
       let config = {
-        headers: { 'Authorization': 'Token ' + window.localStorage.getItem('token') }
-      }
+        headers: {
+          Authorization: "Token " + window.localStorage.getItem("token"),
+        },
+      };
       const response = await axios.get(
-        'https://101.200.52.246:8080/api/likes/?article=' + id,
+        "https://101.200.52.246:8080/api/likes/?article=" + id,
         config
-      )
-      message.info(response.data.count)
-      return response.data.count
+      );
+      message.info(response.data.count);
+      return response.data.count;
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
 
-  getArticleData = async v => {
+  getArticleData = async (v) => {
     try {
       const response = await axios.get(
         "https://101.200.52.246:8080/api/articles/?format=json" +
-        "&page=" +
-        this.state.page +
-        "&page_size=" +
-        count
+          "&page=" +
+          this.state.page +
+          "&page_size=" +
+          count
       );
       this.setState({
         data: response.data.results,
         cache: response.data.results,
-        next: response.data.next
+        next: response.data.next,
       });
     } catch (error) {
       console.log(error);
     }
   };
 
-  onLoadMore = async v => {
+  onLoadMore = async (v) => {
     this.setState({
       loading: true,
       cache: this.state.data.concat(
         [...new Array(count)].map(() => ({ loading: true, name: {} }))
-      )
+      ),
     });
     try {
       this.setState({
-        page: this.state.page + 1
+        page: this.state.page + 1,
       });
       const response = await axios.get(
         "https://101.200.52.246:8080/api/articles/?format=json" +
-        "&page=" +
-        this.state.page +
-        "&page_size=" +
-        count + 
-        "&search=" +
-        this.state.search
+          "&page=" +
+          this.state.page +
+          "&page_size=" +
+          count +
+          "&search=" +
+          this.state.search
       );
       this.setState({
-        next: response.data.next
+        next: response.data.next,
       });
       const temp1 = this.state.data;
       if (response.status === 200) {
@@ -125,7 +132,7 @@ class ArticleList extends Component {
         });
       } else {
         this.setState({
-          cache: temp1
+          cache: temp1,
         });
       }
     } catch (error) {
@@ -133,26 +140,26 @@ class ArticleList extends Component {
     }
   };
 
-  search = async value => {
+  search = async (value) => {
     this.setState({
       initLoading: true,
-      search: value
+      search: value,
     });
     try {
       const response = await axios.get(
         "https://101.200.52.246:8080/api/articles/?format=json" +
-        "&page=" +
-        this.state.page +
-        "&page_size=" +
-        count +
-        "&search=" +
-        value
+          "&page=" +
+          this.state.page +
+          "&page_size=" +
+          count +
+          "&search=" +
+          value
       );
       this.setState({
         data: response.data.results,
         cache: response.data.results,
         initLoading: false,
-        next: response.data.next
+        next: response.data.next,
       });
     } catch (error) {
       console.log(error);
@@ -168,7 +175,7 @@ class ArticleList extends Component {
             textAlign: "center",
             marginTop: 12,
             height: 32,
-            lineHeight: "32px"
+            lineHeight: "32px",
           }}
         >
           {data.length > 0 && (
@@ -185,12 +192,12 @@ class ArticleList extends Component {
         style={{
           backgroundColor: "#fff",
           boxShadow: "0 1px 3px rgba(26,26,26,.1)",
-          borderRadius: "1px"
+          borderRadius: "1px",
         }}
       >
         <Search
           placeholder="请输入文章标题或内容含有的关键字"
-          onSearch={value => this.search(value)}
+          onSearch={(value) => this.search(value)}
           enterButton
         />
         <List
@@ -198,8 +205,24 @@ class ArticleList extends Component {
           dataSource={cache}
           loadMore={loadMore}
           loading={initLoading}
-          renderItem={item => (
+          renderItem={(item) => (
             <List.Item
+              extra={
+                item.cover === "" ? null : (
+                  <img
+                    style={{
+                      borderRadius: "6px",
+                      background: "rgb(18 18 18 / 2%)",
+                      marginTop: '18px',
+                      height: '140px',
+                      objectFit: 'cover'
+                    }}
+                    width={216}
+                    alt="logo"
+                    src={item.cover}
+                  />
+                )
+              }
               actions={[
                 <Button
                   style={{
@@ -207,7 +230,7 @@ class ArticleList extends Component {
                     backgroundColor: "transparent",
                     display: "inline-block",
                     fontSize: "14px",
-                    fontWeight: "500"
+                    fontWeight: "500",
                   }}
                   type="link"
                 >
@@ -218,17 +241,17 @@ class ArticleList extends Component {
                   />{" "}
                   被浏览 {item.views} 次
                 </Button>,
-                <LikeButton article_id={item.id}></LikeButton>
+                <LikeButton article_id={item.id}></LikeButton>,
               ]}
             >
               <div
                 style={
                   item.originality === "Y"
                     ? {
-                      borderLeft: "8px solid",
-                      borderColor: "#269f42",
-                      paddingLeft: "15px"
-                    }
+                        borderLeft: "8px solid",
+                        borderColor: "#269f42",
+                        paddingLeft: "15px",
+                      }
                     : {}
                 }
               >
@@ -238,7 +261,7 @@ class ArticleList extends Component {
                       <Link
                         to={
                           ((item.user && item.user.id) + "" ===
-                            window.localStorage.getItem("user_id")
+                          window.localStorage.getItem("user_id")
                             ? "/profile/"
                             : "/visit/") + (item.user && item.user.id)
                         }
@@ -247,12 +270,12 @@ class ArticleList extends Component {
                           {item.user && item.user.username}
                           {(item.user &&
                             item.user.profile.media_editor_auth) ===
-                            "审核通过" ? (
-                              <IconFont
-                                type="icon-renzhenghuizhang"
-                                style={{ paddingLeft: "10px" }}
-                              />
-                            ) : null}
+                          "审核通过" ? (
+                            <IconFont
+                              type="icon-renzhenghuizhang"
+                              style={{ paddingLeft: "10px" }}
+                            />
+                          ) : null}
                         </div>
                       </Link>
                     }
@@ -261,20 +284,19 @@ class ArticleList extends Component {
                       item.pub_date && dayjs(item.pub_date).fromNow()
                     }
                   />
-                  <Link target="_blank"
-                    to={"/article/" + item.id}>
+                  <Link target="_blank" to={"/article/" + item.id}>
                     <h3
                       style={{
                         color: "#1a1a1a",
                         fontWeight: "600",
                         fontSize: "18px",
-                        fontStretch: "100%"
+                        fontStretch: "100%",
                       }}
                     >
                       {item.title}
                     </h3>
                     <div style={{ color: "#646464", fontSize: "15px" }}>
-                      {this.extractBrief(item.content)}
+                      {item.cover === '' ? this.extractBrief(item.content, 108) : this.extractBrief(item.content, 36)}
                     </div>
                   </Link>
                 </Skeleton>

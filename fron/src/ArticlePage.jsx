@@ -42,6 +42,7 @@ class ArticlePage extends Component {
       pubDate: "",
       views: 0,
       user: null,
+      cover: "",
     };
   }
 
@@ -65,6 +66,7 @@ class ArticlePage extends Component {
           pubDate: response.data.pub_date,
           views: response.data.views,
           user: response.data.user,
+          cover: response.data.cover,
         };
       });
     } catch (error) {
@@ -101,16 +103,37 @@ class ArticlePage extends Component {
             <div
               type="flex"
               style={{
-                background: "#fff",
                 marginBottom: "20px",
               }}
             >
               <div
                 style={{
-                  border: "2px solid #8c8c8c",
+                  position: 'relative',
+                  overflow: 'hidden',
+                  marginBottom: '28px',
+                  borderRadius: '8px',
+                  background: this.state.cover === '' ? "#fff" : 'hsla(2, 0%, 0%, 0.12)',
+                }}
+              >
+                <div
+                  style={{
+                    background: this.state.cover === '' ? "#fff" : `url(${this.state.cover})`,
+                    position: "absolute",
+                    filter: "blur(60px)",
+                    top: 0,
+                    bottom: 0,
+                    left: 0,
+                    right: 0,
+                    zIndex: 0
+                  }}
+                />
+              <div
+                style={{
+                  position: 'relative',
                   borderRadius: "6px",
-                  padding: "16px 18px",
-                  marginBottom: "22px",
+                  padding: this.state.cover === '' ? "6px 18px" : "36px 18px",
+                  marginBottom: this.state.cover === '' ? "6px" : "28px",
+                  background: "rgba(0,30%,100%,90%)",
                 }}
               >
                 <div
@@ -160,21 +183,12 @@ class ArticlePage extends Component {
                       alignItems: "center",
                     }}
                   >
-                    <div
-                      style={{
-                        fontSize: "18px",
-                        fontWeight: "bold",
-                        marginLeft: "26px",
-                      }}
-                    >
-                      {"发布于 " + dayjs(this.state.pubDate).fromNow()}
-                    </div>
                     <div style={{ fontSize: "18px", fontWeight: "bold" }}>
                       {"被浏览 " + this.state.views + " 次"}
                     </div>
                   </div>
                 </div>
-              </div>
+              </div></div>
 
               <div
                 style={{
@@ -201,10 +215,31 @@ class ArticlePage extends Component {
                     dangerouslySetInnerHTML={{ __html: this.state.content }}
                   />
                 </div>
-
-                <div style={{ display: "flex", flexDirection: "row-reverse" }}>
-                  <LikeButton article_id={this.state.id}></LikeButton>
-                </div>
+                <Affix offsetBottom={0}>
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "row-reverse",
+                      background: "#fff",
+                      padding: "16px 8px",
+                      justifyContent: "space-between",
+                    }}
+                  >
+                    <div
+                      style={{ display: "flex", flexDirection: "row-reverse" }}
+                    >
+                      <LikeButton article_id={this.state.id}></LikeButton>
+                    </div>
+                    <div
+                      style={{
+                        fontSize: "18px",
+                        fontWeight: "bold",
+                      }}
+                    >
+                      {"发布于 " + dayjs(this.state.pubDate).fromNow()}
+                    </div>
+                  </div>
+                </Affix>
               </div>
               <div style={{ textAlign: "center" }}>
                 <Spin
