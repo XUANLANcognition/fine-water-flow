@@ -27,6 +27,7 @@ class Article(models.Model):
     pub_date = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     views = models.IntegerField(default=0)
+    cover = models.CharField(max_length=256, blank=True)
     ORIGINALITY_CHOICES = (
         ('Y', '原创'),
         ('N', '非原创')
