@@ -66,9 +66,9 @@ class BookDetailPage extends Component {
               <Col xxl={{ span: 14, offset: 5 }} xl={{ span: 20, offset: 2 }} xs={{ span: 22, offset: 1 }}>
                 <div className='Bookheader'
                   style={{
-                    position: 'relative',
+                    position: '',
                     overflow: 'hidden',
-                    background: 'hsla(0, 0%, 97%, 0.8)',
+                    background: 'hsla(0, 0%, 97%, 0.68)',
                     borderRadius: '20px'
                   }}>
                   <div style={{
