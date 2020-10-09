@@ -108,93 +108,100 @@ class ArticlePage extends Component {
             >
               <div
                 style={{
-                  position: 'relative',
-                  overflow: 'hidden',
-                  marginBottom: '28px',
-                  borderRadius: '8px',
-                  background: this.state.cover === '' ? "#fff" : 'hsla(2, 0%, 0%, 0.12)',
+                  position: "relative",
+                  overflow: "hidden",
+                  marginBottom: "18px",
+                  borderRadius: "10px",
+                  backgroundColor:
+                    this.state.cover === "" ? "#fff" : "hsla(2, 0%, 20%, 0.6)",
                 }}
               >
                 <div
                   style={{
-                    background: this.state.cover === '' ? "#fff" : `url(${this.state.cover})`,
+                    backgroundColor:
+                    this.state.cover === "" ? "#fff" : "hsla(2, 0%, 20%, 0.6)",
+                    backgroundImage:
+                      this.state.cover === ""
+                        ? "#fff"
+                        : `url(${this.state.cover})`,
                     position: "absolute",
-                    filter: "blur(60px)",
+                    filter: "blur(26px)",
                     top: 0,
                     bottom: 0,
                     left: 0,
                     right: 0,
-                    zIndex: 0
+                    zIndex: 0,
+                    backgroundSize: "100% 100%",
                   }}
                 />
-              <div
-                style={{
-                  position: 'relative',
-                  borderRadius: "6px",
-                  padding: this.state.cover === '' ? "6px 18px" : "36px 18px",
-                  marginBottom: this.state.cover === '' ? "6px" : "28px",
-                  background: "rgba(0,30%,100%,90%)",
-                }}
-              >
                 <div
                   style={{
-                    fontSize: "28px",
-                    fontWeight: "bold",
-                    color: "#000",
-                    marginBottom: "8px",
+                    position: "relative",
+                    borderRadius: "6px",
+                    padding: this.state.cover === "" ? "6px 18px" : "36px 18px",
+                    marginBottom: this.state.cover === "" ? "6px" : "28px",
                   }}
                 >
-                  {this.state.title}
-                </div>
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "row",
-                    marginTop: "18px",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                  }}
-                >
-                  <div>
-                    {" "}
-                    <div
-                      style={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                        alignItems: "center",
-                      }}
-                    >
-                      <div
-                        style={{
-                          fontSize: "16px",
-                          marginRight: "8px",
-                          fontWeight: "bold",
-                        }}
-                      >
-                        作者 :{" "}
-                      </div>
-                      <AvatarF user={this.state.user}></AvatarF>
-                    </div>
+                  <div
+                    style={{
+                      fontSize: "28px",
+                      fontWeight: "bold",
+                      color: "#000",
+                      marginBottom: "8px",
+                    }}
+                  >
+                    {this.state.title}
                   </div>
                   <div
                     style={{
                       display: "flex",
-                      flexDirection: "row-reverse",
+                      flexDirection: "row",
+                      marginTop: "18px",
+                      justifyContent: "space-between",
                       alignItems: "center",
                     }}
                   >
-                    <div style={{ fontSize: "18px", fontWeight: "bold" }}>
-                      {"被浏览 " + this.state.views + " 次"}
+                    <div>
+                      {" "}
+                      <div
+                        style={{
+                          display: "flex",
+                          justifyContent: "space-between",
+                          alignItems: "center",
+                        }}
+                      >
+                        <div
+                          style={{
+                            fontSize: "16px",
+                            marginRight: "8px",
+                            fontWeight: "bold",
+                          }}
+                        >
+                          作者 :{" "}
+                        </div>
+                        <AvatarF user={this.state.user}></AvatarF>
+                      </div>
+                    </div>
+                    <div
+                      style={{
+                        display: "flex",
+                        flexDirection: "row-reverse",
+                        alignItems: "center",
+                      }}
+                    >
+                      <div style={{ fontSize: "18px", fontWeight: "bold" }}>
+                        {"被浏览 " + this.state.views + " 次"}
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div></div>
+              </div>
 
               <div
                 style={{
                   fontSize: "16px",
                   border: "1px solid #8c8c8c",
-                  borderRadius: "6px",
+                  borderRadius: "8px",
                   padding: "16px 12px",
                 }}
               >
