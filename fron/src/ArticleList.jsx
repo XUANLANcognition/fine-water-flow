@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 
 import AvatarF from "./AvatarF";
 import LikeButton from "./components/LikeButton";
+import CommentButton from "./components/CommentButton";
 
 const count = 6;
 
@@ -213,9 +214,9 @@ class ArticleList extends Component {
                     style={{
                       borderRadius: "6px",
                       background: "rgb(18 18 18 / 2%)",
-                      marginTop: '18px',
-                      height: '140px',
-                      objectFit: 'cover'
+                      height: "140px",
+                      objectFit: "cover",
+                      marginTop: '36px'
                     }}
                     width={216}
                     alt="logo"
@@ -223,26 +224,7 @@ class ArticleList extends Component {
                   />
                 )
               }
-              actions={[
-                <Button
-                  style={{
-                    color: "#76839b",
-                    backgroundColor: "transparent",
-                    display: "inline-block",
-                    fontSize: "14px",
-                    fontWeight: "500",
-                  }}
-                  type="link"
-                >
-                  {" "}
-                  <IconFont
-                    type="icon-liulanjilu"
-                    style={{ paddingLeft: "5px", color: "#76839b" }}
-                  />{" "}
-                  被浏览 {item.views} 次
-                </Button>,
-                <LikeButton article_id={item.id}></LikeButton>,
-              ]}
+              actions={[]}
             >
               <div
                 style={
@@ -296,9 +278,43 @@ class ArticleList extends Component {
                       {item.title}
                     </h3>
                     <div style={{ color: "#646464", fontSize: "15px" }}>
-                      {item.cover === '' ? this.extractBrief(item.content, 108) : this.extractBrief(item.content, 36)}
+                      {item.cover === ""
+                        ? this.extractBrief(item.content, 108)
+                        : this.extractBrief(item.content, 36)}
                     </div>
                   </Link>
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "row",
+                      alignItems: "center",
+                      margin: "18px 0 6px 0",
+                    }}
+                  >
+                    <Button
+                      style={{
+                        color: "#76839b",
+                        backgroundColor: "transparent",
+                        display: "inline-block",
+                        fontSize: "14px",
+                        fontWeight: "bold",
+                      }}
+                      type="link"
+                    >
+                      {" "}
+                      <IconFont
+                        type="icon-liulanjilu"
+                        style={{ paddingLeft: "5px", color: "#76839b" }}
+                      />{" "}
+                      被浏览 {item.views} 次
+                    </Button>
+                    <CommentButton
+                      article_id={item.id}
+                      article_url={item.url}
+                      style={{ margin: "0 18px 0 0" }}
+                    ></CommentButton>{" "}
+                    <LikeButton article_id={item.id}></LikeButton>
+                  </div>
                 </Skeleton>
               </div>
             </List.Item>

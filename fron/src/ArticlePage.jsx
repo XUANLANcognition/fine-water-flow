@@ -21,6 +21,7 @@ import Advertisement from "./Advertisement";
 import AddComment from "./AddComment";
 import AvatarF from "./AvatarF";
 import LikeButton from "./components/LikeButton";
+import CommentButton from "./components/CommentButton"
 
 const { Paragraph } = Typography;
 const { Title } = Typography;
@@ -236,6 +237,7 @@ class ArticlePage extends Component {
                       style={{ display: "flex", flexDirection: "row-reverse" }}
                     >
                       <LikeButton article_id={this.state.id}></LikeButton>
+                      <CommentButton article_id={this.state.id} article_url={this.state.url} style={{marginRight: '20px'}}></CommentButton>
                     </div>
                     <div
                       style={{

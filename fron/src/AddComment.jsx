@@ -18,7 +18,7 @@ const CommentList = ({ comments }) => (
         author={item.user ? item.user.username : item.username}
         avatar={<AvatarF user={item.user}></AvatarF>}
         content={item.content}
-        datetime={dayjs(item.pub_date).fromNow()}
+        datetime={item && dayjs(item.pub_date).fromNow()}
       />
     )}
   />
