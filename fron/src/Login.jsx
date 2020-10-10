@@ -19,6 +19,7 @@ class Login extends Component {
       window.localStorage.setItem('token', response.data.token)
       window.localStorage.setItem('user_id', response.data.user_id)
       window.localStorage.setItem('user_avatar', response.data.user_avatar)
+      window.localStorage.setItem('user_name', response.data.user_name)
       message.success('欢迎 ' + response.data.user_name + ' 进入 FWF')
       this.props.history.replace('/')
     } catch (error) {

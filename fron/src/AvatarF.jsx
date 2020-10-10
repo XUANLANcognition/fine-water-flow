@@ -74,7 +74,7 @@ class AvatarF extends Component {
             }
           >
             <Avatar
-              shape="square"
+              shape='square'
               icon="user"
               src={this.props.user && this.props.user.last_name}
             />
