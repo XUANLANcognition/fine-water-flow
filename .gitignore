@@ -15,3 +15,4 @@ yarn-error.log*
 /back/web/web/settings.py
 ./back/web/tran/static
 up.sh
+next-fron/public/v1/

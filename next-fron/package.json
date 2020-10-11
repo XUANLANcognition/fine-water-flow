@@ -1,0 +1,31 @@
+{
+  "name": "next-fwf-front",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "NODE_OPTIONS='--inspect' next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "@ant-design/compatible": "^1.0.8",
+    "@ant-design/icons": "^4.2.2",
+    "@types/cookie": "^0.4.0",
+    "@types/lodash": "^4.14.161",
+    "@types/qs": "^6.9.5",
+    "antd": "^4.6.6",
+    "axios": "^0.20.0",
+    "cookie": "^0.4.1",
+    "dayjs": "^1.9.1",
+    "lodash": "^4.17.20",
+    "next": "^9.5.5",
+    "qs": "^6.9.4",
+    "react": "16.13.1",
+    "react-dom": "16.13.1"
+  },
+  "devDependencies": {
+    "@types/node": "^14.11.2",
+    "@types/react": "^16.9.49",
+    "typescript": "^4.0.3"
+  }
+}
