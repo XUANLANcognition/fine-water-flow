@@ -139,13 +139,13 @@ class ArticlePage extends Component {
                   style={{
                     position: "relative",
                     borderRadius: "6px",
-                    padding: this.state.cover === "" ? "6px 18px" : "36px 18px",
+                    padding: this.state.cover === "" ? "6px 0px" : "36px 18px",
                     marginBottom: this.state.cover === "" ? "6px" : "28px",
                   }}
                 >
                   <div
                     style={{
-                      fontSize: "28px",
+                      fontSize: "28px", 
                       fontWeight: "bold",
                       color: "#000",
                       marginBottom: "8px",
@@ -273,9 +273,6 @@ class ArticlePage extends Component {
             xs={{ span: 22, offset: 1 }}
             style={{ paddingBottom: "20px", paddingLeft: "15px" }}
           >
-            <Affix offsetTop={0}>
-              <AuthorShowCard authorId={this.state.authorId} />
-            </Affix>
             <Advertisement />
           </Col>
         </Row>
