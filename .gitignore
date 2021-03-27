@@ -1,7 +1,7 @@
 .idea/
 .vscode/
 node_modules/
-build
+build 
 .DS_Store
 *.tgz
 my-app*
@@ -15,3 +15,27 @@ yarn-error.log*
 /back/web/web/settings.py
 ./back/web/tran/static
 up.sh
+
+# dependencies
+/fron/.pnp
+.pnp.js
+
+# testing
+/fron/coverage
+
+# next.js
+/fron/.next/
+/fron/out/
+
+# local env files
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# vercel
+.vercel
+
+# misc
+.DS_Store
+*.pem
