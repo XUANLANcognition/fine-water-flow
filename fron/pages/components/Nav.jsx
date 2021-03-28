@@ -1,16 +1,17 @@
 import React, { Component } from "react";
-import { Icon, Row, Col, Avatar, Popover, Divider } from "antd";
-import { Link } from "react-router-dom";
+import Link from 'next/link'
+import cookie from "cookie";
+import { createFromIconfontCN } from '@ant-design/icons';
+import { Row, Col, Avatar, Popover, Divider } from "antd";
 
-import ProfileCard from "./ProfileCard";
 
-const IconFont = Icon.createFromIconfontCN({
+const IconFont = createFromIconfontCN({
   scriptUrl: "//at.alicdn.com/t/font_1242637_7sypq2as9i4.js"
 });
 
 const Card = (
   <div style={{ width: "176px", boxShadow: "0px 2px 5px #888888" }}>
-    <ProfileCard />
+    
   </div>
 );
 
@@ -23,9 +24,9 @@ const SignInOrOn = (
       alignItems: "center"
     }}
   >
-    <Link to="/sign_in">登陆</Link>
+    <Link href="/sign_in">登陆</Link>
     <Divider type="vertical" />
-    <Link to="/join">注册</Link>
+    <Link href="/join">注册</Link>
   </div>
 );
 
@@ -39,13 +40,13 @@ const Signed = (
     }}
   >
     <div>
-      <Link to="#">
-        <Popover content={Card} placement="bottomRight" trigger="click">
+      <Link href="#">
+        <Popover content={Card} placement="bothrefmRight" trigger="click">
           <Avatar
             shape="square"
             size="default"
             icon="user"
-            src={window.localStorage.getItem('user_avatar')}
+            src=''
           />
         </Popover>
       </Link>
@@ -82,7 +83,7 @@ class Nav extends Component {
                 marginLeft: "-10px"
               }}
             >
-              <Link to="/">
+              <Link href="/">
                 <div style={{ display: "flex", flexDirection: "row" }}>
                   <img
                     src="/icon.png"
@@ -95,7 +96,7 @@ class Nav extends Component {
               </Link>
             </div>
 
-            <Link to="/">
+            <Link href="/">
               <div
                 style={{
                   width: "96px",
@@ -121,7 +122,7 @@ class Nav extends Component {
               </div>
             </Link>
 
-            <Link to="/book">
+            <Link href="/book">
               <div
                 style={{
                   width: "96px",
@@ -144,7 +145,7 @@ class Nav extends Component {
               </div>
             </Link>
 
-            <Link to="/movie">
+            <Link href="/movie">
               <div
                 style={{
                   width: "96px",
@@ -170,7 +171,7 @@ class Nav extends Component {
               </div>
             </Link>
 
-            <Link to="/notice">
+            <Link href="/notice">
               <div
                 style={{
                   width: "96px",
@@ -192,7 +193,7 @@ class Nav extends Component {
                 </div>
               </div>
             </Link>
-            {window.localStorage.getItem("user_id") ? Signed : SignInOrOn}
+            {}
           </div>
         </Col>
       </Row>

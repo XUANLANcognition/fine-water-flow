@@ -1,22 +1,26 @@
 import React, { Component } from "react";
-import { GetServerSideProps } from "next";
 import cookie from "cookie";
+import { } from 'antd';
 
 import Login from "./components/Login.jsx"
 import Myfooter from "./components/Myfooter"
+import Nav from "./components/Nav"
 
 class Home extends Component {
 
   render() {
     return (
-      <div style={{flex: '1 0'}}>
-        <Login></Login>
+      <div style={{display: 'flex', flexDirection: 'column', minHeight: '100vh'}}>
+        <Nav></Nav>
+        <div style={{flex: '1', display: 'flex', justifyContent: 'space-around', alignItems: 'center'}}>
+            <div style={{fontSize: '64px'}}>FWF</div>
+            <Login></Login>
+        </div>
         <Myfooter></Myfooter>
       </div>
     );
   }
 }
-
 
 class THome extends Component {
 
