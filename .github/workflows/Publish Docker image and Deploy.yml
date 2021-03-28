@@ -37,4 +37,4 @@ jobs:
           script: |
             docker pull xuanlan/fwf
             docker rm -f fwf
-            docker run -d --name fwf -p 3000:3000 wda43779/fwf
+            docker run -d --name fwf -p 3000:3000 xuanlan/fwf
