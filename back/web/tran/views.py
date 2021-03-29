@@ -181,6 +181,12 @@ class UserBriefSerializer(serializers.ModelSerializer):
         read_only_fields = ('username', 'first_name', 'last_name', 'url', 'id', 'profile')
 
 
+class UserBriefDetail(generics.RetrieveAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserBriefSerializer
+    permission_classes = (IsOwner,)
+
+
 class UserAnotherDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = User.objects.all()
     serializer_class =  UserAnotherSerializer
